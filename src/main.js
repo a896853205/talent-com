@@ -16,6 +16,8 @@ router.beforeEach((to, from, next) => {
     next()
 });
 
+
+
 Vue.use(iView);
 Vue.use(ElementUI);
 Vue.use(cookies);

@@ -14,6 +14,10 @@ import FlowOut from '@/views/FlowOut.vue'
 import FlowTalentInfo from '@/views/FlowTalentInfo.vue'
 import Loading from '@/views/Loading.vue'
 import Need from '@/views/Need.vue'
+import AdminIndex from './views/admin/AdminIndex.vue'
+import AddUser from './views/admin/AddUser.vue'
+import SubmitStatus from './views/admin/SubmitStatus.vue'
+import MangerUser from './views/admin/MangerUser.vue'
 
 
 Vue.use(Router)
@@ -29,6 +33,41 @@ export default new Router({
             meta: {
                 title: '黑龙江省企业人才统计'
             }
+        },
+
+        {
+            path: '/admin/index',
+            name: 'adminIndex',
+            component: AdminIndex,
+            meta: {
+                title: '账号分配系统'
+            },
+            children: [
+                {
+                    path: '/admin/addUser',
+                    name: 'addUser',
+                    component: AddUser,
+                    meta: {
+                        title: '分配用户'
+                    }
+                },
+                {
+                    path: '/admin/submitStatus',
+                    name: 'submitStatus',
+                    component: SubmitStatus,
+                    meta: {
+                        title: '审核提交'
+                    }
+                },
+                {
+                    path: '/admin/mangerUser',
+                    name: 'mangerUser',
+                    component: MangerUser,
+                    meta: {
+                        title: '账号管理'
+                    }
+                },
+            ]
         },
         {
             path: '/loading',

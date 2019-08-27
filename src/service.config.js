@@ -1,5 +1,5 @@
-const SERVERURL = "https://api.im-here.cn/";
-//const SERVERURL = "http://localhost:1234/";
+// const SERVERURL = "https://api.im-here.cn/";
+const SERVERURL = "http://localhost:1234/";
 
 const URL = {
     checkLogin: SERVERURL + 'checkLogin',

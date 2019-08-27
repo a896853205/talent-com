@@ -5182,6 +5182,16 @@ const liZhiYuanYin = [
         "value": "个人晋升空间"
     }
 ];
+const qunxian = [
+    {
+        "label": "问卷填写权限",
+        "value": "问卷填写权限"
+    },
+    {
+        "label": "账号分配权限",
+        "value": "账号分配权限"
+    },
+];
 module.exports = {
     jobCategory: jobCategory,
     industryCategory: industryCategory,
@@ -5194,4 +5204,5 @@ module.exports = {
     xinChou: xinChou,
     xingBie: xingBie,
     liZhiYuanYin: liZhiYuanYin,
+    qunxian: qunxian,
 };

@@ -8,21 +8,21 @@
             <tr>
                 <th>企业名</th>
                 <th>提交状态</th>
-                <th>下载</th>
-                <th>单耗</th>
+                <th>下载问卷</th>
+                <th>审核</th>
             </tr>
             </thead>
             <tr>
-                <td>109</td>
-                <td>13</td>
-                <td>1.34</td>
-                <td>213</td>
+                <td>哈尔滨理工大学</td>
+                <td>未提交</td>
+                <td><a href="javascript:;">下载Excel</a></td>
+                <td><a href="javascript:;">审核通过</a>/<a href="javascript:;">不通过</a></td>
             </tr>
             <tr>
-                <td>109</td>
-                <td>13</td>
-                <td>1.34</td>
-                <td>213</td>
+                <td>哈尔滨理工大学</td>
+                <td>未提交</td>
+                <td><a href="javascript:;">下载Excel</a></td>
+                <td><a href="javascript:;">审核通过</a>/<a href="javascript:;">不通过</a></td>
             </tr>
         </table>
     </div>

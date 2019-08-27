@@ -18,6 +18,8 @@ import AdminIndex from './views/admin/AdminIndex.vue'
 import AddUser from './views/admin/AddUser.vue'
 import SubmitStatus from './views/admin/SubmitStatus.vue'
 import MangerUser from './views/admin/MangerUser.vue'
+import AdminChangePassword from './views/admin/ChangePassword.vue'
+import AdminLogin from './views/admin/Login.vue'
 
 
 Vue.use(Router)
@@ -32,6 +34,14 @@ export default new Router({
             component: Guide,
             meta: {
                 title: '黑龙江省企业人才统计'
+            }
+        },
+        {
+            path: '/adminLogin',
+            name: 'adminLogin',
+            component: AdminLogin,
+            meta: {
+                title: '账户分配系统登录'
             }
         },
 
@@ -65,6 +75,14 @@ export default new Router({
                     component: MangerUser,
                     meta: {
                         title: '账号管理'
+                    }
+                },
+                {
+                    path: '/admin/adminChangePassword',
+                    name: 'adminChangePassword',
+                    component: AdminChangePassword,
+                    meta: {
+                        title: '修改密码'
                     }
                 },
             ]

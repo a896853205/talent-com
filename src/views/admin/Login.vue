@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title-b">问卷填报系统</h1>
+        <h1 class="title-b">账户分配系统</h1>
         <div class="box">
             <div class="account">
                 <div class="account-label">
@@ -21,9 +21,6 @@
             <div class="button">
                 <Button type="primary" shape="circle" @click="login" long>登录</Button>
             </div>
-            <div class="forget">
-                <router-link to="/changePassword">忘记密码？</router-link>
-            </div>
         </div>
     </div>
 </template>
@@ -31,11 +28,6 @@
     .title-b {
         text-align: center;
         margin-top: 30px;
-    }
-    .forget {
-        text-align: right;
-        width: 300px;
-        margin: 0 auto;
     }
     .account {
         display: flex;
@@ -74,10 +66,10 @@
     }
 </style>
 <script>
-	import url from '@/service.config.js';
-	import axios from 'axios';
-	import util from '@/utils.js'
-	
+    import url from '@/service.config.js';
+    import axios from 'axios';
+    import util from '@/utils.js'
+
     export default {
         data(){
             return {
@@ -87,36 +79,12 @@
         },
         methods: {
             login(){
-				if (this.$data.account.length < 6) {
-					this.$message.error('用户名长度最小为6位！');
-					return
-				}
-				if (this.$data.password.length < 6) {
-					this.$message.error('密码长度最小为6位！');
-					return
-				}
-				axios({
-				    url: url.login,
-				    method: 'get',
-				    params: {
-						user_name: this.$data.account,
-						user_password: this.$data.password
-					}
-				}).then(res => {
-					if (res.data === -1 || res.data === -2) {
-						this.$message.error('用户名或密码输入错误！');
-					} else {
-						util.setCookies(this.$data.account, this.$data.password, this)
-						this.$message({
-						    message: '登录成功！',
-						    type: 'success',
-                            duration: 1000
-						});
-						this.$router.push('/loading');
-					}
-				}).catch(err => {
-				    console.log(err);
-				});
+                this.$message({
+                    message: '登录成功！',
+                    type: 'success',
+                    duration: 1000
+                });
+                this.$router.push('/admin/addUser');
             }
         }
     }

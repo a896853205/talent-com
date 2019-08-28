@@ -11,7 +11,8 @@
                 <div class="title">单位性质：</div>
                 <div>
                     <Select v-model="cdata['单位性质']" style="width:200px">
-                        <Option v-for="item in danWeiXingZhi" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in danWeiXingZhi" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </div>
             </div>
@@ -33,10 +34,12 @@
     .container {
         padding: 30px;
     }
+
     .box-item {
         display: flex;
         padding: 10px 0;
     }
+
     .title {
         display: flex;
         justify-content: center;
@@ -49,23 +52,31 @@
 
 <script>
     import category from '@/assets/data/category.js'
+
     export default {
         data() {
             return {
-                cdata: {},
+                cdata: {
+                    '单位名称': null,
+                    '单位性质':null,
+                    '权限':null,
+                },
                 danWeiXingZhi: [],
                 qunxian: [],
             }
         },
         methods: {
-            generateAccount(){
+            generateAccount() {
                 this.$message({
                     message: '生成成功',
                     type: 'success'
                 });
-            }
+            },
+            genRandom(length) {
+                return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
+            },
         },
-        created(){
+        created() {
             let danWeiXingZhi = category.danWeiXingZhi;
             let qunxian = category.qunxian;
             this.$data.danWeiXingZhi = danWeiXingZhi

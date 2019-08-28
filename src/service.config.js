@@ -15,6 +15,7 @@ const URL = {
 	changePass: SERVERURL + 'changePassWord',
     createTable: SERVERURL + 'createTable',
     download: SERVERURL + 'download',
+    adminLogin: SERVERURL + 'adminLogin',
 
 };
 

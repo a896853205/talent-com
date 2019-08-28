@@ -68,7 +68,6 @@
 <script>
     import url from '@/service.config.js';
     import axios from 'axios';
-    import util from '@/utils.js'
 
     export default {
         data(){
@@ -79,12 +78,35 @@
         },
         methods: {
             login(){
-                this.$message({
-                    message: '登录成功！',
-                    type: 'success',
-                    duration: 1000
+                if (this.$data.password.length < 4) {
+                    this.$message.error('密码长度最小为4位！');
+                    return
+                }
+                //发请求
+                axios({
+                    url: url.adminLogin,
+                    method:'post',
+                    data:{
+                        user_name: this.$data.account,
+                        user_password: this.$data.password
+                    }
+                }).then(res=>{
+                    if (res.data === -1 || res.data === -2) {
+                        this.$message.error('用户名或密码输入错误！');
+                    }else if (res.data['权限'] != '999') {
+                        this.$message.error('当前账户无权限进入');
+                    }else {
+                        this.$message({
+                            message: '登录成功！',
+                            type: 'success',
+                            duration: 1000
+                        });
+                        this.$router.push('/admin/addUser');
+                    }
+                }).catch(err=>{
+                    console.log(err)
                 });
-                this.$router.push('/admin/addUser');
+
             }
         }
     }

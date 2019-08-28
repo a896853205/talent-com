@@ -8,12 +8,22 @@ import ChangePassword from './views/ChangePassword.vue'
 import Form from './views/Form.vue'
 import CompanyInfo from '@/views/CompanyInfo.vue'
 import TalentStatus from '@/views/TalentStatus.vue'
+import TalentStatusNei from '@/views/TalentStatusNei.vue'
+import TalentStatusWai from '@/views/TalentStatusWai.vue'
 // let TalentStatus = () => import('@/views/TalentStatus.vue');
 import FlowIn from '@/views/FlowIn.vue'
+import FlowInNei from '@/views/FlowInNei.vue'
+import FlowInWai from '@/views/FlowInWai.vue'
 import FlowOut from '@/views/FlowOut.vue'
+import FlowOutNei from '@/views/FlowOutNei.vue'
+import FlowOutWai from '@/views/FlowOutWai.vue'
 import FlowTalentInfo from '@/views/FlowTalentInfo.vue'
+import FlowTalentInfoNei from '@/views/FlowTalentInfoNei.vue'
+import FlowTalentInfoWai from '@/views/FlowTalentInfoWai.vue'
 import Loading from '@/views/Loading.vue'
 import Need from '@/views/Need.vue'
+import NeedNei from '@/views/NeedNei.vue'
+import NeedWai from '@/views/NeedWai.vue'
 import AdminIndex from './views/admin/AdminIndex.vue'
 import AddUser from './views/admin/AddUser.vue'
 import SubmitStatus from './views/admin/SubmitStatus.vue'
@@ -124,12 +134,48 @@ export default new Router({
                     }
                 },
                 {
+                    path: 'needNei',
+                    name: 'needNei',
+                    component: NeedNei,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位人才需求情况统计-体制内'
+                    }
+                },
+                {
+                    path: 'needWai',
+                    name: 'needWai',
+                    component: NeedWai,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位人才需求情况统计-体制外'
+                    }
+                },
+                {
                     path: 'talentStatus',
                     name: 'talentStatus',
                     component: TalentStatus,
                     meta: {
                         keepAlive: true,
                         title: '单位近10年人才存量统计'
+                    }
+                },
+                {
+                    path: 'talentStatusNei',
+                    name: 'talentStatusNei',
+                    component: TalentStatusNei,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位近10年人才存量统计-编制内'
+                    }
+                },
+                {
+                    path: 'talentStatusWai',
+                    name: 'talentStatusWai',
+                    component: TalentStatusWai,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位近10年人才存量统计-编制外'
                     }
                 },
                 {
@@ -142,6 +188,24 @@ export default new Router({
                     }
                 },
                 {
+                    path: 'flowInNei',
+                    name: 'flowInNei',
+                    component: FlowInNei,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位近十年人才流入情况数量统计-编制内'
+                    }
+                },
+                {
+                    path: 'flowInWai',
+                    name: 'flowInWai',
+                    component: FlowInWai,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位近十年人才流入情况数量统计-编制外'
+                    }
+                },
+                {
                     path: 'flowOut',
                     name: 'flowOut',
                     component: FlowOut,
@@ -151,12 +215,48 @@ export default new Router({
                     }
                 },
                 {
+                    path: 'flowOutNei',
+                    name: 'flowOutNei',
+                    component: FlowOutNei,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位近十年人才流出数量统计-编制内'
+                    }
+                },
+                {
+                    path: 'flowOutWai',
+                    name: 'flowOutWai',
+                    component: FlowOutWai,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位近十年人才流出数量统计-编制外'
+                    }
+                },
+                {
                     path: 'flowTalentInfo',
                     name: 'flowTalentInfo',
                     component: FlowTalentInfo,
                     meta: {
                         keepAlive: true,
                         title: '单位流失人才基本信息统计'
+                    }
+                },
+                {
+                    path: 'flowTalentInfoNei',
+                    name: 'flowTalentInfoNei',
+                    component: FlowTalentInfoNei,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位流失人才基本信息统计-体制内'
+                    }
+                },
+                {
+                    path: 'flowTalentInfoWai',
+                    name: 'flowTalentInfoWai',
+                    component: FlowTalentInfoWai,
+                    meta: {
+                        keepAlive: true,
+                        title: '单位流失人才基本信息统计-体制外'
                     }
                 },
             ]

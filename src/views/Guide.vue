@@ -22,12 +22,12 @@
             <div class="buttons-left">
                 <Button type="info" @click="loginHandle">问卷填报系统登录</Button>
             </div>
-<!--            <div class="buttons-right">-->
-<!--                <Button type="warning" @click="registerHandle">注册</Button>-->
-<!--            </div>-->
             <div class="buttons-right">
-                <Button type="warning" @click="loginHandle2">账户分配系统登录</Button>
+                <Button type="warning" @click="registerHandle">注册</Button>
             </div>
+            <!--<div class="buttons-right">-->
+                <!--<Button type="warning" @click="loginHandle2">账户分配系统登录</Button>-->
+            <!--</div>-->
         </div>
     </div>
 </template>

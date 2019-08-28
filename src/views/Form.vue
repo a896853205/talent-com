@@ -4,7 +4,7 @@
                       element-loading-spinner="el-icon-loading"
                       element-loading-background="rgba(228, 231, 237, 0.8)">
         </el-container>
-        <Menu mode="horizontal" :theme="theme1" active-name="companyInfo" class="menu" @on-select="select">
+        <Menu v-if="danWeiXingZhi=='机关'" mode="horizontal" :theme="theme1" active-name="companyInfo" class="menu" @on-select="select">
             <MenuItem name="companyInfo">
                 <Icon type="ios-paper"/>
                 单位基本信息
@@ -26,6 +26,137 @@
                 <Icon type="ios-paper"/>
                 单位人才需求调查
             </MenuItem>
+            <div class="user">
+                <div class="submit">
+                    <Button class="button" type="primary" @click="saveHandle">暂存</Button>
+                </div>
+                <div class="submit">
+                    <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
+                </div>
+                <div class="submit">
+                    <Button type="warning" icon="md-arrow-down" @click="exportExcel">导出表格</Button>
+                </div>
+                <div class="user-name">欢迎，{{companyName}}</div>
+                <div class="logout">
+                    <span @click="logout">退出登录</span>
+                </div>
+            </div>
+        </Menu>
+        <Menu v-if="danWeiXingZhi=='企业'" mode="horizontal" :theme="theme1" active-name="companyInfo" class="menu" @on-select="select">
+            <MenuItem name="companyInfo">
+                <Icon type="ios-paper"/>
+                单位基本信息
+            </MenuItem>
+            <MenuItem name="talentStatus">
+                <Icon type="ios-people"/>
+                单位人才情况汇总
+            </MenuItem>
+            <Submenu name="flowIn">
+                <template slot="title">
+                    <Icon type="ios-stats"/>
+                    单位人才流动汇总
+                </template>
+                <MenuItem name="flowIn">流入情况统计</MenuItem>
+                <MenuItem name="flowOut">流出情况统计</MenuItem>
+                <MenuItem name="flowTalentInfo">流出人才信息统计</MenuItem>
+            </Submenu>
+            <MenuItem name="need">
+                <Icon type="ios-paper"/>
+                单位人才需求调查
+            </MenuItem>
+            <div class="user">
+                <div class="submit">
+                    <Button class="button" type="primary" @click="saveHandle">暂存</Button>
+                </div>
+                <div class="submit">
+                    <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
+                </div>
+                <div class="submit">
+                    <Button type="warning" icon="md-arrow-down" @click="exportExcel">导出表格</Button>
+                </div>
+                <div class="user-name">欢迎，{{companyName}}</div>
+                <div class="logout">
+                    <span @click="logout">退出登录</span>
+                </div>
+            </div>
+        </Menu>
+        <Menu v-if="danWeiXingZhi=='社会团体'" mode="horizontal" :theme="theme1" active-name="companyInfo" class="menu" @on-select="select">
+            <MenuItem name="companyInfo">
+                <Icon type="ios-paper"/>
+                单位基本信息
+            </MenuItem>
+            <MenuItem name="talentStatus">
+                <Icon type="ios-people"/>
+                单位人才情况汇总
+            </MenuItem>
+            <Submenu name="flowIn">
+                <template slot="title">
+                    <Icon type="ios-stats"/>
+                    单位人才流动汇总
+                </template>
+                <MenuItem name="flowIn">流入情况统计</MenuItem>
+                <MenuItem name="flowOut">流出情况统计</MenuItem>
+                <MenuItem name="flowTalentInfo">流出人才信息统计</MenuItem>
+            </Submenu>
+            <MenuItem name="need">
+                <Icon type="ios-paper"/>
+                单位人才需求调查
+            </MenuItem>
+            <div class="user">
+                <div class="submit">
+                    <Button class="button" type="primary" @click="saveHandle">暂存</Button>
+                </div>
+                <div class="submit">
+                    <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
+                </div>
+                <div class="submit">
+                    <Button type="warning" icon="md-arrow-down" @click="exportExcel">导出表格</Button>
+                </div>
+                <div class="user-name">欢迎，{{companyName}}</div>
+                <div class="logout">
+                    <span @click="logout">退出登录</span>
+                </div>
+            </div>
+        </Menu>
+        <Menu v-if="danWeiXingZhi=='事业单位'" mode="horizontal" :theme="theme1" active-name="companyInfo" class="menu" @on-select="select">
+            <MenuItem name="companyInfo">
+                <Icon type="ios-paper"/>
+                单位基本信息
+            </MenuItem>
+            <Submenu name="talentStatusNei">
+                <template slot="title">
+                    <Icon type="ios-people"/>
+                    单位人才情况汇总
+                </template>
+                <MenuItem name="talentStatusNei">单位人才情况汇总-事业单位-编制内</MenuItem>
+                <MenuItem name="talentStatusWai">单位人才情况汇总-事业单位-编制外</MenuItem>
+            </Submenu>
+            <Submenu name="flowInNei">
+                <template slot="title">
+                    <Icon type="ios-stats"/>
+                    单位人才流动汇总
+                </template>
+                <MenuGroup title="流入情况">
+                    <MenuItem name="flowInNei">流入情况统计-事业单位-编制内</MenuItem>
+                    <MenuItem name="flowInWai">流入情况统计-事业单位-编制外</MenuItem>
+                </MenuGroup>
+                <MenuGroup title="流出情况">
+                    <MenuItem name="flowOutNei">流出情况统计-事业单位-编制内</MenuItem>
+                    <MenuItem name="flowOutWai">流出情况统计-事业单位-编制外</MenuItem>
+                </MenuGroup>
+                <MenuGroup title="流出人才信息统计">
+                    <MenuItem name="flowTalentInfoNei">流出人才信息统计-事业单位-体制内</MenuItem>
+                    <MenuItem name="flowTalentInfoWai">流出人才信息统计-事业单位-体制外</MenuItem>
+                </MenuGroup>
+            </Submenu>
+            <Submenu name="needNei">
+                <template slot="title">
+                    <Icon type="ios-paper"/>
+                    单位人才需求调查
+                </template>
+                <MenuItem name="needNei">单位人才需求调查-事业单位-体制内</MenuItem>
+                <MenuItem name="needWai">单位人才需求调查-事业单位-体制外</MenuItem>
+            </Submenu>
             <div class="user">
                 <div class="submit">
                     <Button class="button" type="primary" @click="saveHandle">暂存</Button>
@@ -91,7 +222,12 @@
                 theme1: 'light',
                 companyName: '哈尔滨理工大学',
                 loading: false,
-                btnLoading: false
+                btnLoading: false,
+                danWeiXingZhi: '事业单位',
+                // danWeiXingZhi1: '机关',
+                // danWeiXingZhi2: '企业',
+                // danWeiXingZhi3: '社会团体',
+                // danWeiXingZhi4: '事业单位',
             }
         },
         methods: {

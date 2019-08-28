@@ -2,40 +2,40 @@
 	<div>
 		<div class="box">
 			<div class="item">
-				<InputWithLabel label="单位名称:" v-model="form['单位名称']" :initValue="initObj['单位名称']"/>
-			</div>
-			<div class="item">
-				<InputWithLabel label="统一社会信用代码（或组织机构代码）：" :initValue="initObj['统一社会信用代码']" v-model="form['统一社会信用代码']" />
-			</div>
-			<div class="item">
 				<SelectWithLabel label="所属地域：" :initValue="initObj['所属地域']" v-model="form['所属地域']" :list="suoShuDiYu"></SelectWithLabel>
 			</div>
 			<div class="item">
-				<SelectWithLabel label="所属行业：" :initValue="initObj['所属行业']" v-model="form['所属行业']" :list="suoShuHangYe"></SelectWithLabel>
+				<CascaderWithLabel label="所属行业：" :initValue="initObj['所属行业']" v-model="form['所属行业']" :data="industryCategory"></CascaderWithLabel>
 			</div>
 			<div class="item">
-				<CascaderWithLabel label="行业分类" :initValue="initObj['行业分类']" v-model="form['行业分类']" :data="industryCategory"></CascaderWithLabel>
+				<InputWithLabel label="单位名称（全称）:" v-model="form['单位名称']" :initValue="initObj['单位名称']" />
+			</div>
+			<div class="item">
+				<InputWithLabel label="统一社会信用代码/组织机构代码：" :initValue="initObj['统一社会信用代码']" v-model="form['统一社会信用代码']" />
 			</div>
 			<div class="item">
 				<SelectWithLabel label="单位性质：" :initValue="initObj['单位性质']" v-model="form['单位性质']" :list="danWeiXingZhi"></SelectWithLabel>
 			</div>
 			<div class="item">
-				<InputWithLabel label="填报人:" :initValue="initObj['填报人']" v-model="form['填报人']" />
+				<InputWithLabel label="联系人:" :initValue="initObj['联系人']" v-model="form['联系人']" />
 			</div>
 			<div class="item">
 				<InputWithLabel label="联系电话:" :initValue="initObj['联系电话']" v-model="form['联系电话']" />
 			</div>
 			<div class="item">
-				<InputWithLabel label="QQ:" :initValue="initObj['QQ']" v-model="form['QQ']" />
+				<InputWithLabel label="QQ号:" :initValue="initObj['QQ号']" v-model="form['QQ号']" />
 			</div>
 			<div class="item">
-				<InputWithLabel label="微信:" :initValue="initObj['微信']" v-model="form['微信']" />
+				<InputWithLabel label="微信号:" :initValue="initObj['微信号']" v-model="form['微信号']" />
 			</div>
 			<div class="item">
 				<InputWithLabel label="电子邮箱:" :initValue="initObj['电子邮箱']" v-model="form['电子邮箱']" />
 			</div>
 			<div class="item">
 
+			</div>
+			<div class="item">
+			
 			</div>
 		</div>
 	</div>

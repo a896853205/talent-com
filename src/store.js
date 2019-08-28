@@ -8,6 +8,7 @@ export default new Vuex.Store({
         count: 155,
         loaded: false,
         loading: false,
+		unitType: '事业单位',
         page_load: {
             'companyInfo': true,
             'talentStatus': false,

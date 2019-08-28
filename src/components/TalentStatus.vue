@@ -1,7 +1,15 @@
 <template>
 	<div>
-
 		<div class="box">
+			<div v-if="$store.state.unitType != '事业单位' && $store.state.unitType != '机关' && $store.state.unitType != '社会团体'"
+			 class="box-item">
+				<Card class="card" :bordered="false">
+					<p slot="title">当年年度产值（万元）</p>
+					<div class="item-box">
+						<InputNumberWithLabel v-model="form['当年年度产值（万元）']" :initValue="initObj['当年年度产值（万元）']"></InputNumberWithLabel>
+					</div>
+				</Card>
+			</div>
 			<div class="box-item">
 				<Card class="card" :bordered="false">
 					<p slot="title">职工人数</p>
@@ -10,38 +18,7 @@
 					</div>
 				</Card>
 			</div>
-			<div class="box-item">
-				<Card class="card" :bordered="false">
-					<p slot="title">上一年度产值（万元）</p>
-					<div class="item-box">
-						<InputNumberWithLabel v-model="form['上一年度产值（万元）']" :initValue="initObj['上一年度产值（万元）']"></InputNumberWithLabel>
-					</div>
-				</Card>
-			</div>
-			<div class="box-item">
-				<Card class="card" :bordered="false">
-					<p slot="title">研发经费投入（万元）</p>
-					<div class="item-box">
-						<InputNumberWithLabel v-model="form['研发经费投入（万元）']" :initValue="initObj['研发经费投入（万元）']"></InputNumberWithLabel>
-					</div>
-				</Card>
-			</div>
-			<div class="box-item">
-				<Card class="card" :bordered="false">
-					<p slot="title">新产品销售收入（万元）</p>
-					<div class="item-box">
-						<InputNumberWithLabel v-model="form['新产品销售收入（万元）']" :initValue="initObj['新产品销售收入（万元）']"></InputNumberWithLabel>
-					</div>
-				</Card>
-			</div>
-			<div class="box-item">
-				<Card class="card" :bordered="false">
-					<p slot="title">专利申请授权数</p>
-					<div class="item-box">
-						<InputNumberWithLabel v-model="form['专利申请授权数']" :initValue="initObj['专利申请授权数']"></InputNumberWithLabel>
-					</div>
-				</Card>
-			</div>
+
 			<div class="box-item">
 				<Card class="card" :bordered="false">
 					<p slot="title">性别结构</p>
@@ -55,11 +32,11 @@
 				<Card class="card" :bordered="false">
 					<p slot="title">年龄结构</p>
 					<div class="input-box">
-						<InputNumberWithLabel label="30岁以下" v-model="form['年龄结构']['30岁以下']" :initValue="initObj['年龄结构']['30岁以下']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="31-41" v-model="form['年龄结构']['31-41']" :initValue="initObj['年龄结构']['31-41']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="41-50" v-model="form['年龄结构']['41-50']" :initValue="initObj['年龄结构']['41-50']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="51-60" v-model="form['年龄结构']['51-60']" :initValue="initObj['年龄结构']['51-60']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="61岁以上" v-model="form['年龄结构']['61岁以上']" :initValue="initObj['年龄结构']['61岁以上']"></InputNumberWithLabel>
+						<InputNumberWithLabel label="25岁以下" v-model="form['年龄结构']['25岁以下']" :initValue="initObj['年龄结构']['25岁以下']"></InputNumberWithLabel>
+						<InputNumberWithLabel label="26-35岁" v-model="form['年龄结构']['26-35岁']" :initValue="initObj['年龄结构']['26-35岁']"></InputNumberWithLabel>
+						<InputNumberWithLabel label="36-45岁" v-model="form['年龄结构']['36-45岁']" :initValue="initObj['年龄结构']['36-45岁']"></InputNumberWithLabel>
+						<InputNumberWithLabel label="46-55岁" v-model="form['年龄结构']['46-55岁']" :initValue="initObj['年龄结构']['46-55岁']"></InputNumberWithLabel>
+						<InputNumberWithLabel label="56岁以上" v-model="form['年龄结构']['56岁以上']" :initValue="initObj['年龄结构']['56岁以上']"></InputNumberWithLabel>
 					</div>
 				</Card>
 			</div>
@@ -77,64 +54,52 @@
 			</div>
 			<div class="box-item">
 				<Card class="card" :bordered="false">
-					<p slot="title">薪酬（月）</p>
+					<p slot="title">薪酬（元/月）</p>
 					<div class="input-box xinchou">
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="3000元以下" v-model="form['薪酬（月）']['3000元以下']" :initValue="initObj['薪酬（月）']['3000元以下']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="三千以下" v-model="form['薪酬（元/月）']['三千以下']" :initValue="initObj['薪酬（元/月）']['三千以下']"></InputNumberWithLabel>
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="3000-4000" v-model="form['薪酬（月）']['3000-4000']" :initValue="initObj['薪酬（月）']['3000-4000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="三千至四千" v-model="form['薪酬（元/月）']['三千至四千']" :initValue="initObj['薪酬（元/月）']['三千至四千']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="4000-5000" v-model="form['薪酬（月）']['4000-5000']" :initValue="initObj['薪酬（月）']['4000-5000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="四千至五千" v-model="form['薪酬（元/月）']['四千至五千']" :initValue="initObj['薪酬（元/月）']['四千至五千']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="5000-6000" v-model="form['薪酬（月）']['5000-6000']" :initValue="initObj['薪酬（月）']['5000-6000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="五千至六千" v-model="form['薪酬（元/月）']['五千至六千']" :initValue="initObj['薪酬（元/月）']['五千至六千']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="6000-8000" v-model="form['薪酬（月）']['6000-8000']" :initValue="initObj['薪酬（月）']['6000-8000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="六千至八千" v-model="form['薪酬（元/月）']['六千至八千']" :initValue="initObj['薪酬（元/月）']['六千至八千']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="8000-10000" v-model="form['薪酬（月）']['8000-10000']" :initValue="initObj['薪酬（月）']['8000-10000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="八千至一万" v-model="form['薪酬（元/月）']['八千至一万']" :initValue="initObj['薪酬（元/月）']['八千至一万']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="10000-12000" v-model="form['薪酬（月）']['10000-12000']" :initValue="initObj['薪酬（月）']['10000-12000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="一万至一万二" v-model="form['薪酬（元/月）']['一万至一万二']" :initValue="initObj['薪酬（元/月）']['一万至一万二']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="12000-15000" v-model="form['薪酬（月）']['12000-15000']" :initValue="initObj['薪酬（月）']['12000-15000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="一万二至一万五" v-model="form['薪酬（元/月）']['一万二至一万五']" :initValue="initObj['薪酬（元/月）']['一万二至一万五']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="15000-20000" v-model="form['薪酬（月）']['15000-20000']" :initValue="initObj['薪酬（月）']['15000-20000']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="一万五至两万" v-model="form['薪酬（元/月）']['一万五至两万']" :initValue="initObj['薪酬（元/月）']['一万五至两万']"></InputNumberWithLabel>
 
 						</div>
 						<div class="xinchou-label">
-							<InputNumberWithLabel label="20000元以上" v-model="form['薪酬（月）']['20000元以上']" :initValue="initObj['薪酬（月）']['20000元以上']"></InputNumberWithLabel>
+							<InputNumberWithLabel label="两万以上" v-model="form['薪酬（元/月）']['两万以上']" :initValue="initObj['薪酬（元/月）']['两万以上']"></InputNumberWithLabel>
 
 						</div>
-					</div>
-				</Card>
-			</div>
-			<div class="box-item">
-				<Card class="card" :bordered="false">
-					<p slot="title">获得荣誉</p>
-					<div class="input-box">
-						<InputNumberWithLabel label="国家级" v-model="form['获得荣誉']['国家级']" :initValue="initObj['获得荣誉']['国家级']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="省部级" v-model="form['获得荣誉']['省部级']" :initValue="initObj['获得荣誉']['省部级']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="厅局级" v-model="form['获得荣誉']['厅局级']" :initValue="initObj['获得荣誉']['厅局级']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="其它" v-model="form['获得荣誉']['其它']" :initValue="initObj['获得荣誉']['其它']"></InputNumberWithLabel>
-						<InputNumberWithLabel label="无" v-model="form['获得荣誉']['无']" :initValue="initObj['获得荣誉']['无']"></InputNumberWithLabel>
 					</div>
 				</Card>
 			</div>
 		</div>
-		<GangWeiLeiBie v-model="form['岗位类别']" :initValue="initObj['岗位类别']"></GangWeiLeiBie>
+		<GangWeiLeiBie v-model="form['人员类别']" :initValue="initObj['人员类别']"></GangWeiLeiBie>
 	</div>
 </template>
 <style scoped>
@@ -142,9 +107,8 @@
 		display: flex;
 		flex-wrap: wrap;
 	}
-	.xinchou-label {
 
-	}
+	.xinchou-label {}
 
 	.box {
 		display: flex;
@@ -178,7 +142,9 @@
 		props: {
 			initObj: Object
 		},
-		created() {},
+		created() {
+			console.log('init?', this.$props.initObj)
+		},
 		data() {
 			return {
 				form: {
@@ -192,11 +158,11 @@
 						'女': null
 					},
 					'年龄结构': {
-						'30岁以下': null,
-						'31-41': null,
-						'41-50': null,
-						'51-60': null,
-						'61岁以上': null
+						'25岁以下': null,
+						'26-35岁': null,
+						'36-45岁': null,
+						'46-55岁': null,
+						'56岁以上': null
 					},
 					'学历结构': {
 						"博士研究生": null,
@@ -205,26 +171,19 @@
 						"大专": null,
 						"大专以下": null
 					},
-					'薪酬（月）': {
-						"3000元以下": null,
-						"3000-4000": null,
-						"4000-5000": null,
-						"5000-6000": null,
-						"6000-8000": null,
-						"8000-10000": null,
-						"10000-12000": null,
-						"12000-15000": null,
-						"15000-20000": null,
-						"20000元以上": null
+					"薪酬（元/月）": {
+						"三千以下": null,
+						"三千至四千": null,
+						"四千至五千": null,
+						"五千至六千": null,
+						"六千至八千": null,
+						"八千至一万": null,
+						"一万至一万二": null,
+						"一万二至一万五": null,
+						"一万五至两万": null,
+						"两万以上": null
 					},
-					'获得荣誉': {
-						"国家级": null,
-						"省部级": null,
-						"厅局级": null,
-						"其它": null,
-						"无": null
-					},
-					'岗位类别': []
+					'人员类别': []
 				},
 			}
 		},

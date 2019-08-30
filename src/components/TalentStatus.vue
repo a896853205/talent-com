@@ -1,14 +1,5 @@
 <template>
 	<div class="box">
-		<div v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')"
-			class="box-item">
-			<Card class="card" :bordered="false">
-				<p slot="title">当年年度产值（万元）</p>
-				<div class="item-box">
-					<InputNumberWithLabel v-model="summary['当年年度产值（万元）'].value" :initValue="summary['当年年度产值（万元）'].value" />
-				</div>
-			</Card>
-		</div>
 		
 		<div class="box-item" v-for='(value, key) in noSpecialSummary' :key='key'>
 			<Card class="card" :bordered="false">
@@ -27,6 +18,16 @@
 			</Card>
 		</div>
 
+		<div v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')"
+			class="box-item">
+			<Card class="card" :bordered="false">
+				<p slot="title">当年年度产值（万元）</p>
+				<div class="item-box">
+					<InputNumberWithLabel v-model="summary['当年年度产值（万元）'].value" :initValue="summary['当年年度产值（万元）'].value" />
+				</div>
+			</Card>
+		</div>
+		
 		<div className='box-item'>
 			<GangWeiLeiBie v-model="summary['人员类别'].value" :initValue="summary['人员类别'].value" />
 		</div>
@@ -88,7 +89,7 @@
 			},
 
 			unitType () {
-				return this.$store.state.form._basic['单位性质'];
+				return this.$store.state.form._basic['单位性质'].value;
 			}
 		}
 	}

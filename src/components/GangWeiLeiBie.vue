@@ -71,7 +71,13 @@
 </style>
 <script>
 	import CascaderWithInputWithLabel from '../components/CascaderWithInputWithLabel.vue';
-	import { jobCategory } from '../assets/category';
+	import { 
+		jobCategoryJiGuan, 
+		jobCategoryQiYe,
+		jobCategorySocial,
+		jobCategoryCareer
+	} from '../assets/category';
+
 	export default {
 		props: {
 			initValue: Array
@@ -98,7 +104,6 @@
 				})
 			},
 			delHandle(index) {
-                console.log('del', index);
 				var cur_index = this.$data.form.findIndex(item => {
 					return item.id === index
 				})
@@ -106,16 +111,30 @@
 			}
 		},
 		created() {
-			this.gangWeiLeiBie = jobCategory;
+			console.log(this.$store.state.form._basic['单位性质'].value);
+			// 这里判断四类类别
+			// 机关,社会团体,事业单位,剩下全部
+			switch (this.$store.state.form._basic['单位性质'].value) {
+				case '机关':
+					this.gangWeiLeiBie = jobCategoryJiGuan;
+					break; 
+				case '社会团体':
+					this.gangWeiLeiBie = jobCategorySocial;
+					break;
+				case '事业单位':
+					this.gangWeiLeiBie = jobCategoryCareer;
+					break;
+				default:
+					this.gangWeiLeiBie = jobCategoryQiYe;
+			}
+			
 			for (let i = 0; i < this.$props.initValue.length; i++) {
-				this.$data.form[i]['人员类别'] = this.$props.initValue[i]
+				this.$data.form[i]['人员类别'] = this.$props.initValue[i];
+
 				if (i < this.$props.initValue.length - 1) {
 					this.addHandle()
 				}
 			}
-		},
-		updated() {
-
 		},
 		watch: {
 			form: {

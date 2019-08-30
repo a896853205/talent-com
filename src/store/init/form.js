@@ -64,12 +64,12 @@ const summary_info = {
 }
 
 const sum_in_info = {
-  "流入人数": null,
+  "流入人数": { value: undefined, type: 'number' },
   "性别结构": info_gender,
   "年龄结构": info_age,
   "学历结构": info_degree,
   "薪酬（元/月）": info_salary,
-  "人员类别": info_people
+  "人员类别": { value: info_people, special: true },
 }
 
 const sum_out_info =  {

@@ -1,544 +1,498 @@
-export const jobCategory = [
+const professionalSkill = [
   {
-    "label": "经营管理类",
+    "label": "工程技术人员",
     "children": [
       {
-        "label": "出资人代表",
-        "value": "出资人代表"
+        "label": "正高级",
+        "value": "正高级"
       },
       {
-        "label": "经营管理人员",
-
-        "value": "经营管理人员"
+        "label": "副高级",
+        "value": "副高级"
       },
       {
-        "label": "党群工作者",
-
-        "value": "党群工作者"
-      }
-    ],
-    "value": "经营管理类"
-  },
-  {
-    "label": "专业技术类",
-    "children": [
-      {
-        "label": "工程技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工程技术人员"
+        "label": "中级",
+        "value": "中级"
       },
       {
-        "label": "农业技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "农业技术人员"
-      },
-      {
-        "label": "科学研究人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "科学研究人员"
-      },
-      {
-        "label": "卫生技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "卫生技术人员"
-      },
-      {
-        "label": "教学人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "教学人员"
-      },
-      {
-        "label": "经济人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "经济人员"
-      },
-      {
-        "label": "会计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "会计人员"
-      },
-      {
-        "label": "统计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "统计人员"
-      },
-      {
-        "label": "翻译人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "翻译人员"
-      },
-      {
-        "label": "图书档案、文博人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "图书档案、文博人员"
-      },
-      {
-        "label": "新闻、出版人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "新闻、出版人员"
-      },
-      {
-        "label": "律师、公证人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "律师、公证人员"
-      },
-      {
-        "label": "播音人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "播音人员"
-      },
-      {
-        "label": "工艺美术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工艺美术人员"
-      },
-      {
-        "label": "体育人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "体育人员"
-      },
-      {
-        "label": "艺术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "艺术人员"
-      },
-      {
-        "label": "其他人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "其他人员"
-      }
-    ],
-    "value": "专业技术类"
-  },
-  {
-    "label": "技能类",
-    "children": [
-      {
-        "label": "职业资格一级（高级技师）",
-
-        "value": "职业资格一级（高级技师）"
-      },
-      {
-        "label": "职业资格二级（技师）",
-
-        "value": "职业资格二级（技师）"
-      },
-      {
-        "label": "职业资格三级（高级）",
-
-        "value": "职业资格三级（高级）"
-      },
-      {
-        "label": "职业资格四级（中级）",
-
-        "value": "职业资格四级（中级）"
-      },
-      {
-        "label": "职业资格五级（初级）",
-
-        "value": "职业资格五级（初级）"
+        "label": "初级",
+        "value": "初级"
       },
       {
         "label": "无",
-
         "value": "无"
       }
     ],
-    "value": "技能类"
+    "value": "工程技术人员"
   },
   {
-    "label": "农村实用类",
+    "label": "农业技术人员",
     "children": [
       {
-        "label": "生产型人员",
-
-        "value": "生产型人员"
+        "label": "正高级",
+        "value": "正高级"
       },
       {
-        "label": "经营型人员",
-
-        "value": "经营型人员"
+        "label": "副高级",
+        "value": "副高级"
       },
       {
-        "label": "技能带动型人员",
-
-        "value": "技能带动型人员"
+        "label": "中级",
+        "value": "中级"
       },
       {
-        "label": "科技服务型人员",
-
-        "value": "科技服务型人员"
+        "label": "初级",
+        "value": "初级"
       },
       {
-        "label": "社会服务型人员",
-
-        "value": "社会服务型人员"
+        "label": "无",
+        "value": "无"
       }
     ],
-    "value": "农村实用类"
+    "value": "农业技术人员"
   },
   {
-    "label": "其他",
-
-    "value": "其他"
+    "label": "科学研究人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "科学研究人员"
+  },
+  {
+    "label": "卫生技术人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "卫生技术人员"
+  },
+  {
+    "label": "教学人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "教学人员"
+  },
+  {
+    "label": "经济人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "经济人员"
+  },
+  {
+    "label": "会计人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "会计人员"
+  },
+  {
+    "label": "统计人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "统计人员"
+  },
+  {
+    "label": "翻译人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "翻译人员"
+  },
+  {
+    "label": "图书档案、文博人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "图书档案、文博人员"
+  },
+  {
+    "label": "新闻、出版人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "新闻、出版人员"
+  },
+  {
+    "label": "律师、公证人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "律师、公证人员"
+  },
+  {
+    "label": "播音人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "播音人员"
+  },
+  {
+    "label": "工艺美术人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "工艺美术人员"
+  },
+  {
+    "label": "体育人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "体育人员"
+  },
+  {
+    "label": "艺术人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "艺术人员"
+  },
+  {
+    "label": "其他人员",
+    "children": [
+      {
+        "label": "正高级",
+        "value": "正高级"
+      },
+      {
+        "label": "副高级",
+        "value": "副高级"
+      },
+      {
+        "label": "中级",
+        "value": "中级"
+      },
+      {
+        "label": "初级",
+        "value": "初级"
+      },
+      {
+        "label": "无",
+        "value": "无"
+      }
+    ],
+    "value": "其他人员"
   }
+];
+const technical = [
+  {
+    "label": "职业资格一级（高级技师）",
+    "value": "职业资格一级（高级技师）"
+  },
+  {
+    "label": "职业资格二级（技师）",
+    "value": "职业资格二级（技师）"
+  },
+  {
+    "label": "职业资格三级（高级）",
+    "value": "职业资格三级（高级）"
+  },
+  {
+    "label": "职业资格四级（中级）",
+    "value": "职业资格四级（中级）"
+  },
+  {
+    "label": "职业资格五级（初级）",
+    "value": "职业资格五级（初级）"
+  },
+  {
+    "label": "无",
+    "value": "无"
+  }
+];
+const village = [
+  {
+    "label": "生产型人员",
+    "value": "生产型人员"
+  },
+  {
+    "label": "经营型人员",
+    "value": "经营型人员"
+  },
+  {
+    "label": "技能带动型人员",
+    "value": "技能带动型人员"
+  },
+  {
+    "label": "科技服务型人员",
+    "value": "科技服务型人员"
+  },
+  {
+    "label": "社会服务型人员",
+    "value": "社会服务型人员"
+  },
+  {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
+  },
 ];
 
 //人员类别-机关
@@ -552,559 +506,47 @@ export const jobCategoryJiGuan = [
       },
       {
         "label": "厅局级",
-
         "value": "厅局级"
       },
       {
         "label": "县处级",
-
         "value": "县处级"
       },
       {
         "label": "乡科级",
-
         "value": "乡科级"
       },
       {
         "label": "科员",
-
         "value": "科员"
       },
       {
         "label": "其他",
-
         "value": "其他"
       },
     ],
     "value": "管理人员"
   },
   {
-    "label": "专业技术类",
-    "children": [
-      {
-        "label": "工程技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工程技术人员"
-      },
-      {
-        "label": "农业技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "农业技术人员"
-      },
-      {
-        "label": "科学研究人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "科学研究人员"
-      },
-      {
-        "label": "卫生技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "卫生技术人员"
-      },
-      {
-        "label": "教学人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "教学人员"
-      },
-      {
-        "label": "经济人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "经济人员"
-      },
-      {
-        "label": "会计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "会计人员"
-      },
-      {
-        "label": "统计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "统计人员"
-      },
-      {
-        "label": "翻译人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "翻译人员"
-      },
-      {
-        "label": "图书档案、文博人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "图书档案、文博人员"
-      },
-      {
-        "label": "新闻、出版人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "新闻、出版人员"
-      },
-      {
-        "label": "律师、公证人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "律师、公证人员"
-      },
-      {
-        "label": "播音人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "播音人员"
-      },
-      {
-        "label": "工艺美术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工艺美术人员"
-      },
-      {
-        "label": "体育人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "体育人员"
-      },
-      {
-        "label": "艺术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "艺术人员"
-      },
-      {
-        "label": "其他人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "其他人员"
-      }
-    ],
-    "value": "专业技术类"
+    "label": "专业技术人员",
+    'children': professionalSkill,
+    "value": "专业技术人员",
   },
   {
-    "label": "技能类",
-    "children": [
-      {
-        "label": "职业资格一级（高级技师）",
-
-        "value": "职业资格一级（高级技师）"
-      },
-      {
-        "label": "职业资格二级（技师）",
-
-        "value": "职业资格二级（技师）"
-      },
-      {
-        "label": "职业资格三级（高级）",
-
-        "value": "职业资格三级（高级）"
-      },
-      {
-        "label": "职业资格四级（中级）",
-
-        "value": "职业资格四级（中级）"
-      },
-      {
-        "label": "职业资格五级（初级）",
-
-        "value": "职业资格五级（初级）"
-      },
-      {
-        "label": "无",
-
-        "value": "无"
-      }
-    ],
-    "value": "技能类"
+    "label": "技能人员",
+    "children": technical,
+    "value": "技能人员",
   },
   {
-    "label": "农村实用类",
-    "children": [
-      {
-        "label": "生产型人员",
-
-        "value": "生产型人员"
-      },
-      {
-        "label": "经营型人员",
-
-        "value": "经营型人员"
-      },
-      {
-        "label": "技能带动型人员",
-
-        "value": "技能带动型人员"
-      },
-      {
-        "label": "科技服务型人员",
-
-        "value": "科技服务型人员"
-      },
-      {
-        "label": "社会服务型人员",
-
-        "value": "社会服务型人员"
-      },
-      {
-        "label": "社会工作人员",
-
-        "value": "社会工作人员"
-      },
-    ],
-    "value": "农村实用类"
+    "label": "农村实用人员",
+    "value": "农村实用人员",
+    "children": village
   },
   {
     "label": "其他",
-
     "value": "其他"
   }
 ];
-
 //人员类别-企业
 export const jobCategoryQiYe = [
   {
@@ -1116,1093 +558,183 @@ export const jobCategoryQiYe = [
       },
       {
         "label": "经营管理人员",
-
         "value": "经营管理人员"
       },
       {
         "label": "党群工作者",
-
         "value": "党群工作者"
       },
       {
         "label": "其他",
-
         "value": "其他"
       }
     ],
     "value": "企业经营管理人员"
   },
   {
-    "label": "专业技术类",
-    "children": [
-      {
-        "label": "工程技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工程技术人员"
-      },
-      {
-        "label": "农业技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "农业技术人员"
-      },
-      {
-        "label": "科学研究人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "科学研究人员"
-      },
-      {
-        "label": "卫生技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "卫生技术人员"
-      },
-      {
-        "label": "教学人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "教学人员"
-      },
-      {
-        "label": "经济人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "经济人员"
-      },
-      {
-        "label": "会计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "会计人员"
-      },
-      {
-        "label": "统计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "统计人员"
-      },
-      {
-        "label": "翻译人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "翻译人员"
-      },
-      {
-        "label": "图书档案、文博人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "图书档案、文博人员"
-      },
-      {
-        "label": "新闻、出版人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "新闻、出版人员"
-      },
-      {
-        "label": "律师、公证人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "律师、公证人员"
-      },
-      {
-        "label": "播音人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "播音人员"
-      },
-      {
-        "label": "工艺美术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工艺美术人员"
-      },
-      {
-        "label": "体育人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "体育人员"
-      },
-      {
-        "label": "艺术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "艺术人员"
-      },
-      {
-        "label": "其他人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "其他人员"
-      }
-    ],
-    "value": "专业技术类"
+    "label": "专业技术人员",
+    "children": professionalSkill,
+    "value": "专业技术人员"
   },
   {
-    "label": "技能类",
-    "children": [
-      {
-        "label": "职业资格一级（高级技师）",
-
-        "value": "职业资格一级（高级技师）"
-      },
-      {
-        "label": "职业资格二级（技师）",
-
-        "value": "职业资格二级（技师）"
-      },
-      {
-        "label": "职业资格三级（高级）",
-
-        "value": "职业资格三级（高级）"
-      },
-      {
-        "label": "职业资格四级（中级）",
-
-        "value": "职业资格四级（中级）"
-      },
-      {
-        "label": "职业资格五级（初级）",
-
-        "value": "职业资格五级（初级）"
-      },
-      {
-        "label": "无",
-
-        "value": "无"
-      }
-    ],
-    "value": "技能类"
+    "label": "技能人员",
+    "children": technical,
+    "value": "技能人员"
   },
   {
-    "label": "农村实用类",
-    "children": [
-      {
-        "label": "生产型人员",
-
-        "value": "生产型人员"
-      },
-      {
-        "label": "经营型人员",
-
-        "value": "经营型人员"
-      },
-      {
-        "label": "技能带动型人员",
-
-        "value": "技能带动型人员"
-      },
-      {
-        "label": "科技服务型人员",
-
-        "value": "科技服务型人员"
-      },
-      {
-        "label": "社会服务型人员",
-
-        "value": "社会服务型人员"
-      },
-      {
-        "label": "社会工作人员",
-
-        "value": "社会工作人员"
-      },
-    ],
-    "value": "农村实用类"
+    "label": "农村实用人员",
+    "children": village,
+    "value": "农村实用人员"
   },
   {
     "label": "其他",
-
     "value": "其他"
   }
 ];
-
-export const jobCategorybackup = [
+// 社会团体
+export const jobCategorySocial = [
   {
-    "label": "经营管理类",
+    "label": "管理人员",
     "children": [
       {
-        "label": "出资人代表",
-
-        "value": "出资人代表"
+        "label": "一级",
+        "value": "一级"
       },
       {
-        "label": "经营管理人员",
-
-        "value": "经营管理人员"
+        "label": "二级",
+        "value": "二级"
       },
       {
-        "label": "党群工作者",
-
-        "value": "党群工作者"
+        "label": "三级",
+        "value": "三级"
+      },
+      {
+        "label": "四级",
+        "value": "四级"
+      },
+      {
+        "label": "五级",
+        "value": "五级"
+      },
+      {
+        "label": "六级",
+        "value": "六级"
+      },
+      {
+        "label": "七级",
+        "value": "七级"
+      },
+      {
+        "label": "八级",
+        "value": "八级"
+      },
+      {
+        "label": "九级",
+        "value": "九级"
+      },
+      {
+        "label": "十级",
+        "value": "十级"
+      },
+      {
+        "label": "其他",
+        "value": "其他"
       }
     ],
-    "value": "经营管理类"
+    "value": "管理人员"
   },
   {
-    "label": "专业技术类",
-    "children": [
-      {
-        "label": "工程技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工程技术人员"
-      },
-      {
-        "label": "农业技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "农业技术人员"
-      },
-      {
-        "label": "科学研究人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "科学研究人员"
-      },
-      {
-        "label": "卫生技术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "卫生技术人员"
-      },
-      {
-        "label": "教学人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "教学人员"
-      },
-      {
-        "label": "经济人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "经济人员"
-      },
-      {
-        "label": "会计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "会计人员"
-      },
-      {
-        "label": "统计人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "统计人员"
-      },
-      {
-        "label": "翻译人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "翻译人员"
-      },
-      {
-        "label": "图书档案、文博人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "图书档案、文博人员"
-      },
-      {
-        "label": "新闻、出版人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "新闻、出版人员"
-      },
-      {
-        "label": "律师、公证人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "律师、公证人员"
-      },
-      {
-        "label": "播音人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "播音人员"
-      },
-      {
-        "label": "工艺美术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "工艺美术人员"
-      },
-      {
-        "label": "体育人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "体育人员"
-      },
-      {
-        "label": "艺术人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "艺术人员"
-      },
-      {
-        "label": "其他人员",
-        "children": [
-          {
-            "label": "正高级",
-            "value": "正高级"
-          },
-          {
-            "label": "副高级",
-            "value": "副高级"
-          },
-          {
-            "label": "中级",
-            "value": "中级"
-          },
-          {
-            "label": "初级",
-            "value": "初级"
-          },
-          {
-            "label": "无",
-            "value": "无"
-          }
-        ],
-        "value": "其他人员"
-      }
-    ],
-    "value": "专业技术类"
+    "label": "专业技术人员",
+    'children': professionalSkill,
+    "value": "专业技术人员",
   },
   {
-    "label": "技能类",
-    "children": [
-      {
-        "label": "职业资格一级（高级技师）",
-
-        "value": "职业资格一级（高级技师）"
-      },
-      {
-        "label": "职业资格二级（技师）",
-
-        "value": "职业资格二级（技师）"
-      },
-      {
-        "label": "职业资格三级（高级）",
-
-        "value": "职业资格三级（高级）"
-      },
-      {
-        "label": "职业资格四级（中级）",
-
-        "value": "职业资格四级（中级）"
-      },
-      {
-        "label": "职业资格五级（初级）",
-
-        "value": "职业资格五级（初级）"
-      },
-      {
-        "label": "无",
-
-        "value": "无"
-      }
-    ],
-    "value": "技能类"
+    "label": "技能人员",
+    "children": technical,
+    "value": "技能人员",
   },
   {
-    "label": "农村实用类",
-    "children": [
-      {
-        "label": "生产型人员",
-
-        "value": "生产型人员"
-      },
-      {
-        "label": "经营型人员",
-
-        "value": "经营型人员"
-      },
-      {
-        "label": "技能带动型人员",
-
-        "value": "技能带动型人员"
-      },
-      {
-        "label": "科技服务型人员",
-
-        "value": "科技服务型人员"
-      },
-      {
-        "label": "社会服务型人员",
-
-        "value": "社会服务型人员"
-      }
-    ],
-    "value": "农村实用类"
+    "label": "农村实用人员",
+    "value": "农村实用人员",
+    "children": village,
   },
   {
     "label": "其他",
-
-    "value": "其他"
+    "value": "其他",
   }
 ];
-
+// 事业单位
+export const jobCategoryCareer = [
+  {
+    "label": "管理人员",
+    "children": [
+      {
+        "label": "一级",
+        "value": "一级"
+      },
+      {
+        "label": "二级",
+        "value": "二级"
+      },
+      {
+        "label": "三级",
+        "value": "三级"
+      },
+      {
+        "label": "四级",
+        "value": "四级"
+      },
+      {
+        "label": "五级",
+        "value": "五级"
+      },
+      {
+        "label": "六级",
+        "value": "六级"
+      },
+      {
+        "label": "七级",
+        "value": "七级"
+      },
+      {
+        "label": "八级",
+        "value": "八级"
+      },
+      {
+        "label": "九级",
+        "value": "九级"
+      },
+      {
+        "label": "十级",
+        "value": "十级"
+      },
+      {
+        "label": "其他",
+        "value": "其他"
+      }
+    ],
+    "value": "管理人员"
+  },
+  {
+    "label": "专业技术人员",
+    'children': professionalSkill,
+    "value": "专业技术人员",
+  },
+  {
+    "label": "技能人员",
+    "children": technical,
+    "value": "技能人员",
+  },
+  {
+    "label": "农村实用人员",
+    "value": "农村实用人员",
+    "children": village,
+  },
+  {
+    "label": "其他",
+    "value": "其他",
+  }
+]
 
 
 

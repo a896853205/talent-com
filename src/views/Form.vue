@@ -177,7 +177,8 @@
                     this.$message.error('您已经提交过了，不需要暂存了！');
                     return
                 }
-                let that = this
+								let that = this
+								console.dir(that.$store.state.form)
                 axios({
                     url: url.save,
                     method: 'post',

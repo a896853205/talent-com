@@ -1,63 +1,46 @@
 <template>
-	<div>
-		<CompanyInfo v-model="basic" :initObj="initObj"></CompanyInfo>
+	<div class="box">
+		<div class="item" v-for='(value, key) in basic' :key='key'>
+			<SelectWithLabel v-if='value.type === "select"' :label='key' :initValue='value.value' :v-model='value.value' :list="value.list" />
+			<CascaderWithLabel v-if='value.type === "cascader"' :label='key' :initValue='value.value' :v-model="value.value" :data="value.data" />
+			<InputWithLabel v-if='value.type === "input"' :label='key' :initValue='value.value' :v-model='value.value' />
+		</div>
 	</div>
 </template>
 <style scoped>
-	.button-box {
-		text-align: right;
-		padding-right: 100px;
+	.box {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 30px;
+		justify-content: flex-start;
+		/*space-between、space-around*/
+		padding: 0 100px;
 	}
 
-	.button {
-		width: 100px;
+	.item {
+		width: 300px;
+		height: 80px;
+		margin-right: 10px;
 	}
 </style>
 <script>
-	import CompanyInfo from '../components/CompanyInfo.vue';
+	import InputWithLabel from '../components/InputWithLabel.vue';
+	import SelectWithLabel from '../components/SelectWithLabel.vue';
+	import CascaderWithLabel from '../components/CascaderWithLabel.vue';
+
 	export default {
 		components: {
-			CompanyInfo,
+			InputWithLabel,
+			SelectWithLabel,
+			CascaderWithLabel,
 		},
-		data: () => ({
-			basic: {},
-			initObj: {
-				'单位名称': null,
-				'统一社会信用代码': null,
-				'所属地域': null,
-				'所属行业': null,
-				'行业分类': null,
-				'单位性质': null,
-				'填报人': null,
-				'联系电话': null,
-				'QQ': null,
-				'微信': null,
-				'电子邮箱': null
-			}
-		}),
-		methods: {
-			saveHandle() {
-				
-				this.$message({
-					message: '保存成功',
-					type: 'success'
-				});
-			}
-		},
-		created() {
-			this.$data.initObj = this.$store.state.form._basic
-		},
-		mounted() {
-			
-		},
-		watch: {
-			basic: {
-				handler(val, oldval) {
-					this.$store.state.form._basic = this.$data.basic
-				},
-				deep: true
+		methods: {},
+		created() {},
+		mounted() {},
+		computed: {
+			basic () {
+				return this.$store.state.form._basic;
 			}
 		}
-
 	}
 </script>

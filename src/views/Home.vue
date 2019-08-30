@@ -27,7 +27,7 @@
     import SelectWithLabel from '@/components/SelectWithLabel.vue'
     import CascaderWithLabel from '@/components/CascaderWithLabel.vue'
     import CascaderWithInputWithLabel from '@/components/CascaderWithInputWithLabel.vue'
-    import category from '../assets/data/category';
+    import { jobCategory } from '../assets/category';
 
     import url from '@/service.config.js';
     import axios from 'axios';
@@ -35,7 +35,7 @@
 
     export default {
         created() {
-            this.gangWeiLeiBie = category.jobCategory;
+            this.gangWeiLeiBie = jobCategory;
             window.vue = this
             /*
         //get

@@ -26,7 +26,6 @@
 	.cbox {
 		display: flex;
 		flex-wrap: wrap;
-		margin: 5px 100px;
 		overflow: visible!important;
 	}
 
@@ -72,7 +71,7 @@
 </style>
 <script>
 	import CascaderWithInputWithLabel from '../components/CascaderWithInputWithLabel.vue';
-	import category from '../assets/data/category';
+	import { jobCategory } from '../assets/category';
 	export default {
 		props: {
 			initValue: Array
@@ -107,7 +106,7 @@
 			}
 		},
 		created() {
-			this.gangWeiLeiBie = category.jobCategory;
+			this.gangWeiLeiBie = jobCategory;
 			for (let i = 0; i < this.$props.initValue.length; i++) {
 				this.$data.form[i]['人员类别'] = this.$props.initValue[i]
 				if (i < this.$props.initValue.length - 1) {

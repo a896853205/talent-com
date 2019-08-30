@@ -95,7 +95,7 @@
     import InputNumberWithLabel from '../components/InputNumberWithLabel.vue';
     import SelectWithLabel from '../components/SelectWithLabel.vue';
     import CascaderWithLabel from '../components/CascaderWithLabel.vue';
-    import category from '../assets/data/category';
+    import { nianLingJieGou, xueLiJieGou, major, jobCategory, xinChou } from '../assets/category';
 
     export default {
         methods: {
@@ -151,12 +151,11 @@
             }
         },
         created() {
-            this.nianLingJieGou = category.nianLingJieGou;
-            this.xueLiJieGou = category.xueLiJieGou;
-            this.major = category.major;
-            this.jobCategory = category.jobCategory;
-            this.xinChou = category.xinChou;
-			console.log(this.$data.form1)
+            this.nianLingJieGou = nianLingJieGou;
+            this.xueLiJieGou = xueLiJieGou;
+            this.major = major;
+            this.jobCategory = jobCategory;
+            this.xinChou = xinChou;
         },
         components: {
             InputWithLabel,

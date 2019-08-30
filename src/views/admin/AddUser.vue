@@ -51,7 +51,7 @@
 </style>
 
 <script>
-    import category from '@/assets/data/category.js'
+    import { danWeiXingZhi, qunxian } from '../../assets/category'
 
     export default {
         data() {
@@ -77,8 +77,8 @@
             },
         },
         created() {
-            let danWeiXingZhi = category.danWeiXingZhi;
-            let qunxian = category.qunxian;
+            let danWeiXingZhi = danWeiXingZhi;
+            let qunxian = qunxian;
             this.$data.danWeiXingZhi = danWeiXingZhi
             this.$data.qunxian = qunxian
         }

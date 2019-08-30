@@ -1,9 +1,9 @@
 <template>
 	<div class="box">
 		<el-tabs tab-position="left">
-			<el-tab-pane v-for="(item,index) in result" :key="index" :label="item['year']">
-				<p class="title">单位人才情况汇总表-存量信息-{{item.year}}年</p>
-				<TalentStatus v-model="item.info" :initObj="initArray[index]['info']"></TalentStatus>
+			<el-tab-pane v-for="(value, key) in summary" :key="key" :label="value.year">
+				<p class="title">单位人才情况汇总表-存量信息-{{value.year}}年</p>
+				<TalentStatus :year='value.year' />
 			</el-tab-pane>
 		</el-tabs>
 	</div>
@@ -26,67 +26,9 @@
 		components: {
 			TalentStatus,
 		},
-		data() {
-			return {
-				result: [{
-						"year": "2009",
-						"info": null
-					},
-					{
-						"year": "2010",
-						"info": null
-					},
-					{
-						'year': '2011',
-						"info": null
-					},
-					{
-						'year': '2012',
-						"info": null
-					},
-					{
-						'year': '2013',
-						"info": null
-					},
-					{
-						'year': '2014',
-						"info": null
-					},
-					{
-						'year': '2015',
-						"info": null
-					},
-					{
-						'year': '2016',
-						"info": null
-					},
-					{
-						'year': '2017',
-						"info": null
-					},
-					{
-						'year': '2018',
-						"info": null
-					}
-				],
-				initArray: []
-			}
-		},
-		beforeMount() {
-			this.$data.initArray = this.$store.state.form._summary
-		},
-		created() {
-			
-		},
-		mounted() {
-			
-		},
-		watch: {
-			result: {
-				handler(val, oldval) {
-					this.$store.state.form._summary = this.$data.result
-				},
-				deep: true
+		computed: {
+			summary () {
+				return this.$store.state.form._summary
 			}
 		}
 	}

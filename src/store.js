@@ -120,7 +120,6 @@ export default new Vuex.Store({
       }
     },
     setFlowOutInner (state, { value, key, year, subKey }) {
-      console.log(state, { value, key, year, subKey });
       if (year) {
         let oneYearInfo = state.form._sum_out_nei.find(value => (value.year === year)).info
         

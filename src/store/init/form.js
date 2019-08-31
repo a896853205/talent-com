@@ -22,37 +22,37 @@ function initEveryYear(begin, end, data) {
 }
 
 const info_gender = {
-  "男": { value: undefined, type: 'number' },
-  "女": { value: undefined, type: 'number' }
+  "男": { value: 0, type: 'number' },
+  "女": { value: 0, type: 'number' }
 }
 
 const info_age = {
-  "25岁以下": { value: undefined, type: 'number' },
-  "26-35岁": { value: undefined, type: 'number' },
-  "36-45岁": { value: undefined, type: 'number' },
-  "46-55岁": { value: undefined, type: 'number' },
-  "56岁以上": { value: undefined, type: 'number' }
+  "25岁以下": { value: 0, type: 'number' },
+  "26-35岁": { value: 0, type: 'number' },
+  "36-45岁": { value: 0, type: 'number' },
+  "46-55岁": { value: 0, type: 'number' },
+  "56岁以上": { value: 0, type: 'number' }
 }
 
 const info_degree = {
-  "博士研究生": { value: undefined, type: 'number' },
-  "硕士研究生": { value: undefined, type: 'number' },
-  "本科": { value: undefined, type: 'number' },
-  "大专": { value: undefined, type: 'number' },
-  "大专以下": { value: undefined, type: 'number' }
+  "博士研究生": { value: 0, type: 'number' },
+  "硕士研究生": { value: 0, type: 'number' },
+  "本科": { value: 0, type: 'number' },
+  "大专": { value: 0, type: 'number' },
+  "大专以下": { value: 0, type: 'number' }
 }
 
 const info_salary = {
-  "3000以下": { value: undefined, type: 'number' },
-  "3000-4000": { value: undefined, type: 'number' },
-  "4000-5000": { value: undefined, type: 'number' },
-  "5000-6000": { value: undefined, type: 'number' },
-  "6000-8000": { value: undefined, type: 'number' },
-  "8000-10000": { value: undefined, type: 'number' },
-  "10000-12000": { value: undefined, type: 'number' },
-  "12000-15000": { value: undefined, type: 'number' },
-  "15000-20000": { value: undefined, type: 'number' },
-  "20000以上": { value: undefined, type: 'number' }
+  "3000以下": { value: 0, type: 'number' },
+  "3000-4000": { value: 0, type: 'number' },
+  "4000-5000": { value: 0, type: 'number' },
+  "5000-6000": { value: 0, type: 'number' },
+  "6000-8000": { value: 0, type: 'number' },
+  "8000-10000": { value: 0, type: 'number' },
+  "10000-12000": { value: 0, type: 'number' },
+  "12000-15000": { value: 0, type: 'number' },
+  "15000-20000": { value: 0, type: 'number' },
+  "20000以上": { value: 0, type: 'number' }
 }
 
 const info_people = [{
@@ -61,17 +61,17 @@ const info_people = [{
 }]
 
 const summary_info = {
-  "职工人数": { value: undefined, type: 'number' },
+  "职工人数": { value: 0, type: 'number' },
   "性别结构": info_gender,
   "年龄结构": info_age,
   "学历结构": info_degree,
   "薪酬（元/月）": info_salary,
   "人员类别": { value: info_people, special: true },
-  "当年年度产值（万元）": { value: undefined, type: 'number', special: true }
+  "当年年度产值（万元）": { value: 0, type: 'number', special: true }
 }
 
 const sum_in_info = {
-  "流入人数": { value: undefined, type: 'number' },
+  "流入人数": { value: 0, type: 'number' },
   "性别结构": info_gender,
   "年龄结构": info_age,
   "学历结构": info_degree,
@@ -80,7 +80,7 @@ const sum_in_info = {
 }
 
 const sum_out_info = {
-  "流出人数": { value: undefined, type: 'number' },
+  "流出人数": { value: 0, type: 'number' },
   "性别结构": info_gender,
   "年龄结构": info_age,
   "学历结构": info_degree,
@@ -92,11 +92,11 @@ const sum_out_info = {
 export const outStatusInfo = {
   "姓名": { value: undefined, type: 'input' },
   "身份证号": { value: undefined, type: 'input' },
-  "年龄": { value: undefined, type: 'number' },
+  "年龄": { value: 0, type: 'number' },
   '性别': { value: undefined, type: 'select', list: xingBie },
   "人员类别": { value: [], type: 'cascaderSpecial' },
   "离职时间": { value: undefined, type: 'date' },
-  "从业年限（年）": { value: undefined, type: 'number' },
+  "从业年限（年）": { value: 0, type: 'number' },
   "流入地": { value: undefined, type: 'input' },
   '离职原因（多选）': { value: [], type: 'checkBox', list: liZhiYuanYin }
 }
@@ -106,11 +106,11 @@ export const personInfo = {
   "年龄结构": { value: undefined, type: 'select', list: nianLingJieGou },
   '学历结构': { value: undefined, type: 'select', list: xueLiJieGou },
   '专业': { value: undefined, type: 'cascader', data: major},
-  "工作经验（年）": { value: undefined, type: 'number' },
+  "工作经验（年）": { value: 0, type: 'number' },
   "职业资格证书": { value: undefined, type: 'input' },
   "人员类别": { value: [], type: 'cascaderSpecial' },
   '薪酬（元/月）': { value: undefined, type: 'select', list: xinChou },
-  "需求数量（人）": { value: undefined, type: 'number' },
+  "需求数量（人）": { value: 0, type: 'number' },
 }
 
 export const form_inserting = {

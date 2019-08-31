@@ -6,14 +6,14 @@
 					<Cascader 
 						:transfer="vb"
 						:data="data"
-						v-model="value1"
-						@on-visible-change="emit()"
-						change-on-select />
+						:value="value1"
+						@on-change="cascaderEvent"
+						 />
 				</Col>
 				<Col span="8" >
 					<Input-number
-						v-model="value2"
-						@on-change="emit()"
+						:value="value2"
+						@on-change="inputEvent"
 						style="width:95%; margin-bottom: 10px; margin-left: 5%; margin-right: 5px;" />
 				</Col>
 			</Row>
@@ -53,12 +53,21 @@
 			this.emit()
 		},
 		methods: {
-			emit() {
+			cascaderEvent(value, selectedData) {
+				this.$data.value1 = value;
+				this.$options.methods.emit(this);
+			},
+			inputEvent(value) {
+				this.$data.value2 = value;
+				this.$options.methods.emit(this);
+			},
+			emit(_this) {
+				console.log(_this.$data.value1);
 				let obj = {
-					cas: this.$data.value1,
-					num: this.$data.value2
+					cas: _this.$data.value1,
+					num: _this.$data.value2
 				}
-				this.$emit('cascader', { obj, index: this.index })
+				_this.$emit('cascader', { obj, key: _this.label, index: _this.index })
 			}
 		}
 	}

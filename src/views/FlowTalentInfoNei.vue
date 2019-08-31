@@ -1,7 +1,10 @@
 <template>
   <div class="box">
     <div class="need">
-      <FlowTalentInfoNei></FlowTalentInfoNei>
+      <FlowTalentInfo
+        title='单位流失人才信息表-事业单位-体制内'
+        commitFunction='setOutStatusIn'
+        :outStatus='outStatus' />
     </div>
   </div>
 </template>
@@ -12,13 +15,16 @@
 }
 </style>
 <script>
-import FlowTalentInfoNei from "../components/FlowTalentInfoNei.vue";
+import FlowTalentInfo from "../components/FlowTalentInfo.vue";
+
 export default {
   components: {
-    FlowTalentInfoNei
+    FlowTalentInfo
   },
-  created() {
-    this.$store.state.loading = false;
+  computed: {
+    outStatus() {
+      return this.$store.state.form._out_status_nei;
+    }
   }
 };
 </script>

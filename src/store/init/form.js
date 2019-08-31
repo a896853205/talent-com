@@ -114,6 +114,7 @@ export const personInfo = {
 }
 
 export const form_inserting = {
+  _id: undefined,
   _from_user: null,
   _confirmed: false,
   _basic: {

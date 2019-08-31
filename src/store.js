@@ -12,10 +12,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    userId: '',
     count: 155,
     loaded: false,
     loading: false,
-    unitType: '事业单位',
     page_load: {
       'companyInfo': true,
       'talentStatus': false,
@@ -28,6 +28,12 @@ export default new Vuex.Store({
     vueElementLoading: false,
   },
   mutations: {
+    setUserId(state, userId) {
+      state.userId = userId;
+    },
+    setForm(state, form) {
+      state.form = form;
+    },
     setBasic (state, {value, key}) {
       state.form._basic[key].value = value;
     },
@@ -132,7 +138,22 @@ export default new Vuex.Store({
     },
     setOutStatus (state, arr) {
       state._out_status = arr;
-    }
+    },
+    setOutStatusIn (state, arr) {
+      state._out_status_nei = arr;
+    },
+    setOutStatusOut (state, arr) {
+      state._out_status_wai = arr;
+    },
+    setNeed (state, arr) {
+      state._need = arr;
+    },
+    setNeedIn (state, arr) {
+      state._need_nei = arr;
+    },
+    setNeedOut (state, arr) {
+      state._need_wai = arr;
+    },
   },
   getters: {
     stationCategory: state => {

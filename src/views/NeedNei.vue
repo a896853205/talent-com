@@ -1,27 +1,31 @@
 <template>
-    <div class="box">
-        <div class="need">
-            <NeedNei></NeedNei>
-        </div>
+  <div class="box">
+    <div class="need">
+      <Need 
+        title='单位人才需求调查表-事业单位-体制内'
+        commitFunction='setNeedIn'
+        :need='need'
+      />
     </div>
+  </div>
 </template>
 <style scoped>
-    .box {
-
-    }
-    .need {
-        margin: 0 auto;
-        max-width: 1250px;
-    }
+.need {
+  margin: 0 auto;
+  max-width: 1250px;
+}
 </style>
 <script>
-    import NeedNei from '../components/NeedNei.vue'
-    export default {
-        components:{
-            NeedNei,
-        },
-		created() {
-			this.$store.state.loading = false;
-		}
+import Need from "../components/Need.vue";
+
+export default {
+  components: {
+    Need
+  },
+  computed: {
+    need() {
+      return this.$store.state.form._need_nei;
     }
+  }
+};
 </script>

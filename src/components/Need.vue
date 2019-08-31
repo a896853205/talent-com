@@ -3,7 +3,7 @@
     <div v-for="(item, index) in need" :key="item.id">
       <Card :bordered="false">
         <div class="del-box">
-          <p class="del-box-title" slot="title">单位人才需求调查表 {{index+1}}</p>
+          <p class="del-box-title" slot="title">{{ title }} {{index+1}}</p>
           <div class="del-btn">
             <i-button
               type="error"
@@ -29,77 +29,6 @@
 							:index='index' />
           </div>
 				</div>
-        <!-- <div class="abox">
-          <div class="item">
-            <InputWithLabel
-              label="需求岗位"
-              v-model="item['info']['需求岗位']"
-              :initValue="item['info']['需求岗位']"
-            />
-          </div>
-          <div class="item">
-            <InputNumberWithLabel
-              label="需求数量（人）"
-              v-model="item['info']['需求数量（人）']"
-              :initValue="item['info']['需求数量（人）']"
-            />
-          </div>
-          <div class="item">
-            <SelectWithLabel
-              label="年龄结构"
-              :list="nianLingJieGou"
-              v-model="item['info']['年龄结构']"
-              :initValue="item['info']['年龄结构']"
-            />
-          </div>
-          <div class="item">
-            <SelectWithLabel
-              label="学历结构"
-              :list="xueLiJieGou"
-              v-model="item['info']['学历结构']"
-              :initValue="item['info']['学历结构']"
-            ></SelectWithLabel>
-          </div>
-          <div class="item">
-            <CascaderWithLabel
-              label="专业要求"
-              :data="major"
-              v-model="item['info']['专业要求']"
-              :initValue="item['info']['专业要求']"
-            ></CascaderWithLabel>
-          </div>
-          <div class="item">
-            <InputNumberWithLabel
-              label="工作经验（年）"
-              v-model="item['info']['工作经验（年）']"
-              :initValue="item['info']['工作经验（年）']"
-            />
-          </div>
-          <div class="item">
-            <InputWithLabel
-              label="职业资格证书"
-              v-model="item['info']['职业资格证书']"
-              :initValue="item['info']['职业资格证书']"
-            />
-          </div>
-          <div class="item">
-            <CascaderWithLabel
-              label="岗位类别"
-              :data="jobCategory"
-              v-model="item['info']['岗位类别']"
-              :initValue="item['info']['岗位类别']"
-            ></CascaderWithLabel>
-          </div>
-          <div class="item">
-            <CascaderWithLabel
-              label="薪酬"
-              :data="xinChou"
-              v-model="item['info']['薪酬']"
-              :initValue="item['info']['薪酬']"
-            />
-          </div>
-          <div class="item"></div>
-        </div> -->
       </Card>
     </div>
     <div class="add">
@@ -166,34 +95,51 @@ export default {
     CascaderWithLabel,
     InputNumberWithLabel
   },
+  props: ['title', 'commitFunction', 'need'],
   methods: {
     addHandle() {
       var num = this.$data.num++;
-      this.need.push({
+
+      this.$data.need.push({
         id: num,
         info: personInfo
       });
+
+      this.$options.methods.needArrCommit(this);
     },
     delHandle(index) {
-      var cur_index = this.need.findIndex(item => {
+      var cur_index = this.$data.need.findIndex(item => {
         return item.id === index;
       });
-      this.need.splice(cur_index, 1);
-    }
+      
+      this.$data.need.splice(cur_index, 1);
+
+      this.$options.methods.needArrCommit(this);
+    },
+    
+    changeEvent ({ value, key, index }) {
+      this.$data.need[index].info[key].value = value;
+      this.$options.methods.needArrCommit(this);
+    },
+
+    needArrCommit(_this) {
+      _this.$store.commit(_this.commitFunction, _this.$data.needArr);
+    },
   },
+
   data() {
     return {
       num: 1,
+      needArr: [],
     }
   },
+
   beforeMount() {
-    let needArr = this.$store.state.form._need;
-    this.$data.num = needArr[needArr.length - 1].id + 1;
+    this.$data.needArr = this.need;
+    this.$data.num = this.$data.needArr[this.$data.needArr.length - 1].id + 1;
   },
+
   computed: {
-    need() {
-      return this.$store.state.form._need;
-    },
     stationCategory() {
       return this.$store.getters.stationCategory;
     }

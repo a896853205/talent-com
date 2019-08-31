@@ -161,8 +161,8 @@ export default {
 	computed: {
 		unit() {
 			return this.$store.state.form._basic['单位性质'].value;
-		}
-	},
+    }
+  },
   methods: {
     exportExcel() {
       let flag = this.$store.state.form._confirmed;
@@ -195,7 +195,10 @@ export default {
       axios({
         url: url.save,
         method: "post",
-        data: that.$store.state.form
+        data: { 
+          form: that.$store.state.form,
+          userId: that.$store.state.userId
+        }
       })
 			.then(res => {
 				this.$message({
@@ -545,18 +548,20 @@ export default {
     }
   },
   created() {
-    if (util.getCookies(this) == null) {
-      this.$router.push("/");
-      return;
-    }
-    if (!this.$store.state.loaded) {
-      this.$router.push("/loading");
-    }
-    if (this.$store.state.form._basic["单位名称"] === null) {
-      this.$data.companyName = util.getCookies(this).user_name;
-    } else {
-      this.$data.companyName = this.$store.state.form._basic["单位名称"];
-    }
+    // if (util.getCookies(this) === null) {
+    //   this.$router.push("/");
+    //   return;
+    // }
+    // if (!this.$store.state.loaded) {
+    //   this.$router.push("/loading");
+    // }
+    // if (this.$store.state.form._basic["单位名称"] === null) {
+    //   this.$data.companyName = util.getCookies(this).user_name;
+    // } else {
+    //   this.$data.companyName = this.$store.state.form._basic["单位名称"];
+    // }
+
+    
   }
 };
 </script>

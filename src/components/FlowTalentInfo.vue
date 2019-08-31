@@ -3,7 +3,7 @@
 		<div v-for="(item, index) in outStatus" :key="item.id">
 			<Card :bordered="false">
 				<div class="del-box">
-					<p class="del-box-title" slot="title">单位流失人才信息表 {{index+1}}</p>
+					<p class="del-box-title" slot="title">{{ title }} {{index+1}}</p>
 					<div class="del-btn">
 						<i-button type="error" v-if="item.id > 0" style="margin-right: 10px" shape="circle" @click="delHandle(item.id)">删除</i-button>
 					</div>
@@ -143,6 +143,7 @@
 			MultiSelectWithLabel,
 			InputDateWithLabel
 		},
+		props: ['title', 'commitFunction', 'outStatus'],
 		methods: {
 			addHandle() {
 				let num = this.$data.num++;
@@ -171,7 +172,7 @@
 			},
 
 			outStatusArrCommit(_this) {
-				_this.$store.commit('setOutStatus', _this.$data.outStatusArr);
+				_this.$store.commit(_this.commitFunction, _this.$data.outStatusArr);
 			},
 		},
 
@@ -183,14 +184,11 @@
 		},
 
 		beforeMount() {
-			this.$data.outStatusArr = this.$store.state.form._out_status;
+			this.$data.outStatusArr = this.outStatus;
       this.$data.num = this.$data.outStatusArr[this.$data.outStatusArr.length - 1].id + 1;
 		},
 
 		computed: {
-			outStatus() {
-				return this.$store.state.form._out_status;
-			},
 			stationCategory() {
 				return this.$store.getters.stationCategory;
 			}

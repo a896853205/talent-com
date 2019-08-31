@@ -1,7 +1,11 @@
 <template>
   <div class="box">
     <div class="need">
-      <Need></Need>
+      <Need 
+        title='单位人才需求调查表'
+        commitFunction='setNeed'
+        :need='need'
+      />
     </div>
   </div>
 </template>
@@ -13,9 +17,15 @@
 </style>
 <script>
 import Need from "../components/Need.vue";
+
 export default {
   components: {
     Need
+  },
+  computed: {
+    need() {
+      return this.$store.state.form._need;
+    }
   }
 };
 </script>

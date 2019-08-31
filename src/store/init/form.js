@@ -1,8 +1,15 @@
 import { objectHelper } from '../../util/object-helper';
-import { 
-  suoShuDiYu, 
-  industryCategory, 
-  danWeiXingZhi } from '../../assets/category';
+import {
+  suoShuDiYu,
+  industryCategory,
+  danWeiXingZhi,
+  xingBie,
+  nianLingJieGou,
+  xueLiJieGou,
+  xinChou,
+  major,
+  liZhiYuanYin
+} from '../../assets/category';
 function initEveryYear(begin, end, data) {
   let dataArr = [];
   for (let i = begin; i <= end; i++) {
@@ -72,14 +79,38 @@ const sum_in_info = {
   "人员类别": { value: info_people, special: true },
 }
 
-const sum_out_info =  {
-  "流出人数": null,
+const sum_out_info = {
+  "流出人数": { value: undefined, type: 'number' },
   "性别结构": info_gender,
   "年龄结构": info_age,
   "学历结构": info_degree,
   "薪酬（元/月）": info_salary,
-  "人员类别": info_people,
-  "离职原因（多选）": []
+  "人员类别": { value: info_people, special: true },
+  "离职原因（多选）": { value: [], special: true }
+}
+
+export const outStatusInfo = {
+  "姓名": { value: undefined, type: 'input' },
+  "身份证号": { value: undefined, type: 'input' },
+  "年龄": { value: undefined, type: 'number' },
+  '性别': { value: undefined, type: 'select', list: xingBie },
+  "人员类别": { value: info_people, special: true },
+  "离职时间": { value: [], special: true },
+  "从业年限（年）": { value: undefined, type: 'number' },
+  "流入地": { value: undefined, type: 'input' },
+  '离职原因（多选）': { value: [], special: true, list: liZhiYuanYin }
+}
+
+export const personInfo = {
+  "需求岗位": { value: undefined, type: 'input' },
+  "需求数量（人）": { value: undefined, type: 'number' },
+  "年龄结构": { value: undefined, type: 'select', list: nianLingJieGou },
+  '学历结构': { value: undefined, type: 'select', list: xueLiJieGou },
+  '专业要求': { value: undefined, type: 'select', list: major},
+  "工作经验（年）": { value: undefined, type: 'number' },
+  "职业资格证书": { value: undefined, type: 'input' },
+  "人员类别": { value: info_people, special: true },
+  '薪酬（元/月）': { value: undefined, type: 'select', list: xinChou }
 }
 
 export const form_inserting = {
@@ -107,87 +138,27 @@ export const form_inserting = {
   _sum_out_nei: initEveryYear(2009, 2018, sum_out_info),
   _sum_out_wai: initEveryYear(2009, 2018, sum_out_info),
   _out_status: [{
-      "id": 0,
-      "info": {
-          "姓名": null,
-          "身份证号": null,
-          "年龄": null,
-          '性别': null,
-          "人员类别": null,
-          "离职时间": null,
-          "从业年限（年）": null,
-          "流入地": null,
-          '离职原因（多选）': null
-      }
+    "id": 0,
+    "info": outStatusInfo
   }],
   _out_status_nei: [{
     "id": 0,
-    "info": {
-      "姓名": null,
-      "身份证号": null,
-      "年龄": null,
-      '性别': null,
-      "人员类别": null,
-      "离职时间": null,
-      "从业年限（年）": null,
-      "流入地": null,
-      '离职原因（多选）': null
-    }
+    "info": outStatusInfo
   }],
   _out_status_wai: [{
-      "id": 0,
-      "info": {
-          "姓名": null,
-          "身份证号": null,
-          "年龄": null,
-          '性别': null,
-          "人员类别": null,
-          "离职时间": null,
-          "从业年限（年）": null,
-          "流入地": null,
-          '离职原因（多选）': null
-      }
+    "id": 0,
+    "info": outStatusInfo
   }],
   _need: [{
-      "id": 0,
-      "info": {
-          "需求岗位": null,
-          "需求数量（人）": null,
-          "年龄结构": null,
-          '学历结构': null,
-          '专业要求': null,
-          "工作经验（年）": null,
-          "职业资格证书": null,
-          "岗位类别": null,
-          '薪酬（元/月）': null
-      }
+    "id": 0,
+    "info": personInfo
   }],
   _need_nei: [{
-      "id": 0,
-      "info": {
-          "需求岗位": null,
-          "需求数量（人）": null,
-          "年龄结构": null,
-          '学历结构': null,
-          '专业要求': null,
-          "工作经验（年）": null,
-          "职业资格证书": null,
-          "岗位类别": null,
-          '薪酬（元/月）': null
-      }
+    "id": 0,
+    "info": personInfo
   }],
   _need_wai: [{
-      "id": 0,
-      "info": {
-          "需求岗位": null,
-          "需求数量（人）": null,
-          "年龄结构": null,
-          '学历结构': null,
-          '专业要求': null,
-          "工作经验（年）": null,
-          "职业资格证书": null,
-          "岗位类别": null,
-          '薪酬（元/月）': null
-      }
+    "id": 0,
+    "info": personInfo
   }]
 }

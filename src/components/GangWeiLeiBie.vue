@@ -3,15 +3,19 @@
 		<div class="box-item">
 			<Card class="card" :bordered="false">
 				<div class="add-box">
-					<p slot="title" class="add-box-title">人员类别</p>
+					<p slot="title" class="add-box-title">{{label}}</p>
 					<div class="add">
 						<i-button type="info" @click="addHandle">添加</i-button>
 					</div>
 				</div>
 				<div class="input-box">
-					<div class="input-box-cascader" v-for="item in form" :key="item.id" :name="item['人员类别']">
-						<CascaderWithInputWithLabel :initObj="item['人员类别']" style="width:300px;margin-right: 30px"
-						 v-model="item['人员类别']" :data="gangWeiLeiBie"></CascaderWithInputWithLabel>
+					<div class="input-box-cascader" v-for="(item, index) in form" :key="item.id" :name="item['人员类别']">
+						<CascaderWithInputWithLabel
+							:initObj="item[label]"
+							style="width:300px;margin-right: 30px"
+							:data="gangWeiLeiBie"
+							@cascader='getCascaderData'
+							:index='index' />
 						<div class="del-btn">
 							<i-button type="error" style="margin-right: 10px" v-if="item.id>0" shape="circle" @click="delHandle(item.id)">删除</i-button>
 							<div style="width: 56px;margin-right: 10px" v-else></div>
@@ -80,13 +84,14 @@
 
 	export default {
 		props: {
-			initValue: Array
+			initValue: Array,
+			label: String
 		},
 		data() {
 			return {
 				form: [{
 					id: 0,
-					'人员类别': {}
+					[this.label]: {}
 				}],
 				gangWeiLeiBie: [],
 				num: 1
@@ -97,21 +102,25 @@
 		},
 		methods: {
 			addHandle() {
-				let num = this.$data.num++
+				let num = this.$data.num++;
+
 				this.$data.form.push({
 					id: num,
-					'人员类别': {}
+					[this.label]: {}
 				})
 			},
 			delHandle(index) {
-				var cur_index = this.$data.form.findIndex(item => {
-					return item.id === index
+				let cur_index = this.$data.form.findIndex(item => {
+					return item.id === index;
 				})
+
 				this.$data.form.splice(cur_index, 1)
+			},
+			getCascaderData ({ obj, index }) {
+				this.$data.form[index][this.label] = obj;
 			}
 		},
 		created() {
-			console.log(this.$store.state.form._basic['单位性质'].value);
 			// 这里判断四类类别
 			// 机关,社会团体,事业单位,剩下全部
 			switch (this.$store.state.form._basic['单位性质'].value) {
@@ -129,7 +138,7 @@
 			}
 			
 			for (let i = 0; i < this.$props.initValue.length; i++) {
-				this.$data.form[i]['人员类别'] = this.$props.initValue[i];
+				this.$data.form[i][this.label] = this.$props.initValue[i];
 
 				if (i < this.$props.initValue.length - 1) {
 					this.addHandle()
@@ -140,10 +149,12 @@
 			form: {
 				handler(val, oldval) {
 					let emitArray = []
+
 					for (var item of this.$data.form) {
-						emitArray.push(item['人员类别'])
+						emitArray.push(item[this.label])
 					}
-					this.$emit('input', emitArray)
+
+					this.$emit('station', emitArray, this.label);
 				},
 				deep: true
 			}

@@ -23,15 +23,14 @@
 		},
 		mounted() {
 			this.$data.model1 = this.$props.initValue
-			this.emit()
+			// this.emit()
 		},
 		methods: {
 			emit() {
-				if (this.$data.model1 === undefined) {
-					this.$data.model1 = null
-				} else {
-					this.$emit('input', this.$data.model1)
-				}
+				// if (this.$data.model1 === undefined) {
+				// 	this.$data.model1 = null
+				// } else {
+				this.$emit('select', this.$data.model1, this.label);
 			}
 		}
 	}

@@ -4,23 +4,27 @@
 			<Card class="card" :bordered="false">
 				<p slot="title">{{ key }}</p>
 				<div class="item-box" v-if="value.type">
-					<InputNumberWithLabel v-model="value.value" :initValue="value.value" />
+					<InputNumberWithLabel
+						:label='key'
+						@input-number='inputNumber' 
+						:initValue="value.value" />
 				</div>
 				<div class="input-box" v-else>
 					<InputNumberWithLabel 
 						v-for='(subValue, subKey) in value' 
 						:label='subKey'
-						:v-model='subValue.value'
 						:initValue="subValue.value"
-						:key="subKey" />
+						:propKey='key'
+						:key="subKey"
+						@input-number='subInputNumber' />
 				</div>
 			</Card>
 		</div>
 
-
-
 		<div className='box-item'>
-			<GangWeiLeiBie v-model="sumIn['人员类别'].value" :initValue="sumIn['人员类别'].value" />
+			<GangWeiLeiBie 
+				:initValue="sumIn['人员类别'].value"
+				@station='stationEvent' />
 		</div>
 	</div>
 </template>

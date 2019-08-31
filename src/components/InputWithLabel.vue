@@ -1,7 +1,7 @@
 <template>
 	<Form label-position="top" style="text-align: left;">
 		<Form-item :label="label">
-			<Input v-model="value" @on-change="emit"></Input>
+			<Input v-model="value" @on-change="emit" />
 		</Form-item>
 	</Form>
 </template>
@@ -20,14 +20,14 @@
 		},
 		mounted() {
 			this.$data.value = this.$props.initValue
-			this.emit()
+			// this.emit()
 		},
 		methods: {
 			emit() {
-				if (this.$data.value === undefined || this.$data.value === '') {
-					this.$data.value = null
-				}
-				this.$emit('input', this.$data.value)
+				// if (this.$data.value === undefined || this.$data.value === '') {
+				// 	this.$data.value = null
+				// }
+				this.$emit('input', this.$data.value, this.label);
 			}
 		}
 	}

@@ -20,6 +20,21 @@ export default new Vuex.Store({
     form: form_inserting,
     vueElementLoading: false,
   },
-  mutations: {},
+  mutations: {
+    setBasic (state, {value, key}) {
+      state.form._basic[key].value = value;
+    },
+    setSummery (state, { value, key, year, subKey }) {
+      if (year) {
+        let oneYearInfo = state.form._summary.find(value => (value.year === year)).info
+        
+        if (key && !subKey) {
+          oneYearInfo[key].value = value;
+        } else if (key && subKey) {
+          oneYearInfo[key][subKey].value = value;
+        }
+      }
+    }
+  },
   actions: {}
 })

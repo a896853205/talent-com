@@ -5,15 +5,20 @@
 			<Card class="card" :bordered="false">
 				<p slot="title">{{ key }}</p>
 				<div class="item-box" v-if="value.type">
-					<InputNumberWithLabel v-model="value.value" :initValue="value.value" />
+					<InputNumberWithLabel 
+					:label='key' 
+					@input-number='inputNumber' 
+					:initValue="value.value" />
 				</div>
 				<div class="input-box" v-else>
 					<InputNumberWithLabel 
 						v-for='(subValue, subKey) in value' 
 						:label='subKey'
-						:v-model='subValue.value'
 						:initValue="subValue.value"
-						:key="subKey" />
+						:propKey='key'
+						:key="subKey"
+						@input-number='subInputNumber'
+						/>
 				</div>
 			</Card>
 		</div>
@@ -23,13 +28,19 @@
 			<Card class="card" :bordered="false">
 				<p slot="title">当年年度产值（万元）</p>
 				<div class="item-box">
-					<InputNumberWithLabel v-model="summary['当年年度产值（万元）'].value" :initValue="summary['当年年度产值（万元）'].value" />
+					<InputNumberWithLabel
+						label='当年年度产值（万元）'
+						:initValue="summary['当年年度产值（万元）'].value"
+						@input-number='inputNumber' />
 				</div>
 			</Card>
 		</div>
 		
 		<div className='box-item'>
-			<GangWeiLeiBie v-model="summary['人员类别'].value" :initValue="summary['人员类别'].value" />
+			<GangWeiLeiBie
+				label='人员类别'
+				:initValue="summary['人员类别'].value"
+				@station='stationEvent'/>
 		</div>
 	</div>
 </template>
@@ -69,6 +80,17 @@
 		components: {
 			InputNumberWithLabel,
 			GangWeiLeiBie,
+		},
+		methods: {
+			inputNumber (value, key) {
+				this.$store.commit('setSummery', { value, key, year: this.year });
+			},
+			subInputNumber (value, subKey, key) {
+				this.$store.commit('setSummery', { value, key, year: this.year, subKey });
+			},
+			stationEvent (value, key) {
+				this.$store.commit('setSummery', { value, key, year: this.year });
+			}
 		},
 		computed: {
 			noSpecialSummary () {

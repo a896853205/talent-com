@@ -1,42 +1,23 @@
 <template>
 	<div class="container">
-		<div v-for="(item, index) in form1" :key="item.id" :name="item['岗位类别']">
+		<div v-for="(item, index) in outStatus" :key="item.id">
 			<Card :bordered="false">
 				<div class="del-box">
 					<p class="del-box-title" slot="title">单位流失人才信息表 {{index+1}}</p>
 					<div class="del-btn">
-						<i-button type="error" v-if="item.id>0" style="margin-right: 10px" shape="circle" @click="delHandle(item.id)">删除</i-button>
+						<i-button type="error" v-if="item.id > 0" style="margin-right: 10px" shape="circle" @click="delHandle(item.id)">删除</i-button>
 					</div>
 				</div>
 				<div class="abox">
-					<div class="item">
-						<InputWithLabel label="姓名" v-model="item['info']['姓名']" :initValue="item['info']['姓名']"/>
+					<div class="item" v-for='(value, key) in item.info' :key='key' :class='{"none": (value.special)}'>
+						<SelectWithLabel v-if='value.type === "select"' :label='key' :initValue='value.value' :v-model='value.value' :list="value.list" />
+						<CascaderWithLabel v-if='value.type === "cascader"' :label='key' :initValue='value.value' :v-model="value.value" :data="value.data" />
+						<InputWithLabel v-if='value.type === "input"' :label='key' :initValue='value.value' :v-model='value.value' />
+						<InputNumberWithLabel v-if='value.type === "number"' :label='key' :initValue='value.value' :v-model='value.value' />
 					</div>
-					<div class="item">
-						<InputWithLabel label="身份证号" v-model="item['info']['身份证号']"  :initValue="item['info']['身份证号']"/>
+					<div className='box-item'>
+						<GangWeiLeiBie v-model="item.info['人员类别'].value" :initValue="item.info['人员类别'].value" />
 					</div>
-					<div class="item">
-						<InputNumberWithLabel label="年龄" v-model="item['info']['年龄']" :initValue="item['info']['年龄']"/>
-					</div>
-					<div class="item">
-						<SelectWithLabel label="性别" v-model="item['info']['性别']" :initValue="item['info']['性别']" :list="xingBie"></SelectWithLabel>
-					</div>
-					<div class="item">
-						<SelectWithLabel label="学历" v-model="item['info']['学历']" :initValue="item['info']['学历']" :list="xueLiJieGou"></SelectWithLabel>
-					</div>
-					<div class="item">
-						<CascaderWithLabel label="岗位类别" v-model="item['info']['岗位类别']" :initValue="item['info']['岗位类别']" :data="jobCategory"></CascaderWithLabel>
-					</div>
-					<div class="item">
-						<InputNumberWithLabel label="从业年限（年）" v-model="item['info']['从业年限（年）']" :initValue="item['info']['从业年限（年）']"/>
-					</div>
-					<div class="item">
-						<InputWithLabel label="流入地域" v-model="item['info']['流入地域']" :initValue="item['info']['流入地域']"/>
-					</div>
-					<div class="item">
-						<SelectWithLabel label="离职原因" v-model="item['info']['离职原因']" :initValue="item['info']['离职原因']" :list="liZhiYuanYin"></SelectWithLabel>
-					</div>
-					<div class="item"></div>
 				</div>
 			</Card>
 		</div>
@@ -95,91 +76,45 @@
 	import InputNumberWithLabel from '../components/InputNumberWithLabel.vue';
 	import SelectWithLabel from '../components/SelectWithLabel.vue';
 	import CascaderWithLabel from '../components/CascaderWithLabel.vue';
-	import { nianLingJieGou, xueLiJieGou, major, jobCategory, xinChou, xingBie, liZhiYuanYin } from '../assets/category';
+	import GangWeiLeiBie from '../components/GangWeiLeiBie.vue';
+	import { outStatusInfo } from '../store/init/form';
 
 	export default {
-		methods: {
-			addHandle() {
-				var num = this.$data.num++;
-				this.$data.form1.push({
-					"id": num,
-					"info": {
-						"姓名": null,
-						"身份证号": null,
-						"年龄": null,
-						'性别': null,
-						'学历': null,
-						"岗位类别": null,
-						"从业年限（年）": null,
-						"流入地域": null,
-						'离职原因': null
-					}
-				})
-				console.log(this.$data.form1)
-			},
-			delHandle(index) {
-				var cur_index = this.$data.form1.findIndex(item => {
-					return item.id === index
-				});
-				this.$data.form1.splice(cur_index, 1)
-			}
-		},
-		data() {
-			return {
-				form1: [{
-					"id": 0,
-					"info": {
-						"姓名": null,
-						"身份证号": null,
-						"年龄": null,
-						'性别': null,
-						'学历': null,
-						"岗位类别": null,
-						"从业年限（年）": null,
-						"流入地域": null,
-						'离职原因': null
-					}
-				}],
-				form: {},
-				gangWeiLeiBie: [],
-				num: 1,
-				nianLingJieGou: [],
-				xueLiJieGou: [],
-				major: [],
-				jobCategory: [],
-				xinChou: [],
-				xingBie: [],
-				liZhiYuanYin: [],
-				initArray: []
-
-			}
-		},
-		created() {
-			this.nianLingJieGou = nianLingJieGou;
-			this.xueLiJieGou = xueLiJieGou;
-			this.major = major;
-			this.jobCategory = jobCategory;
-			this.xinChou = xinChou;
-			this.xingBie = xingBie;
-			this.liZhiYuanYin = liZhiYuanYin;
-		},
 		components: {
 			InputWithLabel,
 			SelectWithLabel,
 			CascaderWithLabel,
 			InputNumberWithLabel,
+			GangWeiLeiBie
 		},
+		methods: {
+			addHandle() {
+				let num = this.$data.num++;
+				this.outStatus.push({
+					id: num,
+					info: outStatusInfo,
+				});
+			},
+			delHandle(index) {
+				let cur_index = this.outStatus.findIndex(item => {
+					return item.id === index
+				});
+				this.outStatus.splice(cur_index, 1)
+			}
+		},
+		data() {
+			return {
+				num: 1,
+			}
+		},
+
 		beforeMount() {
-			this.$data.initArray = this.$store.state.form._out_status
-            this.$data.num = this.$data.initArray[this.$data.initArray.length - 1].id + 1
-			this.$data.form1 = this.$data.initArray
+			let outStatusArr = this.$store.state.form._out_status;
+      this.$data.num = outStatusArr[outStatusArr.length - 1].id + 1
 		},
-		watch: {
-			form1: {
-				handler(val, oldval) {
-					this.$store.state.form._out_status = this.$data.form1
-				},
-				deep: true
+		computed: {
+			outStatus() {
+				return this.$store.state.form._out_status;
 			}
 		}
 	}

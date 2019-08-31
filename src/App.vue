@@ -13,4 +13,7 @@
     /*background: linear-gradient(0deg, rgba(96, 96, 96, 0.2), rgba(96, 96, 96, 0.2));*/
     height: 100%;
   }
+  .none {
+    display: none;
+  }
 </style>

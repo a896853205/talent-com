@@ -19,7 +19,7 @@
 	import url from '@/service.config.js';
 	import axios from 'axios';
 	import util from '@/utils.js'
-    import VueElementLoading from 'vue-element-loading'
+  import VueElementLoading from 'vue-element-loading'
 	export default {
 	    components:{
             VueElementLoading,
@@ -51,7 +51,7 @@
 			// });
 		},
 		mounted(){
-            this.$store.state.vueElementLoading = false
+      this.$store.state.vueElementLoading = false
 		}
 	}
 </script>

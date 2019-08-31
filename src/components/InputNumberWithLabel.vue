@@ -11,7 +11,8 @@
 		name: 'InputNumberWithLabel',
 		props: {
 			label: String,
-			initValue: Number
+			initValue: Number,
+			propKey: String
 		},
 		data() {
 			return {
@@ -20,14 +21,18 @@
 		},
 		mounted() {
 			this.$data.value = this.$props.initValue
-			this.emit()
+			// this.emit()
 		},
 		methods: {
 			emit() {
-				if (this.$data.value === undefined || this.$data.value === null){
-					this.$data.value = null
+				// if (this.$data.value === undefined || this.$data.value === null){
+				// 	this.$data.value = null
+				// }
+				if (this.propKey) {
+					this.$emit('input-number', this.$data.value, this.label, this.propKey)
+				} else {
+					this.$emit('input-number', this.$data.value, this.label)
 				}
-				this.$emit('input', this.$data.value)
 			}
 		}
 	}

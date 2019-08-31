@@ -1,9 +1,9 @@
 <template>
 	<div class="box">
 		<div class="item" v-for='(value, key) in basic' :key='key'>
-			<SelectWithLabel v-if='value.type === "select"' :label='key' :initValue='value.value' :v-model='value.value' :list="value.list" />
-			<CascaderWithLabel v-if='value.type === "cascader"' :label='key' :initValue='value.value' :v-model="value.value" :data="value.data" />
-			<InputWithLabel v-if='value.type === "input"' :label='key' :initValue='value.value' :v-model='value.value' />
+			<SelectWithLabel v-if='value.type === "select"' :label='key' :initValue='value.value' @select='selectEvent' :list="value.list" />
+			<CascaderWithLabel v-if='value.type === "cascader"' :label='key' :initValue='value.value' @cascader='cascaderEvent' :data="value.data" />
+			<InputWithLabel v-if='value.type === "input"' :label='key' :initValue='value.value' @input='inputEvent' />
 		</div>
 	</div>
 </template>
@@ -34,12 +34,31 @@
 			SelectWithLabel,
 			CascaderWithLabel,
 		},
-		methods: {},
+		methods: {
+			inputEvent (value, key) {
+				this.$store.commit('setBasic', { value, key });
+			},
+
+			selectEvent (value, key) {
+				this.$store.commit('setBasic', { value, key });
+			},
+
+			cascaderEvent (value, key) {
+				this.$store.commit('setBasic', { value, key });
+			}
+		},
 		created() {},
 		mounted() {},
 		computed: {
-			basic () {
-				return this.$store.state.form._basic;
+			basic: {
+				get() {
+					return this.$store.state.form._basic;
+				},
+				set(v) {
+					console.log(v);
+					// 使用vuex中的mutations中定义好的方法来改变
+          // this.$store.commit('USER', v)
+        }
 			}
 		}
 	}

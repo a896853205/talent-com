@@ -3,10 +3,18 @@
 		<Form-item :label="label">
 			<Row>
 				<Col span="16">
-				<Cascader :transfer="vb" :data="data" v-model="value1" @on-change="emit()" @on-visible-change="emit()" change-on-select></Cascader>
+					<Cascader 
+						:transfer="vb"
+						:data="data"
+						v-model="value1"
+						@on-visible-change="emit()"
+						change-on-select />
 				</Col>
-				<Col span="8">
-				<Input-number v-model="value2" @on-change="emit()" style="width:95%; margin-bottom: 10px; margin-left: 5%; margin-right: 5px;"></Input-number>
+				<Col span="8" >
+					<Input-number
+						v-model="value2"
+						@on-change="emit()"
+						style="width:95%; margin-bottom: 10px; margin-left: 5%; margin-right: 5px;" />
 				</Col>
 			</Row>
 		</Form-item>
@@ -28,7 +36,8 @@
 				model1: '',
 				value1: [],
 				value2: null,
-				vb: true
+				vb: true,
+				index: 0
 			}
 		},
 		mounted() {
@@ -45,13 +54,11 @@
 		},
 		methods: {
 			emit() {
-				setTimeout(() => {
-					var obj = {
-						cas: this.$data.value1,
-						num: this.$data.value2
-					}
-					this.$emit('input', obj)
-				}, 100)
+				let obj = {
+					cas: this.$data.value1,
+					num: this.$data.value2
+				}
+				this.$emit('cascader', { obj, index: this.index })
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 <template>
 	<Form label-position="top" style="text-align: left;">
 		<Form-item :label="label">
-			<Cascader :data="data" v-model="value1" @on-change="emit()" @on-visible-change="emit()" change-on-select></Cascader>
+			<Cascader :data="data" v-model="value1" @on-visible-change="emit()" change-on-select></Cascader>
 		</Form-item>
 	</Form>
 </template>
@@ -24,17 +24,15 @@
 			if (this.$props.initValue !== undefined && this.$props.initValue !== null) {
 				this.$data.value1 = this.$props.initValue
 			}
-			this.emit()
+			// this.emit()
 		},
 		methods: {
 			emit() {
-				setTimeout(() => {
-					if (this.$data.value1.length) {
-						this.$emit('input', this.$data.value1)
-					} else {
-						this.$emit('input', null)
-					}
-				}, 100)
+				if (this.$data.value1.length) {
+					this.$emit('cascader', this.$data.value1, this.label);
+				} else {
+					this.$emit('cascader', [], this.label);
+				}
 			}
 		}
 	}

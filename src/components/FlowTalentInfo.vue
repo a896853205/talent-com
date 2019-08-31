@@ -10,19 +10,65 @@
 				</div>
 				<div class="abox">
 					<div class="item" v-for='(value, key) in item.info' :key='key' :class='{"none": (value.special)}'>
-						<SelectWithLabel v-if='value.type === "select"' :label='key' :initValue='value.value' :v-model='value.value' :list="value.list" />
-						<CascaderWithLabel v-if='value.type === "cascader"' :label='key' :initValue='value.value' :v-model="value.value" :data="value.data" />
-						<InputWithLabel v-if='value.type === "input"' :label='key' :initValue='value.value' :v-model='value.value' />
-						<InputNumberWithLabel v-if='value.type === "number"' :label='key' :initValue='value.value' :v-model='value.value' />
-					</div>
-					<div className='box-item'>
-						<GangWeiLeiBie v-model="item.info['人员类别'].value" :initValue="item.info['人员类别'].value" />
+						<SelectWithLabel
+							v-if='value.type === "select"'
+							:label='key'
+							:initValue='value.value'
+							@select='changeEvent'
+							:list="value.list"
+							:index='index' />
+						<CascaderWithLabel
+							v-if='value.type === "cascader"'
+							:label='key'
+							:initValue='value.value'
+							@cascader='changeEvent'
+							:data="value.data"
+							:index='index' />
+						<InputWithLabel 
+							v-if='value.type === "input"'
+							:label='key'
+							:initValue='value.value'
+							@input='changeEvent'
+							:index='index' />
+						<InputNumberWithLabel
+							v-if='value.type === "number"'
+							:label='key'
+							:initValue='value.value'
+							@input-number='changeEvent'
+							:index='index' />
+						<InputDateWithLabel 
+							v-if='value.type === "date"'
+							:label='key'
+							:initValue='value.value'
+							@date='changeEvent'
+							:index='index' 
+						/>
+						<MultiSelectWithLabel 
+							v-if='value.type === "checkBox"'
+							:label='key'
+							:initValue='value.value'
+							@checkBox='changeEvent'
+							:index='index'
+							:list="value.list"
+						/>
+						<CascaderWithLabel
+							v-if='value.type === "cascaderSpecial"'
+							:initObj="value.value"
+							:label='key'
+							:data="stationCategory"
+							@cascader='getCascaderData'
+							:index='index' />
 					</div>
 				</div>
 			</Card>
 		</div>
 		<div class="add">
-			<i-button class="add-btn" type="info" @click="addHandle">添加</i-button>
+			<i-button
+				class="add-btn"
+				type="info"
+				@click="addHandle">
+				添加
+			</i-button>
 		</div>
 	</div>
 </template>
@@ -76,8 +122,17 @@
 	import InputNumberWithLabel from '../components/InputNumberWithLabel.vue';
 	import SelectWithLabel from '../components/SelectWithLabel.vue';
 	import CascaderWithLabel from '../components/CascaderWithLabel.vue';
-	import GangWeiLeiBie from '../components/GangWeiLeiBie.vue';
+	import MultiSelectWithLabel from '../components/until/MultiSelectWithLabel';
+	import InputDateWithLabel from '../components/until/InputDateWithLabel.vue';
+
 	import { outStatusInfo } from '../store/init/form';
+	import { 
+		jobCategoryJiGuan, 
+		jobCategoryQiYe,
+		jobCategorySocial,
+		jobCategoryCareer
+	} from '../assets/category';
+
 
 	export default {
 		components: {
@@ -85,37 +140,61 @@
 			SelectWithLabel,
 			CascaderWithLabel,
 			InputNumberWithLabel,
-			GangWeiLeiBie
+			MultiSelectWithLabel,
+			InputDateWithLabel
 		},
 		methods: {
 			addHandle() {
 				let num = this.$data.num++;
-				this.outStatus.push({
+
+				this.$data.outStatusArr.push({
 					id: num,
 					info: outStatusInfo,
 				});
+
+				this.$options.methods.outStatusArrCommit(this);
 			},
+
 			delHandle(index) {
-				let cur_index = this.outStatus.findIndex(item => {
+				let cur_index = this.$data.outStatusArr.findIndex(item => {
 					return item.id === index
 				});
-				this.outStatus.splice(cur_index, 1)
-			}
+
+				this.$data.outStatusArr.splice(cur_index, 1);
+
+				this.$options.methods.outStatusArrCommit(this);
+			},
+
+			changeEvent ({ value, key, index }) {
+				this.$data.outStatusArr[index].info[key].value = value;
+				this.$options.methods.outStatusArrCommit(this);
+			},
+
+			outStatusArrCommit(_this) {
+				_this.$store.commit('setOutStatus', _this.$data.outStatusArr);
+			},
 		},
+
 		data() {
 			return {
 				num: 1,
+				outStatusArr: []
 			}
 		},
 
 		beforeMount() {
-			let outStatusArr = this.$store.state.form._out_status;
-      this.$data.num = outStatusArr[outStatusArr.length - 1].id + 1
+			this.$data.outStatusArr = this.$store.state.form._out_status;
+      this.$data.num = this.$data.outStatusArr[this.$data.outStatusArr.length - 1].id + 1;
 		},
+
 		computed: {
 			outStatus() {
 				return this.$store.state.form._out_status;
+			},
+			stationCategory() {
+				return this.$store.getters.stationCategory;
 			}
-		}
+		},
+
 	}
 </script>

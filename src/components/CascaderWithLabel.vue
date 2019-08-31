@@ -12,7 +12,8 @@
 		props: {
 			label: String,
 			data: Array,
-			initValue: Array
+			initValue: Array,
+			index: Number
 		},
 		data() {
 			return {
@@ -28,11 +29,11 @@
 		},
 		methods: {
 			emit() {
-				if (this.$data.value1.length) {
-					this.$emit('cascader', this.$data.value1, this.label);
-				} else {
-					this.$emit('cascader', [], this.label);
-				}
+				this.$emit('cascader', {
+					value: this.$data.value1,
+					key: this.label,
+					index: this.index
+				});
 			}
 		}
 	}

@@ -86,7 +86,7 @@ const sum_out_info = {
   "学历结构": info_degree,
   "薪酬（元/月）": info_salary,
   "人员类别": { value: info_people, special: true },
-  "离职原因（多选）": { value: [], special: true }
+  "离职原因（多选）": { value: [], type: 'checkBox', list: liZhiYuanYin }
 }
 
 export const outStatusInfo = {
@@ -94,23 +94,23 @@ export const outStatusInfo = {
   "身份证号": { value: undefined, type: 'input' },
   "年龄": { value: undefined, type: 'number' },
   '性别': { value: undefined, type: 'select', list: xingBie },
-  "人员类别": { value: info_people, special: true },
-  "离职时间": { value: [], special: true },
+  "人员类别": { value: [], type: 'cascaderSpecial' },
+  "离职时间": { value: undefined, type: 'date' },
   "从业年限（年）": { value: undefined, type: 'number' },
   "流入地": { value: undefined, type: 'input' },
-  '离职原因（多选）': { value: [], special: true, list: liZhiYuanYin }
+  '离职原因（多选）': { value: [], type: 'checkBox', list: liZhiYuanYin }
 }
 
 export const personInfo = {
   "需求岗位": { value: undefined, type: 'input' },
-  "需求数量（人）": { value: undefined, type: 'number' },
   "年龄结构": { value: undefined, type: 'select', list: nianLingJieGou },
   '学历结构': { value: undefined, type: 'select', list: xueLiJieGou },
-  '专业要求': { value: undefined, type: 'select', list: major},
+  '专业': { value: undefined, type: 'cascader', data: major},
   "工作经验（年）": { value: undefined, type: 'number' },
   "职业资格证书": { value: undefined, type: 'input' },
-  "人员类别": { value: info_people, special: true },
-  '薪酬（元/月）': { value: undefined, type: 'select', list: xinChou }
+  "人员类别": { value: [], type: 'cascaderSpecial' },
+  '薪酬（元/月）': { value: undefined, type: 'select', list: xinChou },
+  "需求数量（人）": { value: undefined, type: 'number' },
 }
 
 export const form_inserting = {

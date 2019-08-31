@@ -20,10 +20,14 @@
 						<CascaderWithLabel v-if='value.type === "cascader"' :label='key' :initValue='value.value' :v-model="value.value" :data="value.data" />
 						<InputWithLabel v-if='value.type === "input"' :label='key' :initValue='value.value' :v-model='value.value' />
 						<InputNumberWithLabel v-if='value.type === "number"' :label='key' :initValue='value.value' :v-model='value.value' />
-					</div>
-					<div className='box-item'>
-						<GangWeiLeiBie v-model="item.info['人员类别'].value" :initValue="item.info['人员类别'].value" />
-					</div>
+            <CascaderWithLabel
+							v-if='value.type === "cascaderSpecial"'
+							:initObj="value.value"
+							:label='key'
+							:data="stationCategory"
+							@cascader='getCascaderData'
+							:index='index' />
+          </div>
 				</div>
         <!-- <div class="abox">
           <div class="item">
@@ -154,7 +158,7 @@ import InputNumberWithLabel from "../components/InputNumberWithLabel.vue";
 import SelectWithLabel from "../components/SelectWithLabel.vue";
 import CascaderWithLabel from "../components/CascaderWithLabel.vue";
 import { personInfo } from '../store/init/form';
-
+  
 export default {
   components: {
     InputWithLabel,
@@ -189,6 +193,9 @@ export default {
   computed: {
     need() {
       return this.$store.state.form._need;
+    },
+    stationCategory() {
+      return this.$store.getters.stationCategory;
     }
   }
 };

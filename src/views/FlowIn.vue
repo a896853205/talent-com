@@ -3,7 +3,9 @@
     <el-tabs tab-position="left">
       <el-tab-pane v-for="(value, key) in sumIn" :key="key" :label="value.year">
         <p class="title">单位人才流动汇总表-流入人才-{{value.year}}年</p>
-        <FlowIn :year='value.year' />
+        <FlowIn 
+          :year='value.year'
+          commitFunction='setFlowIn' />
       </el-tab-pane>
     </el-tabs>
   </div>

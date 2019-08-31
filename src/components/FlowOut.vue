@@ -1,24 +1,42 @@
 <template>
   <div class="box">
     <div class="box-item" v-for='(value, key) in noSpecialSumOut' :key='key'>
-			<Card class="card" :bordered="false">
+			<Card class="card" :bordered="false" v-if="value.type === 'number' || !value.type">
 				<p slot="title">{{ key }}</p>
-				<div class="item-box" v-if="value.type">
-					<InputNumberWithLabel v-model="value.value" :initValue="value.value" />
+				<div class="item-box" v-if="value.type === 'number'">
+					<InputNumberWithLabel 
+            v-model="value.value"
+            @input-number='changeEvent'
+            :initValue="value.value" />
 				</div>
-				<div class="input-box" v-else>
+				<div class="input-box" v-else-if="!value.type">
 					<InputNumberWithLabel 
 						v-for='(subValue, subKey) in value' 
 						:label='subKey'
-						:v-model='subValue.value'
 						:initValue="subValue.value"
-						:key="subKey" />
+            :propKey='key'
+						:key="subKey"
+            @input-number='changeEvent' />
 				</div>
 			</Card>
 		</div>
     <div className='box-item'>
-			<GangWeiLeiBie v-model="sumOut['人员类别'].value" :initValue="sumOut['人员类别'].value" />
+			<GangWeiLeiBie
+        label='人员类别'
+        :initValue="sumOut['人员类别'].value"
+        @station='changeEvent'
+         />
 		</div>
+    <div className='box-item'>
+      <Card class="card" :bordered="false">
+        <MultiSelectWithLabel 
+          label='离职原因（多选）'
+          :initValue="sumOut['离职原因（多选）'].value"
+          @checkBox='changeEvent'
+          :list="sumOut['离职原因（多选）'].list"
+        />
+      </Card>
+    </div>
   </div>
 
 </template>
@@ -48,12 +66,21 @@
 <script>
 import InputNumberWithLabel from "../components/InputNumberWithLabel.vue";
 import GangWeiLeiBie from "../components/GangWeiLeiBie.vue";
+import MultiSelectWithLabel from '../components/until/MultiSelectWithLabel';
+
+import { 
+  jobCategoryJiGuan, 
+  jobCategoryQiYe,
+  jobCategorySocial,
+  jobCategoryCareer
+} from '../assets/category';
 
 export default {
-  props: ["year"],
+  props: ["year", 'commitFunction'],
   components: {
     InputNumberWithLabel,
-    GangWeiLeiBie
+    GangWeiLeiBie,
+    MultiSelectWithLabel
   },
   data() {
     return {};
@@ -74,7 +101,25 @@ export default {
       }
 
       return noSpecialSumOut;
-    }
+    },
+
+    gangWeiLeiBie() {
+				switch (this.$store.state.form._basic['单位性质'].value) {
+					case '机关':
+						return jobCategoryJiGuan;
+					case '社会团体':
+						return jobCategorySocial;
+					case '事业单位':
+						return jobCategoryCareer;
+					default:
+						return jobCategoryQiYe;
+				}
+			}
+  },
+  methods: {
+    changeEvent ({ value, subKey, key }) {
+      this.$store.commit(this.commitFunction, { value, key, year: this.year, subKey });
+    },
   }
 };
 </script>

@@ -12,7 +12,8 @@
 		props: {
 			label: String,
 			initValue: Number,
-			propKey: String
+			propKey: String,
+			index: Number
 		},
 		data() {
 			return {
@@ -28,11 +29,12 @@
 				// if (this.$data.value === undefined || this.$data.value === null){
 				// 	this.$data.value = null
 				// }
-				if (this.propKey) {
-					this.$emit('input-number', this.$data.value, this.label, this.propKey)
-				} else {
-					this.$emit('input-number', this.$data.value, this.label)
-				}
+				this.$emit('input-number', { 
+					value: this.$data.value,
+					key: this.label,
+					propKey: this.propKey,
+					index: this.index 
+				});
 			}
 		}
 	}

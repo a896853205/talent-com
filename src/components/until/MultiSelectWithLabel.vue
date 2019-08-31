@@ -1,7 +1,7 @@
 <template>
 	<Form label-position="top" style="text-align: left;">
 		<Form-item :label="label">
-			<Select v-model="model1" @on-change="emit">
+			<Select v-model="model1" multiple @on-change="emit">
 				<Option v-for="item in list" :value="item.value" :key="item.value">{{ item.label }}</Option>
 			</Select>
 		</Form-item>
@@ -10,16 +10,16 @@
 
 <script>
 	export default {
-		name: 'SelectWithLabel',
+		name: 'MultiSelectWithLabel',
 		props: {
 			label: String,
 			list: Array,
-			initValue: String,
-			index: Number,
+			initValue: Array,
+			index: Number
 		},
 		data() {
 			return {
-				model1: ''
+				model1: []
 			}
 		},
 		mounted() {
@@ -28,14 +28,7 @@
 		},
 		methods: {
 			emit() {
-				// if (this.$data.model1 === undefined) {
-				// 	this.$data.model1 = null
-				// } else {
-				this.$emit('select', {
-					value: this.$data.model1,
-					key: this.label,
-					index: this.index
-				});
+				this.$emit('checkBox', { value: this.$data.model1, key: this.label, index: this.index })
 			}
 		}
 	}

@@ -1,9 +1,15 @@
 <template>
 	<div class="box">
 		<el-tabs tab-position="left">
-			<el-tab-pane v-for="(item, index) in initArray" :key="index" :label="item['year']">
-				<p class="title">单位人才情况汇总表-存量信息-事业单位-编制外-{{item.year}}年</p>
-				<TalentStatus v-model="item.info" :initObj="initArray[index]['info']"></TalentStatus>
+			<el-tab-pane 
+				v-for="(value, key) in summaryOutter"
+				:key="key"
+				:label="value.year">
+				<p class="title">单位人才情况汇总表-存量信息-事业单位-编制外-{{value.year}}年</p>
+				<TalentStatus
+					:year='value.year'
+					commitFunction='setSummeryOut'
+				/>
 			</el-tab-pane>
 		</el-tabs>
 	</div>
@@ -27,26 +33,12 @@
 			TalentStatus,
 		},
 		data() {
-			return {
-				initArray: []
+			return {}
+		},
+		computed: {
+			summaryOutter () {
+				return this.$store.state.form._summary_wai
 			}
-		},
-		beforeMount() {
-			this.$data.initArray = this.$store.state.form._summary
-		},
-		created() {
-			
-		},
-		mounted() {
-			
-		},
-		// watch: {
-		// 	result: {
-		// 		handler(val, oldval) {
-		// 			this.$store.state.form._summary = this.$data.result
-		// 		},
-		// 		deep: true
-		// 	}
-		// }
+		}
 	}
 </script>

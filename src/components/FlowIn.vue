@@ -6,7 +6,7 @@
 				<div class="item-box" v-if="value.type">
 					<InputNumberWithLabel
 						:label='key'
-						@input-number='inputNumber' 
+						@input-number='changeEvent' 
 						:initValue="value.value" />
 				</div>
 				<div class="input-box" v-else>
@@ -16,7 +16,7 @@
 						:initValue="subValue.value"
 						:propKey='key'
 						:key="subKey"
-						@input-number='subInputNumber' />
+						@input-number='changeEvent' />
 				</div>
 			</Card>
 		</div>
@@ -25,7 +25,7 @@
 			<GangWeiLeiBie 
 				label='人员类别'
 				:initValue="sumIn['人员类别'].value"
-				@station='stationEvent' />
+				@station='changeEvent' />
 		</div>
 	</div>
 </template>
@@ -57,7 +57,7 @@
 	import GangWeiLeiBie from '../components/GangWeiLeiBie.vue';
 
 	export default {
-		props: ['year'],
+		props: ['year', 'commitFunction'],
 		components: {
 			InputNumberWithLabel,
 			GangWeiLeiBie,
@@ -84,14 +84,8 @@
 			}
 		},
 		methods: {
-			inputNumber (value, key) {
-				this.$store.commit('setFlowIn', { value, key, year: this.year });
-			},
-			subInputNumber (value, subKey, key) {
-				this.$store.commit('setFlowIn', { value, key, year: this.year, subKey });
-			},
-			stationEvent (value, key) {
-				this.$store.commit('setFlowIn', { value, key, year: this.year });
+			changeEvent ({ value, subKey, key }) {
+				this.$store.commit(this.commitFunction, { value, key, year: this.year, subKey });
 			}
 		}
 	}

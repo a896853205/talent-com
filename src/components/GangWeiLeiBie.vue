@@ -117,7 +117,6 @@
 				this.$data.form.splice(cur_index, 1)
 			},
 			getCascaderData ({ obj, index }) {
-				console.log('leiBei',index);
 				this.$data.form[index][this.label] = obj;
 			}
 		},
@@ -149,13 +148,16 @@
 		watch: {
 			form: {
 				handler(val, oldval) {
-					let emitArray = []
+					let emitArray = [];
 
 					for (var item of this.$data.form) {
 						emitArray.push(item[this.label])
 					}
 
-					this.$emit('station', emitArray, this.label);
+					this.$emit('station', {
+						value: emitArray,
+						key: this.label
+					});
 				},
 				deep: true
 			}

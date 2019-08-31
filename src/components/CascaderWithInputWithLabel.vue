@@ -29,7 +29,8 @@
 			data: Array,
 			initValue: Array,
 			initNum: Number,
-			initObj: Object
+			initObj: Object,
+			index: Number,
 		},
 		data() {
 			return {
@@ -37,7 +38,6 @@
 				value1: [],
 				value2: null,
 				vb: true,
-				index: 0
 			}
 		},
 		mounted() {

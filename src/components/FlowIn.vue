@@ -23,6 +23,7 @@
 
 		<div className='box-item'>
 			<GangWeiLeiBie 
+				label='人员类别'
 				:initValue="sumIn['人员类别'].value"
 				@station='stationEvent' />
 		</div>
@@ -80,6 +81,17 @@
 				}
 
 				return noSpecialSumIn;
+			}
+		},
+		methods: {
+			inputNumber (value, key) {
+				this.$store.commit('setFlowIn', { value, key, year: this.year });
+			},
+			subInputNumber (value, subKey, key) {
+				this.$store.commit('setFlowIn', { value, key, year: this.year, subKey });
+			},
+			stationEvent (value, key) {
+				this.$store.commit('setFlowIn', { value, key, year: this.year });
 			}
 		}
 	}

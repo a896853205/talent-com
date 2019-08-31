@@ -34,6 +34,18 @@ export default new Vuex.Store({
           oneYearInfo[key][subKey].value = value;
         }
       }
+    },
+    setFlowIn (state, { value, key, year, subKey }) {
+      console.log('store', { value, key, year, subKey })
+      if (year) {
+        let oneYearInfo = state.form._sum_in.find(value => (value.year === year)).info
+        
+        if (key && !subKey) {
+          oneYearInfo[key].value = value;
+        } else if (key && subKey) {
+          oneYearInfo[key][subKey].value = value;
+        }
+      }
     }
   },
   actions: {}

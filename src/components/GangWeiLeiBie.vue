@@ -117,6 +117,7 @@
 				this.$data.form.splice(cur_index, 1)
 			},
 			getCascaderData ({ obj, index }) {
+				console.log('leiBei',index);
 				this.$data.form[index][this.label] = obj;
 			}
 		},

@@ -5,6 +5,7 @@
 				<p class="title">单位人才情况汇总表-存量信息-{{value.year}}年</p>
 				<TalentStatus
 					:year='value.year'
+					:summary='value.info'
 					commitFunction='setSummery' />
 			</el-tab-pane>
 		</el-tabs>

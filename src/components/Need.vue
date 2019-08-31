@@ -15,20 +15,52 @@
           </div>
         </div>
         <div class="abox">
-					<div class="item" v-for='(value, key) in item.info' :key='key' :class='{"none": (value.special)}'>
-						<SelectWithLabel v-if='value.type === "select"' :label='key' :initValue='value.value' :v-model='value.value' :list="value.list" />
-						<CascaderWithLabel v-if='value.type === "cascader"' :label='key' :initValue='value.value' :v-model="value.value" :data="value.data" />
-						<InputWithLabel v-if='value.type === "input"' :label='key' :initValue='value.value' :v-model='value.value' />
-						<InputNumberWithLabel v-if='value.type === "number"' :label='key' :initValue='value.value' :v-model='value.value' />
+          <div
+            class="item"
+            v-for="(value, key) in item.info"
+            :key="key"
+            :class="{'none': (value.special)}"
+          >
+            <SelectWithLabel
+              v-if="value.type === 'select'"
+              :label="key"
+              :initValue="value.value"
+              @select="changeEvent"
+              :list="value.list"
+              :index="index"
+            />
             <CascaderWithLabel
-							v-if='value.type === "cascaderSpecial"'
-							:initObj="value.value"
-							:label='key'
-							:data="stationCategory"
-							@cascader='getCascaderData'
-							:index='index' />
+              v-if="value.type === 'cascader'"
+              :label="key"
+              :initValue="value.value"
+              @cascader='changeEvent'
+              :data="value.data"
+              :index="index"
+            />
+            <InputWithLabel
+              v-if="value.type === 'input'"
+              :label="key"
+              :initValue="value.value"
+              @input='changeEvent'
+              :index="index"
+            />
+            <InputNumberWithLabel
+              v-if="value.type === 'number'"
+              :label="key"
+              :initValue="value.value"
+              @input-number="changeEvent"
+              :index="index"
+            />
+            <CascaderWithLabel
+              v-if="value.type === 'cascaderSpecial'"
+              :initObj="value.value"
+              :label="key"
+              :data="stationCategory"
+              @cascader="getCascaderData"
+              :index="index"
+            />
           </div>
-				</div>
+        </div>
       </Card>
     </div>
     <div class="add">
@@ -86,8 +118,8 @@ import InputWithLabel from "../components/InputWithLabel.vue";
 import InputNumberWithLabel from "../components/InputNumberWithLabel.vue";
 import SelectWithLabel from "../components/SelectWithLabel.vue";
 import CascaderWithLabel from "../components/CascaderWithLabel.vue";
-import { personInfo } from '../store/init/form';
-  
+import { personInfo } from "../store/init/form";
+
 export default {
   components: {
     InputWithLabel,
@@ -95,12 +127,12 @@ export default {
     CascaderWithLabel,
     InputNumberWithLabel
   },
-  props: ['title', 'commitFunction', 'need'],
+  props: ["title", "commitFunction", "need"],
   methods: {
     addHandle() {
       var num = this.$data.num++;
 
-      this.$data.need.push({
+      this.$data.needArr.push({
         id: num,
         info: personInfo
       });
@@ -108,30 +140,30 @@ export default {
       this.$options.methods.needArrCommit(this);
     },
     delHandle(index) {
-      var cur_index = this.$data.need.findIndex(item => {
+      var cur_index = this.$data.needArr.findIndex(item => {
         return item.id === index;
       });
-      
-      this.$data.need.splice(cur_index, 1);
+
+      this.$data.needArr.splice(cur_index, 1);
 
       this.$options.methods.needArrCommit(this);
     },
-    
-    changeEvent ({ value, key, index }) {
-      this.$data.need[index].info[key].value = value;
+
+    changeEvent({ value, key, index }) {
+      this.$data.needArr[index].info[key].value = value;
       this.$options.methods.needArrCommit(this);
     },
 
     needArrCommit(_this) {
       _this.$store.commit(_this.commitFunction, _this.$data.needArr);
-    },
+    }
   },
 
   data() {
     return {
       num: 1,
-      needArr: [],
-    }
+      needArr: []
+    };
   },
 
   beforeMount() {

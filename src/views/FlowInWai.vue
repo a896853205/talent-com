@@ -5,6 +5,7 @@
         <p class="title">单位人才流动汇总表-流入人才-事业单位-编制外-{{value.year}}年</p>
         <FlowIn
 					:year='value.year'
+          :sumIn='value.info'
 					commitFunction='setFlowInOutter'/>
       </el-tab-pane>
     </el-tabs>

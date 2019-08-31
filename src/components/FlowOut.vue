@@ -5,7 +5,7 @@
 				<p slot="title">{{ key }}</p>
 				<div class="item-box" v-if="value.type === 'number'">
 					<InputNumberWithLabel 
-            v-model="value.value"
+            :label='key'
             @input-number='changeEvent'
             :initValue="value.value" />
 				</div>
@@ -76,7 +76,7 @@ import {
 } from '../assets/category';
 
 export default {
-  props: ["year", 'commitFunction'],
+  props: ["year", 'commitFunction', 'sumOut'],
   components: {
     InputNumberWithLabel,
     GangWeiLeiBie,
@@ -86,35 +86,31 @@ export default {
     return {};
   },
   computed: {
-    sumOut () {
-      return this.$store.state.form._sum_out.find(value => (value.year === this.year)).info;
-    },
-
     noSpecialSumOut () {
-      let sumOut = this.$store.state.form._sum_out.find(value => (value.year === this.year)).info;
       let noSpecialSumOut = {};
 
-      for (let key in sumOut) {
-        if (!sumOut[key].special) {
-          noSpecialSumOut[key] = sumOut[key];
+      for (let key in this.sumOut) {
+        if (!this.sumOut[key].special) {
+          noSpecialSumOut[key] = this.sumOut[key];
         }
       }
 
+      console.log('noSpecialSumOut', noSpecialSumOut);
       return noSpecialSumOut;
     },
 
     gangWeiLeiBie() {
-				switch (this.$store.state.form._basic['单位性质'].value) {
-					case '机关':
-						return jobCategoryJiGuan;
-					case '社会团体':
-						return jobCategorySocial;
-					case '事业单位':
-						return jobCategoryCareer;
-					default:
-						return jobCategoryQiYe;
-				}
-			}
+      switch (this.$store.state.form._basic['单位性质'].value) {
+        case '机关':
+          return jobCategoryJiGuan;
+        case '社会团体':
+          return jobCategorySocial;
+        case '事业单位':
+          return jobCategoryCareer;
+        default:
+          return jobCategoryQiYe;
+      }
+    }
   },
   methods: {
     changeEvent ({ value, subKey, key }) {

@@ -22,7 +22,7 @@
 				</div>
 			</Card>
 		</div>
-
+		
 		<div v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')"
 			class="box-item">
 			<Card class="card" :bordered="false">
@@ -76,11 +76,16 @@
 	import GangWeiLeiBie from '../components/GangWeiLeiBie.vue';
 	
 	export default {
-		props: ['year', 'commitFunction'],
+		props: ['year', 'commitFunction', 'summary'],
 		components: {
 			InputNumberWithLabel,
 			GangWeiLeiBie,
 		},
+
+		data() {
+			return {}
+		},
+
 		methods: {
 			changeEvent ({ value, key, subKey }) {
 				this.$store.commit(this.commitFunction, { value, key, year: this.year, subKey });
@@ -88,20 +93,15 @@
 		},
 		computed: {
 			noSpecialSummary () {
-				let summary = this.$store.state.form._summary.find(value => (value.year === this.year)).info;
 				let noSpecialSummary = {};
 
-				for (let key in summary) {
-					if (!summary[key].special) {
-						noSpecialSummary[key] = summary[key];
+				for (let key in this.summary) {
+					if (!this.summary[key].special) {
+						noSpecialSummary[key] = this.summary[key];
 					}
 				}
 
 				return noSpecialSummary;
-			},
-
-			summary () {
-				return this.$store.state.form._summary.find(value => (value.year === this.year)).info;
 			},
 
 			unitType () {

@@ -94,7 +94,6 @@ export default {
         url: url.login,
         method: 'post',
         data: {
-          form: this.$store.state.form,
           user_name: this.$data.account,
           user_password: this.$data.password
         }

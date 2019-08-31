@@ -28,11 +28,16 @@ export default new Vuex.Store({
     vueElementLoading: false,
   },
   mutations: {
+    // 设置用户id
     setUserId(state, userId) {
       state.userId = userId;
     },
+    
+    // 更新表单
     setForm(state, form) {
-      state.form = form;
+      if (form) {
+        state.form = form;
+      }
     },
     setBasic (state, {value, key}) {
       state.form._basic[key].value = value;
@@ -92,7 +97,7 @@ export default new Vuex.Store({
         }
       }
     },
-    setFlowInOutter () {
+    setFlowInOutter (state, { value, key, year, subKey }) {
       if (year) {
         let oneYearInfo = state.form._sum_in_wai.find(value => (value.year === year)).info
         
@@ -115,6 +120,7 @@ export default new Vuex.Store({
       }
     },
     setFlowOutInner (state, { value, key, year, subKey }) {
+      console.log(state, { value, key, year, subKey });
       if (year) {
         let oneYearInfo = state.form._sum_out_nei.find(value => (value.year === year)).info
         

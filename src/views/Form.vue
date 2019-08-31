@@ -195,7 +195,7 @@ export default {
       axios({
         url: url.save,
         method: "post",
-        data: { 
+        data: {
           form: that.$store.state.form,
           userId: that.$store.state.userId
         }

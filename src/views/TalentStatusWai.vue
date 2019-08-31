@@ -8,6 +8,7 @@
 				<p class="title">单位人才情况汇总表-存量信息-事业单位-编制外-{{value.year}}年</p>
 				<TalentStatus
 					:year='value.year'
+					:summary='value.info'
 					commitFunction='setSummeryOut'
 				/>
 			</el-tab-pane>

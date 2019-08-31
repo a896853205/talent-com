@@ -57,7 +57,7 @@
 	import GangWeiLeiBie from '../components/GangWeiLeiBie.vue';
 
 	export default {
-		props: ['year', 'commitFunction'],
+		props: ['year', 'commitFunction', 'sumIn'],
 		components: {
 			InputNumberWithLabel,
 			GangWeiLeiBie,
@@ -66,17 +66,12 @@
 			return {}
 		},
 		computed: {
-			sumIn () {
-				return this.$store.state.form._sum_in.find(value => (value.year === this.year)).info;
-			},
-
 			noSpecialSumIn () {
-				let sumIn = this.$store.state.form._sum_in.find(value => (value.year === this.year)).info;
 				let noSpecialSumIn = {};
 
-				for (let key in sumIn) {
-					if (!sumIn[key].special) {
-						noSpecialSumIn[key] = sumIn[key];
+				for (let key in this.sumIn) {
+					if (!this.sumIn[key].special) {
+						noSpecialSumIn[key] = this.sumIn[key];
 					}
 				}
 

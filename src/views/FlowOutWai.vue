@@ -1,10 +1,11 @@
 <template>
 	<div class="box">
 		<el-tabs tab-position="left">
-			<el-tab-pane v-for="(value, key) in flowOutOutter" :key="key" :label="value.year">
+			<el-tab-pane v-for="(value, key) in sumOutOutter" :key="key" :label="value.year">
 				<p class="title">单位人才流动汇总表-流出人才-事业单位-编制外-{{ value.year }}年</p>
 				<FlowOut 
 					:year='value.year'
+					:sumOut='value.info'
 					commitFunction='setFlowOutOutter'
 				/>
 			</el-tab-pane>
@@ -31,7 +32,7 @@
 		},
 		data() {},
 		computed: {
-			flowOutOutter () {
+			sumOutOutter () {
 				return this.$store.state.form._sum_out_wai;
 			}
 		}

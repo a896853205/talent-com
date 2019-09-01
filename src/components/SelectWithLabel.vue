@@ -1,5 +1,5 @@
 <template>
-	<Form label-position="top" style="text-align: left;">
+	<Form label-position="top" style="text-align: left;height: 100%;">
 		<Form-item :label="label">
 			<Select v-model="model1" @on-change="emit">
 				<Option v-for="item in list" :value="item.value" :key="item.value">{{ item.label }}</Option>

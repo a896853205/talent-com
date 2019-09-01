@@ -70,6 +70,19 @@ const summary_info = {
   "当年年度产值（万元）": { value: 0, type: 'number', special: true }
 }
 
+export const summaryInfo = {
+  label: '职工人数',
+  value: 0,
+  type: 'number',
+  children: {
+    label: '人员类别',
+    value: undefined, 
+    type: 'selectInput', 
+    list: [],
+    children: [],
+  }
+}
+
 const sum_in_info = {
   "流入人数": { value: 0, type: 'number' },
   "性别结构": info_gender,
@@ -129,7 +142,7 @@ export const form_inserting = {
     '微信号': { value: null, type: 'input' },
     '电子邮箱': { value: null, type: 'input' }
   },
-  _summary: initEveryYear(2009, 2018, summary_info),
+  _summary: initEveryYear(2009, 2018, summaryInfo),
   _summary_nei: initEveryYear(2009, 2018, summary_info),
   _summary_wai: initEveryYear(2009, 2018, summary_info),
   _sum_in: initEveryYear(2009, 2018, sum_in_info),

@@ -30,7 +30,7 @@
 				// }
 				this.$emit('input', {
 					value: this.$data.value,
-					key: this.label,
+					label: this.label,
 					index: this.index
 				});
 			}

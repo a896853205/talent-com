@@ -70,6 +70,19 @@ const summary_info = {
   "当年年度产值（万元）": { value: 0, type: 'number', special: true }
 }
 
+export const summaryInfo = {
+  label: '职工人数',
+  value: 0,
+  type: 'number',
+  children: {
+    label: '人员类别',
+    value: undefined, 
+    type: 'selectInput', 
+    list: [],
+    children: [],
+  }
+}
+
 const sum_in_info = {
   "流入人数": { value: 0, type: 'number' },
   "性别结构": info_gender,
@@ -117,19 +130,51 @@ export const form_inserting = {
   _id: undefined,
   _from_user: null,
   _confirmed: false,
-  _basic: {
-    '所属地域': { value: null, type: 'select', list: suoShuDiYu },
-    '所属行业': { value: null, type: 'cascader', data: industryCategory },
-    '单位名称（全称）': { value: null, type: 'input' },
-    '统一社会信用代码/组织机构代码': { value: null, type: 'input' },
-    '单位性质': { value: null, type: 'select', list: danWeiXingZhi },
-    '联系人': { value: null, type: 'input' },
-    '联系电话': { value: null, type: 'input' },
-    'QQ号': { value: null, type: 'input' },
-    '微信号': { value: null, type: 'input' },
-    '电子邮箱': { value: null, type: 'input' }
-  },
-  _summary: initEveryYear(2009, 2018, summary_info),
+  _basic: [{
+    label: '所属地域',
+    value: null,
+    type: 'select',
+    list: suoShuDiYu
+  }, {
+    label: '所属行业',
+    value: null,
+    type: 'cascader',
+    data: industryCategory
+  }, {
+    label: '单位名称（全称）',
+    value: undefined,
+    type: 'input'
+  }, {
+    label: '统一社会信用代码/组织机构代码',
+    value: undefined,
+    type: 'input'
+  }, {
+    label: '单位性质',
+    value: null,
+    type: 'select',
+    list: danWeiXingZhi
+  }, {
+    label: '联系人',
+    value: undefined,
+    type: 'input'
+  }, {
+    label: '联系电话',
+    value: undefined,
+    type: 'input'
+  }, {
+    label: 'QQ号',
+    value: undefined,
+    type: 'input'
+  }, {
+    label: '微信号',
+    value: undefined,
+    type: 'input'
+  }, {
+    label: '电子邮箱',
+    value: undefined,
+    type: 'input'
+  }],
+  _summary: initEveryYear(2009, 2018, summaryInfo),
   _summary_nei: initEveryYear(2009, 2018, summary_info),
   _summary_wai: initEveryYear(2009, 2018, summary_info),
   _sum_in: initEveryYear(2009, 2018, sum_in_info),

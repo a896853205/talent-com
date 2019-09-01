@@ -2,20 +2,20 @@
 	<Form label-position="top" style="text-align: left;">
 		<Form-item :label="label">
 			<Row>
-				<Col span="16">
+				<i-col span="16">
 					<Cascader 
 						:transfer="vb"
 						:data="data"
 						:value="value1"
 						@on-change="cascaderEvent"
 						 />
-				</Col>
-				<Col span="8" >
+				</i-col>
+				<i-col span="8" >
 					<Input-number
 						:value="value2"
 						@on-change="inputEvent"
 						style="width:95%; margin-bottom: 10px; margin-left: 5%; margin-right: 5px;" />
-				</Col>
+				</i-col>
 			</Row>
 		</Form-item>
 	</Form>
@@ -50,7 +50,7 @@
 				}
 				this.$data.value2 = this.$props.initObj.num
 			}
-			this.emit()
+			this.emit(this);
 		},
 		methods: {
 			cascaderEvent(value, selectedData) {

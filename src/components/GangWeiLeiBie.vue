@@ -1,28 +1,29 @@
 <template>
 	<div class="cbox">
 		<div class="box-item">
-			<Card class="card" :bordered="false">
-				<div class="add-box">
-					<p slot="title" class="add-box-title">{{label}}</p>
-					<div class="add">
-						<i-button type="info" @click="addHandle">添加</i-button>
+			<div class="add-box">
+				<p slot="title" class="add-box-title">{{label}}</p>
+				<div class="add">
+					<i-button type="info" @click="addHandle">添加</i-button>
+				</div>
+			</div>
+			<div class="input-box">
+				<div class="input-box-cascader"
+					v-for="(item, index) in form"
+					:key="item.id"
+					:name="item['人员类别']">
+					<CascaderWithInputWithLabel
+						:initObj="item[label]"
+						style="width:300px;margin-right: 30px"
+						:data="cateData"
+						@cascader='getCascaderData'
+						:index='index' />
+					<div class="del-btn">
+						<i-button type="error" style="margin-right: 10px" v-if="item.id>0" shape="circle" @click="delHandle(item.id)">删除</i-button>
+						<div style="width: 56px;margin-right: 10px" v-else></div>
 					</div>
 				</div>
-				<div class="input-box">
-					<div class="input-box-cascader" v-for="(item, index) in form" :key="item.id" :name="item['人员类别']">
-						<CascaderWithInputWithLabel
-							:initObj="item[label]"
-							style="width:300px;margin-right: 30px"
-							:data="gangWeiLeiBie"
-							@cascader='getCascaderData'
-							:index='index' />
-						<div class="del-btn">
-							<i-button type="error" style="margin-right: 10px" v-if="item.id>0" shape="circle" @click="delHandle(item.id)">删除</i-button>
-							<div style="width: 56px;margin-right: 10px" v-else></div>
-						</div>
-					</div>
-				</div>
-			</Card>
+			</div>
 		</div>
 	</div>
 </template>
@@ -35,6 +36,7 @@
 
 	.box-item {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: flex-start;
 		margin: 0 20px 10px 0;
@@ -75,17 +77,12 @@
 </style>
 <script>
 	import CascaderWithInputWithLabel from '../components/CascaderWithInputWithLabel.vue';
-	import { 
-		jobCategoryJiGuan, 
-		jobCategoryQiYe,
-		jobCategorySocial,
-		jobCategoryCareer
-	} from '../assets/category';
-
+	
 	export default {
 		props: {
 			initValue: Array,
-			label: String
+			label: String,
+			cateData: Array,
 		},
 		data() {
 			return {
@@ -121,29 +118,32 @@
 			}
 		},
 		created() {
-			// 这里判断四类类别
-			// 机关,社会团体,事业单位,剩下全部
-			switch (this.$store.state.form._basic['单位性质'].value) {
-				case '机关':
-					this.gangWeiLeiBie = jobCategoryJiGuan;
-					break; 
-				case '社会团体':
-					this.gangWeiLeiBie = jobCategorySocial;
-					break;
-				case '事业单位':
-					this.gangWeiLeiBie = jobCategoryCareer;
-					break;
-				default:
-					this.gangWeiLeiBie = jobCategoryQiYe;
-			}
-			
-			for (let i = 0; i < this.$props.initValue.length; i++) {
-				this.$data.form[i][this.label] = this.$props.initValue[i];
+			console.log('cateData', this.cateData);
+			// // 这里判断四类类别
+			// // 机关,社会团体,事业单位,剩下全部
+			// switch (this.$store.state.form._basic['单位性质'].value) {
+			// 	case '机关':
+			// 		this.gangWeiLeiBie = jobCategoryJiGuan;
+			// 		break; 
+			// 	case '社会团体':
+			// 		this.gangWeiLeiBie = jobCategorySocial;
+			// 		break;
+			// 	case '事业单位':
+			// 		this.gangWeiLeiBie = jobCategoryCareer;
+			// 		break;
+			// 	default:
+			// 		this.gangWeiLeiBie = jobCategoryQiYe;
+			// }
+			if (this.initValue) {
+				for (let i = 0; i < this.initValue.length; i++) {
+					this.$data.form[i][this.label] = this.initValue[i];
 
-				if (i < this.$props.initValue.length - 1) {
-					this.addHandle()
+					if (i < this.initValue.length - 1) {
+						this.addHandle()
+					}
 				}
 			}
+			
 		},
 		watch: {
 			form: {

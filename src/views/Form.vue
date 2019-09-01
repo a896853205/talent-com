@@ -160,7 +160,7 @@ export default {
 	},
 	computed: {
 		unit() {
-			return this.$store.state.form._basic['单位性质'].value;
+			return this.$store.getters.unit;
     }
   },
   methods: {
@@ -560,8 +560,6 @@ export default {
     // } else {
     //   this.$data.companyName = this.$store.state.form._basic["单位名称"];
     // }
-
-    
   }
 };
 </script>

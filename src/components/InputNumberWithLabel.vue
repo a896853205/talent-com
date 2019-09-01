@@ -32,8 +32,7 @@
 				// }
 				this.$emit('input-number', { 
 					value: this.$data.value,
-					key: this.label,
-					propKey: this.propKey,
+					label: this.label,
 					index: this.index,
 					propIndex: this.propIndex
 				});

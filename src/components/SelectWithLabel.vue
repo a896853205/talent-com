@@ -33,7 +33,7 @@
 				// } else {
 				this.$emit('select', {
 					value: this.$data.model1,
-					key: this.label,
+					label: this.label,
 					index: this.index
 				});
 			}

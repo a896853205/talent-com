@@ -1,7 +1,7 @@
 <template>
 	<Form label-position="top" style="text-align: left;">
 		<Form-item :label="label">
-			<Cascader :data="data" v-model="value1" @on-visible-change="emit()" change-on-select></Cascader>
+			<Cascader :data="data" v-model="value1" @on-change="emit" change-on-select></Cascader>
 		</Form-item>
 	</Form>
 </template>
@@ -28,10 +28,11 @@
 			// this.emit()
 		},
 		methods: {
-			emit() {
+			emit(value) {
+				this.$data.value1 = value;
 				this.$emit('cascader', {
 					value: this.$data.value1,
-					key: this.label,
+					label: this.label,
 					index: this.index
 				});
 			}

@@ -1,26 +1,29 @@
 <template>
   <div class="company-box">
     <Row type="flex" justify="start" align="middle" :gutter="30">
-      <i-col span="4" v-for="(value, key) in basic" :key="key">
+      <i-col span="4" v-for="(item, index) in basic" :key="index">
         <SelectWithLabel
-          v-if="value.type === 'select'"
-          :label="key"
-          :initValue="value.value"
+          v-if="item.type === 'select'"
+          :label="item.label"
+          :initValue="item.value"
           @select="changeEvent"
-          :list="value.list"
+          :list="item.list"
+          :index='index'
         />
         <CascaderWithLabel
-          v-if="value.type === 'cascader'"
-          :label="key"
-          :initValue="value.value"
+          v-if="item.type === 'cascader'"
+          :label="item.label"
+          :initValue="item.value"
           @cascader="changeEvent"
-          :data="value.data"
+          :data="item.data"
+          :index='index'
         />
         <InputWithLabel
-          v-if="value.type === 'input'"
-          :label="key"
-          :initValue="value.value"
+          v-if="item.type === 'input'"
+          :label="item.label"
+          :initValue="item.value"
           @input="changeEvent"
+          :index='index'
         />
       </i-col>
     </Row>
@@ -58,8 +61,8 @@ export default {
     CascaderWithLabel
   },
   methods: {
-    changeEvent({ value, key }) {
-      this.$store.commit("setBasic", { value, key });
+    changeEvent({ value, index, label }) {
+      this.$store.commit("setBasic", { value, index, label });
     }
   },
   created() {},

@@ -146,6 +146,8 @@
 					}
 				})
 
+				console.log('计算属性', summaryDetail.children);
+
 				return summaryDetail.children;
 			},
 

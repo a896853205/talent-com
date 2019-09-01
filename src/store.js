@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { 
+import {
   form_inserting,
-  summaryInfo 
+  summaryInfo
 } from './store/init/form';
 import { objectHelper } from './util/object-helper';
 import {
@@ -51,10 +51,10 @@ export default new Vuex.Store({
       }
     },
 
-    setBasic(state, { value, key }) {
-      state.form._basic[key].value = value;
-      console.log('store', value);
-      if (key === '单位性质') {
+    setBasic(state, { value, index, label }) {
+      state.form._basic[index].value = value;
+
+      if (label === '单位性质') {
         // 更换单位性质时会将 单位人才,单位人才流动汇总 流入流出全部清除
         // 提示是否确认
         // 如果确认,进行初始化select和select选中的数据
@@ -128,9 +128,10 @@ export default new Vuex.Store({
             });
         }
       }
+      console.log('basic', state.form._basic);
     },
 
-    setSummery(state, { value, year, index, propIndex, label}) {
+    setSummery(state, { value, year, index, propIndex, label }) {
       // 判断赋值是否完成
       let correct = false;
 
@@ -163,6 +164,7 @@ export default new Vuex.Store({
           });
         }
       }
+      console.log('setSummery', state);
     },
     setSummeryIn(state, { value, key, year, subKey }) {
       if (year) {
@@ -283,6 +285,13 @@ export default new Vuex.Store({
         default:
           return jobCategoryQiYe;
       }
+    },
+    unit: state => {
+      let unit = '';
+      if (state.form._basic['单位性质']) {
+        unit = state.form._basic['单位性质'].value;
+      }
+      return unit;
     }
   },
   actions: {}

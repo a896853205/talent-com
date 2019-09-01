@@ -50,7 +50,7 @@
 				}
 				this.$data.value2 = this.$props.initObj.num
 			}
-			this.emit()
+			this.emit(this);
 		},
 		methods: {
 			cascaderEvent(value, selectedData) {

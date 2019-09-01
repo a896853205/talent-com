@@ -20,24 +20,43 @@
 
 		<Divider />
 
-		<Row v-for="(item, index) in summaryDetail" :key='index' :gutter='16'>
-			<div v-if="item.children">
-				<span class="input-combine-box-title">{{ item.label }}</span>
-				<div>
-					<i-col
-					span='4'
-					v-for='(opationItem, opationIndex) in item.children'
-					:key='opationIndex'>
-					<InputNumberWithLabel
-						:label='opationItem.label'
-						:initValue="opationItem.value"
-						:propIndex='index'
-						:index='opationIndex'
-						@input-number='changeEvent'
-						/>
-					</i-col>
+		<div
+			v-for="(it, i) in summaryDetail"
+			:class="{ 'none': !(it.prop === summary.children.value) }"
+			:key='i'>
+			<Row
+				v-for="(item, index) in it.children"
+				:key="index"
+				:gutter='16'
+				>
+				<div v-if="item.children">
+					<span class="input-combine-box-title">{{ item.label }}</span>
+					<div>
+						<i-col
+							span='4'
+							v-for='(opationItem, opationIndex) in item.children'
+							:key='opationIndex'>
+						<InputNumberWithLabel
+							:label='opationItem.label'
+							:initValue="opationItem.value"
+							:propIndex='index'
+							:index='opationIndex'
+							@input-number='changeEvent'
+							/>
+						</i-col>
+					</div>
 				</div>
-			</div>
+			</Row>
+			
+		</div>
+		<Row>
+			<i-col>
+				<GangWeiLeiBie
+					label='人员类别'
+					:initValue="summary.children.children[4].value"
+					:cateData='summary.children.children[4].data'
+					@station='changeEvent'/>
+			</i-col>
 		</Row>
 				
 			<!-- 这里放一个select -->
@@ -70,16 +89,14 @@
 			</div>
 			
 			<div className='box-item'>
-				<GangWeiLeiBie
-					label='人员类别'
-					:initValue="summary['人员类别'].value"
-					@station='changeEvent'/>
+				
 			</div> -->
 	</div>
 </template>
 <style scoped>
 	.summary-box {
-		height: 100vh;
+		overflow: auto;
+		overflow-x: hidden;
 	}
 
 	.box {
@@ -97,6 +114,7 @@
 		font-size: 20px;
 		margin-bottom: 10px;
 		margin-left: 8px;
+		font-weight: 700;
 	}
 </style>
 <script>
@@ -138,17 +156,7 @@
 			// },
 			// 选出正确的详细信息
 			summaryDetail () {
-				let summaryDetail = {};
-
-				this.summary.children.children.forEach(item => {
-					if (item.prop === this.summary.children.value) {
-						summaryDetail = item;
-					}
-				})
-
-				console.log('计算属性', summaryDetail.children);
-
-				return summaryDetail.children;
+				return this.summary.children.children;
 			},
 
 			unitType () {

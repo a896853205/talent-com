@@ -19,6 +19,33 @@ import {
   SUMMARY_ITEM
 } from './assets/category/summary';
 
+function getStationCategory (state) {
+
+  if(state.form._basic) {
+    state.form._basic.forEach(item => {
+
+      if(item.label === '单位性质') {
+        switch (item.value) {
+          case '机关':
+            debugger;
+            return jobCategoryJiGuan;
+          case '社会团体':
+  
+            return jobCategorySocial;
+          case '事业单位':
+  
+            return jobCategoryCareer;
+          default:
+  
+            return jobCategoryQiYe;
+        }
+      }
+    })
+  } else {
+    return [];
+  }
+}
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -67,14 +94,15 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._summary[i].info.children.children = [];
+              state.form._summary[i].info.children.value = undefined;
               // 输入数据
-              OFFICE_ONE_LEVEL.forEach(() => {
+              OFFICE_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
-                summaryItem.prop = item.label
+                summaryItem.prop = oneLevelItem.label;
                 state.form._summary[i].info.children.children.push(summaryItem);
               })
             });
-
+            
             break;
           case '社会团体':
             // 一级菜单进行赋值
@@ -84,10 +112,11 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._summary[i].info.children.children = [];
+              state.form._summary[i].info.children.value = undefined;
               // 输入数据
-              SOCIETY_ONE_LEVEL.forEach(() => {
+              SOCIETY_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
-                summaryItem.prop = item.label;
+                summaryItem.prop = oneLevelItem.label;
                 state.form._summary[i].info.children.children.push(summaryItem);
               })
             });
@@ -101,10 +130,11 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._summary[i].info.children.children = [];
+              state.form._summary[i].info.children.value = undefined;
               // 输入数据
-              JOB_ONE_LEVEL.forEach(() => {
+              JOB_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
-                summaryItem.prop = item.label;
+                summaryItem.prop = oneLevelItem.label;
                 state.form._summary[i].info.children.children.push(summaryItem);
               })
             });
@@ -119,16 +149,17 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._summary[i].info.children.children = [];
+              state.form._summary[i].info.children.value = undefined;
               // 输入数据
-              ENTERPRISE_ONE_LEVEL.forEach(() => {
+              ENTERPRISE_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
-                summaryItem.prop = item.label;
+                summaryItem.prop = oneLevelItem.label;
                 state.form._summary[i].info.children.children.push(summaryItem);
               })
             });
         }
       }
-      console.log('basic', state.form._basic);
+      console.log(state.form);
     },
 
     setSummery(state, { value, year, index, propIndex, label }) {
@@ -147,6 +178,45 @@ export default new Vuex.Store({
         // 对象的二级结构
         if (summaryInfo.children.label === label) {
           oneYearInfo.children.value = value;
+
+          // 设置下面的人员类别二级菜单
+          let cate = [];
+          state.form._basic.forEach(item => {
+
+            if(item.label === '单位性质') {
+              switch (item.value) {
+                case '机关':
+                  debugger;
+                  cate = jobCategoryJiGuan;
+                  break;
+                case '社会团体':
+        
+                  cate = jobCategorySocial;
+                  break;
+                case '事业单位':
+        
+                  cate = jobCategoryCareer;
+                  break;
+                default:
+        
+                  cate =  jobCategoryQiYe;
+                  break;
+              }
+            }
+          })
+
+          cate.forEach(eachCategory => {
+            debugger;
+            if (eachCategory.value === oneYearInfo.children.value) {
+              // 这里把人员类别的位置写死了
+              // 如果调整了单位人才情况汇总需要调整这里
+              
+              oneYearInfo.children.children[4].data = eachCategory.children;
+              console.log(oneYearInfo.children.children);
+              debugger;
+            }
+          });
+
           correct = true;
         }
 
@@ -164,7 +234,8 @@ export default new Vuex.Store({
           });
         }
       }
-      console.log('setSummery', state);
+      
+      console.log('setSummery', state.form._summary[0].info);
     },
     setSummeryIn(state, { value, key, year, subKey }) {
       if (year) {
@@ -275,24 +346,17 @@ export default new Vuex.Store({
   },
   getters: {
     stationCategory: state => {
-      switch (state.form._basic['单位性质'].value) {
-        case '机关':
-          return jobCategoryJiGuan;
-        case '社会团体':
-          return jobCategorySocial;
-        case '事业单位':
-          return jobCategoryCareer;
-        default:
-          return jobCategoryQiYe;
-      }
+      return getStationCategory(state);
     },
     unit: state => {
       let unit = '';
+
       if (state.form._basic['单位性质']) {
         unit = state.form._basic['单位性质'].value;
       }
+
       return unit;
-    }
+    },
   },
   actions: {}
 })

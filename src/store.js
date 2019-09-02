@@ -35,33 +35,6 @@ import {
   SUM_OUT_ITEM_PERSON_CATEGORY
 } from './store/init/sum-out';
 
-function getStationCategory(state) {
-
-  if (state.form._basic) {
-    state.form._basic.forEach(item => {
-
-      if (item.label === '单位性质') {
-        switch (item.value) {
-          case '机关':
-            debugger;
-            return jobCategoryJiGuan;
-          case '社会团体':
-
-            return jobCategorySocial;
-          case '事业单位':
-
-            return jobCategoryCareer;
-          default:
-
-            return jobCategoryQiYe;
-        }
-      }
-    })
-  } else {
-    return [];
-  }
-}
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -123,6 +96,7 @@ export default new Vuex.Store({
               })
             });
 
+            debugger;
             // 一级菜单进行赋值
             state.form._sum_in.forEach((item, i) => {
               // 输入select框
@@ -440,44 +414,44 @@ export default new Vuex.Store({
           oneYearInfo[0].children.value = value;
 
           // 设置下面的人员类别二级菜单
-          let cate = [];
-          state.form._basic.forEach(item => {
+          // let cate = [];
+          // state.form._basic.forEach(item => {
 
-            if (item.label === '单位性质') {
-              switch (item.value) {
-                case '机关':
+          //   if (item.label === '单位性质') {
+          //     switch (item.value) {
+          //       case '机关':
 
-                  cate = jobCategoryJiGuan;
-                  break;
-                case '社会团体':
+          //         cate = jobCategoryJiGuan;
+          //         break;
+          //       case '社会团体':
 
-                  cate = jobCategorySocial;
-                  break;
-                case '事业单位':
+          //         cate = jobCategorySocial;
+          //         break;
+          //       case '事业单位':
 
-                  cate = jobCategoryCareer;
-                  break;
-                default:
+          //         cate = jobCategoryCareer;
+          //         break;
+          //       default:
 
-                  cate = jobCategoryQiYe;
-                  break;
-              }
-            }
-          })
+          //         cate = jobCategoryQiYe;
+          //         break;
+          //     }
+          //   }
+          // })
 
-          cate.forEach(eachCategory => {
-            if (eachCategory.value === oneYearInfo[0].children.value) {
-              // 这里把人员类别的位置写死了
-              // 如果调整了单位人才情况汇总需要调整这里
-              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
-                if (everyCategoryObj.prop === eachCategory.value) {
-                  oneYearInfo[0].children.children[everyCategoryIndex];
+          // cate.forEach(eachCategory => {
+          //   if (eachCategory.value === oneYearInfo[0].children.value) {
+          //     // 这里把人员类别的位置写死了
+          //     // 如果调整了单位人才情况汇总需要调整这里
+          //     oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
+          //       if (everyCategoryObj.prop === eachCategory.value) {
+          //         oneYearInfo[0].children.children[everyCategoryIndex];
 
-                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
-                }
-              });
-            }
-          });
+          //         oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
+          //       }
+          //     });
+          //   }
+          // });
 
           correct = true;
         }
@@ -485,16 +459,15 @@ export default new Vuex.Store({
         // 对象的三级结构
         if (!correct) {
           // 找到第三级对应的对象
-          oneYearInfo[0].children.children.forEach((subItem, _index) => {
-            if (subItem.prop === oneYearInfo[0].children.value) {
-              if (index && !propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].value = value;
-                debugger;
-              } else if (index && propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
-              }
-            }
+          let child = oneYearInfo[0].children.children.find(subItem => {
+            return (subItem.prop === oneYearInfo[0].children.value);
           });
+          if (index && !propIndex) {
+            child.children[index].value = value;
+          } else if (index && propIndex) {
+            child.children[index].children[propIndex].value = value;
+          }
+          
         }
       }
     },
@@ -1112,6 +1085,7 @@ export default new Vuex.Store({
               }
             }
           });
+          
         }
       }
     },
@@ -1136,8 +1110,90 @@ export default new Vuex.Store({
   },
   getters: {
     stationCategory: state => {
-      return getStationCategory(state);
+      let arr = [];
+
+      state.form._basic.forEach(item => {
+        if (item.label === '单位性质') {
+          switch (item.value) {
+            case '机关':
+              arr = jobCategoryJiGuan;
+              break;
+            case '社会团体':
+              arr =  jobCategorySocial;
+              break;
+            case '事业单位':
+              arr =  jobCategoryCareer;
+              break;
+            default:
+              arr =  jobCategoryQiYe;
+          }
+        }
+      })
+
+      return arr;
     },
+
+    oneLevelStationCategory: state => {
+      let arr = [];
+
+      state.form._basic.forEach(item => {
+        if (item.label === '单位性质') {
+          if (item.value) {
+            switch (item.value) {
+              case '机关':
+                arr = OFFICE_ONE_LEVEL;
+                break;
+              case '社会团体':
+                arr =  SOCIETY_ONE_LEVEL;
+                break;
+              case '事业单位':
+                arr =  JOB_ONE_LEVEL;
+                break;
+              default:
+                arr =  ENTERPRISE_ONE_LEVEL;
+            }
+          } else {
+            arr = [];
+          }
+        }
+      })
+
+      return arr;
+    },
+
+    twoLevelStationCategory: (state, getters) => year => {
+      let oneYearSummary = state.form._summary.find(item => {
+        return (year === item.year); 
+      }).info;
+
+      debugger;
+
+      let twoCategory = getters.stationCategory.find(item => {
+        return (item.label === oneYearSummary[0].children.value)
+      })
+
+      debugger;
+
+      return twoCategory.children;
+    },
+    getSummaryObjCombin: state => year => {
+      let summaryObjCombinBox = {},
+          summaryObjCombin = [];
+      let oneYearSummary = state.form._summary.find(item => {
+        return (year === item.year); 
+      }).info;
+
+      summaryObjCombinBox = oneYearSummary[0].children.children.find(item => {
+        return (item.prop === oneYearSummary[0].children.value);
+      });
+
+      if (summaryObjCombinBox) {
+        summaryObjCombin = summaryObjCombinBox.children;
+      }
+
+      return summaryObjCombin;
+    },
+
     unit: state => {
       let unit = '';
 

@@ -16,6 +16,7 @@
 			list: Array,
 			initValue: String,
 			index: Number,
+			propIndex: Number
 		},
 		data() {
 			return {
@@ -34,7 +35,8 @@
 				this.$emit('select', {
 					value: this.$data.model1,
 					label: this.label,
-					index: this.index
+					index: this.index,
+					propIndex: this.propIndex,
 				});
 			}
 		}

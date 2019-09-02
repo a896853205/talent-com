@@ -31,7 +31,6 @@
 		},
 		computed: {
 			summary () {
-				console.log('_summary', this.$store.state.form._summary);
 				return this.$store.state.form._summary
 			}
 		}

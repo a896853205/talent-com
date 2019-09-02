@@ -109,27 +109,57 @@ export const sumOutInfo = [{
   }
 }]
 
-const sum_out_info = {
-  "流出人数": { value: 0, type: 'number' },
-  "性别结构": info_gender,
-  "年龄结构": info_age,
-  "学历结构": info_degree,
-  "薪酬（元/月）": info_salary,
-  "人员类别": { value: info_people, special: true },
-  "离职原因（多选）": { value: [], type: 'checkBox', list: liZhiYuanYin }
-}
+export const outStatusInfo = [{
+  label: '姓名',
+  value: undefined,
+  type: 'input'
+}, {
+  label: '身份证号',
+  value: undefined,
+  type: 'input'
+}, {
+  label: "年龄",
+  value: 0,
+  type: 'number'
+}, {
+  label: '性别',
+  value: undefined,
+  type: 'select',
+  list: xingBie
+}, {
+  label: '人员类别',
+  value: [],
+  type: 'cascaderSpecial'
+}, {
+  label: "离职时间",
+  value: undefined,
+  type: 'date'
+}, {
+  label: "从业年限（年）",
+  value: 0,
+  type: 'number'
+}, {
+  label: "流入地",
+  value: undefined,
+  type: 'input'
+}, {
+  label: '离职原因（多选）',
+  value: [],
+  type: 'checkBox',
+  list: liZhiYuanYin
+}]
 
-export const outStatusInfo = {
-  "姓名": { value: undefined, type: 'input' },
-  "身份证号": { value: undefined, type: 'input' },
-  "年龄": { value: 0, type: 'number' },
-  '性别': { value: undefined, type: 'select', list: xingBie },
-  "人员类别": { value: [], type: 'cascaderSpecial' },
-  "离职时间": { value: undefined, type: 'date' },
-  "从业年限（年）": { value: 0, type: 'number' },
-  "流入地": { value: undefined, type: 'input' },
-  '离职原因（多选）': { value: [], type: 'checkBox', list: liZhiYuanYin }
-}
+// export const outStatusInfo = {
+//   "姓名": { value: undefined, type: 'input' },
+//   "身份证号": { value: undefined, type: 'input' },
+//   "年龄": { value: 0, type: 'number' },
+//   '性别': { value: undefined, type: 'select', list: xingBie },
+//   "人员类别": { value: [], type: 'cascaderSpecial' },
+//   "离职时间": { value: undefined, type: 'date' },
+//   "从业年限（年）": { value: 0, type: 'number' },
+//   "流入地": { value: undefined, type: 'input' },
+//   '离职原因（多选）': { value: [], type: 'checkBox', list: liZhiYuanYin }
+// }
 
 export const personInfo = {
   "需求岗位": { value: undefined, type: 'input' },
@@ -147,7 +177,8 @@ export const form_inserting = {
   _id: undefined,
   _from_user: null,
   _confirmed: false,
-  _basic: [{
+  _basic: [
+    {
     label: '所属地域',
     value: null,
     type: 'select',

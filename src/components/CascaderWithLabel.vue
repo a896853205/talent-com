@@ -13,7 +13,8 @@
 			label: String,
 			data: Array,
 			initValue: Array,
-			index: Number
+			index: Number,
+			propIndex: Number,
 		},
 		data() {
 			return {
@@ -33,7 +34,8 @@
 				this.$emit('cascader', {
 					value: this.$data.value1,
 					label: this.label,
-					index: this.index
+					index: this.index,
+					propIndex: this.propIndex,
 				});
 			}
 		}

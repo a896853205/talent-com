@@ -1,7 +1,9 @@
 <template>
 	<Form label-position="top" style="text-align: left;">
 		<Form-item :label="label">
-			<Input-number v-model="value" style="width:100%; margin-right: 5px" @on-change="emit()"></Input-number>
+			<Input-number
+				:key='key'
+				v-model="value" style="width:100%; margin-right: 5px" @on-change="emit()"></Input-number>
 		</Form-item>
 	</Form>
 </template>
@@ -14,7 +16,8 @@
 			initValue: Number,
 			propKey: String,
 			index: Number,
-			propIndex: Number
+			propIndex: Number,
+			key: String,
 		},
 		data() {
 			return {

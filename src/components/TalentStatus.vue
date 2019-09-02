@@ -22,7 +22,7 @@
 					:label='summary[0].children.label'
 					@select='changeEvent'
 					:initValue="summary[0].children.value"
-					:list='summary[0].children.list' />
+					:list='oneLevelStationCategory' />
 			</i-col>
 			<i-col 
 				span='4'
@@ -38,13 +38,13 @@
 
 		<Divider />
 
-		<div
+		<!-- <div
 			v-for="(it, i) in summaryDetail"
 			:class="{ 'none': !(it.prop === summary[0].children.value) }"
-			:key='i'>
+			:key='i'> -->
 			<Row
-				v-for="(item, index) in it.children"
-				:key="index"
+				v-for="(item, index) in getSummaryObjCombin"
+				:key="(summary[0].children.value + index)"
 				:gutter='16'
 				>
 				<div v-if="item.children">
@@ -53,13 +53,14 @@
 						<i-col
 							span='4'
 							v-for='(opationItem, opationIndex) in item.children'
-							:key='opationIndex'>
+							:key='(item.label+opationItem.label+opationIndex)'>
 						<InputNumberWithLabel
 							:label='opationItem.label'
 							:initValue="opationItem.value"
 							:propIndex='index'
 							:index='opationIndex'
 							@input-number='changeEvent'
+							:key='"input" + item.label+index+opationIndex'
 							/>
 						</i-col>
 					</div>
@@ -69,14 +70,14 @@
 						<GangWeiLeiBie
 							:label='item.label'
 							:initValue="item.value"
-							:cateData='item.data'
+							:cateData='twoLevelStationCategory'
 							:index='index'
-							@station='changeEvent'/>
+							@station='changeEvent' />
 					</i-col>
 				</div>
 			</Row>
 		</div>
-	</div>
+	<!-- </div> -->
 </template>
 <style scoped>
 	.summary-box {
@@ -126,8 +127,21 @@
 				return this.summary[0].children.inputChildren;
 			},
 
+			oneLevelStationCategory () {
+				return this.$store.getters.oneLevelStationCategory;
+			},
+
+			twoLevelStationCategory () {
+				console.log(this.$store.getters.twoLevelStationCategory(this.year));
+				return this.$store.getters.twoLevelStationCategory(this.year);
+			},
+			
 			unitType () {
 				return this.$store.getters.unit;
+			},
+
+			getSummaryObjCombin () {
+				return this.$store.getters.getSummaryObjCombin(this.year);
 			}
 		}
 	}

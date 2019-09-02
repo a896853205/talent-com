@@ -1,65 +1,73 @@
 <template>
 	<div class="container">
-		<div v-for="(item, index) in outStatus" :key="item.id">
+		<div v-for="(item, propIndex) in outStatus" :key="propIndex">
 			<Card :bordered="false">
 				<div class="del-box">
-					<p class="del-box-title" slot="title">{{ title }} {{index+1}}</p>
+					<p class="del-box-title" slot="title">{{ title }} {{propIndex+1}}</p>
 					<div class="del-btn">
 						<i-button type="error" v-if="item.id > 0" style="margin-right: 10px" shape="circle" @click="delHandle(item.id)">删除</i-button>
 					</div>
 				</div>
-				<div class="abox">
-					<div class="item" v-for='(value, key) in item.info' :key='key' :class='{"none": (value.special)}'>
+				<Row :gutter='16'>
+					<i-col 
+						span='4'
+						v-for='(item, index) in item.info'
+						:key='index'>
 						<SelectWithLabel
-							v-if='value.type === "select"'
-							:label='key'
-							:initValue='value.value'
+							v-if='item.type === "select"'
+							:label='item.label'
+							:initValue='item.value'
 							@select='changeEvent'
-							:list="value.list"
-							:index='index' />
+							:list="item.list"
+							:index='index'
+							:propIndex='propIndex' />
 						<CascaderWithLabel
-							v-if='value.type === "cascader"'
-							:label='key'
-							:initValue='value.value'
+							v-if='item.type === "cascader"'
+							:label='item.label'
+							:initValue='item.value'
 							@cascader='changeEvent'
-							:data="value.data"
-							:index='index' />
+							:data="item.data"
+							:index='index'
+							:propIndex='propIndex' />
 						<InputWithLabel 
-							v-if='value.type === "input"'
-							:label='key'
-							:initValue='value.value'
+							v-if='item.type === "input"'
+							:label='item.label'
+							:initValue='item.value'
 							@input='changeEvent'
-							:index='index' />
+							:index='index'
+							:propIndex='propIndex' />
 						<InputNumberWithLabel
-							v-if='value.type === "number"'
-							:label='key'
-							:initValue='value.value'
+							v-if='item.type === "number"'
+							:label='item.label'
+							:initValue='item.value'
 							@input-number='changeEvent'
-							:index='index' />
+							:index='index'
+							:propIndex='propIndex' />
 						<InputDateWithLabel 
-							v-if='value.type === "date"'
-							:label='key'
-							:initValue='value.value'
+							v-if='item.type === "date"'
+							:label='item.label'
+							:initValue='item.value'
 							@date='changeEvent'
-							:index='index' 
-						/>
+							:index='index'
+							:propIndex='propIndex' />
 						<MultiSelectWithLabel 
-							v-if='value.type === "checkBox"'
-							:label='key'
-							:initValue='value.value'
+							v-if='item.type === "checkBox"'
+							:label='item.label'
+							:initValue='item.value'
 							@checkBox='changeEvent'
 							:index='index'
-							:list="value.list"
-						/>
+							:list="item.list"
+							:propIndex='propIndex' />
 						<CascaderWithLabel
-							v-if='value.type === "cascaderSpecial"'
-							:initObj="value.value"
-							:label='key'
+							v-if='item.type === "cascaderSpecial"'
+							:initObj="item.value"
+							:label='item.label'
 							:data="stationCategory"
 							@cascader='getCascaderData'
-							:index='index' />
-					</div>
-				</div>
+							:index='index'
+							:propIndex='propIndex' />
+					</i-col >
+				</Row>
 			</Card>
 		</div>
 		<div class="add">
@@ -159,8 +167,8 @@
 				this.$options.methods.outStatusArrCommit(this);
 			},
 
-			changeEvent ({ value, key, index }) {
-				this.$data.outStatusArr[index].info[key].value = value;
+			changeEvent ({ value, propIndex, index }) {
+				this.$data.outStatusArr[propIndex].info[index].value = value;
 				this.$options.methods.outStatusArrCommit(this);
 			},
 

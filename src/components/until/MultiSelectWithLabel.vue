@@ -15,7 +15,8 @@
 			label: String,
 			list: Array,
 			initValue: Array,
-			index: Number
+			index: Number,
+			propIndex: Number,
 		},
 		data() {
 			return {
@@ -28,7 +29,12 @@
 		},
 		methods: {
 			emit() {
-				this.$emit('checkBox', { value: this.$data.model1, key: this.label, index: this.index })
+				this.$emit('checkBox', {
+					value: this.$data.model1,
+					key: this.label,
+					index: this.index,
+					propIndex: this.propIndex
+				})
 			}
 		}
 	}

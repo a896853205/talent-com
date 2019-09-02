@@ -13,6 +13,7 @@
 			label: String,
 			initValue: String,
 			index: Number,
+			propIndex: Number,
 		},
 		data() {
 			return {
@@ -31,7 +32,8 @@
 				this.$emit('input', {
 					value: this.$data.value,
 					label: this.label,
-					index: this.index
+					index: this.index,
+					propIndex: this.propIndex,
 				});
 			}
 		}

@@ -20,6 +20,7 @@
 			label: String,
 			initValue: String,
 			index: Number,
+			propIndex: Number,
 		},
 		data() {
 			return {
@@ -36,7 +37,12 @@
 				// 	this.$data.value = null
 				// }
 
-				this.$emit('date', { value: this.$data.value, key: this.label, index: this.index })
+				this.$emit('date', {
+					value: this.$data.value,
+					key: this.label,
+					index: this.index,
+					propIndex: this.propIndex,
+				})
 			}
 		}
 	}

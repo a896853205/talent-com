@@ -182,8 +182,8 @@ export const form_inserting = {
     type: 'input'
   }],
   _summary: initEveryYear(2009, 2018, summaryInfo),
-  _summary_nei: initEveryYear(2009, 2018, summary_info),
-  _summary_wai: initEveryYear(2009, 2018, summary_info),
+  _summary_nei: initEveryYear(2009, 2018, summaryInfo),
+  _summary_wai: initEveryYear(2009, 2018, summaryInfo),
   _sum_in: initEveryYear(2009, 2018, sum_in_info),
   _sum_in_nei: initEveryYear(2009, 2018, sum_in_info),
   _sum_in_wai: initEveryYear(2009, 2018, sum_in_info),

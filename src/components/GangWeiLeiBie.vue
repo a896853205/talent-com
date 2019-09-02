@@ -10,10 +10,9 @@
 			<div class="input-box">
 				<div class="input-box-cascader"
 					v-for="(item, index) in form"
-					:key="item.id"
-					:name="item['人员类别']">
+					:key="item.id">
 					<CascaderWithInputWithLabel
-						:initObj="item[label]"
+						:initObj="item.value"
 						style="width:300px;margin-right: 30px"
 						:data="cateData"
 						@cascader='getCascaderData'
@@ -83,12 +82,13 @@
 			initValue: Array,
 			label: String,
 			cateData: Array,
+			index: Number,
 		},
 		data() {
 			return {
 				form: [{
 					id: 0,
-					[this.label]: {}
+					value: {}
 				}],
 				gangWeiLeiBie: [],
 				num: 1
@@ -103,7 +103,7 @@
 
 				this.$data.form.push({
 					id: num,
-					[this.label]: {}
+					value: {}
 				})
 			},
 			delHandle(index) {
@@ -114,11 +114,10 @@
 				this.$data.form.splice(cur_index, 1)
 			},
 			getCascaderData ({ obj, index }) {
-				this.$data.form[index][this.label] = obj;
+				this.$data.form[index].value = obj;
 			}
 		},
 		created() {
-			console.log('cateData', this.cateData);
 			// // 这里判断四类类别
 			// // 机关,社会团体,事业单位,剩下全部
 			// switch (this.$store.state.form._basic['单位性质'].value) {
@@ -136,14 +135,11 @@
 			// }
 			if (this.initValue) {
 				for (let i = 0; i < this.initValue.length; i++) {
-					this.$data.form[i][this.label] = this.initValue[i];
-
-					if (i < this.initValue.length - 1) {
-						this.addHandle()
-					}
+					this.$data.form[i].value = this.initValue[i];
 				}
+			} else {
+				this.addHandle();
 			}
-			
 		},
 		watch: {
 			form: {
@@ -151,12 +147,13 @@
 					let emitArray = [];
 
 					for (var item of this.$data.form) {
-						emitArray.push(item[this.label])
+						emitArray.push(item.value)
 					}
 
 					this.$emit('station', {
 						value: emitArray,
-						key: this.label
+						label: this.label,
+						index: this.index,
 					});
 				},
 				deep: true

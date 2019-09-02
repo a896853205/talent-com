@@ -7,7 +7,6 @@
 					@input-number='changeEvent' 
 					:initValue="summary[0].value" />
 			</i-col>
-
 			<i-col 
 				v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')"
 				span='4'>
@@ -24,6 +23,16 @@
 					@select='changeEvent'
 					:initValue="summary[0].children.value"
 					:list='summary[0].children.list' />
+			</i-col>
+			<i-col 
+				span='4'
+				v-for="(it, i) in summaryDetailTotalNum"
+				:key="i"
+				:class="{ 'none': !(it.prop === summary[0].children.value) }">
+				<InputNumberWithLabel 
+					:label='it.label'
+					@input-number='changeEvent'
+					:initValue="it.value" />
 			</i-col>
 		</Row>
 
@@ -55,19 +64,18 @@
 						</i-col>
 					</div>
 				</div>
+				<div v-else>
+					<i-col>
+						<GangWeiLeiBie
+							:label='item.label'
+							:initValue="item.value"
+							:cateData='item.data'
+							:index='index'
+							@station='changeEvent'/>
+					</i-col>
+				</div>
 			</Row>
-			
 		</div>
-		<Row v-if="summary[0].children.children[4]">
-			<i-col>
-				<GangWeiLeiBie
-					label='人员类别'
-					:initValue="summary[0].children.children[4].value"
-					:cateData='summary[0].children.children[4].data'
-					@station='changeEvent'/>
-			</i-col>
-		</Row>
-				
 			<!-- 这里放一个select -->
 			
 
@@ -104,6 +112,7 @@
 	.summary-box {
 		overflow: auto;
 		overflow-x: hidden;
+		min-height: 100vh;
 	}
 
 	.box {
@@ -153,6 +162,10 @@
 			// 选出正确的详细信息
 			summaryDetail () {
 				return this.summary[0].children.children;
+			},
+
+			summaryDetailTotalNum () {
+				return this.summary[0].children.inputChildren;
 			},
 
 			unitType () {

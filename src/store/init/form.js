@@ -57,7 +57,7 @@ const info_salary = {
 
 const info_people = [{
   "cas": [],
-  "num": undefined
+  "num": 0
 }]
 
 const summary_info = {
@@ -76,10 +76,12 @@ export const summaryInfo = [{
   type: 'number',
   children: {
     label: '人员类别',
-    value: undefined, 
-    type: 'selectInput', 
+    value: undefined,
+    type: 'selectInput',
     list: [],
+    // 存所有下面的input框的数组
     children: [],
+    inputChildren: [],
   }
 }, {
   label: '当年年度产值（万元）',

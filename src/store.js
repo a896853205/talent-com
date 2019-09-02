@@ -16,7 +16,8 @@ import {
   ENTERPRISE_ONE_LEVEL,
   SOCIETY_ONE_LEVEL,
   JOB_ONE_LEVEL,
-  SUMMARY_ITEM
+  SUMMARY_ITEM,
+  SUMMARY_PERSON_CATEGORY
 } from './assets/category/summary';
 
 function getStationCategory (state) {
@@ -98,8 +99,11 @@ export default new Vuex.Store({
               // 输入数据
               OFFICE_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
+                let summaryPersonCategory = objectHelper.deepCopy(SUMMARY_PERSON_CATEGORY);
                 summaryItem.prop = oneLevelItem.label;
+                summaryPersonCategory.prop = oneLevelItem.label;
                 state.form._summary[i].info[0].children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.inputChildren.push(summaryPersonCategory);
               })
             });
             
@@ -116,8 +120,11 @@ export default new Vuex.Store({
               // 输入数据
               SOCIETY_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
+                let summaryPersonCategory = objectHelper.deepCopy(SUMMARY_PERSON_CATEGORY);
                 summaryItem.prop = oneLevelItem.label;
+                summaryPersonCategory.prop = oneLevelItem.label;
                 state.form._summary[i].info[0].children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.inputChildren.push(summaryPersonCategory);
               })
             });
 
@@ -134,8 +141,11 @@ export default new Vuex.Store({
               // 输入数据
               JOB_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
+                let summaryPersonCategory = objectHelper.deepCopy(SUMMARY_PERSON_CATEGORY);
                 summaryItem.prop = oneLevelItem.label;
+                summaryPersonCategory.prop = oneLevelItem.label;
                 state.form._summary[i].info[0].children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.inputChildren.push(summaryPersonCategory);
               })
             });
 
@@ -153,13 +163,15 @@ export default new Vuex.Store({
               // 输入数据
               ENTERPRISE_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
+                let summaryPersonCategory = objectHelper.deepCopy(SUMMARY_PERSON_CATEGORY);
                 summaryItem.prop = oneLevelItem.label;
+                summaryPersonCategory.prop = oneLevelItem.label;
                 state.form._summary[i].info[0].children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.inputChildren.push(summaryPersonCategory);
               })
             });
         }
       }
-      console.log(state.form);
     },
 
     setSummery(state, { value, year, index, propIndex, label }) {
@@ -191,7 +203,7 @@ export default new Vuex.Store({
             if(item.label === '单位性质') {
               switch (item.value) {
                 case '机关':
-                  debugger;
+                  
                   cate = jobCategoryJiGuan;
                   break;
                 case '社会团体':
@@ -211,14 +223,16 @@ export default new Vuex.Store({
           })
 
           cate.forEach(eachCategory => {
-            debugger;
             if (eachCategory.value === oneYearInfo[0].children.value) {
               // 这里把人员类别的位置写死了
               // 如果调整了单位人才情况汇总需要调整这里
-              
-              oneYearInfo[0].children.children[4].data = eachCategory.children;
-              console.log(oneYearInfo[0].children.children);
-              debugger;
+              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
+                if( everyCategoryObj.prop === eachCategory.value) {
+                  oneYearInfo[0].children.children[everyCategoryIndex];
+                  debugger;
+                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
+                }
+              });
             }
           });
 
@@ -232,6 +246,7 @@ export default new Vuex.Store({
             if (subItem.prop === oneYearInfo[0].children.value) {
               if (index && !propIndex) {
                 oneYearInfo[0].children.children[_index].children[index].value = value;
+                debugger;
               } else if (index && propIndex) {
                 oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
               }
@@ -240,7 +255,7 @@ export default new Vuex.Store({
         }
       }
       
-      console.log('setSummery', state.form._summary[0].info);
+      console.log('第一年的summary', state.form._summary[0].info);
     },
     setSummeryIn(state, { value, key, year, subKey }) {
       if (year) {
@@ -356,12 +371,12 @@ export default new Vuex.Store({
     unit: state => {
       let unit = '';
 
-      if (state.form._basic['单位性质']) {
-        unit = state.form._basic['单位性质'].value;
+      if (state.form._basic[4]) {
+        unit = state.form._basic[4].value;
       }
 
       return unit;
-    },
+    }
   },
   actions: {}
 })

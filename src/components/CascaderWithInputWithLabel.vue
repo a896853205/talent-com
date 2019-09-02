@@ -34,22 +34,28 @@
 		},
 		data() {
 			return {
-				model1: '',
 				value1: [],
-				value2: null,
+				value2: 0,
 				vb: true,
 			}
 		},
 		mounted() {
-			let temp = this.$props.initObj
-			if (JSON.stringify(this.$props.initObj) != "{}" && this.$props.initObj !== null) {
+
+			if (JSON.stringify(this.$props.initObj) !== "{}" && this.$props.initObj !== null) {
+				
 				if (this.$props.initObj.cas === null || this.$props.initObj.cas === undefined) {
 					this.$data.value1 = []
 				} else {
 					this.$data.value1 = this.$props.initObj.cas
 				}
-				this.$data.value2 = this.$props.initObj.num
+
+				if (!this.$props.initObj.num) {
+					this.$data.value2 = 0;
+				} else {
+					this.$data.value2 = this.$props.initObj.num
+				}
 			}
+
 			this.emit(this);
 		},
 		methods: {
@@ -57,16 +63,18 @@
 				this.$data.value1 = value;
 				this.$options.methods.emit(this);
 			},
+
 			inputEvent(value) {
 				this.$data.value2 = value;
 				this.$options.methods.emit(this);
 			},
+
 			emit(_this) {
-				console.log(_this.$data.value1);
 				let obj = {
 					cas: _this.$data.value1,
 					num: _this.$data.value2
 				}
+				debugger;
 				_this.$emit('cascader', { obj, key: _this.label, index: _this.index })
 			}
 		}

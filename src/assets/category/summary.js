@@ -116,8 +116,14 @@ export const SUMMARY_ITEM = {
     label: '薪酬（元/月）',
     children: info_salary,
   }, {
-    label: '人员类别',
+    label: '子人员类别',
     value: info_people,
     special: true
   }]
+}
+
+export const SUMMARY_PERSON_CATEGORY = {
+  label: '当前类别人数',
+  value: 0,
+  type: 'number',
 }

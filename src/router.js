@@ -27,7 +27,6 @@ import NeedWai from '@/views/NeedWai.vue'
 import AdminIndex from './views/admin/AdminIndex.vue'
 import AddUser from './views/admin/AddUser.vue'
 import SubmitStatus from './views/admin/SubmitStatus.vue'
-import MangerUser from './views/admin/MangerUser.vue'
 import AdminChangePassword from './views/admin/ChangePassword.vue'
 import AdminLogin from './views/admin/Login.vue'
 
@@ -77,14 +76,6 @@ export default new Router({
           component: SubmitStatus,
           meta: {
             title: '审核提交'
-          }
-        },
-        {
-          path: '/admin/mangerUser',
-          name: 'mangerUser',
-          component: MangerUser,
-          meta: {
-            title: '账号管理'
           }
         },
         {

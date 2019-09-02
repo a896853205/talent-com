@@ -1,86 +1,57 @@
 <template>
-    <div class="container">
-        <div class="addUser-box">
-            <div class="box-item">
-                <div class="title">单位名称：</div>
-                <div>
-                    <Input v-model="cdata['单位名称']" placeholder="请输入想要生成账户的单位名称" style="width: 300px"/>
-                </div>
-            </div>
-            <div class="box-item">
-                <div class="title">单位性质：</div>
-                <div>
-                    <Select v-model="cdata['单位性质']" style="width:200px">
-                        <Option v-for="item in danWeiXingZhi" :value="item.value" :key="item.value">{{ item.label }}
-                        </Option>
-                    </Select>
-                </div>
-            </div>
-            <div class="box-item">
-                <div class="title">权限设置：</div>
-                <div>
-                    <Select v-model="cdata['权限']" style="width:200px">
-                        <Option v-for="item in qunxian" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                    </Select>
-                </div>
-            </div>
-            <div class="box-item">
-                <Button type="primary" @click="generateAccount">生成用户名和密码</Button>
-            </div>
-        </div>
-    </div>
+  <div class="addUser">
+    <Row type="flex" align="center" class-name="row">
+      <i-col span="2" class-name="label">单位名称：</i-col>
+      <i-col span="6" class-name="labelInput">
+        <Input v-model="companyName" placeholder="请输入单位名称" />
+      </i-col>
+    </Row>
+    <Row type="flex" align="center" class-name="row">
+      <i-col span="2" class-name="label">用户权限：</i-col>
+      <i-col span="6" class-name="labelInput">
+        <CheckboxGroup v-model="authority">
+          <Checkbox size="large" label="分配用户权限"></Checkbox>
+          <Checkbox size="large" label="填报权限"></Checkbox>
+        </CheckboxGroup>
+      </i-col>
+    </Row>
+    <Row type="flex" align="center" class-name="row">
+      <i-col span="8" class-name="label">
+        <Button type="primary" long @click="addUserHandle">生成用户名和密码</Button>
+      </i-col>
+    </Row>
+  </div>
 </template>
+
 <style scoped>
-    .container {
-        padding: 30px;
-    }
-
-    .box-item {
-        display: flex;
-        padding: 10px 0;
-    }
-
-    .title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 16px;
-        font-weight: bolder;
-        margin-right: 10px;
-    }
+.row {
+  margin-bottom: 10px;
+}
+.addUser {
+  padding: 100px;
+}
+.label,
+.labelInput {
+  height: 32px;
+  line-height: 32px;
+  font-size: 16px;
+}
 </style>
 
 <script>
-    import { danWeiXingZhi, qunxian } from '../../assets/category'
-
-    export default {
-        data() {
-            return {
-                cdata: {
-                    '单位名称': null,
-                    '单位性质':null,
-                    '权限':null,
-                },
-                danWeiXingZhi: [],
-                qunxian: [],
-            }
-        },
-        methods: {
-            generateAccount() {
-                this.$message({
-                    message: '生成成功',
-                    type: 'success'
-                });
-            },
-            genRandom(length) {
-                return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
-            },
-        },
-        created() {
-            let danWeiXingZhi = danWeiXingZhi;
-            let qunxian = qunxian;
-            this.$data.danWeiXingZhi = danWeiXingZhi
-            this.$data.qunxian = qunxian
-        }
+export default {
+  data() {
+    return {
+      companyName: "",
+      authority: []
+    };
+  },
+  methods: {
+    addUserHandle() {
+      this.$Modal.success({
+        title: "生成成功"
+      });
     }
+  }
+};
 </script>

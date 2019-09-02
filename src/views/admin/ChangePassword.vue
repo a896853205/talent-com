@@ -1,78 +1,59 @@
 <template>
-    <div class="container">
-        <div class="chang-box">
-            <div class="item">
-                <div class="label">
-                    老密码：
-                </div>
-                <div class="input">
-                    <Input v-model="cdata['老密码']"  placeholder="请输入老密码" style="width: 300px"/>
-                </div>
-            </div>
-            <div class="item">
-                <div class="label">
-                    新密码：
-                </div>
-                <div class="input">
-                    <Input v-model="cdata['新密码']" placeholder="请输入新密码" style="width: 300px"/>
-                </div>
-            </div>
-            <div class="item">
-                <div class="label">
-                    确认密码：
-                </div>
-                <div class="input">
-                    <Input v-model="cdata['确认密码']" placeholder="请再输一次新密码" style="width: 300px"/>
-                </div>
-            </div>
-            <div class="item">
-                <div class="btn">
-                    <Button type="primary" @click="change">修改</Button>
-                </div>
-            </div>
-
-        </div>
-    </div>
+  <div class="changePassword">
+    <Row type="flex" align="center" class-name="row">
+      <i-col span="2" class-name="label">旧密码：</i-col>
+      <i-col span="6" class-name="labelInput">
+        <Input v-model="currentPassword" placeholder="请输入当前密码" />
+      </i-col>
+    </Row>
+    <Row type="flex" align="center" class-name="row">
+      <i-col span="2" class-name="label">新密码：</i-col>
+      <i-col span="6" class-name="labelInput">
+        <Input v-model="newPassword" placeholder="请输入新密码" />
+      </i-col>
+    </Row>
+    <Row type="flex" align="center" class-name="row">
+      <i-col span="2" class-name="label">重复新密码：</i-col>
+      <i-col span="6" class-name="labelInput">
+        <Input v-model="reNewPassword" placeholder="请再次输入新密码" />
+      </i-col>
+    </Row>
+    <Row type="flex" align="center" class-name="row">
+      <i-col span="8" class-name="label">
+        <Button type="primary" long @click="changeHandle">修改</Button>
+      </i-col>
+    </Row>
+  </div>
 </template>
+
 <style scoped>
-    .container {
-        padding: 30px;
-    }
-    .item {
-        display: flex;
-        margin-bottom: 10px;
-    }
-    .label {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-        font-weight: bolder;
-        width: 120px;
-    }
-    .btn {
-        margin-left: 15px;
-    }
+.changePassword {
+  padding: 100px;
+}
+.row {
+  margin-bottom: 10px;
+}
+.label,
+.labelInput {
+  height: 32px;
+  line-height: 32px;
+  font-size: 16px;
+}
 </style>
 
 <script>
-
-    export default {
-        data() {
-            return {
-                cdata: {},
-            }
-        },
-        methods: {
-            change(){
-                this.$message({
-                    message: '修改成功',
-                    type: 'success'
-                });
-            }
-        },
-        created(){
-
-        }
+export default {
+  data() {
+    return {
+      currentPassword: "",
+      newPassword: "",
+      reNewPassword: ""
+    };
+  },
+  methods: {
+    changeHandle() {
+      console.log("修改密码");
     }
+  }
+};
 </script>

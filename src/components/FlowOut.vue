@@ -1,104 +1,142 @@
 <template>
-  <div class="box">
-    <div class="box-item" v-for='(value, key) in noSpecialSumOut' :key='key'>
-			<Card class="card" :bordered="false" v-if="value.type === 'number' || !value.type">
-				<p slot="title">{{ key }}</p>
-				<div class="item-box" v-if="value.type === 'number'">
-					<InputNumberWithLabel 
-            :label='key'
-            @input-number='changeEvent'
-            :initValue="value.value" />
-				</div>
-				<div class="input-box" v-else-if="!value.type">
-					<InputNumberWithLabel 
-						v-for='(subValue, subKey) in value' 
-						:label='subKey'
-						:initValue="subValue.value"
-            :propKey='key'
-						:key="subKey"
-            @input-number='changeEvent' />
-				</div>
-			</Card>
-		</div>
-    <div className='box-item'>
-			<GangWeiLeiBie
-        label='人员类别'
-        :initValue="sumOut['人员类别'].value"
-        @station='changeEvent'
-         />
-		</div>
-    <div className='box-item'>
-      <Card class="card" :bordered="false">
-        <MultiSelectWithLabel 
-          label='离职原因（多选）'
-          :initValue="sumOut['离职原因（多选）'].value"
-          @checkBox='changeEvent'
-          :list="sumOut['离职原因（多选）'].list"
+  <div class="sum-out-box">
+    <Row :gutter="16">
+      <i-col span="4">
+        <InputNumberWithLabel
+          :label="sumOut[0].label"
+          @input-number="changeEvent"
+          :initValue="sumOut[0].value"
         />
-      </Card>
+      </i-col>
+    </Row>
+    <Row :gutter="16">
+      <i-col span="4">
+        <SelectWithLabel
+          :label="sumOut[0].children.label"
+          @select="changeEvent"
+          :initValue="sumOut[0].children.value"
+          :list="sumOut[0].children.list"
+        />
+      </i-col>
+      <i-col
+        span="4"
+        v-for="(it, i) in sumOutDetailTotalNum"
+        :key="i"
+        :class="{ 'none': !(it.prop === sumOut[0].children.value) }"
+      >
+        <InputNumberWithLabel :label="it.label" @input-number="changeEvent" :initValue="it.value" />
+      </i-col>
+    </Row>
+
+    <Divider />
+
+    <div
+      v-for="(it, i) in sumOutDetail"
+      :class="{ 'none': !(it.prop === sumOut[0].children.value)}"
+      :key="i"
+    >
+      <Row
+        v-for="(item, index) in it.children"
+        :key="index"
+        :gutter="16">
+        <div v-if="item.children">
+          <span class="input-combine-box-title">{{ item.label }}</span>
+          <div>
+            <i-col
+              span="4"
+              v-for="(opationItem, opationIndex) in item.children"
+              :key="opationIndex"
+            >
+              <InputNumberWithLabel
+                :label="opationItem.label"
+                :initValue="opationItem.value"
+                :propIndex="index"
+                :index="opationIndex"
+                @input-number="changeEvent"
+              />
+            </i-col>
+          </div>
+        </div>
+        <!-- 这里判断是类别岗位类型 -->
+        <div v-else-if="item.type === 'cate'">
+          <i-col>
+            <GangWeiLeiBie
+              :label="item.label"
+              :initValue="item.value"
+              :cateData="item.data"
+              :index="index"
+              @station="changeEvent"
+            />
+          </i-col>
+        </div>
+        <!-- 这里判断是多选类型 -->
+        <div v-else-if="item.type === 'checkBox'">
+          <i-col span=4>
+            <MultiSelectWithLabel 
+              :label='item.label'
+              :initValue="item.value"
+              @checkBox='changeEvent'
+              :index="index"
+              :list="item.list"
+            />
+          </i-col>
+        </div>
+      </Row>
     </div>
   </div>
 
 </template>
 <style scoped>
-.box {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 10px 100px 5px 100px;
+.sum-out-box {
+  overflow: auto;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-.box-item {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 0 20px 10px 0;
-}
-
-.input-box {
-  display: flex;
-}
-
-.card {
-  height: 125px;
-  box-sizing: border-box;
+.input-combine-box-title {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 8px;
+  font-weight: 700;
 }
 </style>
 <script>
 import InputNumberWithLabel from "../components/InputNumberWithLabel.vue";
 import GangWeiLeiBie from "../components/GangWeiLeiBie.vue";
 import MultiSelectWithLabel from '../components/until/MultiSelectWithLabel';
+import SelectWithLabel from "../components/SelectWithLabel";
 
 export default {
   props: ["year", 'commitFunction', 'sumOut'],
   components: {
     InputNumberWithLabel,
     GangWeiLeiBie,
-    MultiSelectWithLabel
+    MultiSelectWithLabel,
+    SelectWithLabel
   },
   data() {
     return {};
   },
   computed: {
-    noSpecialSumOut () {
-      let noSpecialSumOut = {};
-
-      for (let key in this.sumOut) {
-        if (!this.sumOut[key].special) {
-          noSpecialSumOut[key] = this.sumOut[key];
-        }
-      }
-
-      console.log('noSpecialSumOut', noSpecialSumOut);
-      return noSpecialSumOut;
+     // 选出正确的详细信息
+    sumOutDetail() {
+      return this.sumOut[0].children.children;
     },
 
-    gangWeiLeiBie() {
-      
-    }
+    sumOutDetailTotalNum() {
+      return this.sumOut[0].children.inputChildren;
+    },
   },
   methods: {
-    changeEvent ({ value, subKey, key }) {
-      this.$store.commit(this.commitFunction, { value, key, year: this.year, subKey });
+    changeEvent ({ value, index, propIndex, label }) {
+      this.$store.commit(this.commitFunction, {
+        value,
+        year: this.year,
+        index,
+        propIndex,
+        label
+      });
     },
   }
 };

@@ -5,8 +5,11 @@ import {
   info_salary,
   info_people,
 } from './basic-info';
+import {
+  liZhiYuanYin
+} from '../../assets/category/category';
 
-export const SUM_IN_ITEM = {
+export const SUM_OUT_ITEM = {
   prop: '',
   children: [{
     label: '性别结构',
@@ -23,11 +26,17 @@ export const SUM_IN_ITEM = {
   }, {
     label: '子人员类别',
     value: info_people,
-    special: true
+    special: true,
+    type: 'cate'
+  }, { 
+    label: '离职原因（多选）',
+    value: [],
+    type: 'checkBox',
+    list: liZhiYuanYin
   }]
 }
 
-export const SUM_IN_ITEM_PERSON_CATEGORY = {
+export const SUM_OUT_ITEM_PERSON_CATEGORY = {
   label: '当前类别人数',
   value: 0,
   type: 'number',

@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import {
   form_inserting,
   summaryInfo,
-  sumInInfo
+  sumInInfo,
+  sumOutInfo
 } from './store/init/form';
 import { objectHelper } from './util/object-helper';
 import {
@@ -29,6 +30,10 @@ import {
   SUM_IN_ITEM_PERSON_CATEGORY
 } from './store/init/sum-in';
 
+import {
+  SUM_OUT_ITEM,
+  SUM_OUT_ITEM_PERSON_CATEGORY
+} from './store/init/sum-out';
 
 function getStationCategory(state) {
 
@@ -139,6 +144,27 @@ export default new Vuex.Store({
               })
             });
 
+            // 一级菜单进行赋值
+            state.form._sum_out.forEach((item, i) => {
+              // 输入select框
+              state.form._sum_out[i].info[0].children.list = OFFICE_ONE_LEVEL;
+
+              // 清除数据
+              state.form._sum_out[i].info[0].children.children = [];
+              state.form._sum_out[i].info[0].children.value = undefined;
+              // 输入数据
+              OFFICE_ONE_LEVEL.forEach(oneLevelItem => {
+                let sumOutItem = objectHelper.deepCopy(SUM_OUT_ITEM);
+                let sumOutPersonCategory = objectHelper.deepCopy(SUM_OUT_ITEM_PERSON_CATEGORY);
+
+                sumOutItem.prop = oneLevelItem.label;
+                sumOutPersonCategory.prop = oneLevelItem.label;
+
+                state.form._sum_out[i].info[0].children.children.push(sumOutItem);
+                state.form._sum_out[i].info[0].children.inputChildren.push(sumOutPersonCategory);
+              })
+            });
+
             break;
           case '社会团体':
             // 一级菜单进行赋值
@@ -178,6 +204,27 @@ export default new Vuex.Store({
 
                 state.form._sum_in[i].info[0].children.children.push(sumInItem);
                 state.form._sum_in[i].info[0].children.inputChildren.push(sumInPersonCategory);
+              })
+            });
+
+            // 一级菜单进行赋值
+            state.form._sum_out.forEach((item, i) => {
+              // 输入select框
+              state.form._sum_out[i].info[0].children.list = OFFICE_ONE_LEVEL;
+
+              // 清除数据
+              state.form._sum_out[i].info[0].children.children = [];
+              state.form._sum_out[i].info[0].children.value = undefined;
+              // 输入数据
+              SOCIETY_ONE_LEVEL.forEach(oneLevelItem => {
+                let sumOutItem = objectHelper.deepCopy(SUM_OUT_ITEM);
+                let sumOutPersonCategory = objectHelper.deepCopy(SUM_OUT_ITEM_PERSON_CATEGORY);
+
+                sumOutItem.prop = oneLevelItem.label;
+                sumOutPersonCategory.prop = oneLevelItem.label;
+
+                state.form._sum_out[i].info[0].children.children.push(sumOutItem);
+                state.form._sum_out[i].info[0].children.inputChildren.push(sumOutPersonCategory);
               })
             });
 
@@ -262,6 +309,48 @@ export default new Vuex.Store({
                 state.form._sum_in_wai[i].info[0].children.inputChildren.push(sumInPersonCategory);
               })
             });
+
+            // 一级菜单进行赋值
+            state.form._sum_out_nei.forEach((item, i) => {
+              // 输入select框
+              state.form._sum_out_nei[i].info[0].children.list = OFFICE_ONE_LEVEL;
+
+              // 清除数据
+              state.form._sum_out_nei[i].info[0].children.children = [];
+              state.form._sum_out_nei[i].info[0].children.value = undefined;
+              // 输入数据
+              JOB_ONE_LEVEL.forEach(oneLevelItem => {
+                let sumOutItem = objectHelper.deepCopy(SUM_OUT_ITEM);
+                let sumOutPersonCategory = objectHelper.deepCopy(SUM_OUT_ITEM_PERSON_CATEGORY);
+
+                sumOutItem.prop = oneLevelItem.label;
+                sumOutPersonCategory.prop = oneLevelItem.label;
+
+                state.form._sum_out_nei[i].info[0].children.children.push(sumOutItem);
+                state.form._sum_out_nei[i].info[0].children.inputChildren.push(sumOutPersonCategory);
+              })
+            });
+
+            // 一级菜单进行赋值
+            state.form._sum_out_wai.forEach((item, i) => {
+              // 输入select框
+              state.form._sum_out_wai[i].info[0].children.list = OFFICE_ONE_LEVEL;
+
+              // 清除数据
+              state.form._sum_out_wai[i].info[0].children.children = [];
+              state.form._sum_out_wai[i].info[0].children.value = undefined;
+              // 输入数据
+              JOB_ONE_LEVEL.forEach(oneLevelItem => {
+                let sumOutItem = objectHelper.deepCopy(SUM_OUT_ITEM);
+                let sumOutPersonCategory = objectHelper.deepCopy(SUM_OUT_ITEM_PERSON_CATEGORY);
+
+                sumOutItem.prop = oneLevelItem.label;
+                sumOutPersonCategory.prop = oneLevelItem.label;
+
+                state.form._sum_out_wai[i].info[0].children.children.push(sumOutItem);
+                state.form._sum_out_wai[i].info[0].children.inputChildren.push(sumOutPersonCategory);
+              })
+            });
             debugger;
             break;
           default:
@@ -301,6 +390,27 @@ export default new Vuex.Store({
                 summaryPersonCategory.prop = oneLevelItem.label;
                 state.form._sum_in[i].info[0].children.children.push(summaryItem);
                 state.form._sum_in[i].info[0].children.inputChildren.push(summaryPersonCategory);
+              })
+            });
+
+            // 一级菜单进行赋值
+            state.form._sum_out.forEach((item, i) => {
+              // 输入select框
+              state.form._sum_out[i].info[0].children.list = OFFICE_ONE_LEVEL;
+
+              // 清除数据
+              state.form._sum_out[i].info[0].children.children = [];
+              state.form._sum_out[i].info[0].children.value = undefined;
+              // 输入数据
+              ENTERPRISE_ONE_LEVEL.forEach(oneLevelItem => {
+                let sumOutItem = objectHelper.deepCopy(SUM_OUT_ITEM);
+                let sumOutPersonCategory = objectHelper.deepCopy(SUM_OUT_ITEM_PERSON_CATEGORY);
+
+                sumOutItem.prop = oneLevelItem.label;
+                sumOutPersonCategory.prop = oneLevelItem.label;
+
+                state.form._sum_out[i].info[0].children.children.push(sumOutItem);
+                state.form._sum_out[i].info[0].children.inputChildren.push(sumOutPersonCategory);
               })
             });
         }
@@ -618,7 +728,6 @@ export default new Vuex.Store({
             if (subItem.prop === oneYearInfo[0].children.value) {
               if (index && !propIndex) {
                 oneYearInfo[0].children.children[_index].children[index].value = value;
-                debugger;
               } else if (index && propIndex) {
                 oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
               }
@@ -781,36 +890,228 @@ export default new Vuex.Store({
         }
       }
     },
-    setFlowOut(state, { value, key, year, subKey }) {
+    setFlowOut(state, { value, year, index, propIndex, label }) {
+      // 判断赋值是否完成
+      let correct = false;
       if (year) {
         let oneYearInfo = state.form._sum_out.find(value => (value.year === year)).info
+        
+        // 对象的一级结构
+        if (sumOutInfo[0].label === label) {
+          oneYearInfo[0].value = value;
+          correct = true;
+        }
 
-        if (key && !subKey) {
-          oneYearInfo[key].value = value;
-        } else if (key && subKey) {
-          oneYearInfo[key][subKey].value = value;
+        // 对象的二级结构
+        if (sumOutInfo[0].children.label === label) {
+          oneYearInfo[0].children.value = value;
+
+          // 设置下面的人员类别二级菜单
+          let cate = [];
+          state.form._basic.forEach(item => {
+
+            if (item.label === '单位性质') {
+              switch (item.value) {
+                case '机关':
+
+                  cate = jobCategoryJiGuan;
+                  break;
+                case '社会团体':
+
+                  cate = jobCategorySocial;
+                  break;
+                case '事业单位':
+
+                  cate = jobCategoryCareer;
+                  break;
+                default:
+
+                  cate = jobCategoryQiYe;
+                  break;
+              }
+            }
+          })
+
+          cate.forEach(eachCategory => {
+            if (eachCategory.value === oneYearInfo[0].children.value) {
+
+              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
+                if (everyCategoryObj.prop === eachCategory.value) {
+                  oneYearInfo[0].children.children[everyCategoryIndex];
+
+                  // 这里把人员类别的位置写死了
+                  // 如果调整了单位人才情况汇总需要调整这里
+                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
+                }
+              });
+            }
+          });
+
+          correct = true;
+        }
+
+        // 对象的三级结构
+        if (!correct) {
+          // 找到第三级对应的对象
+          oneYearInfo[0].children.children.forEach((subItem, _index) => {
+            if (subItem.prop === oneYearInfo[0].children.value) {
+              if (index && !propIndex) {
+                oneYearInfo[0].children.children[_index].children[index].value = value;
+              } else if (index && propIndex) {
+                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
+              }
+            }
+          });
         }
       }
     },
-    setFlowOutInner(state, { value, key, year, subKey }) {
+    setFlowOutInner(state, { value, year, index, propIndex, label }) {
+      // 判断赋值是否完成
+      let correct = false;
       if (year) {
         let oneYearInfo = state.form._sum_out_nei.find(value => (value.year === year)).info
+        
+        // 对象的一级结构
+        if (sumOutInfo[0].label === label) {
+          oneYearInfo[0].value = value;
+          correct = true;
+        }
 
-        if (key && !subKey) {
-          oneYearInfo[key].value = value;
-        } else if (key && subKey) {
-          oneYearInfo[key][subKey].value = value;
+        // 对象的二级结构
+        if (sumOutInfo[0].children.label === label) {
+          oneYearInfo[0].children.value = value;
+
+          // 设置下面的人员类别二级菜单
+          let cate = [];
+          state.form._basic.forEach(item => {
+
+            if (item.label === '单位性质') {
+              switch (item.value) {
+                case '机关':
+
+                  cate = jobCategoryJiGuan;
+                  break;
+                case '社会团体':
+
+                  cate = jobCategorySocial;
+                  break;
+                case '事业单位':
+
+                  cate = jobCategoryCareer;
+                  break;
+                default:
+
+                  cate = jobCategoryQiYe;
+                  break;
+              }
+            }
+          })
+
+          cate.forEach(eachCategory => {
+            if (eachCategory.value === oneYearInfo[0].children.value) {
+
+              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
+                if (everyCategoryObj.prop === eachCategory.value) {
+                  oneYearInfo[0].children.children[everyCategoryIndex];
+
+                  // 这里把人员类别的位置写死了
+                  // 如果调整了单位人才情况汇总需要调整这里
+                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
+                }
+              });
+            }
+          });
+
+          correct = true;
+        }
+
+        // 对象的三级结构
+        if (!correct) {
+          // 找到第三级对应的对象
+          oneYearInfo[0].children.children.forEach((subItem, _index) => {
+            if (subItem.prop === oneYearInfo[0].children.value) {
+              if (index && !propIndex) {
+                oneYearInfo[0].children.children[_index].children[index].value = value;
+              } else if (index && propIndex) {
+                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
+              }
+            }
+          });
         }
       }
     },
-    setFlowOutOutter(state, { value, key, year, subKey }) {
+    setFlowOutOutter(state, { value, year, index, propIndex, label }) {
+      // 判断赋值是否完成
+      let correct = false;
       if (year) {
         let oneYearInfo = state.form._sum_out_wai.find(value => (value.year === year)).info
+        
+        // 对象的一级结构
+        if (sumOutInfo[0].label === label) {
+          oneYearInfo[0].value = value;
+          correct = true;
+        }
 
-        if (key && !subKey) {
-          oneYearInfo[key].value = value;
-        } else if (key && subKey) {
-          oneYearInfo[key][subKey].value = value;
+        // 对象的二级结构
+        if (sumOutInfo[0].children.label === label) {
+          oneYearInfo[0].children.value = value;
+
+          // 设置下面的人员类别二级菜单
+          let cate = [];
+          state.form._basic.forEach(item => {
+
+            if (item.label === '单位性质') {
+              switch (item.value) {
+                case '机关':
+
+                  cate = jobCategoryJiGuan;
+                  break;
+                case '社会团体':
+
+                  cate = jobCategorySocial;
+                  break;
+                case '事业单位':
+
+                  cate = jobCategoryCareer;
+                  break;
+                default:
+
+                  cate = jobCategoryQiYe;
+                  break;
+              }
+            }
+          })
+
+          cate.forEach(eachCategory => {
+            if (eachCategory.value === oneYearInfo[0].children.value) {
+
+              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
+                if (everyCategoryObj.prop === eachCategory.value) {
+                  oneYearInfo[0].children.children[everyCategoryIndex];
+
+                  // 这里把人员类别的位置写死了
+                  // 如果调整了单位人才情况汇总需要调整这里
+                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
+                }
+              });
+            }
+          });
+
+          correct = true;
+        }
+
+        // 对象的三级结构
+        if (!correct) {
+          // 找到第三级对应的对象
+          oneYearInfo[0].children.children.forEach((subItem, _index) => {
+            if (subItem.prop === oneYearInfo[0].children.value) {
+              if (index && !propIndex) {
+                oneYearInfo[0].children.children[_index].children[index].value = value;
+              } else if (index && propIndex) {
+                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
+              }
+            }
+          });
         }
       }
     },

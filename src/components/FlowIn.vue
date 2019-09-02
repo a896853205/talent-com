@@ -108,10 +108,6 @@ export default {
     sumInDetailTotalNum() {
       return this.sumIn[0].children.inputChildren;
     },
-
-    unitType() {
-      return this.$store.getters.unit;
-    }
   },
   methods: {
     changeEvent({ value, index, propIndex, label }) {

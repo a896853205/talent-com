@@ -94,14 +94,20 @@ export const sumInInfo = [{
   }
 }]
 
-const sum_in_info = {
-  "流入人数": { value: 0, type: 'number' },
-  "性别结构": info_gender,
-  "年龄结构": info_age,
-  "学历结构": info_degree,
-  "薪酬（元/月）": info_salary,
-  "人员类别": { value: info_people, special: true },
-}
+export const sumOutInfo = [{
+  label: '流出人数',
+  value: 0,
+  type: 'number',
+  children: {
+    label: '人员类别',
+    value: undefined,
+    type: 'selectInput',
+    list: [],
+    // 存所有input框的数组
+    children: [],
+    inputChildren: [],
+  }
+}]
 
 const sum_out_info = {
   "流出人数": { value: 0, type: 'number' },
@@ -191,9 +197,9 @@ export const form_inserting = {
   _sum_in: initEveryYear(2009, 2018, sumInInfo),
   _sum_in_nei: initEveryYear(2009, 2018, sumInInfo),
   _sum_in_wai: initEveryYear(2009, 2018, sumInInfo),
-  _sum_out: initEveryYear(2009, 2018, sum_out_info),
-  _sum_out_nei: initEveryYear(2009, 2018, sum_out_info),
-  _sum_out_wai: initEveryYear(2009, 2018, sum_out_info),
+  _sum_out: initEveryYear(2009, 2018, sumOutInfo),
+  _sum_out_nei: initEveryYear(2009, 2018, sumOutInfo),
+  _sum_out_wai: initEveryYear(2009, 2018, sumOutInfo),
   _out_status: [{
     "id": 0,
     "info": outStatusInfo

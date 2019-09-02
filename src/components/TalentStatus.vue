@@ -1,20 +1,29 @@
 <template>
 	<div class='summary-box'>
-		<Row>
+		<Row :gutter='16'>
 			<i-col span='4'>
 				<InputNumberWithLabel 
-					:label='summary.label'
+					:label='summary[0].label'
 					@input-number='changeEvent' 
-					:initValue="summary.value" />
+					:initValue="summary[0].value" />
+			</i-col>
+
+			<i-col 
+				v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')"
+				span='4'>
+				<InputNumberWithLabel
+					:label='summary[1].label'
+					:initValue='summary[1].value'
+					@input-number='changeEvent' />
 			</i-col>
 		</Row>
-		<Row>
+		<Row :gutter='16'>
 			<i-col span='4'>
 				<SelectWithLabel 
-					:label='summary.children.label'
+					:label='summary[0].children.label'
 					@select='changeEvent'
-					:initValue="summary.children.value"
-					:list='summary.children.list' />
+					:initValue="summary[0].children.value"
+					:list='summary[0].children.list' />
 			</i-col>
 		</Row>
 
@@ -22,7 +31,7 @@
 
 		<div
 			v-for="(it, i) in summaryDetail"
-			:class="{ 'none': !(it.prop === summary.children.value) }"
+			:class="{ 'none': !(it.prop === summary[0].children.value) }"
 			:key='i'>
 			<Row
 				v-for="(item, index) in it.children"
@@ -49,12 +58,12 @@
 			</Row>
 			
 		</div>
-		<Row>
+		<Row v-if="summary[0].children.children[4]">
 			<i-col>
 				<GangWeiLeiBie
 					label='人员类别'
-					:initValue="summary.children.children[4].value"
-					:cateData='summary.children.children[4].data'
+					:initValue="summary[0].children.children[4].value"
+					:cateData='summary[0].children.children[4].data'
 					@station='changeEvent'/>
 			</i-col>
 		</Row>
@@ -77,15 +86,13 @@
 
 			<div v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')"
 				class="box-item">
-				<Card class="card" :bordered="false">
-					<p slot="title">当年年度产值（万元）</p>
-					<div class="item-box">
-						<InputNumberWithLabel
-							label='当年年度产值（万元）'
-							:initValue="summary['当年年度产值（万元）'].value"
-							@input-number='changeEvent' />
-					</div>
-				</Card>
+				<p slot="title">当年年度产值（万元）</p>
+				<div class="item-box">
+					<InputNumberWithLabel
+						label='当年年度产值（万元）'
+						:initValue="summary['当年年度产值（万元）'].value"
+						@input-number='changeEvent' />
+				</div>
 			</div>
 			
 			<div className='box-item'>
@@ -143,24 +150,13 @@
 			}
 		},
 		computed: {
-			// noSpecialSummary () {
-			// 	let noSpecialSummary = {};
-
-			// 	for (let key in this.summary) {
-			// 		if (!this.summary[key].special) {
-			// 			noSpecialSummary[key] = this.summary[key];
-			// 		}
-			// 	}
-
-			// 	return noSpecialSummary;
-			// },
 			// 选出正确的详细信息
 			summaryDetail () {
-				return this.summary.children.children;
+				return this.summary[0].children.children;
 			},
 
 			unitType () {
-				return this.$store.state.form._basic['单位性质'].value;
+				return this.$store.getters.unit;
 			}
 		}
 	}

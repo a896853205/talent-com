@@ -90,16 +90,16 @@ export default new Vuex.Store({
             // 一级菜单进行赋值
             state.form._summary.forEach((item, i) => {
               // 输入select框
-              state.form._summary[i].info.children.list = OFFICE_ONE_LEVEL;
+              state.form._summary[i].info[0].children.list = OFFICE_ONE_LEVEL;
 
               // 清除数据
-              state.form._summary[i].info.children.children = [];
-              state.form._summary[i].info.children.value = undefined;
+              state.form._summary[i].info[0].children.children = [];
+              state.form._summary[i].info[0].children.value = undefined;
               // 输入数据
               OFFICE_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
                 summaryItem.prop = oneLevelItem.label;
-                state.form._summary[i].info.children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.children.push(summaryItem);
               })
             });
             
@@ -108,16 +108,16 @@ export default new Vuex.Store({
             // 一级菜单进行赋值
             state.form._summary.forEach((item, i) => {
               // 输入select框
-              state.form._summary[i].info.children.list = SOCIETY_ONE_LEVEL;
+              state.form._summary[i].info[0].children.list = SOCIETY_ONE_LEVEL;
 
               // 清除数据
-              state.form._summary[i].info.children.children = [];
-              state.form._summary[i].info.children.value = undefined;
+              state.form._summary[i].info[0].children.children = [];
+              state.form._summary[i].info[0].children.value = undefined;
               // 输入数据
               SOCIETY_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
                 summaryItem.prop = oneLevelItem.label;
-                state.form._summary[i].info.children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.children.push(summaryItem);
               })
             });
 
@@ -126,16 +126,16 @@ export default new Vuex.Store({
             // 一级菜单进行赋值
             state.form._summary.forEach((item, i) => {
               // 输入select框
-              state.form._summary[i].info.children.list = JOB_ONE_LEVEL;
+              state.form._summary[i].info[0].children.list = JOB_ONE_LEVEL;
 
               // 清除数据
-              state.form._summary[i].info.children.children = [];
-              state.form._summary[i].info.children.value = undefined;
+              state.form._summary[i].info[0].children.children = [];
+              state.form._summary[i].info[0].children.value = undefined;
               // 输入数据
               JOB_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
                 summaryItem.prop = oneLevelItem.label;
-                state.form._summary[i].info.children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.children.push(summaryItem);
               })
             });
 
@@ -145,16 +145,16 @@ export default new Vuex.Store({
             // 一级菜单进行赋值
             state.form._summary.forEach((item, i) => {
               // 输入select框
-              state.form._summary[i].info.children.list = ENTERPRISE_ONE_LEVEL;
+              state.form._summary[i].info[0].children.list = ENTERPRISE_ONE_LEVEL;
 
               // 清除数据
-              state.form._summary[i].info.children.children = [];
-              state.form._summary[i].info.children.value = undefined;
+              state.form._summary[i].info[0].children.children = [];
+              state.form._summary[i].info[0].children.value = undefined;
               // 输入数据
               ENTERPRISE_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
                 summaryItem.prop = oneLevelItem.label;
-                state.form._summary[i].info.children.children.push(summaryItem);
+                state.form._summary[i].info[0].children.children.push(summaryItem);
               })
             });
         }
@@ -170,14 +170,19 @@ export default new Vuex.Store({
         let oneYearInfo = state.form._summary.find(value => (value.year === year)).info
 
         // 对象的一级结构
-        if (summaryInfo.label === label) {
-          oneYearInfo.value = value;
+        if (summaryInfo[0].label === label) {
+          oneYearInfo[0].value = value;
+          correct = true;
+        }
+
+        if (summaryInfo[1].label === label) {
+          oneYearInfo[1].value = value;
           correct = true;
         }
 
         // 对象的二级结构
-        if (summaryInfo.children.label === label) {
-          oneYearInfo.children.value = value;
+        if (summaryInfo[0].children.label === label) {
+          oneYearInfo[0].children.value = value;
 
           // 设置下面的人员类别二级菜单
           let cate = [];
@@ -207,12 +212,12 @@ export default new Vuex.Store({
 
           cate.forEach(eachCategory => {
             debugger;
-            if (eachCategory.value === oneYearInfo.children.value) {
+            if (eachCategory.value === oneYearInfo[0].children.value) {
               // 这里把人员类别的位置写死了
               // 如果调整了单位人才情况汇总需要调整这里
               
-              oneYearInfo.children.children[4].data = eachCategory.children;
-              console.log(oneYearInfo.children.children);
+              oneYearInfo[0].children.children[4].data = eachCategory.children;
+              console.log(oneYearInfo[0].children.children);
               debugger;
             }
           });
@@ -223,12 +228,12 @@ export default new Vuex.Store({
         // 对象的三级结构
         if (!correct) {
           // 找到第三级对应的对象
-          oneYearInfo.children.children.forEach((subItem, _index) => {
-            if (subItem.prop === oneYearInfo.children.value) {
+          oneYearInfo[0].children.children.forEach((subItem, _index) => {
+            if (subItem.prop === oneYearInfo[0].children.value) {
               if (index && !propIndex) {
-                oneYearInfo.children.children[_index].children[index].value = value;
+                oneYearInfo[0].children.children[_index].children[index].value = value;
               } else if (index && propIndex) {
-                oneYearInfo.children.children[_index].children[index].children[propIndex].value = value;
+                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
               }
             }
           });

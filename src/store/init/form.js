@@ -70,7 +70,7 @@ const summary_info = {
   "当年年度产值（万元）": { value: 0, type: 'number', special: true }
 }
 
-export const summaryInfo = {
+export const summaryInfo = [{
   label: '职工人数',
   value: 0,
   type: 'number',
@@ -81,7 +81,12 @@ export const summaryInfo = {
     list: [],
     children: [],
   }
-}
+}, {
+  label: '当年年度产值（万元）',
+  value: 0,
+  type: 'number',
+}]
+
 
 const sum_in_info = {
   "流入人数": { value: 0, type: 'number' },

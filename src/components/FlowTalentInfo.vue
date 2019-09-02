@@ -126,13 +126,6 @@
 	import InputDateWithLabel from '../components/until/InputDateWithLabel.vue';
 
 	import { outStatusInfo } from '../store/init/form';
-	import { 
-		jobCategoryJiGuan, 
-		jobCategoryQiYe,
-		jobCategorySocial,
-		jobCategoryCareer
-	} from '../assets/category';
-
 
 	export default {
 		components: {

@@ -1,87 +1,128 @@
 <template>
-	<div class="box">
-		<div class="box-item" v-for='(value, key) in noSpecialSumIn' :key='key'>
-			<Card class="card" :bordered="false">
-				<p slot="title">{{ key }}</p>
-				<div class="item-box" v-if="value.type">
-					<InputNumberWithLabel
-						:label='key'
-						@input-number='changeEvent' 
-						:initValue="value.value" />
-				</div>
-				<div class="input-box" v-else>
-					<InputNumberWithLabel 
-						v-for='(subValue, subKey) in value' 
-						:label='subKey'
-						:initValue="subValue.value"
-						:propKey='key'
-						:key="subKey"
-						@input-number='changeEvent' />
-				</div>
-			</Card>
-		</div>
+  <div class="sum-in-box">
+    <Row :gutter="16">
+      <i-col span="4">
+        <InputNumberWithLabel
+          :label="sumIn[0].label"
+          @input-number="changeEvent"
+          :initValue="sumIn[0].value"
+        />
+      </i-col>
+    </Row>
+    <Row :gutter="16">
+      <i-col span="4">
+        <SelectWithLabel
+          :label="sumIn[0].children.label"
+          @select="changeEvent"
+          :initValue="sumIn[0].children.value"
+          :list="sumIn[0].children.list"
+        />
+      </i-col>
+      <i-col
+        span="4"
+        v-for="(it, i) in sumInDetailTotalNum"
+        :key="i"
+        :class="{ 'none': !(it.prop === sumIn[0].children.value) }"
+      >
+        <InputNumberWithLabel :label="it.label" @input-number="changeEvent" :initValue="it.value" />
+      </i-col>
+    </Row>
 
-		<div className='box-item'>
-			<GangWeiLeiBie 
-				label='人员类别'
-				:initValue="sumIn['人员类别'].value"
-				@station='changeEvent' />
-		</div>
-	</div>
+    <Divider />
+
+    <div
+      v-for="(it, i) in sumInDetail"
+      :class="{ 'none': !(it.prop === sumIn[0].children.value)}"
+      :key="i"
+    >
+      <Row v-for="(item, index) in it.children" :key="index" :gutter="16">
+        <div v-if="item.children">
+          <span class="input-combine-box-title">{{ item.label }}</span>
+          <div>
+            <i-col
+              span="4"
+              v-for="(opationItem, opationIndex) in item.children"
+              :key="opationIndex"
+            >
+              <InputNumberWithLabel
+                :label="opationItem.label"
+                :initValue="opationItem.value"
+                :propIndex="index"
+                :index="opationIndex"
+                @input-number="changeEvent"
+              />
+            </i-col>
+          </div>
+        </div>
+        <div v-else>
+          <i-col>
+            <GangWeiLeiBie
+              :label="item.label"
+              :initValue="item.value"
+              :cateData="item.data"
+              :index="index"
+              @station="changeEvent"
+            />
+          </i-col>
+        </div>
+      </Row>
+    </div>
+  </div>
 </template>
 <style scoped>
-	.box {
-		display: flex;
-		flex-wrap: wrap;
-		margin: 10px 100px 5px 100px;
-	}
+.sum-in-box {
+  overflow: auto;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
 
-	.box-item {
-		display: flex;
-		justify-content: center;
-		align-items: flex-start;
-		margin: 0 20px 10px 0;
-	}
-
-	.input-box {
-		display: flex;
-	}
-
-	.card {
-		height: 125px;
-		box-sizing: border-box;
-	}
+.input-combine-box-title {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 8px;
+  font-weight: 700;
+}
 </style>
 <script>
-	import InputNumberWithLabel from '../components/InputNumberWithLabel.vue';
-	import GangWeiLeiBie from '../components/GangWeiLeiBie.vue';
+import InputNumberWithLabel from "../components/InputNumberWithLabel.vue";
+import SelectWithLabel from "../components/SelectWithLabel";
+import GangWeiLeiBie from "../components/GangWeiLeiBie.vue";
 
-	export default {
-		props: ['year', 'commitFunction', 'sumIn'],
-		components: {
-			InputNumberWithLabel,
-			GangWeiLeiBie,
-		},
-		data() {
-			return {}
-		},
-		computed: {
-			noSpecialSumIn () {
-				let noSpecialSumIn = {};
+export default {
+  props: ["year", "commitFunction", "sumIn"],
+  components: {
+    InputNumberWithLabel,
+    GangWeiLeiBie,
+    SelectWithLabel
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    // 选出正确的详细信息
+    sumInDetail() {
+      return this.sumIn[0].children.children;
+    },
 
-				for (let key in this.sumIn) {
-					if (!this.sumIn[key].special) {
-						noSpecialSumIn[key] = this.sumIn[key];
-					}
-				}
+    sumInDetailTotalNum() {
+      return this.sumIn[0].children.inputChildren;
+    },
 
-				return noSpecialSumIn;
-			}
-		},
-		methods: {
-			changeEvent ({ value, subKey, key }) {
-				this.$store.commit(this.commitFunction, { value, key, year: this.year, subKey });
-			}
-		}
-	}
+    unitType() {
+      return this.$store.getters.unit;
+    }
+  },
+  methods: {
+    changeEvent({ value, index, propIndex, label }) {
+      this.$store.commit(this.commitFunction, {
+        value,
+        year: this.year,
+        index,
+        propIndex,
+        label
+      });
+    }
+  }
+};
 </script>

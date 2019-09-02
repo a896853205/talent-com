@@ -55,13 +55,10 @@
 	}
 
 	.add-box-title {
-		display: flex;
-		align-items: center;
-		height: 50px;
-		font-size: 14px;
-		color: #17233d;
+		display: block;
+		font-size: 20px;
+		margin-bottom: 10px;
 		font-weight: 700;
-		padding-left: 3px;
 	}
 
 	.add {

@@ -76,36 +76,6 @@
 				</div>
 			</Row>
 		</div>
-			<!-- 这里放一个select -->
-			
-
-
-			<!-- 这里放一个循环判断显示 -->
-
-
-			<!-- <Row>
-				<i-col span="12">
-					<InputNumberWithLabel
-						:label='summary.label'
-						@input-number='changeEvent' 
-						:initValue="summary.value" />
-				</i-col>
-			</Row>
-
-			<div v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')"
-				class="box-item">
-				<p slot="title">当年年度产值（万元）</p>
-				<div class="item-box">
-					<InputNumberWithLabel
-						label='当年年度产值（万元）'
-						:initValue="summary['当年年度产值（万元）'].value"
-						@input-number='changeEvent' />
-				</div>
-			</div>
-			
-			<div className='box-item'>
-				
-			</div> -->
 	</div>
 </template>
 <style scoped>
@@ -115,16 +85,6 @@
 		min-height: 100vh;
 	}
 
-	.box {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		margin: 10px 100px;
-	}
-
-	.input-box {
-		display: flex;
-	}
 	.input-combine-box-title {
 		display: block;
 		font-size: 20px;
@@ -153,8 +113,6 @@
 
 		methods: {
 			changeEvent ({ value, index, propIndex, label }) {
-				console.log(this.summary);
-				console.log(value, index, propIndex, label);
 				this.$store.commit(this.commitFunction, { value, year: this.year, index, propIndex, label });
 			}
 		},

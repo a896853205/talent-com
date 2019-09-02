@@ -68,13 +68,6 @@ import InputNumberWithLabel from "../components/InputNumberWithLabel.vue";
 import GangWeiLeiBie from "../components/GangWeiLeiBie.vue";
 import MultiSelectWithLabel from '../components/until/MultiSelectWithLabel';
 
-import { 
-  jobCategoryJiGuan, 
-  jobCategoryQiYe,
-  jobCategorySocial,
-  jobCategoryCareer
-} from '../assets/category';
-
 export default {
   props: ["year", 'commitFunction', 'sumOut'],
   components: {
@@ -100,16 +93,7 @@ export default {
     },
 
     gangWeiLeiBie() {
-      switch (this.$store.state.form._basic['单位性质'].value) {
-        case '机关':
-          return jobCategoryJiGuan;
-        case '社会团体':
-          return jobCategorySocial;
-        case '事业单位':
-          return jobCategoryCareer;
-        default:
-          return jobCategoryQiYe;
-      }
+      
     }
   },
   methods: {

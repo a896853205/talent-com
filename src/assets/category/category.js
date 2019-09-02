@@ -736,8 +736,6 @@ export const jobCategoryCareer = [
   }
 ]
 
-
-
 export const industryCategory = [
   {
     "label": "第一产业",

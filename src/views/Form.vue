@@ -551,7 +551,7 @@ export default {
     }
   },
   created() {
-    console.log('created');
+
     if (!this.$store.state.form._from_user) {
       this.$store.commit('setUserId', localStorage.getItem('userId'));
     }
@@ -571,18 +571,6 @@ export default {
       
       _this.$store.commit('setForm', form);
     });
-    // if (util.getCookies(this) === null) {
-    //   this.$router.push("/");
-    //   return;
-    // }
-    // if (!this.$store.state.loaded) {
-    //   this.$router.push("/loading");
-    // }
-    // if (this.$store.state.form._basic["单位名称"] === null) {
-    //   this.$data.companyName = util.getCookies(this).user_name;
-    // } else {
-    //   this.$data.companyName = this.$store.state.form._basic["单位名称"];
-    // }
   }
 };
 </script>

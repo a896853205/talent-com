@@ -118,18 +118,18 @@ export const personInfo = [
     type: 'input' 
   },
   { 
-    label: "年龄结构",
+    label: "年龄",
     value: undefined,
     type: 'select',
     list: nianLingJieGou 
   },
   {
-    label: '学历结构',
+    label: '学历',
     value: undefined,
     type: 'select',
     list: xueLiJieGou 
   },
-  { 
+  {
     label: '专业',
     value: undefined,
     type: 'cascader',

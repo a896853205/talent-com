@@ -57,7 +57,7 @@
             />
             <CascaderWithLabel
               v-if="item.type === 'cascaderSpecial'"
-              :initObj="item.value"
+              :initValue="item.value"
 							:label='item.label'
               :data="stationCategory"
               @cascader="getCascaderData"
@@ -174,13 +174,24 @@ export default {
   },
 
   beforeMount() {
-    this.$data.needArr = this.need;
-    this.$data.num = this.$data.needArr[this.$data.needArr.length - 1].id + 1;
+    // this.$data.needArr = this.need;
+    // this.$data.num = this.$data.needArr[this.$data.needArr.length - 1].id + 1;
   },
 
   computed: {
     stationCategory() {
       return this.$store.getters.stationCategory;
+    }
+  },
+
+  watch: {
+    need: {
+      handler: function(val, oldval) {
+        this.$data.needArr = val;
+    		this.$data.num = this.$data.needArr[this.$data.needArr.length - 1].id + 1;
+      },
+      immediate: true,
+      deep: true
     }
   }
 };

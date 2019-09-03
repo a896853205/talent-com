@@ -15,58 +15,53 @@
           :label="sumIn[0].children.label"
           @select="changeEvent"
           :initValue="sumIn[0].children.value"
-          :list="sumIn[0].children.list"
+          :list="oneLevelStationCategory"
         />
       </i-col>
-      <i-col
-        span="4"
-        v-for="(it, i) in sumInDetailTotalNum"
-        :key="i"
-        :class="{ 'none': !(it.prop === sumIn[0].children.value) }"
-      >
-        <InputNumberWithLabel :label="it.label" @input-number="changeEvent" :initValue="it.value" />
+      <i-col span="4" v-if="sumInInput">
+        <InputNumberWithLabel
+          :label="sumInInput.label"
+          @input-number="changeEvent"
+          :initValue="sumInInput.value"
+        />
       </i-col>
     </Row>
 
     <Divider />
 
-    <div
-      v-for="(it, i) in sumInDetail"
-      :class="{ 'none': !(it.prop === sumIn[0].children.value)}"
-      :key="i"
-    >
-      <Row v-for="(item, index) in it.children" :key="index" :gutter="16">
-        <div v-if="item.children">
-          <span class="input-combine-box-title">{{ item.label }}</span>
-          <div>
-            <i-col
-              span="4"
-              v-for="(opationItem, opationIndex) in item.children"
-              :key="opationIndex"
-            >
-              <InputNumberWithLabel
-                :label="opationItem.label"
-                :initValue="opationItem.value"
-                :propIndex="index"
-                :index="opationIndex"
-                @input-number="changeEvent"
-              />
-            </i-col>
-          </div>
-        </div>
-        <div v-else>
-          <i-col>
-            <GangWeiLeiBie
-              :label="item.label"
-              :initValue="item.value"
-              :cateData="item.data"
-              :index="index"
-              @station="changeEvent"
+    <Row
+      v-for="(item, index) in getSumInObjCombin"
+      :key="(sumIn[0].children.value + index)"
+      :gutter="16">
+      <div v-if="item.children">
+        <span class="input-combine-box-title">{{ item.label }}</span>
+        <div>
+          <i-col
+            span="4"
+            v-for="(opationItem, opationIndex) in item.children"
+            :key="opationIndex">
+            <InputNumberWithLabel
+              :label="opationItem.label"
+              :initValue="opationItem.value"
+              :propIndex="index"
+              :index="opationIndex"
+              @input-number="changeEvent"
             />
           </i-col>
         </div>
-      </Row>
-    </div>
+      </div>
+      <div v-else>
+        <i-col>
+          <GangWeiLeiBie
+            :label="item.label"
+            :initValue="item.value"
+            :cateData="twoLevelStationCategory"
+            :index="index"
+            @station="changeEvent"
+          />
+        </i-col>
+      </div>
+    </Row>
   </div>
 </template>
 <style scoped>
@@ -90,7 +85,14 @@ import SelectWithLabel from "../components/SelectWithLabel";
 import GangWeiLeiBie from "../components/GangWeiLeiBie.vue";
 
 export default {
-  props: ["year", "commitFunction", "sumIn"],
+  props: [
+    "year",
+    "commitFunction",
+    "sumIn",
+    "getSumInObjCombin",
+    "sumInInput",
+    "twoLevelStationCategory"
+  ],
   components: {
     InputNumberWithLabel,
     GangWeiLeiBie,
@@ -100,13 +102,8 @@ export default {
     return {};
   },
   computed: {
-    // 选出正确的详细信息
-    sumInDetail() {
-      return this.sumIn[0].children.children;
-    },
-
-    sumInDetailTotalNum() {
-      return this.sumIn[0].children.inputChildren;
+    oneLevelStationCategory() {
+      return this.$store.getters.oneLevelStationCategory;
     },
   },
   methods: {

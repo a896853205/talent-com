@@ -385,6 +385,7 @@ export default new Vuex.Store({
         initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
+
     setFlowIn(state, { value, year, index, propIndex, label }) {
 
       if (year) {
@@ -409,230 +410,29 @@ export default new Vuex.Store({
         initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
+
     setFlowOut(state, { value, year, index, propIndex, label }) {
-      // 判断赋值是否完成
-      let correct = false;
+
       if (year) {
         let oneYearInfo = state.form._sum_out.find(value => (value.year === year)).info
 
-        // 对象的一级结构
-        if (sumOutInfo[0].label === label) {
-          oneYearInfo[0].value = value;
-          correct = true;
-        }
-
-        // 对象的二级结构
-        if (sumOutInfo[0].children.label === label) {
-          oneYearInfo[0].children.value = value;
-
-          // 设置下面的人员类别二级菜单
-          let cate = [];
-          state.form._basic.forEach(item => {
-
-            if (item.label === '单位性质') {
-              switch (item.value) {
-                case '机关':
-
-                  cate = jobCategoryJiGuan;
-                  break;
-                case '社会团体':
-
-                  cate = jobCategorySocial;
-                  break;
-                case '事业单位':
-
-                  cate = jobCategoryCareer;
-                  break;
-                default:
-
-                  cate = jobCategoryQiYe;
-                  break;
-              }
-            }
-          })
-
-          cate.forEach(eachCategory => {
-            if (eachCategory.value === oneYearInfo[0].children.value) {
-
-              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
-                if (everyCategoryObj.prop === eachCategory.value) {
-                  oneYearInfo[0].children.children[everyCategoryIndex];
-
-                  // 这里把人员类别的位置写死了
-                  // 如果调整了单位人才情况汇总需要调整这里
-                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
-                }
-              });
-            }
-          });
-
-          correct = true;
-        }
-
-        // 对象的三级结构
-        if (!correct) {
-          // 找到第三级对应的对象
-          oneYearInfo[0].children.children.forEach((subItem, _index) => {
-            if (subItem.prop === oneYearInfo[0].children.value) {
-              if (index && !propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].value = value;
-              } else if (index && propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
-              }
-            }
-          });
-        }
+        initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
     setFlowOutInner(state, { value, year, index, propIndex, label }) {
-      // 判断赋值是否完成
-      let correct = false;
+      
       if (year) {
         let oneYearInfo = state.form._sum_out_nei.find(value => (value.year === year)).info
 
-        // 对象的一级结构
-        if (sumOutInfo[0].label === label) {
-          oneYearInfo[0].value = value;
-          correct = true;
-        }
-
-        // 对象的二级结构
-        if (sumOutInfo[0].children.label === label) {
-          oneYearInfo[0].children.value = value;
-
-          // 设置下面的人员类别二级菜单
-          let cate = [];
-          state.form._basic.forEach(item => {
-
-            if (item.label === '单位性质') {
-              switch (item.value) {
-                case '机关':
-
-                  cate = jobCategoryJiGuan;
-                  break;
-                case '社会团体':
-
-                  cate = jobCategorySocial;
-                  break;
-                case '事业单位':
-
-                  cate = jobCategoryCareer;
-                  break;
-                default:
-
-                  cate = jobCategoryQiYe;
-                  break;
-              }
-            }
-          })
-
-          cate.forEach(eachCategory => {
-            if (eachCategory.value === oneYearInfo[0].children.value) {
-
-              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
-                if (everyCategoryObj.prop === eachCategory.value) {
-                  oneYearInfo[0].children.children[everyCategoryIndex];
-
-                  // 这里把人员类别的位置写死了
-                  // 如果调整了单位人才情况汇总需要调整这里
-                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
-                }
-              });
-            }
-          });
-
-          correct = true;
-        }
-
-        // 对象的三级结构
-        if (!correct) {
-          // 找到第三级对应的对象
-          oneYearInfo[0].children.children.forEach((subItem, _index) => {
-            if (subItem.prop === oneYearInfo[0].children.value) {
-              if (index && !propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].value = value;
-              } else if (index && propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
-              }
-            }
-          });
-        }
+        initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
     setFlowOutOutter(state, { value, year, index, propIndex, label }) {
-      // 判断赋值是否完成
-      let correct = false;
+
       if (year) {
         let oneYearInfo = state.form._sum_out_wai.find(value => (value.year === year)).info
 
-        // 对象的一级结构
-        if (sumOutInfo[0].label === label) {
-          oneYearInfo[0].value = value;
-          correct = true;
-        }
-
-        // 对象的二级结构
-        if (sumOutInfo[0].children.label === label) {
-          oneYearInfo[0].children.value = value;
-
-          // 设置下面的人员类别二级菜单
-          let cate = [];
-          state.form._basic.forEach(item => {
-
-            if (item.label === '单位性质') {
-              switch (item.value) {
-                case '机关':
-
-                  cate = jobCategoryJiGuan;
-                  break;
-                case '社会团体':
-
-                  cate = jobCategorySocial;
-                  break;
-                case '事业单位':
-
-                  cate = jobCategoryCareer;
-                  break;
-                default:
-
-                  cate = jobCategoryQiYe;
-                  break;
-              }
-            }
-          })
-
-          cate.forEach(eachCategory => {
-            if (eachCategory.value === oneYearInfo[0].children.value) {
-
-              oneYearInfo[0].children.children.forEach((everyCategoryObj, everyCategoryIndex) => {
-                if (everyCategoryObj.prop === eachCategory.value) {
-                  oneYearInfo[0].children.children[everyCategoryIndex];
-
-                  // 这里把人员类别的位置写死了
-                  // 如果调整了单位人才情况汇总需要调整这里
-                  oneYearInfo[0].children.children[everyCategoryIndex].children[4].data = eachCategory.children;
-                }
-              });
-            }
-          });
-
-          correct = true;
-        }
-
-        // 对象的三级结构
-        if (!correct) {
-          // 找到第三级对应的对象
-          oneYearInfo[0].children.children.forEach((subItem, _index) => {
-            if (subItem.prop === oneYearInfo[0].children.value) {
-              if (index && !propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].value = value;
-              } else if (index && propIndex) {
-                oneYearInfo[0].children.children[_index].children[index].children[propIndex].value = value;
-              }
-            }
-          });
-
-        }
+        initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
     setOutStatus(state, arr) {
@@ -985,6 +785,144 @@ export default new Vuex.Store({
     getSumInWaiInput: state => year => {
       let summaryInput = {};
       let oneYearSummary = state.form._sum_in_wai.find(item => {
+        return (year === item.year);
+      }).info;
+
+      summaryInput = oneYearSummary[0].children.inputChildren.find(item => {
+        return (item.prop === oneYearSummary[0].children.value);
+      });
+
+      return summaryInput;
+    },
+
+    twoLevelSumOutStationCategory: (state, getters) => year => {
+      let oneYearSummary = state.form._sum_out.find(item => {
+        return (year === item.year);
+      }).info;
+
+      let twoCategory = getters.stationCategory.find(item => {
+        return (item.label === oneYearSummary[0].children.value)
+      })
+
+      if (twoCategory) {
+        return twoCategory.children;
+      } else {
+        return [];
+      }
+    },
+    getSumOutObjCombin: state => year => {
+
+      let summaryObjCombinBox = {},
+          summaryObjCombin = [];
+      let oneYearSummary = state.form._sum_out.find(item => {
+        return (year === item.year);
+      }).info;
+
+      summaryObjCombinBox = oneYearSummary[0].children.children.find(item => {
+        return (item.prop === oneYearSummary[0].children.value);
+      });
+
+      if (summaryObjCombinBox) {
+        summaryObjCombin = summaryObjCombinBox.children;
+      }
+
+      return summaryObjCombin;
+    },
+    getSumOutInput: state => year => {
+      let summaryInput = {};
+      let oneYearSummary = state.form._sum_out.find(item => {
+        return (year === item.year);
+      }).info;
+
+      summaryInput = oneYearSummary[0].children.inputChildren.find(item => {
+        return (item.prop === oneYearSummary[0].children.value);
+      });
+
+      return summaryInput;
+    },
+
+    twoLevelSumOutNeiStationCategory: (state, getters) => year => {
+      let oneYearSummary = state.form._sum_out_nei.find(item => {
+        return (year === item.year);
+      }).info;
+
+      let twoCategory = getters.stationCategory.find(item => {
+        return (item.label === oneYearSummary[0].children.value)
+      })
+
+      if (twoCategory) {
+        return twoCategory.children;
+      } else {
+        return [];
+      }
+    },
+    getSumOutNeiObjCombin: state => year => {
+
+      let summaryObjCombinBox = {},
+          summaryObjCombin = [];
+      let oneYearSummary = state.form._sum_out_nei.find(item => {
+        return (year === item.year);
+      }).info;
+
+      summaryObjCombinBox = oneYearSummary[0].children.children.find(item => {
+        return (item.prop === oneYearSummary[0].children.value);
+      });
+
+      if (summaryObjCombinBox) {
+        summaryObjCombin = summaryObjCombinBox.children;
+      }
+
+      return summaryObjCombin;
+    },
+    getSumOutNeiInput: state => year => {
+      let summaryInput = {};
+      let oneYearSummary = state.form._sum_out_nei.find(item => {
+        return (year === item.year);
+      }).info;
+
+      summaryInput = oneYearSummary[0].children.inputChildren.find(item => {
+        return (item.prop === oneYearSummary[0].children.value);
+      });
+
+      return summaryInput;
+    },
+
+    twoLevelSumOutWaiStationCategory: (state, getters) => year => {
+      let oneYearSummary = state.form._sum_out_wai.find(item => {
+        return (year === item.year);
+      }).info;
+
+      let twoCategory = getters.stationCategory.find(item => {
+        return (item.label === oneYearSummary[0].children.value)
+      })
+
+      if (twoCategory) {
+        return twoCategory.children;
+      } else {
+        return [];
+      }
+    },
+    getSumOutWaiObjCombin: state => year => {
+
+      let summaryObjCombinBox = {},
+          summaryObjCombin = [];
+      let oneYearSummary = state.form._sum_out_wai.find(item => {
+        return (year === item.year);
+      }).info;
+
+      summaryObjCombinBox = oneYearSummary[0].children.children.find(item => {
+        return (item.prop === oneYearSummary[0].children.value);
+      });
+
+      if (summaryObjCombinBox) {
+        summaryObjCombin = summaryObjCombinBox.children;
+      }
+
+      return summaryObjCombin;
+    },
+    getSumOutWaiInput: state => year => {
+      let summaryInput = {};
+      let oneYearSummary = state.form._sum_out_wai.find(item => {
         return (year === item.year);
       }).info;
 

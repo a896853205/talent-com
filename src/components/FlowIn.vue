@@ -98,9 +98,6 @@ export default {
     GangWeiLeiBie,
     SelectWithLabel
   },
-  data() {
-    return {};
-  },
   computed: {
     oneLevelStationCategory() {
       return this.$store.getters.oneLevelStationCategory;

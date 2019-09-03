@@ -1,39 +1,62 @@
 <template>
-	<div class="box">
-		<el-tabs tab-position="left">
-			<el-tab-pane v-for="(value, key) in sumOut" :key="key" :label="value.year">
-				<p class="title">单位人才流动汇总表-流出人才-{{value.year}}年</p>
-				<FlowOut 
-					:year='value.year'
-					:sumOut='value.info'
-					commitFunction='setFlowOut' />
-			</el-tab-pane>
-		</el-tabs>
-	</div>
+  <div class="box">
+    <el-tabs tab-position="left">
+      <el-tab-pane 
+				v-for="(value, key) in sumOut"
+				:key="key"
+				:label="value.year">
+        <p class="title">单位人才流动汇总表-流出人才-{{value.year}}年</p>
+        <FlowOut
+					:getSumOutObjCombin="getSumOutObjCombin(value.year)"
+          :SumOutInput="SumOutInput(value.year)"
+          :twoLevelSumOutStationCategory="twoLevelSumOutStationCategory(value.year)"
+					:year="value.year"
+					:sumOut="value.info"
+					commitFunction="setFlowOut" />
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 <style scoped>
-	.box {
-		margin-top: 20px;
-	}
+.box {
+  margin-top: 20px;
+}
 
-	.title {
-		text-align: center;
-		font-size: 16px;
-		font-weight: bolder;
-	}
+.title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bolder;
+}
 </style>
 <script>
-	import FlowOut from '../components/FlowOut.vue';
+import FlowOut from "../components/FlowOut.vue";
 
-	export default {
-		components: {
-			FlowOut,
-		},
-		data() {},
-		computed: {
-			sumOut () {
-				return this.$store.state.form._sum_out;
-			}
-		}
-	}
+export default {
+  components: {
+    FlowOut
+  },
+  computed: {
+    sumOut() {
+      return this.$store.state.form._sum_out;
+    },
+
+    getSumOutObjCombin() {
+      return year => {
+        return this.$store.getters.getSumOutObjCombin(year);
+      };
+    },
+
+    SumOutInput() {
+      return year => {
+        return this.$store.getters.getSumOutInput(year);
+      };
+    },
+
+    twoLevelSumOutStationCategory() {
+      return year => {
+        return this.$store.getters.twoLevelSumOutStationCategory(year);
+      };
+    }
+  }
+};
 </script>

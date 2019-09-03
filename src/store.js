@@ -966,7 +966,7 @@ function initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label
     oneYearInfo[0].children.value = value;
     correct = true;
   }
-  debugger;
+  
   let oneInput = oneYearInfo[0].children.inputChildren.find(item => {
     return (item.prop === oneYearInfo[0].children.value);
   })
@@ -985,8 +985,9 @@ function initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label
     if ((index !== undefined) && (propIndex === undefined)) {
       child.children[index].value = value;
     } else if ((index !== undefined) && (propIndex !== undefined)) {
-      child.children[index].children[propIndex].value = value;
+      child.children[propIndex].children[index].value = value;
     }
+    debugger;
   }
 }
 // 流入修改页面函数
@@ -1024,7 +1025,7 @@ function initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label }
     if ((index !== undefined) && (propIndex === undefined)) {
       child.children[index].value = value;
     } else if ((index !== undefined) && (propIndex !== undefined)) {
-      child.children[index].children[propIndex].value = value;
+      child.children[propIndex].children[index].value = value;
     }
   }
 }

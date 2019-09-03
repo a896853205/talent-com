@@ -14,8 +14,8 @@
           v-if="item.type === 'cascader'"
           :label="item.label"
           :initValue="item.value"
-          @cascader="changeEvent"
           :data="item.data"
+          @cascader="changeEvent"
           :index='index'
         />
         <InputWithLabel
@@ -68,10 +68,9 @@ export default {
   created() {},
   mounted() {},
   computed: {
-    basic: {
-      get() {
-        return this.$store.state.form._basic;
-      }
+    basic() {
+      console.log(this.$store.state.form._basic);
+      return this.$store.state.form._basic;
     }
   }
 };

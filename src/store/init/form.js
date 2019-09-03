@@ -175,7 +175,7 @@ export const form_inserting = {
     list: suoShuDiYu
   }, {
     label: '所属行业',
-    value: null,
+    value: [],
     type: 'cascader',
     data: industryCategory
   }, {

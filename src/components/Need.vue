@@ -1,66 +1,71 @@
 <template>
   <div class="container">
-    <div v-for="(item, index) in need" :key="item.id">
+    <div 
+      v-for="(item, propIndex) in need"
+      :key="propIndex">
       <Card :bordered="false">
         <div class="del-box">
-          <p class="del-box-title" slot="title">{{ title }} {{index+1}}</p>
+          <p class="del-box-title" slot="title">{{ title }} {{ propIndex + 1 }}</p>
           <div class="del-btn">
             <i-button
               type="error"
-              v-if="item.id>0"
+              v-if="item.id > 0"
               style="margin-right: 10px"
               shape="circle"
               @click="delHandle(item.id)"
             >删除</i-button>
           </div>
         </div>
-        <div class="abox">
-          <div
-            class="item"
-            v-for="(value, key) in item.info"
-            :key="key"
-            :class="{'none': (value.special)}"
-          >
+        <Row :gutter='16'>
+          <i-col
+            span='4'
+            v-for="(item, index) in item.info"
+            :key='"" + propIndex + index'>
             <SelectWithLabel
-              v-if="value.type === 'select'"
-              :label="key"
-              :initValue="value.value"
+              v-if="item.type === 'select'"
+              :label="item.label"
+              :initValue="item.value"
               @select="changeEvent"
-              :list="value.list"
+              :list="item.list"
               :index="index"
+              :propIndex='propIndex'
             />
             <CascaderWithLabel
-              v-if="value.type === 'cascader'"
-              :label="key"
-              :initValue="value.value"
-              @cascader='changeEvent'
-              :data="value.data"
-              :index="index"
+              v-if="item.type === 'cascader'"
+              :label='item.label'
+							:initValue='item.value'
+							@cascader='changeEvent'
+							:data="item.data"
+							:index='index'
+							:propIndex='propIndex'
             />
             <InputWithLabel
-              v-if="value.type === 'input'"
-              :label="key"
-              :initValue="value.value"
-              @input='changeEvent'
-              :index="index"
+              v-if="item.type === 'input'"
+              :label='item.label'
+							:initValue='item.value'
+							@input='changeEvent'
+							:index='index'
+							:propIndex='propIndex'
             />
             <InputNumberWithLabel
-              v-if="value.type === 'number'"
-              :label="key"
-              :initValue="value.value"
-              @input-number="changeEvent"
-              :index="index"
+              v-if="item.type === 'number'"
+              :label='item.label'
+							:initValue='item.value'
+							@input-number='changeEvent'
+							:index='index'
+							:propIndex='propIndex'
             />
             <CascaderWithLabel
-              v-if="value.type === 'cascaderSpecial'"
-              :initObj="value.value"
-              :label="key"
+              v-if="item.type === 'cascaderSpecial'"
+              :initObj="item.value"
+							:label='item.label'
               :data="stationCategory"
               @cascader="getCascaderData"
               :index="index"
+              :propIndex='propIndex'
             />
-          </div>
-        </div>
+          </i-col>
+        </Row>
       </Card>
     </div>
     <div class="add">
@@ -120,6 +125,8 @@ import SelectWithLabel from "../components/SelectWithLabel.vue";
 import CascaderWithLabel from "../components/CascaderWithLabel.vue";
 import { personInfo } from "../store/init/form";
 
+import { objectHelper } from '../util/object-helper';
+  
 export default {
   components: {
     InputWithLabel,
@@ -134,7 +141,7 @@ export default {
 
       this.$data.needArr.push({
         id: num,
-        info: personInfo
+        info: objectHelper.deepCopy(personInfo)
       });
 
       this.$options.methods.needArrCommit(this);
@@ -149,8 +156,8 @@ export default {
       this.$options.methods.needArrCommit(this);
     },
 
-    changeEvent({ value, key, index }) {
-      this.$data.needArr[index].info[key].value = value;
+    changeEvent({ value, propIndex, index }) {
+      this.$data.needArr[propIndex].info[index].value = value;
       this.$options.methods.needArrCommit(this);
     },
 

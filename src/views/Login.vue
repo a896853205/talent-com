@@ -99,7 +99,7 @@ export default {
         }
       })
         .then(res => {
-          if (res.data === -1 || res.data === -2) {
+          if (res.data.userId === -1 || res.data.userId === -2) {
             this.$message.error("用户名或密码输入错误！");
           } else {
             // util.setCookies(this.$data.account, this.$data.password, this);

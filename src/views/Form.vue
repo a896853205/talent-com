@@ -175,15 +175,16 @@ export default {
       }
     },
     logout() {
-      this.$cookies.remove("user_data");
+      // this.$cookies.remove("user_data");
       this.$router.push("/");
     },
     select(name) {
-      this.$data.loading = true;
-      setTimeout(() => {
-        this.$router.push(name);
-        this.$data.loading = false;
-      }, 100);
+      this.$router.push(name);
+      // this.$data.loading = true;
+      // setTimeout(() => {
+      //   this.$router.push(name);
+      //   this.$data.loading = false;
+      // }, 100);
     },
     saveHandle() {
       if (this.$store.state.form._confirmed) {

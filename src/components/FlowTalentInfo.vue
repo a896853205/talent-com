@@ -1,6 +1,8 @@
 <template>
 	<div class="container">
-		<div v-for="(item, propIndex) in outStatus" :key="propIndex">
+		<div 
+			v-for="(item, propIndex) in outStatus"
+			:key="propIndex">
 			<Card :bordered="false">
 				<div class="del-box">
 					<p class="del-box-title" slot="title">{{ title }} {{propIndex+1}}</p>
@@ -12,7 +14,7 @@
 					<i-col 
 						span='4'
 						v-for='(item, index) in item.info'
-						:key='index'>
+						:key='"" + propIndex + index'>
 						<SelectWithLabel
 							v-if='item.type === "select"'
 							:label='item.label'
@@ -135,6 +137,8 @@
 
 	import { outStatusInfo } from '../store/init/form';
 
+	import { objectHelper } from '../util/object-helper';
+
 	export default {
 		components: {
 			InputWithLabel,
@@ -151,7 +155,7 @@
 
 				this.$data.outStatusArr.push({
 					id: num,
-					info: outStatusInfo,
+					info: objectHelper.deepCopy(outStatusInfo),
 				});
 
 				this.$options.methods.outStatusArrCommit(this);

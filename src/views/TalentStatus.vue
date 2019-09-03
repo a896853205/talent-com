@@ -4,6 +4,9 @@
 			<el-tab-pane v-for="(value, key) in summary" :key="key" :label="value.year">
 				<p class="title">单位人才情况汇总表-存量信息-{{value.year}}年</p>
 				<TalentStatus
+					:getSummaryObjCombin='getSummaryObjCombin(value.year)'
+					:summaryInput='summaryInput(value.year)'
+					:twoLevelStationCategory='twoLevelStationCategory(value.year)'
 					:year='value.year'
 					:summary='value.info'
 					commitFunction='setSummery' />
@@ -32,7 +35,25 @@
 		computed: {
 			summary () {
 				return this.$store.state.form._summary
-			}
+			},
+
+			getSummaryObjCombin () {
+				return year => {
+					return this.$store.getters.getSummaryObjCombin(year);
+				}
+			},
+
+			summaryInput () {
+				return year => {
+					return this.$store.getters.getSummaryInput(year);
+				}
+			},
+
+			twoLevelStationCategory () {
+				return year => {
+					return this.$store.getters.twoLevelStationCategory(year);
+				}
+			},
 		}
 	}
 </script>

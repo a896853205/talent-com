@@ -1,47 +1,59 @@
 <template>
-	<Form label-position="top" style="text-align: left;">
-		<Form-item :label="label">
-			<Input-number
-				:key='key'
-				v-model="value" style="width:100%; margin-right: 5px" @on-change="emit()"></Input-number>
-		</Form-item>
-	</Form>
+  <Form label-position="top" style="text-align: left;">
+    <Form-item :label="label">
+      <Input-number
+        :key="key"
+        v-model="value"
+        style="width:100%; margin-right: 5px"
+        @on-change="emit()"
+      ></Input-number>
+    </Form-item>
+  </Form>
 </template>
 
 <script>
-	export default {
-		name: 'InputNumberWithLabel',
-		props: {
-			label: String,
-			initValue: Number,
-			propKey: String,
-			index: Number,
-			propIndex: Number,
-			key: String,
-		},
-		data() {
-			return {
-				value: null
-			}
-		},
-		mounted() {
-			this.$data.value = this.$props.initValue
-			// this.emit()
-		},
-		methods: {
-			emit() {
-				// if (this.$data.value === undefined || this.$data.value === null){
-				// 	this.$data.value = null
-				// }
-				this.$emit('input-number', { 
-					value: this.$data.value,
-					label: this.label,
-					index: this.index,
-					propIndex: this.propIndex
-				});
-			}
-		}
-	}
+export default {
+  name: "InputNumberWithLabel",
+  props: {
+    label: String,
+    initValue: Number,
+    propKey: String,
+    index: Number,
+    propIndex: Number,
+    key: String
+  },
+  data() {
+    return {
+      value: null
+    };
+  },
+  mounted() {
+    this.$data.value = this.$props.initValue;
+    // this.emit()
+  },
+  methods: {
+    emit() {
+      // if (this.$data.value === undefined || this.$data.value === null){
+      // 	this.$data.value = null
+      // }
+      this.$emit("input-number", {
+        value: this.$data.value,
+        label: this.label,
+        index: this.index,
+        propIndex: this.propIndex
+      });
+    }
+  },
+  watch: {
+    initValue: {
+      handler: function(val, oldval) {
+        this.$data.value = val;
+      },
+      immediate: true, //关键
+      deep: true
+    }
+  }
+};
 </script>
 
 <style>

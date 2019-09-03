@@ -24,15 +24,11 @@
 					:initValue="summary[0].children.value"
 					:list='oneLevelStationCategory' />
 			</i-col>
-			<i-col 
-				span='4'
-				v-for="(it, i) in summaryDetailTotalNum"
-				:key="i"
-				:class="{ 'none': !(it.prop === summary[0].children.value) }">
+			<i-col span='4' v-if="summaryInput">
 				<InputNumberWithLabel 
-					:label='it.label'
+					:label='summaryInput.label'
 					@input-number='changeEvent'
-					:initValue="it.value" />
+					:initValue="summaryInput.value" />
 			</i-col>
 		</Row>
 
@@ -100,7 +96,14 @@
 	import GangWeiLeiBie from '../components/GangWeiLeiBie.vue';
 	
 	export default {
-		props: ['year', 'commitFunction', 'summary'],
+		props: [
+			'year',
+			'commitFunction',
+			'summary',
+			'getSummaryObjCombin',
+			'summaryInput',
+			'twoLevelStationCategory'
+		],
 
 		components: {
 			InputNumberWithLabel,
@@ -118,31 +121,13 @@
 			}
 		},
 		computed: {
-			// 选出正确的详细信息
-			summaryDetail () {
-				return this.summary[0].children.children;
-			},
-
-			summaryDetailTotalNum () {
-				return this.summary[0].children.inputChildren;
-			},
-
 			oneLevelStationCategory () {
 				return this.$store.getters.oneLevelStationCategory;
-			},
-
-			twoLevelStationCategory () {
-				console.log(this.$store.getters.twoLevelStationCategory(this.year));
-				return this.$store.getters.twoLevelStationCategory(this.year);
 			},
 			
 			unitType () {
 				return this.$store.getters.unit;
 			},
-
-			getSummaryObjCombin () {
-				return this.$store.getters.getSummaryObjCombin(this.year);
-			}
 		}
 	}
 </script>

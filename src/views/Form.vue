@@ -200,7 +200,7 @@ export default {
         method: "post",
         data: {
           form: that.$store.state.form,
-          userId: that.$store.state.userId
+          userId: that.$store.state.form._from_user
         }
       })
 			.then(res => {
@@ -551,6 +551,7 @@ export default {
     }
   },
   created() {
+    console.log('created');
     if (!this.$store.state.form._from_user) {
       this.$store.commit('setUserId', localStorage.getItem('userId'));
     }
@@ -567,6 +568,7 @@ export default {
     })
     .then(res => {
       let { form } = res.data;
+      
       _this.$store.commit('setForm', form);
     });
     // if (util.getCookies(this) === null) {

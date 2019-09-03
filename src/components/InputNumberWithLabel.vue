@@ -24,18 +24,11 @@ export default {
   },
   data() {
     return {
-      value: null
+      value: 0
     };
-  },
-  mounted() {
-    this.$data.value = this.$props.initValue;
-    // this.emit()
   },
   methods: {
     emit() {
-      // if (this.$data.value === undefined || this.$data.value === null){
-      // 	this.$data.value = null
-      // }
       this.$emit("input-number", {
         value: this.$data.value,
         label: this.label,
@@ -49,7 +42,7 @@ export default {
       handler: function(val, oldval) {
         this.$data.value = val;
       },
-      immediate: true, //关键
+      immediate: true,
       deep: true
     }
   }

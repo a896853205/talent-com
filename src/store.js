@@ -436,22 +436,22 @@ export default new Vuex.Store({
       }
     },
     setOutStatus(state, arr) {
-      state._out_status = arr;
+      state.form._out_status = arr;
     },
     setOutStatusIn(state, arr) {
-      state._out_status_nei = arr;
+      state.form._out_status_nei = arr;
     },
     setOutStatusOut(state, arr) {
-      state._out_status_wai = arr;
+      state.form._out_status_wai = arr;
     },
     setNeed(state, arr) {
-      state._need = arr;
+      state.form._need = arr;
     },
     setNeedIn(state, arr) {
-      state._need_nei = arr;
+      state.form._need_nei = arr;
     },
     setNeedOut(state, arr) {
-      state._need_wai = arr;
+      state.form._need_wai = arr;
     },
   },
   getters: {
@@ -541,6 +541,8 @@ export default new Vuex.Store({
       if (summaryObjCombinBox) {
         summaryObjCombin = summaryObjCombinBox.children;
       }
+
+      debugger;
 
       return summaryObjCombin;
     },

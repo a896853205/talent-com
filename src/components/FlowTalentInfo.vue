@@ -65,7 +65,7 @@
 							:initObj="item.value"
 							:label='item.label'
 							:data="stationCategory"
-							@cascader='getCascaderData'
+							@cascader='changeEvent'
 							:index='index'
 							:propIndex='propIndex' />
 					</i-col >

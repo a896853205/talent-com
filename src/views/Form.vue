@@ -149,6 +149,7 @@
 import url from "@/service.config.js";
 import axios from "axios";
 import util from "@/utils.js";
+import { debuglog } from 'util';
 export default {
   data() {
     return {
@@ -176,6 +177,7 @@ export default {
     },
     logout() {
       // this.$cookies.remove("user_data");
+      localStorage.clear();
       this.$router.push("/");
     },
     select(name) {
@@ -549,6 +551,24 @@ export default {
     }
   },
   created() {
+    if (!this.$store.state.form._from_user) {
+      this.$store.commit('setUserId', localStorage.getItem('userId'));
+    }
+
+    let userId = this.$store.state.form._from_user;
+    let _this = this;
+
+    axios({
+      url: url.getForm,
+      method: 'get',
+      params: {
+        userId
+      }
+    })
+    .then(res => {
+      let { form } = res.data;
+      _this.$store.commit('setForm', form);
+    });
     // if (util.getCookies(this) === null) {
     //   this.$router.push("/");
     //   return;

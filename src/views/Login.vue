@@ -102,10 +102,11 @@ export default {
           if (res.data.userId === -1 || res.data.userId === -2) {
             this.$message.error("用户名或密码输入错误！");
           } else {
-            // util.setCookies(this.$data.account, this.$data.password, this);
             this.$store.commit('setUserId', res.data.userId);
-            this.$store.commit('setForm', res.data.returnForm);
-
+            // this.$store.commit('setForm', res.data.returnForm);
+            
+            localStorage.setItem('userId', res.data.userId);
+            
             this.$message({
               message: "登录成功！",
               type: "success",

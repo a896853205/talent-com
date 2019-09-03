@@ -57,7 +57,7 @@ export default new Vuex.Store({
   mutations: {
     // 设置用户id
     setUserId(state, userId) {
-      state.userId = userId;
+      state.form._from_user = userId;
     },
 
     // 更新表单

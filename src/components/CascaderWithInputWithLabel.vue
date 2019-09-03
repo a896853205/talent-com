@@ -74,7 +74,7 @@
 					cas: _this.$data.value1,
 					num: _this.$data.value2
 				}
-				debugger;
+
 				_this.$emit('cascader', { obj, key: _this.label, index: _this.index })
 			}
 		}

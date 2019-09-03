@@ -94,7 +94,7 @@ export default new Vuex.Store({
               })
             });
 
-            debugger;
+
             // 一级菜单进行赋值
             state.form._sum_in.forEach((item, i) => {
 
@@ -592,13 +592,13 @@ export default new Vuex.Store({
         return (year === item.year);
       }).info;
 
-      debugger;
+
 
       let twoCategory = getters.stationCategory.find(item => {
         return (item.label === oneYearSummary[0].children.value)
       })
 
-      debugger;
+
 
       if (twoCategory) {
         return twoCategory.children;
@@ -642,13 +642,13 @@ export default new Vuex.Store({
         return (year === item.year);
       }).info;
 
-      debugger;
+
 
       let twoCategory = getters.stationCategory.find(item => {
         return (item.label === oneYearSummary[0].children.value)
       })
 
-      debugger;
+
 
       if (twoCategory) {
         return twoCategory.children;
@@ -987,7 +987,7 @@ function initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label
     } else if ((index !== undefined) && (propIndex !== undefined)) {
       child.children[propIndex].children[index].value = value;
     }
-    debugger;
+
   }
 }
 // 流入修改页面函数

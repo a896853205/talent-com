@@ -568,11 +568,6 @@ export default {
     }
   },
   created() {
-<<<<<<< HEAD
-    console.log("created");
-=======
-
->>>>>>> 1194a3bb04635125feb0b1734dbdcc44dff33c44
     if (!this.$store.state.form._from_user) {
       this.$store.commit("setUserId", localStorage.getItem("userId"));
     }

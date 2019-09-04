@@ -667,13 +667,13 @@ export default new Vuex.Store({
         return (year === item.year);
       }).info;
 
-      debugger;
+
 
       let twoCategory = getters.stationCategory.find(item => {
         return (item.label === oneYearSummary[0].children.value)
       })
 
-      debugger;
+
 
       if (twoCategory) {
         return twoCategory.children;

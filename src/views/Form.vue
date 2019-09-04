@@ -96,7 +96,7 @@
           <Button class="button" type="primary" @click="saveHandle">暂存</Button>
         </div>
         <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
+          <Button type="success" @click="submitHandle2" :loading="btnLoading">提交问卷</Button>
         </div>
         <div class="submit">
           <Button type="warning" icon="md-arrow-down" @click="exportExcel">导出表格</Button>
@@ -585,11 +585,6 @@ export default {
       let { form } = res.data;
 
       _this.$store.commit("setForm", form);
-      // _this.$store.commit('setBasic', {
-      //   value: _this.$store.state.form._basic[4].value,
-      //   index: 4,
-      //   label: _this.$store.state.form._basic[4].label
-      // });
     });
   }
 };

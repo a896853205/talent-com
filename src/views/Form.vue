@@ -96,7 +96,7 @@
           <Button class="button" type="primary" @click="saveHandle">暂存</Button>
         </div>
         <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
+          <Button type="success" @click="submitHandle2" :loading="btnLoading">提交问卷</Button>
         </div>
         <div class="submit">
           <Button type="warning" icon="md-arrow-down" @click="exportExcel">导出表格</Button>
@@ -149,7 +149,7 @@
 import url from "@/service.config.js";
 import axios from "axios";
 import util from "@/utils.js";
-import { debuglog } from 'util';
+import { debuglog } from "util";
 export default {
   data() {
     return {
@@ -158,10 +158,10 @@ export default {
       loading: false,
       btnLoading: false
     };
-	},
-	computed: {
-		unit() {
-			return this.$store.getters.unit;
+  },
+  computed: {
+    unit() {
+      return this.$store.getters.unit;
     }
   },
   methods: {
@@ -192,8 +192,8 @@ export default {
       if (this.$store.state.form._confirmed) {
         this.$message.error("您已经提交过了，不需要暂存了！");
         return;
-			}
-			
+      }
+
       let that = this;
       axios({
         url: url.save,
@@ -203,18 +203,35 @@ export default {
           userId: that.$store.state.form._from_user
         }
       })
-			.then(res => {
-				this.$message({
-					message: "已暂存到服务器，请放心退出",
-					type: "success",
-					duration: 1000
-				});
-				console.log(res.data);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-      
+        .then(res => {
+          this.$message({
+            message: "已暂存到服务器，请放心退出",
+            type: "success",
+            duration: 1000
+          });
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    submitHandle2() {
+      console.log("提交问卷");
+      let that = this;
+      axios({
+        url: url.generateExcel,
+        method: "post",
+        data: {
+          form: that.$store.state.form,
+          userId: that.$store.state.form._from_user
+        }
+      })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     submitHandle() {
       if (this.$store.state.form._confirmed) {
@@ -551,9 +568,9 @@ export default {
     }
   },
   created() {
-    console.log('created');
+    console.log("created");
     if (!this.$store.state.form._from_user) {
-      this.$store.commit('setUserId', localStorage.getItem('userId'));
+      this.$store.commit("setUserId", localStorage.getItem("userId"));
     }
 
     let userId = this.$store.state.form._from_user;
@@ -561,15 +578,14 @@ export default {
 
     axios({
       url: url.getForm,
-      method: 'get',
+      method: "get",
       params: {
         userId
       }
-    })
-    .then(res => {
+    }).then(res => {
       let { form } = res.data;
-      
-      _this.$store.commit('setForm', form);
+
+      _this.$store.commit("setForm", form);
     });
     // if (util.getCookies(this) === null) {
     //   this.$router.push("/");

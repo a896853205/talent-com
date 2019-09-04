@@ -16,6 +16,7 @@ const URL = {
     createTable: SERVERURL + 'createTable',
     download: SERVERURL + 'download',
     adminLogin: SERVERURL + 'adminLogin',
+    generateExcel: SERVERURL + 'generateExcel',
 
 };
 

@@ -95,12 +95,15 @@
 			CascaderWithInputWithLabel,
 		},
 		methods: {
-			addHandle() {
+			addHandle(value) {
 				let num = this.$data.num++;
 
+				if (!value) {
+					value = {};
+				}
 				this.$data.form.push({
 					id: num,
-					value: {}
+					value
 				})
 			},
 			delHandle(index) {
@@ -130,9 +133,19 @@
 			// 	default:
 			// 		this.gangWeiLeiBie = jobCategoryQiYe;
 			// }
+			this.$data.form = [];
+
 			if (this.initValue) {
 				for (let i = 0; i < this.initValue.length; i++) {
-					this.$data.form[i].value = this.initValue[i];
+					let num = this.$data.num++;
+					
+					this.$data.form.push({
+						id: num,
+						value: this.initValue[i]
+					})
+				}
+				if (!this.initValue.length) {
+					this.addHandle();
 				}
 			} else {
 				this.addHandle();

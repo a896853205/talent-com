@@ -3,7 +3,8 @@
 		<el-tabs tab-position="left">
 			<el-tab-pane v-for="(value, key) in summaryInner" :key="key" :label="value.year">
 				<p class="title">单位人才情况汇总表-存量信息-事业单位-编制内-{{ value.year }}年</p>
-				<TalentStatus 
+				<TalentStatus
+					:key="`编制内${key}`"
 					:getSummaryObjCombin='getSummaryNeiObjCombin(value.year)'
 					:summaryInput='summaryInput(value.year)'
 					:twoLevelStationCategory='twoLevelSummaryNeiStationCategory(value.year)'
@@ -34,6 +35,7 @@
 		},
 		computed: {
 			summaryInner () {
+				console.log('nei', this.$store.state.form._summary_nei);
 				return this.$store.state.form._summary_nei;
 			},
 

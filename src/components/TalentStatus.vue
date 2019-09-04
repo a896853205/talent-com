@@ -42,7 +42,7 @@
     :key='i'>-->
     <Row
       v-for="(item, index) in getSummaryObjCombin"
-      :key="(summary[0].children.value + index)"
+      :key="(commitFunction + summary[0].children.value + index)"
       :gutter="16"
     >
       <div v-if="item.children">
@@ -118,7 +118,6 @@ export default {
   data() {
     return {};
   },
-
   methods: {
     changeEvent({ value, index, propIndex, label }) {
       this.$store.commit(this.commitFunction, {

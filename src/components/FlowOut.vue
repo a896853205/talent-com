@@ -122,6 +122,8 @@ export default {
   },
   methods: {
     changeEvent ({ value, index, propIndex, label }) {
+
+      debugger;
       this.$store.commit(this.commitFunction, {
         value,
         year: this.year,

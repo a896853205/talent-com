@@ -77,12 +77,15 @@ export default new Vuex.Store({
 
         switch (value) {
           case '机关':
+            
             // 一级菜单进行赋值
             state.form._summary.forEach((item, i) => {
 
               // 清除数据
               state.form._summary[i].info[0].children.children = [];
-              state.form._summary[i].info[0].children.value = undefined;
+              state.form._summary[i].info[0].children.value = OFFICE_ONE_LEVEL[0].value;
+              state.form._summary[i].info[0].children.inputChildren = [];
+
               // 输入数据
               OFFICE_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
@@ -94,13 +97,14 @@ export default new Vuex.Store({
               })
             });
 
-            debugger;
             // 一级菜单进行赋值
             state.form._sum_in.forEach((item, i) => {
 
               // 清除数据
               state.form._sum_in[i].info[0].children.children = [];
-              state.form._sum_in[i].info[0].children.value = undefined;
+              state.form._sum_in[i].info[0].children.value = OFFICE_ONE_LEVEL[0].value;
+              state.form._sum_in[i].info[0].children.inputChildren = [];
+
               // 输入数据
               OFFICE_ONE_LEVEL.forEach(oneLevelItem => {
                 let sumInItem = objectHelper.deepCopy(SUM_IN_ITEM);
@@ -119,7 +123,10 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_out[i].info[0].children.children = [];
-              state.form._sum_out[i].info[0].children.value = undefined;
+              state.form._sum_out[i].info[0].children.value = OFFICE_ONE_LEVEL[0].value;
+              state.form._sum_out[i].info[0].children.inputChildren = [];
+
+
               // 输入数据
               OFFICE_ONE_LEVEL.forEach(oneLevelItem => {
                 let sumOutItem = objectHelper.deepCopy(SUM_OUT_ITEM);
@@ -135,12 +142,14 @@ export default new Vuex.Store({
 
             break;
           case '社会团体':
+
             // 一级菜单进行赋值
             state.form._summary.forEach((item, i) => {
 
               // 清除数据
               state.form._summary[i].info[0].children.children = [];
-              state.form._summary[i].info[0].children.value = undefined;
+              state.form._summary[i].info[0].children.value = SOCIETY_ONE_LEVEL[0].value;
+              state.form._summary[i].info[0].children.inputChildren = [];
               // 输入数据
               SOCIETY_ONE_LEVEL.forEach(oneLevelItem => {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
@@ -157,7 +166,8 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_in[i].info[0].children.children = [];
-              state.form._sum_in[i].info[0].children.value = undefined;
+              state.form._sum_in[i].info[0].children.value = SOCIETY_ONE_LEVEL[0].value;
+              state.form._sum_in[i].info[0].children.inputChildren = [];
               // 输入数据
               SOCIETY_ONE_LEVEL.forEach(oneLevelItem => {
                 let sumInItem = objectHelper.deepCopy(SUM_IN_ITEM);
@@ -176,7 +186,8 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_out[i].info[0].children.children = [];
-              state.form._sum_out[i].info[0].children.value = undefined;
+              state.form._sum_out[i].info[0].children.value = SOCIETY_ONE_LEVEL[0].value;
+              state.form._sum_out[i].info[0].children.inputChildren = [];
               // 输入数据
               SOCIETY_ONE_LEVEL.forEach(oneLevelItem => {
                 let sumOutItem = objectHelper.deepCopy(SUM_OUT_ITEM);
@@ -193,29 +204,32 @@ export default new Vuex.Store({
             break;
           case '事业单位':
             //  编制内
-            state.form._summary_nei.forEach((item, i) => {
-
+            for (let i = 0; i < state.form._summary_nei.length; i++) {
               // 清除数据
               state.form._summary_nei[i].info[0].children.children = [];
-              state.form._summary_nei[i].info[0].children.value = undefined;
+              state.form._summary_nei[i].info[0].children.value = JOB_ONE_LEVEL[0].value;
               state.form._summary_nei[i].info[0].children.inputChildren = [];
               // 输入数据
-              JOB_ONE_LEVEL.forEach(oneLevelItem => {
+
+              for (let oneLevelItem of JOB_ONE_LEVEL) {
                 let summaryItem = objectHelper.deepCopy(SUMMARY_ITEM);
                 let summaryPersonCategory = objectHelper.deepCopy(SUMMARY_PERSON_CATEGORY);
+
                 summaryItem.prop = oneLevelItem.label;
                 summaryPersonCategory.prop = oneLevelItem.label;
+
                 state.form._summary_nei[i].info[0].children.children.push(summaryItem);
                 state.form._summary_nei[i].info[0].children.inputChildren.push(summaryPersonCategory);
-              })
-            });
+              }
+            }
 
+            console.log('state', state);
             //  编制外
             state.form._summary_wai.forEach((item, i) => {
 
               // 清除数据
               state.form._summary_wai[i].info[0].children.children = [];
-              state.form._summary_wai[i].info[0].children.value = undefined;
+              state.form._summary_wai[i].info[0].children.value = JOB_ONE_LEVEL[0].value;
               state.form._summary_wai[i].info[0].children.inputChildren = [];
               // 输入数据
               JOB_ONE_LEVEL.forEach(oneLevelItem => {
@@ -233,7 +247,7 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_in_nei[i].info[0].children.children = [];
-              state.form._sum_in_nei[i].info[0].children.value = undefined;
+              state.form._sum_in_nei[i].info[0].children.value = JOB_ONE_LEVEL[0].value;
               state.form._sum_in_nei[i].info[0].children.inputChildren = [];
               // 输入数据
               JOB_ONE_LEVEL.forEach(oneLevelItem => {
@@ -253,7 +267,7 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_in_wai[i].info[0].children.children = [];
-              state.form._sum_in_wai[i].info[0].children.value = undefined;
+              state.form._sum_in_wai[i].info[0].children.value = JOB_ONE_LEVEL[0].value;
               state.form._sum_in_wai[i].info[0].children.inputChildren = [];
               // 输入数据
               JOB_ONE_LEVEL.forEach(oneLevelItem => {
@@ -273,7 +287,7 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_out_nei[i].info[0].children.children = [];
-              state.form._sum_out_nei[i].info[0].children.value = undefined;
+              state.form._sum_out_nei[i].info[0].children.value = JOB_ONE_LEVEL[0].value;
               state.form._sum_out_nei[i].info[0].children.inputChildren = [];
               // 输入数据
               JOB_ONE_LEVEL.forEach(oneLevelItem => {
@@ -293,7 +307,7 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_out_wai[i].info[0].children.children = [];
-              state.form._sum_out_wai[i].info[0].children.value = undefined;
+              state.form._sum_out_wai[i].info[0].children.value = JOB_ONE_LEVEL[0].value;
               state.form._sum_out_wai[i].info[0].children.inputChildren = [];
               // 输入数据
               JOB_ONE_LEVEL.forEach(oneLevelItem => {
@@ -316,7 +330,7 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._summary[i].info[0].children.children = [];
-              state.form._summary[i].info[0].children.value = undefined;
+              state.form._summary[i].info[0].children.value = ENTERPRISE_ONE_LEVEL[0].value;
               state.form._summary[i].info[0].children.inputChildren = [];
               // 输入数据
               ENTERPRISE_ONE_LEVEL.forEach(oneLevelItem => {
@@ -334,7 +348,7 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_in[i].info[0].children.children = [];
-              state.form._sum_in[i].info[0].children.value = undefined;
+              state.form._sum_in[i].info[0].children.value = ENTERPRISE_ONE_LEVEL[0].value;
               state.form._sum_in[i].info[0].children.inputChildren = [];
               // 输入数据
               ENTERPRISE_ONE_LEVEL.forEach(oneLevelItem => {
@@ -352,7 +366,7 @@ export default new Vuex.Store({
 
               // 清除数据
               state.form._sum_out[i].info[0].children.children = [];
-              state.form._sum_out[i].info[0].children.value = undefined;
+              state.form._sum_out[i].info[0].children.value = ENTERPRISE_ONE_LEVEL[0].value;
               state.form._sum_out[i].info[0].children.inputChildren = [];
               // 输入数据
               ENTERPRISE_ONE_LEVEL.forEach(oneLevelItem => {
@@ -373,7 +387,7 @@ export default new Vuex.Store({
     setSummery(state, { value, year, index, propIndex, label }) {
 
       if (year) {
-        let oneYearInfo = state.form._summary.find(value => (value.year === year)).info;
+        let oneYearInfo = state.form._summary.find(v => (v.year === year)).info;
 
         initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label });
 
@@ -384,7 +398,7 @@ export default new Vuex.Store({
 
       if (year) {
         let oneYearInfo = state.form._summary_nei.find(value => (value.year === year)).info
-
+        debugger;
         initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
@@ -427,15 +441,15 @@ export default new Vuex.Store({
       if (year) {
         let oneYearInfo = state.form._sum_out.find(value => (value.year === year)).info
 
-        initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label });
+        initSumOutPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
     setFlowOutInner(state, { value, year, index, propIndex, label }) {
-      
+
       if (year) {
         let oneYearInfo = state.form._sum_out_nei.find(value => (value.year === year)).info
 
-        initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label });
+        initSumOutPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
     setFlowOutOutter(state, { value, year, index, propIndex, label }) {
@@ -443,7 +457,7 @@ export default new Vuex.Store({
       if (year) {
         let oneYearInfo = state.form._sum_out_wai.find(value => (value.year === year)).info
 
-        initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label });
+        initSumOutPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
     setOutStatus(state, arr) {
@@ -540,7 +554,7 @@ export default new Vuex.Store({
     getSummaryObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._summary.find(item => {
         return (year === item.year);
       }).info;
@@ -567,13 +581,14 @@ export default new Vuex.Store({
         return (item.prop === oneYearSummary[0].children.value);
       });
 
+      debugger;
       return summaryInput;
     },
 
     getSummaryNeiObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._summary_nei.find(item => {
         return (year === item.year);
       }).info;
@@ -586,6 +601,7 @@ export default new Vuex.Store({
         summaryObjCombin = summaryObjCombinBox.children;
       }
 
+      debugger;
       return summaryObjCombin;
     },
     getSummaryNeiInput: state => year => {
@@ -619,7 +635,7 @@ export default new Vuex.Store({
     getSummaryWaiObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._summary_wai.find(item => {
         return (year === item.year);
       }).info;
@@ -684,7 +700,7 @@ export default new Vuex.Store({
     getSumInObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._sum_in.find(item => {
         return (year === item.year);
       }).info;
@@ -730,7 +746,7 @@ export default new Vuex.Store({
     getSumInNeiObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._sum_in_nei.find(item => {
         return (year === item.year);
       }).info;
@@ -776,7 +792,7 @@ export default new Vuex.Store({
     getSumInWaiObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._sum_in_wai.find(item => {
         return (year === item.year);
       }).info;
@@ -822,7 +838,7 @@ export default new Vuex.Store({
     getSumOutObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._sum_out.find(item => {
         return (year === item.year);
       }).info;
@@ -868,7 +884,7 @@ export default new Vuex.Store({
     getSumOutNeiObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._sum_out_nei.find(item => {
         return (year === item.year);
       }).info;
@@ -914,7 +930,7 @@ export default new Vuex.Store({
     getSumOutWaiObjCombin: state => year => {
 
       let summaryObjCombinBox = {},
-          summaryObjCombin = [];
+        summaryObjCombin = [];
       let oneYearSummary = state.form._sum_out_wai.find(item => {
         return (year === item.year);
       }).info;
@@ -976,7 +992,7 @@ function initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label
       oneYearInfo[0].children.value = value;
       correct = true;
     }
-    
+
     if (!correct) {
       let oneInput = oneYearInfo[0].children.inputChildren.find(item => {
         return (item.prop === oneYearInfo[0].children.value);
@@ -987,7 +1003,7 @@ function initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label
       }
     }
   }
-  
+
   // 对象的三级结构
   if (!correct) {
     // 找到第三级对应的对象
@@ -1024,13 +1040,58 @@ function initSumInPageCate(oneYearInfo, { value, year, index, propIndex, label }
       let oneInput = oneYearInfo[0].children.inputChildren.find(item => {
         return (item.prop === oneYearInfo[0].children.value);
       })
-  
+
       if (oneInput.label === label) {
         oneInput.value = value;
         correct = true;
       }
     }
-    
+
+  }
+  // 对象的三级结构
+  if (!correct) {
+    // 找到第三级对应的对象
+    let child = oneYearInfo[0].children.children.find(subItem => {
+      return (subItem.prop === oneYearInfo[0].children.value);
+    });
+
+    if ((index !== undefined) && (propIndex === undefined)) {
+      child.children[index].value = value;
+    } else if ((index !== undefined) && (propIndex !== undefined)) {
+      child.children[propIndex].children[index].value = value;
+    }
+  }
+}
+
+// 流入修改页面函数
+function initSumOutPageCate(oneYearInfo, { value, year, index, propIndex, label }) {
+  // 判断赋值是否完成
+  let correct = false;
+
+  // 对象的一级结构
+  if (sumOutInfo[0].label === label) {
+    oneYearInfo[0].value = value;
+    correct = true;
+  }
+
+  // 对象的二级结构
+  if (!correct) {
+    if (sumOutInfo[0].children.label === label) {
+      oneYearInfo[0].children.value = value;
+      correct = true;
+    }
+
+    if (!correct) {
+      let oneInput = oneYearInfo[0].children.inputChildren.find(item => {
+        return (item.prop === oneYearInfo[0].children.value);
+      })
+
+      if (oneInput.label === label) {
+        oneInput.value = value;
+        correct = true;
+      }
+    }
+
   }
   // 对象的三级结构
   if (!correct) {

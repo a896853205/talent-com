@@ -4,6 +4,7 @@
 			<el-tab-pane v-for="(value, key) in summary" :key="key" :label="value.year">
 				<p class="title">单位人才情况汇总表-存量信息-{{value.year}}年</p>
 				<TalentStatus
+					:key="`正常${key}`"
 					:getSummaryObjCombin='getSummaryObjCombin(value.year)'
 					:summaryInput='summaryInput(value.year)'
 					:twoLevelStationCategory='twoLevelStationCategory(value.year)'

@@ -149,7 +149,10 @@
 import url from "@/service.config.js";
 import axios from "axios";
 import util from "@/utils.js";
-import { debuglog } from 'util';
+import { debuglog } from "util";
+// 表单验证
+import { verify } from "./form/verification";
+
 export default {
   data() {
     return {
@@ -158,10 +161,10 @@ export default {
       loading: false,
       btnLoading: false
     };
-	},
-	computed: {
-		unit() {
-			return this.$store.getters.unit;
+  },
+  computed: {
+    unit() {
+      return this.$store.getters.unit;
     }
   },
   methods: {
@@ -192,8 +195,12 @@ export default {
       if (this.$store.state.form._confirmed) {
         this.$message.error("您已经提交过了，不需要暂存了！");
         return;
-			}
-			
+      }
+
+      if (!this.$store.state.form._basic[4]) {
+        this.$message.error("请选择 单位基本信息 中的 单位性质 ");
+        return;
+      }
       let that = this;
       axios({
         url: url.save,
@@ -203,164 +210,174 @@ export default {
           userId: that.$store.state.form._from_user
         }
       })
-			.then(res => {
-				this.$message({
-					message: "已暂存到服务器，请放心退出",
-					type: "success",
-					duration: 1000
-				});
-				console.log(res.data);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-      
+        .then(res => {
+          this.$message({
+            message: "已暂存到服务器，请放心退出",
+            type: "success",
+            duration: 1000
+          });
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     submitHandle() {
+      let verifyMsg = null;
+
       if (this.$store.state.form._confirmed) {
         this.$message.error("请不要重复提交！");
         return;
       }
-      if (this.check()) {
-        let that = this;
-        this.$confirm("提交后不可修改, 是否提交?", "提交", {
-          confirmButtonText: "提交",
-          cancelButtonText: "取消",
-          type: "warning"
-        })
-          .then(() => {
-            this.btnLoading = true;
-            this.$store.state.form._confirmed = true;
-            //上传服务器！！！！！！！！
-            axios({
-              url: url.save,
-              method: "post",
-              data: that.$store.state.form
-            })
-              .then(res => {
-                console.log(res.data);
-                this.btnLoading = false;
-                this.$message({
-                  type: "success",
-                  message: "提交成功!"
-                });
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          })
-          .catch(() => {
-            this.$message({
-              type: "info",
-              message: "已取消提交"
-            });
+
+      verifyMsg = verify(this.$store.state.form);
+
+      
+      if (!verifyMsg.verify) {
+        return void this.$Message.error({
+          content: verifyMsg.msg,
+          duration: 10,
+          closable: true
+        });
+      }
+
+      this.$confirm("提交后不可修改, 是否提交?", "提交", {
+        confirmButtonText: "提交",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.btnLoading = true;
+          this.$store.state.form._confirmed = true;
+          //上传服务器！！！！！！！！
+          return axios({
+            url: url.save,
+            method: "post",
+            data: that.$store.state.form
           });
-      }
+        })
+        .then(res => {
+          console.log(res.data);
+          this.btnLoading = false;
+          this.$message({
+            type: "success",
+            message: "提交成功!"
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消提交"
+          });
+        });
     },
 
-    check() {
-      //基本信息校验
-      const jb = "基本信息";
-      const rchz = "单位人才情况汇总";
-      const lr = "单位人才流动汇总 流入情况统计";
-      const lc = "单位人才流动汇总 流出情况统计";
-      const lcxx = "单位人才流动汇总 流出人才信息统计";
-      const rcxq = "单位人才需求调查";
-      const patt_name = /^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/;
-      const patt_id = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-      const patt_phone = /^[1][0-9][0-9]{9}$/;
-      const patt_email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-      for (var item in this.$store.state.form._basic) {
-        if (item == "QQ" || item == "微信" || item == "电子邮箱") {
-          continue;
-        }
-        if (!this.$store.state.form._basic[item]) {
-          this.warn(jb, item, "empty");
-          return false;
-        }
-      }
-      if (this.$store.state.form._basic["行业分类"].length !== 3) {
-        this.warn(jb, "行业分类", "complete");
-        return false;
-      }
-      if (!patt_name.test(this.$store.state.form._basic["填报人"])) {
-        this.warn(jb, "填报人", "wrong");
-        return false;
-      }
-      if (!patt_phone.test(this.$store.state.form._basic["联系电话"])) {
-        this.warn(jb, "联系电话", "wrong");
-        return false;
-      }
-      if (
-        this.$store.state.form._basic["电子邮箱"] !== null &&
-        !patt_email.test(this.$store.state.form._basic["电子邮箱"])
-      ) {
-        this.warn(jb, "电子邮箱", "wrong");
-        return false;
-      }
+    // check() {
+    //   //基本信息校验
+    //   const jb = "基本信息";
+    //   const rchz = "单位人才情况汇总";
+    //   const lr = "单位人才流动汇总 流入情况统计";
+    //   const lc = "单位人才流动汇总 流出情况统计";
+    //   const lcxx = "单位人才流动汇总 流出人才信息统计";
+    //   const rcxq = "单位人才需求调查";
+    //   const patt_name = /^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/;
+    //   const patt_id = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    //   const patt_phone = /^[1][0-9][0-9]{9}$/;
+    //   const patt_email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    //   for (var item in this.$store.state.form._basic) {
+    //     if (item == "QQ" || item == "微信" || item == "电子邮箱") {
+    //       continue;
+    //     }
+    //     if (!this.$store.state.form._basic[item]) {
+    //       this.warn(jb, item, "empty");
+    //       return false;
+    //     }
+    //   }
+    //   if (this.$store.state.form._basic["行业分类"].length !== 3) {
+    //     this.warn(jb, "行业分类", "complete");
+    //     return false;
+    //   }
+    //   if (!patt_name.test(this.$store.state.form._basic["填报人"])) {
+    //     this.warn(jb, "填报人", "wrong");
+    //     return false;
+    //   }
+    //   if (!patt_phone.test(this.$store.state.form._basic["联系电话"])) {
+    //     this.warn(jb, "联系电话", "wrong");
+    //     return false;
+    //   }
+    //   if (
+    //     this.$store.state.form._basic["电子邮箱"] !== null &&
+    //     !patt_email.test(this.$store.state.form._basic["电子邮箱"])
+    //   ) {
+    //     this.warn(jb, "电子邮箱", "wrong");
+    //     return false;
+    //   }
 
-      //单位人才情况汇总校验
-      if (
-        !this.checkEveryYear(
-          rchz,
-          "职工人数",
-          this.$store.state.form._summary
-        ) ||
-        !this.checkEveryYear(lr, "流入人数", this.$store.state.form._sum_in) ||
-        !this.checkEveryYear(lc, "流出人数", this.$store.state.form._sum_out)
-      ) {
-        return false;
-      }
-      //流出人才信息统计校验
-      var item_out_index = 1;
-      for (var item_out of this.$store.state.form._out_status) {
-        for (var item_out_s in item_out.info) {
-          if (item_out.info[item_out_s] == null) {
-            this.warn(lcxx + "第" + item_out_index + "项", item_out_s, "empty");
-            return false;
-          }
-        }
+    //   //单位人才情况汇总校验
+    //   if (
+    //     !this.checkEveryYear(
+    //       rchz,
+    //       "职工人数",
+    //       this.$store.state.form._summary
+    //     ) ||
+    //     !this.checkEveryYear(lr, "流入人数", this.$store.state.form._sum_in) ||
+    //     !this.checkEveryYear(lc, "流出人数", this.$store.state.form._sum_out)
+    //   ) {
+    //     return false;
+    //   }
+    //   //流出人才信息统计校验
+    //   var item_out_index = 1;
+    //   for (var item_out of this.$store.state.form._out_status) {
+    //     for (var item_out_s in item_out.info) {
+    //       if (item_out.info[item_out_s] == null) {
+    //         this.warn(lcxx + "第" + item_out_index + "项", item_out_s, "empty");
+    //         return false;
+    //       }
+    //     }
 
-        if (!this.IdentityCodeValid(item_out.info["身份证号"])) {
-          this.warn(lcxx + "第" + item_out_index + "项", "身份证号", "wrong");
-          return false;
-        }
+    //     if (!this.IdentityCodeValid(item_out.info["身份证号"])) {
+    //       this.warn(lcxx + "第" + item_out_index + "项", "身份证号", "wrong");
+    //       return false;
+    //     }
 
-        if (!this.checkJob(item_out.info["岗位类别"])) {
-          this.warn(
-            lcxx + "第" + item_out_index + "项",
-            "岗位类别",
-            "complete"
-          );
-          return false;
-        }
-        item_out_index++;
-      }
+    //     if (!this.checkJob(item_out.info["岗位类别"])) {
+    //       this.warn(
+    //         lcxx + "第" + item_out_index + "项",
+    //         "岗位类别",
+    //         "complete"
+    //       );
+    //       return false;
+    //     }
+    //     item_out_index++;
+    //   }
 
-      //单位人才需求校验
-      var need_index = 1;
-      for (var item_need of this.$store.state.form._need) {
-        for (var item_need_s in item_need.info) {
-          if (
-            item_need.info[item_need_s] == null &&
-            item_need_s != "职业资格证书"
-          ) {
-            this.warn(rcxq + "第" + need_index + "项", item_need_s, "empty");
-            return false;
-          }
-          if (!this.checkJob(item_need.info["岗位类别"])) {
-            this.warn(rcxq + "第" + need_index + "项", "岗位类别", "complete");
-            return false;
-          }
-          if (item_need.info["专业要求"].length != 3) {
-            this.warn(rcxq + "第" + need_index + "项", "专业需求", "complete");
-            return;
-          }
-        }
-        need_index++;
-      }
-      return true;
-    },
+    //   //单位人才需求校验
+    //   var need_index = 1;
+    //   for (var item_need of this.$store.state.form._need) {
+    //     for (var item_need_s in item_need.info) {
+    //       if (
+    //         item_need.info[item_need_s] == null &&
+    //         item_need_s != "职业资格证书"
+    //       ) {
+    //         this.warn(rcxq + "第" + need_index + "项", item_need_s, "empty");
+    //         return false;
+    //       }
+    //       if (!this.checkJob(item_need.info["岗位类别"])) {
+    //         this.warn(rcxq + "第" + need_index + "项", "岗位类别", "complete");
+    //         return false;
+    //       }
+    //       if (item_need.info["专业要求"].length != 3) {
+    //         this.warn(rcxq + "第" + need_index + "项", "专业需求", "complete");
+    //         return;
+    //       }
+    //     }
+    //     need_index++;
+    //   }
+    //   return true;
+    // },
     checkJob(e) {
       if (e.length == 0) {
         return false;
@@ -551,9 +568,8 @@ export default {
     }
   },
   created() {
-
     if (!this.$store.state.form._from_user) {
-      this.$store.commit('setUserId', localStorage.getItem('userId'));
+      this.$store.commit("setUserId", localStorage.getItem("userId"));
     }
 
     let userId = this.$store.state.form._from_user;
@@ -561,15 +577,19 @@ export default {
 
     axios({
       url: url.getForm,
-      method: 'get',
+      method: "get",
       params: {
         userId
       }
-    })
-    .then(res => {
+    }).then(res => {
       let { form } = res.data;
-      
-      _this.$store.commit('setForm', form);
+
+      _this.$store.commit("setForm", form);
+      // _this.$store.commit('setBasic', {
+      //   value: _this.$store.state.form._basic[4].value,
+      //   index: 4,
+      //   label: _this.$store.state.form._basic[4].label
+      // });
     });
   }
 };

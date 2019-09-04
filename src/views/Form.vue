@@ -96,7 +96,7 @@
           <Button class="button" type="primary" @click="saveHandle">暂存</Button>
         </div>
         <div class="submit">
-          <Button type="success" @click="submitHandle2" :loading="btnLoading">提交问卷</Button>
+          <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
         </div>
         <div class="submit">
           <Button type="warning" icon="md-arrow-down" @click="exportExcel">导出表格</Button>
@@ -197,10 +197,6 @@ export default {
         return;
       }
 
-      if (!this.$store.state.form._basic[4]) {
-        this.$message.error("请选择 单位基本信息 中的 单位性质 ");
-        return;
-      }
       let that = this;
       axios({
         url: url.save,
@@ -230,15 +226,20 @@ export default {
         return;
       }
 
-      verifyMsg = verify(this.$store.state.form);
+      if (!this.$store.state.form._basic[4]) {
+        this.$message.error("请选择 单位基本信息 中的 单位性质 ");
+        return;
+      }
 
+      verifyMsg = verify(this.$store.state.form);
       
       if (!verifyMsg.verify) {
-        return void this.$Message.error({
+        this.$Message.error({
           content: verifyMsg.msg,
           duration: 10,
           closable: true
         });
+        return;
       }
 
       this.$confirm("提交后不可修改, 是否提交?", "提交", {

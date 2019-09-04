@@ -182,7 +182,7 @@ export const form_inserting = {
     label: '单位名称（全称）',
     value: undefined,
     type: 'input',
-    regExp: /^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/
+    regExp: '/^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/'
   }, {
     label: '统一社会信用代码/组织机构代码',
     value: undefined,
@@ -197,13 +197,13 @@ export const form_inserting = {
     label: '联系人',
     value: undefined,
     type: 'input',
-    regExp: /^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/,
+    regExp: '/^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/',
     must: true,
   }, {
     label: '联系电话',
     value: undefined,
     type: 'input',
-    regExp: /^[1][0-9][0-9]{9}$/,
+    regExp: '/^[1][0-9][0-9]{9}$/',
     must: true,
   }, {
     label: 'QQ号',
@@ -217,7 +217,7 @@ export const form_inserting = {
     label: '电子邮箱',
     value: undefined,
     type: 'input',
-    regExp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+    regExp: '/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/'
   }],
   _summary: initEveryYear(2009, 2018, summaryInfo),
   _summary_nei: initEveryYear(2009, 2018, summaryInfo),

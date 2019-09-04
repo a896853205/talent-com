@@ -1,6 +1,6 @@
-export const summaryVerify = _summary => {
+export const flowInVerify = _sum_in => {
   // 进行Array的处理
-  _summary = Array.from(_summary);
+  _sum_in = Array.from(_sum_in);
   // 返回的对象
   let verifyMsg = {
     verify: true,
@@ -10,11 +10,11 @@ export const summaryVerify = _summary => {
   haveDataYearIndexArr = [];
 
   // 查一下哪一年有数据把index输入到
-  _summary.forEach((item, index) => {
+  _sum_in.forEach((item, index) => {
     if (item.info[0].value > 0) {
       haveDataYearIndexArr.push(index);
     }
-  })
+  });
 
   // 判断如果每一年都没有填写
   if (haveDataYearIndexArr.length === 0) {
@@ -28,21 +28,21 @@ export const summaryVerify = _summary => {
 
     // 先求每个年份的所有类别的人数和
     let yearSum = 0;
-    for (let eachClass of _summary[index].info[0].children.inputChildren) {
+    for (let eachClass of _sum_in[index].info[0].children.inputChildren) {
       yearSum += eachClass.value;
     }
 
     // 看二级加和等不等于一级
-    if (_summary[index].info[0].value !== yearSum) {
+    if (_sum_in[index].info[0].value !== yearSum) {
       verifyMsg.verify = false;
-      verifyMsg.msg = `${_summary[index].year}年的职工人数填写错误`;
+      verifyMsg.msg = `${_sum_in[index].year}年的流入人数填写错误`;
       
       return verifyMsg;
     }
 
     // 看三级加和等不等于二级
-    for (let eachClassStructure of _summary[index].info[0].children.children) {
-      let classObj = _summary[index].info[0].children.inputChildren.find(value => {
+    for (let eachClassStructure of _sum_in[index].info[0].children.children) {
+      let classObj = _sum_in[index].info[0].children.inputChildren.find(value => {
         
         return (value.prop === eachClassStructure.prop);
       });
@@ -56,7 +56,7 @@ export const summaryVerify = _summary => {
           for (let selectSpecial of eachStructureObj.value) {
             if (selectSpecial.num && selectSpecial.cas.length === 0) {
               verifyMsg.verify = false;
-              verifyMsg.msg = `${_summary[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
+              verifyMsg.msg = `${_sum_in[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
 
               return verifyMsg;
             }
@@ -65,7 +65,7 @@ export const summaryVerify = _summary => {
 
           if (classObj.value !== structureNum) {
             verifyMsg.verify = false;
-            verifyMsg.msg = `${_summary[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
+            verifyMsg.msg = `${_sum_in[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
 
             return verifyMsg;
           }
@@ -80,7 +80,7 @@ export const summaryVerify = _summary => {
 
           if (classObj.value !== structureNum) {
             verifyMsg.verify = false;
-            verifyMsg.msg = `${_summary[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
+            verifyMsg.msg = `${_sum_in[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
             
             return verifyMsg;
           }
@@ -88,6 +88,4 @@ export const summaryVerify = _summary => {
       }
     }
   }
-
-  return verifyMsg;
 }

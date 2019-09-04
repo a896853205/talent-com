@@ -23,7 +23,7 @@ export const basicVerify = _basic => {
         return verifyMsg;
       }
     }
-    debugger;
+
     if (basicItem.type === 'input') {
       if (basicItem.must) {
         if (basicItem.value === null ||
@@ -37,11 +37,10 @@ export const basicVerify = _basic => {
       }
 
       if (basicItem.value && basicItem.regExp) {
-        if (!basicItem.regExp.test(basicItem.value)) {
+        if (!eval(basicItem.regExp).test(basicItem.value)) {
           verifyMsg.verify = false;
           verifyMsg.msg = '填写有误';
           verifyMsg.label = basicItem.label;
-          debugger;
           return verifyMsg;
         }
       }

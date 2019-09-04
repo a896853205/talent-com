@@ -83,10 +83,7 @@
 		},
 		data() {
 			return {
-				form: [{
-					id: 0,
-					value: {}
-				}],
+				form: [],
 				gangWeiLeiBie: [],
 				num: 1
 			}
@@ -144,6 +141,7 @@
 						value: this.initValue[i]
 					})
 				}
+				debugger;
 				if (!this.initValue.length) {
 					this.addHandle();
 				}

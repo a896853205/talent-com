@@ -60,7 +60,9 @@ export const flowOutVerify = _sum_out => {
 
               return verifyMsg;
             }
-            structureNum += selectSpecial.num;
+            if (selectSpecial.num) {
+              structureNum += selectSpecial.num;
+            }
           }
 
           if (classObj.value !== structureNum) {
@@ -74,18 +76,22 @@ export const flowOutVerify = _sum_out => {
           let eachStructureArr = eachStructureObj.children,
             structureNum = 0;
 
-          eachStructureArr.forEach(structure => {
-            structureNum += structure.value;
-          })
-
-          if (classObj.value !== structureNum) {
-            verifyMsg.verify = false;
-            verifyMsg.msg = `${_sum_out[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
-            
-            return verifyMsg;
+          if (eachStructureArr){
+            eachStructureArr.forEach(structure => {
+              structureNum += structure.value;
+            })
+  
+            if (classObj.value !== structureNum) {
+              verifyMsg.verify = false;
+              verifyMsg.msg = `${_sum_out[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
+              
+              return verifyMsg;
+            }
           }
         }
       }
     }
   }
+
+  return verifyMsg;
 }

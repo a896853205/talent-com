@@ -2,7 +2,7 @@
   <div class="box">
     <div class="need">
       <Need 
-        title='单位人才需求调查表-事业单位-体制外'
+        title='单位人才需求调查表-事业单位-编制外'
         commitFunction='setNeedOut'
         :need='need'
       />

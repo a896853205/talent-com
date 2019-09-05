@@ -25,6 +25,15 @@
           :initValue="sumInInput.value"
         />
       </i-col>
+      <i-col span="8">
+        <Alert type="error">
+          An error prompt
+          <span slot="desc">
+            Custom error description copywriting.
+            <Icon type="help-circled" size="14"></Icon>
+          </span>
+        </Alert>
+      </i-col>
     </Row>
 
     <Divider />
@@ -32,14 +41,12 @@
     <Row
       v-for="(item, index) in getSumInObjCombin"
       :key="(sumIn[0].children.value + index)"
-      :gutter="16">
+      :gutter="16"
+    >
       <div v-if="item.children">
         <span class="input-combine-box-title">{{ item.label }}</span>
         <div>
-          <i-col
-            span="4"
-            v-for="(opationItem, opationIndex) in item.children"
-            :key="opationIndex">
+          <i-col span="4" v-for="(opationItem, opationIndex) in item.children" :key="opationIndex">
             <InputNumberWithLabel
               :label="opationItem.label"
               :initValue="opationItem.value"
@@ -61,6 +68,17 @@
           />
         </i-col>
       </div>
+    </Row>
+    <Row>
+      <i-col span="8">
+        <Alert type="error">
+          An error prompt
+          <span slot="desc">
+            Custom error description copywriting.
+            <Icon type="help-circled" size="14"></Icon>
+          </span>
+        </Alert>
+      </i-col>
     </Row>
   </div>
 </template>
@@ -101,7 +119,7 @@ export default {
   computed: {
     oneLevelStationCategory() {
       return this.$store.getters.oneLevelStationCategory;
-    },
+    }
   },
   methods: {
     changeEvent({ value, index, propIndex, label }) {

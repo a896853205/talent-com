@@ -123,7 +123,7 @@ export default new Router({
           component: NeedNei,
           meta: {
             keepAlive: true,
-            title: '单位人才需求情况统计-体制内'
+            title: '单位人才需求情况统计-编制内'
           }
         },
         {
@@ -132,7 +132,7 @@ export default new Router({
           component: NeedWai,
           meta: {
             keepAlive: true,
-            title: '单位人才需求情况统计-体制外'
+            title: '单位人才需求情况统计-编制外'
           }
         },
         {
@@ -231,7 +231,7 @@ export default new Router({
           component: FlowTalentInfoNei,
           meta: {
             keepAlive: true,
-            title: '单位流失人才基本信息统计-体制内'
+            title: '单位流失人才基本信息统计-编制内'
           }
         },
         {
@@ -240,7 +240,7 @@ export default new Router({
           component: FlowTalentInfoWai,
           meta: {
             keepAlive: true,
-            title: '单位流失人才基本信息统计-体制外'
+            title: '单位流失人才基本信息统计-编制外'
           }
         },
       ]

@@ -39,16 +39,16 @@
           <MenuItem name="flowOutWai">流出情况统计-事业单位-编制外</MenuItem>
         </MenuGroup>
         <MenuGroup title="流出人才信息统计">
-          <MenuItem name="flowTalentInfoNei">流出人才信息统计-事业单位-体制内</MenuItem>
-          <MenuItem name="flowTalentInfoWai">流出人才信息统计-事业单位-体制外</MenuItem>
+          <MenuItem name="flowTalentInfoNei">流出人才信息统计-事业单位-编制内</MenuItem>
+          <MenuItem name="flowTalentInfoWai">流出人才信息统计-事业单位-编制外</MenuItem>
         </MenuGroup>
       </Submenu>
       <Submenu name="needNei">
         <template slot="title">
           <Icon type="ios-paper" />单位人才需求调查
         </template>
-        <MenuItem name="needNei">单位人才需求调查-事业单位-体制内</MenuItem>
-        <MenuItem name="needWai">单位人才需求调查-事业单位-体制外</MenuItem>
+        <MenuItem name="needNei">单位人才需求调查-事业单位-编制内</MenuItem>
+        <MenuItem name="needWai">单位人才需求调查-事业单位-编制外</MenuItem>
       </Submenu>
       <div class="user">
         <div class="submit">

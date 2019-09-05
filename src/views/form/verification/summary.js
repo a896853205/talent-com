@@ -48,8 +48,8 @@ export const summaryVerify = _summary => {
       });
 
       for (let eachStructureObj of eachClassStructure.children) {
-        // 判断子人员类别的特殊情况
-        if (eachStructureObj.label === '子人员类别') {
+        // 判断岗位级别的特殊情况
+        if (eachStructureObj.label === '岗位级别') {
 
           let structureNum = 0;
 

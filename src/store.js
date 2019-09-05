@@ -77,13 +77,13 @@ export default new Vuex.Store({
     },
 
     setBasic(state, { value, index, label }) {
-      state.form._basic[index].value = value;
 
       if (label === '单位性质') {
+        state.form = objectHelper.deepCopy(form_inserting);
         // 更换单位性质时会将 单位人才,单位人才流动汇总 流入流出全部清除
         // 提示是否确认
         // 如果确认,进行初始化select和select选中的数据
-
+        
         switch (value) {
           case '机关':
             
@@ -390,6 +390,8 @@ export default new Vuex.Store({
             });
         }
       }
+      state.form._basic[index].value = value;
+
     },
 
     setSummery(state, { value, year, index, propIndex, label }) {

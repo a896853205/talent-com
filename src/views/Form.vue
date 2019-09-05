@@ -187,7 +187,6 @@ export default {
         });
     },
     exportExcel() {
-      console.log("提交问卷");
       let that = this;
       axios({
         url: url.generateExcel,
@@ -199,6 +198,8 @@ export default {
       })
         .then(res => {
           console.log(res.data);
+          window.open(url.download + "/" + this.$store.state.form._from_user, "_self");
+
         })
         .catch(err => {
           console.log(err);

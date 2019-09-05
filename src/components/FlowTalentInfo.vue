@@ -191,13 +191,6 @@ export default {
     };
   },
 
-  beforeMount() {
-    // this.$data.outStatusArr = this.outStatus;
-    // this.$data.num =
-    //   this.$data.outStatusArr[this.$data.outStatusArr.length - 1].id + 1;
-    console.log("outStatusArr", this.$data.outStatusArr);
-  },
-
   computed: {
     stationCategory() {
       return this.$store.getters.stationCategory;

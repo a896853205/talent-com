@@ -41,7 +41,7 @@ export default {
 	watch: {
     initValue: {
       handler: function(val, oldval) {
-        console.log('casca', val);
+
 				if (val) {
 					// 不知道为什么需要异步才能好使
 					setTimeout(() => {

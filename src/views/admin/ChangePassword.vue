@@ -51,9 +51,7 @@ export default {
     };
   },
   methods: {
-    changeHandle() {
-      console.log("修改密码");
-    }
+    changeHandle() {}
   }
 };
 </script>

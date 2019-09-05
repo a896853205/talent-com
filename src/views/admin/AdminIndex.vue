@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     select(name) {
-      console.log(name);
       this.$router.push(name);
     },
     logout() {

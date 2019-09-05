@@ -35,6 +35,8 @@ import {
   SUM_OUT_ITEM_PERSON_CATEGORY
 } from './store/init/sum-out';
 
+import adminModul from './store/admin/'
+
 Vue.use(Vuex)
 
 let form = objectHelper.deepCopy(form_inserting);
@@ -230,7 +232,6 @@ export default new Vuex.Store({
               }
             }
 
-            console.log('state', state);
             //  编制外
             state.form._summary_wai.forEach((item, i) => {
 
@@ -975,7 +976,10 @@ export default new Vuex.Store({
       return unit;
     }
   },
-  actions: {}
+  actions: {},
+  modules: {
+    admin: adminModul
+  }
 })
 
 function initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label }) {

@@ -20,7 +20,6 @@ import FlowOutWai from '@/views/FlowOutWai.vue'
 import FlowTalentInfo from '@/views/FlowTalentInfo.vue'
 import FlowTalentInfoNei from '@/views/FlowTalentInfoNei.vue'
 import FlowTalentInfoWai from '@/views/FlowTalentInfoWai.vue'
-import Loading from '@/views/Loading.vue'
 import Need from '@/views/Need.vue'
 import NeedNei from '@/views/NeedNei.vue'
 import NeedWai from '@/views/NeedWai.vue'
@@ -53,7 +52,6 @@ export default new Router({
         title: '账户分配系统登录'
       }
     },
-
     {
       path: '/admin/index',
       name: 'adminIndex',
@@ -87,11 +85,6 @@ export default new Router({
           }
         },
       ]
-    },
-    {
-      path: '/loading',
-      name: 'loading',
-      component: Loading
     },
     {
       path: '/changePassword',
@@ -272,14 +265,6 @@ export default new Router({
       meta: {
         title: '登录'
       }
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     }
   ]
 })

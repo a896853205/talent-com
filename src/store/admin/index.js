@@ -1,4 +1,4 @@
-export default modul = {
+export default {
   // 权限管理的数据存在这里
   state: {},
   // 操作vuex的函数放在这里

@@ -4844,3 +4844,28 @@ export const qunxian = [
     "value": "账号分配权限"
   },
 ];
+
+export const renCaiCengCi = [{
+  "label": "问卷填写权限",
+  "value": "问卷填写权限"
+}, 
+{
+  "label": "领军人才",
+  "value": "领军人才"
+},
+{
+  "label": "高精尖人才",
+  "value": "高精尖人才"
+},
+{
+  "label": "急需紧缺人才",
+  "value": "急需紧缺人才"
+},
+{
+  "label": "后备人才",
+  "value": "后备人才"
+},
+{
+  "label": "一般性人才",
+  "value": "一般性人才"
+}]

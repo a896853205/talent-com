@@ -16,13 +16,19 @@ export const flowInVerify = _sum_in => {
     }
   });
 
-  // 判断如果每一年都没有填写
-  if (haveDataYearIndexArr.length === 0) {
+  if (_sum_in[_sum_in.length - 1].info[0].value === 0) {
     verifyMsg.verify = false;
-    verifyMsg.msg = '至少需要添加一年的信息';
+    verifyMsg.msg = '必须填写2018年信息';
 
     return verifyMsg;
   }
+  // 判断如果每一年都没有填写
+  // if (haveDataYearIndexArr.length === 0) {
+  //   verifyMsg.verify = false;
+  //   verifyMsg.msg = '至少需要添加一年的信息';
+
+  //   return verifyMsg;
+  // }
 
   for (let index of haveDataYearIndexArr) {
 

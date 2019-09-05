@@ -544,7 +544,11 @@ export const jobCategoryJiGuan = [
   },
   {
     "label": "其他",
-    "value": "其他"
+    "value": "其他",
+    "children": [{
+      "label": "其他",
+      "value": "其他",
+    }]
   }
 ];
 //人员类别-企业
@@ -588,7 +592,11 @@ export const jobCategoryQiYe = [
   },
   {
     "label": "其他",
-    "value": "其他"
+    "value": "其他",
+    "children": [{
+      "label": "其他",
+      "value": "其他",
+    }]
   }
 ];
 // 社会团体
@@ -661,6 +669,10 @@ export const jobCategorySocial = [
   {
     "label": "其他",
     "value": "其他",
+    "children": [{
+      "label": "其他",
+      "value": "其他",
+    }]
   }
 ];
 // 事业单位
@@ -733,6 +745,10 @@ export const jobCategoryCareer = [
   {
     "label": "其他",
     "value": "其他",
+    "children": [{
+      "label": "其他",
+      "value": "其他",
+    }]
   }
 ]
 

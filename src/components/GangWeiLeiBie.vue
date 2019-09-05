@@ -141,7 +141,7 @@
 						value: this.initValue[i]
 					})
 				}
-				debugger;
+				// debugger;
 				if (!this.initValue.length) {
 					this.addHandle();
 				}

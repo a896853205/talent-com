@@ -168,15 +168,50 @@ export default {
     }
   },
   methods: {
+    exportExcel2() {
+      console.log("提交问卷");
+      let that = this;
+      axios({
+        url: url.generateExcel,
+        method: "post",
+        data: {
+          form: that.$store.state.form,
+          userId: that.$store.state.form._from_user
+        }
+      })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     exportExcel() {
-      let flag = this.$store.state.form._confirmed;
-      if (flag === true) {
-        console.log("下载表格");
-        let excelName = this.$store.state.form._from_user;
-        window.open(url.download + "/" + excelName, "_self");
-      } else {
-        this.$message.error("请先提交问卷");
-      }
+      console.log("提交问卷");
+      let that = this;
+      axios({
+        url: url.generateExcel,
+        method: "post",
+        data: {
+          form: that.$store.state.form,
+          userId: that.$store.state.form._from_user
+        }
+      })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      // let flag = this.$store.state.form._confirmed;
+      // if (flag === true) {
+      //   console.log("下载表格");
+      //   let excelName = this.$store.state.form._from_user;
+      //   window.open(url.download + "/" + excelName, "_self");
+      // } else {
+      //   this.$message.error("请先提交问卷");
+      // }
     },
     logout() {
       // this.$cookies.remove("user_data");

@@ -36,9 +36,7 @@ export default {
   watch: {
     initValue: {
       handler: function(val, oldval) {
-        if (val) {
-          this.$data.value = val;
-        }
+        this.$data.value = val;
       },
       immediate: true,
       deep: true

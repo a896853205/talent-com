@@ -69,7 +69,6 @@ export default {
   mounted() {},
   computed: {
     basic() {
-      console.log(this.$store.state.form._basic);
       return this.$store.state.form._basic;
     }
   }

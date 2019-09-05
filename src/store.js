@@ -37,6 +37,7 @@ import {
 
 Vue.use(Vuex)
 
+let form = objectHelper.deepCopy(form_inserting);
 export default new Vuex.Store({
   state: {
     userId: '',
@@ -51,7 +52,7 @@ export default new Vuex.Store({
       'flowTalentInfo': false,
       'need': false
     },
-    form: form_inserting,
+    form,
     vueElementLoading: false,
   },
   mutations: {
@@ -61,9 +62,15 @@ export default new Vuex.Store({
     },
 
     // 更新表单
-    setForm(state, form) {
+    setForm(state, { form, userId }) {
       if (form) {
         state.form = form;
+      } else if (userId && !form) {
+        let initForm = objectHelper.deepCopy(form_inserting)
+        initForm._from_user = userId;
+        state.form = initForm;
+      } else {
+        state.form = objectHelper.deepCopy(form_inserting);
       }
     },
 

@@ -8,7 +8,8 @@ import {
   xueLiJieGou,
   xinChou,
   major,
-  liZhiYuanYin
+  liZhiYuanYin,
+  renCaiCengCi
 } from '../../assets/category/category';
 function initEveryYear(begin, end, data) {
   let dataArr = [];
@@ -109,6 +110,11 @@ export const outStatusInfo = [
   value: [],
   type: 'checkBox',
   list: liZhiYuanYin
+}, {
+  label: '人才层次',
+  value: undefined,
+  type: 'select',
+  list: renCaiCengCi
 }];
 
 export const personInfo = [

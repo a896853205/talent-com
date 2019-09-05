@@ -60,7 +60,9 @@ export const summaryVerify = _summary => {
 
               return verifyMsg;
             }
-            structureNum += selectSpecial.num;
+            if (selectSpecial.num) {
+              structureNum += selectSpecial.num;
+            }
           }
 
           if (classObj.value !== structureNum) {

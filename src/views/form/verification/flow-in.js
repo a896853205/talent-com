@@ -60,7 +60,10 @@ export const flowInVerify = _sum_in => {
 
               return verifyMsg;
             }
-            structureNum += selectSpecial.num;
+            if (selectSpecial.num) {
+              structureNum += selectSpecial.num;
+            }
+            debugger;
           }
 
           if (classObj.value !== structureNum) {
@@ -88,4 +91,6 @@ export const flowInVerify = _sum_in => {
       }
     }
   }
+
+  return verifyMsg;
 }

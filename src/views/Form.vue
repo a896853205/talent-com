@@ -254,23 +254,12 @@ export default {
         });
     },
     submitHandle() {
-<<<<<<< HEAD
-=======
       let verifyMsg = null;
 
->>>>>>> 14a1a7731c8c6516eda55cc2a9ea534005d8e091
       if (this.$store.state.form._confirmed) {
         this.$message.error("请不要重复提交！");
         return;
       }
-<<<<<<< HEAD
-      if (this.check()) {
-        let that = this;
-        this.$confirm("提交后不可修改, 是否提交?", "提交", {
-          confirmButtonText: "提交",
-          cancelButtonText: "取消",
-          type: "warning"
-=======
 
       if (!this.$store.state.form._basic[4]) {
         this.$message.error("请选择 单位基本信息 中的 单位性质 ");
@@ -313,7 +302,6 @@ export default {
         })
         .catch(err => {
           console.log(err);
->>>>>>> 14a1a7731c8c6516eda55cc2a9ea534005d8e091
         })
         .catch(() => {
           this.$message({

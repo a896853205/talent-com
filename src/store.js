@@ -391,14 +391,14 @@ export default new Vuex.Store({
 
         initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label });
 
-        debugger;
+        // debugger;
       }
     },
     setSummeryIn(state, { value, year, index, propIndex, label }) {
 
       if (year) {
         let oneYearInfo = state.form._summary_nei.find(value => (value.year === year)).info
-        debugger;
+        // debugger;
         initSummaryPageCate(oneYearInfo, { value, year, index, propIndex, label });
       }
     },
@@ -567,7 +567,7 @@ export default new Vuex.Store({
         summaryObjCombin = summaryObjCombinBox.children;
       }
 
-      debugger;
+      // debugger;
 
       return summaryObjCombin;
     },
@@ -581,7 +581,7 @@ export default new Vuex.Store({
         return (item.prop === oneYearSummary[0].children.value);
       });
 
-      debugger;
+      // debugger;
       return summaryInput;
     },
 
@@ -601,7 +601,7 @@ export default new Vuex.Store({
         summaryObjCombin = summaryObjCombinBox.children;
       }
 
-      debugger;
+      // debugger;
       return summaryObjCombin;
     },
     getSummaryNeiInput: state => year => {

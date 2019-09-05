@@ -188,22 +188,28 @@ export default {
     },
     exportExcel() {
       let that = this;
-      axios({
-        url: url.generateExcel,
-        method: "post",
-        data: {
-          form: that.$store.state.form,
-          userId: that.$store.state.form._from_user
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          window.open(url.download + "/" + this.$store.state.form._from_user, "_self");
-
+      if (this.$store.state.form._confirmed) {
+        axios({
+          url: url.generateExcel,
+          method: "post",
+          data: {
+            form: that.$store.state.form,
+            userId: that.$store.state.form._from_user
+          }
         })
-        .catch(err => {
-          console.log(err);
-        });
+          .then(res => {
+            console.log(res.data);
+            window.open(
+              url.download + "/" + this.$store.state.form._from_user,
+              "_self"
+            );
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        this.$message.error("请先提交问卷");
+      }
 
       // let flag = this.$store.state.form._confirmed;
       // if (flag === true) {
@@ -256,7 +262,7 @@ export default {
     },
     submitHandle() {
       let verifyMsg = null;
-
+      // let that = this
       if (this.$store.state.form._confirmed) {
         this.$message.error("请不要重复提交！");
         return;
@@ -268,7 +274,7 @@ export default {
       }
 
       verifyMsg = verify(this.$store.state.form);
-      
+
       if (!verifyMsg.verify) {
         this.$Message.error({
           content: verifyMsg.msg,
@@ -300,7 +306,9 @@ export default {
             type: "success",
             message: "提交成功!"
           });
+          this.btnLoading = false;
         })
+        
         .catch(err => {
           console.log(err);
         })

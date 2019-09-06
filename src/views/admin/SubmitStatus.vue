@@ -148,6 +148,27 @@ export default {
     downloadExcel(ExcelName){
         console.log(ExcelName)
     }
+  },
+  mounted() {
+    axios({
+        url: url.manageInfo,
+        method: "post",
+        data: {
+          userId: this.adminUserId
+        }
+      })
+        .then(res => {
+          switch (res.data.status) {
+            case 0:
+              this.$Message.error(res.data.msg);
+              break;
+            case 1:
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
   }
 };
 </script>

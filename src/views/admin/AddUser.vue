@@ -60,6 +60,10 @@ export default {
   methods: {
     addUserHandle() {
       console.log('单位名称', this.companyName, '用户权限', this.authority);
+      if (this.companyName === "" || this.companyName === null || this.authority.length === 0) {
+        this.$Message.error("单位名称和权限不得为空！");
+        return;
+      }
       axios({
         url: url.adminRegister,
         method: "post",

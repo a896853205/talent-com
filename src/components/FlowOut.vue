@@ -28,9 +28,9 @@
       </i-col>
       <i-col span="8">
         <Alert type="error">
-          An error prompt
+          注意
           <span slot="desc">
-            Custom error description copywriting.
+            填写完当前的人员类别后，还可以切换人员类菜单，继续填写当年的其他人员类别。
             <Icon type="help-circled" size="14"></Icon>
           </span>
         </Alert>
@@ -89,9 +89,9 @@
     <Row>
       <i-col span="8">
         <Alert type="error">
-          An error prompt
+          注意
           <span slot="desc">
-            Custom error description copywriting.
+            填写完当前的人员类别后，还可以切换人员类菜单，继续填写当年的其他人员类别。
             <Icon type="help-circled" size="14"></Icon>
           </span>
         </Alert>

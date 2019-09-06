@@ -1,5 +1,13 @@
 <template>
 	<div class="box">
+		<Row>
+      <i-col span='4'>
+        <Alert type="warning" show-icon>
+          提示
+          <template slot="desc">在此处切换年份</template>
+        </Alert>
+      </i-col>
+    </Row>
 		<el-tabs tab-position="left">
 			<el-tab-pane v-for="(value, key) in summary" :key="key" :label="value.year">
 				<p class="title">单位人才情况汇总表-存量信息-{{value.year}}年</p>

@@ -178,35 +178,45 @@ export default {
     }
   },
   methods: {
+    // 下载表格
     exportExcel() {
       let _this = this;
 
       _this.$data.btnLoading = true;
-      console.log("conmfirmed", _this.$store.state.form._confirmed);
 
-      if (_this.$store.state.form._confirmed) {
-        axios({
-          url: url.generateExcel,
-          method: "post",
-          data: {
-            form: _this.$store.state.form,
-            userId: _this.$store.state.form._from_user
-          }
-        })
-          .then(res => {
-            window.open(
-              url.download + "/" + _this.$store.state.form._from_user,
-              "_self"
-            );
-            _this.$data.btnLoading = false;
+      axios({
+        url: url.getForm,
+        method: "get",
+        params: {
+          userId: _this.$store.state.form._from_user
+        }
+      }).then(res => {
+        let { form } = res.data;
+
+        if (form._confirmed) {
+          axios({
+            url: url.generateExcel,
+            method: "post",
+            data: {
+              form: _this.$store.state.form,
+              userId: _this.$store.state.form._from_user
+            }
           })
-          .catch(err => {
-            _this.$data.btnLoading = false;
-          });
-      } else {
-        _this.$data.btnLoading = false;
-        _this.$message.error("请先提交问卷");
-      }
+            .then(res => {
+              window.open(
+                url.download + "/" + _this.$store.state.form._from_user,
+                "_self"
+              );
+              _this.$data.btnLoading = false;
+            })
+            .catch(err => {
+              _this.$data.btnLoading = false;
+            });
+        } else {
+          _this.$data.btnLoading = false;
+          _this.$message.error("请先提交问卷");
+        }
+      });
     },
     logout() {
       // this.$cookies.remove("user_data");
@@ -229,6 +239,7 @@ export default {
       // }
       let _this = this,
         userId = this.$store.state.form._from_user;
+      console.log(userId);
 
       axios({
         url: url.getForm,
@@ -309,7 +320,6 @@ export default {
             type: "warning"
           })
           .then(() => {
-            _this.$store.state.form._confirmed = true;
             _this.loading = true;
             // 上传服务器！！！！！！！！
             axios({

@@ -1,14 +1,25 @@
 <template>
   <div class="box">
+    <Row>
+      <i-col span="4">
+        <Alert type="warning" show-icon>
+          提示
+          <template slot="desc">在此处切换年份</template>
+        </Alert>
+      </i-col>
+    </Row>
     <el-tabs tab-position="left">
       <el-tab-pane v-for="(value, key) in summaryOutter" :key="key" :label="value.year">
         <p class="title">单位人才情况汇总表-存量信息-事业单位-编制外-{{value.year}}年</p>
-        <TalentStatus 
+        <TalentStatus
           :key="`编制外${key}`"
-					:getSummaryObjCombin='getSummaryWaiObjCombin(value.year)'
-					:summaryInput='summaryInput(value.year)'
-					:twoLevelStationCategory='twoLevelSummaryWaiStationCategory(value.year)'
-					:year="value.year" :summary="value.info" commitFunction="setSummeryOut" />
+          :getSummaryObjCombin="getSummaryWaiObjCombin(value.year)"
+          :summaryInput="summaryInput(value.year)"
+          :twoLevelStationCategory="twoLevelSummaryWaiStationCategory(value.year)"
+          :year="value.year"
+          :summary="value.info"
+          commitFunction="setSummeryOut"
+        />
       </el-tab-pane>
     </el-tabs>
   </div>

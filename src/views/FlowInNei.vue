@@ -1,5 +1,13 @@
 <template>
   <div class="box">
+    <Row>
+      <i-col span="4">
+        <Alert type="warning" show-icon>
+          提示
+          <template slot="desc">在此处切换年份</template>
+        </Alert>
+      </i-col>
+    </Row>
     <el-tabs tab-position="left">
       <el-tab-pane v-for="(value, key) in FlowInInner" :key="key" :label="value.year">
         <p class="title">单位人才流动汇总表-流入人才-事业单位-编制内-{{value.year}}年</p>
@@ -7,10 +15,10 @@
           :getSumInObjCombin="getSumInObjCombin(value.year)"
           :sumInInput="SumInInput(value.year)"
           :twoLevelStationCategory="twoLevelSumInStationCategory(value.year)"
-					:year='value.year'
-          :sumIn='value.info'
-					commitFunction='setFlowInInner'
-				/>
+          :year="value.year"
+          :sumIn="value.info"
+          commitFunction="setFlowInInner"
+        />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -35,11 +43,11 @@ export default {
   data() {
     return {};
   },
-	computed: {
-		FlowInInner () {
-			return this.$store.state.form._sum_in_nei;
+  computed: {
+    FlowInInner() {
+      return this.$store.state.form._sum_in_nei;
     },
-    
+
     getSumInObjCombin() {
       return year => {
         return this.$store.getters.getSumInNeiObjCombin(year);
@@ -57,6 +65,6 @@ export default {
         return this.$store.getters.twoLevelSumInNeiStationCategory(year);
       };
     }
-	}
+  }
 };
 </script>

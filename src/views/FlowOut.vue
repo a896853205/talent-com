@@ -1,18 +1,24 @@
 <template>
   <div class="box">
+    <Row>
+      <i-col span="4">
+        <Alert type="warning" show-icon>
+          提示
+          <template slot="desc">在此处切换年份</template>
+        </Alert>
+      </i-col>
+    </Row>
     <el-tabs tab-position="left">
-      <el-tab-pane 
-				v-for="(value, key) in sumOut"
-				:key="key"
-				:label="value.year">
+      <el-tab-pane v-for="(value, key) in sumOut" :key="key" :label="value.year">
         <p class="title">单位人才流动汇总表-流出人才-{{value.year}}年</p>
         <FlowOut
-					:getSumOutObjCombin="getSumOutObjCombin(value.year)"
+          :getSumOutObjCombin="getSumOutObjCombin(value.year)"
           :SumOutInput="SumOutInput(value.year)"
           :twoLevelSumOutStationCategory="twoLevelSumOutStationCategory(value.year)"
-					:year="value.year"
-					:sumOut="value.info"
-					commitFunction="setFlowOut" />
+          :year="value.year"
+          :sumOut="value.info"
+          commitFunction="setFlowOut"
+        />
       </el-tab-pane>
     </el-tabs>
   </div>

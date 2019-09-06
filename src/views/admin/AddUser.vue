@@ -10,7 +10,7 @@
       <i-col span="2" class-name="label">用户权限：</i-col>
       <i-col span="6" class-name="labelInput">
         <CheckboxGroup v-model="authority">
-          <Checkbox size="large" label="分配用户权限"></Checkbox>
+          <Checkbox size="large" label="分配用户权限" :disabled="isThird"></Checkbox>
           <Checkbox size="large" label="填报权限"></Checkbox>
         </CheckboxGroup>
       </i-col>
@@ -46,15 +46,25 @@ export default {
   data() {
     return {
       companyName: "",
-      authority: []
+      authority: [],
+      isThird: false,
     };
   },
   created() {
     console.log('really',this.adminUserId);
+    console.log('usercode', this.userCode);
+    let third = this.userCode.substr(8, 4);
+    let forth = this.userCode.substr(12, 4);
+    if (third !== '0000' && forth === '0000') {
+      this.isThird = true;
+    }
   },
   computed: {
     adminUserId () {
       return this.$store.getters.getAdminUserId;
+    },
+    userCode () {
+      return this.$store.getters.getUserCode;
     }
   },
   methods: {

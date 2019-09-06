@@ -24,6 +24,9 @@ export default {
     getAdminUserId: state => {
       return state.adminUserId;
     },
+    getUserCode: state => {
+      return state.userCode;
+    },
     getCompanyName: state => {
       return state.companyName;
     }

@@ -47,16 +47,13 @@ export default {
           render: (h, params) => {
             let name = params.row._user_code;
             let tempName = "";
-            for (let index = 1; index <= name.length; index ++) {
+            for (let index = 1; index <= name.length; index++) {
               tempName += name[index - 1];
               if (index % 4 === 0 && index !== name.length) {
-                tempName += '-';
+                tempName += "-";
               }
             }
-            return h(
-              "div",
-              tempName
-            )
+            return h("div", tempName);
           }
         },
         {
@@ -78,7 +75,15 @@ export default {
                 "未提交"
               );
             } else if (params.row._confirmed === 1) {
-              return h("div", "已提交");
+              return h(
+                "div",
+                {
+                  style: {
+                    color: "#00ff00"
+                  }
+                },
+                "已提交"
+              );
             }
           }
         },
@@ -108,23 +113,23 @@ export default {
               );
             } else if (params.row._confirmed === 1) {
               return h(
-              "Button",
-              {
-                props: {
-                  type: "info",
-                  size: "small",
-                },
-                style: {
-                  marginLeft: "10px"
-                },
-                on: {
-                  click: () => {
-                    this.downloadExcel(params.row._id);
+                "Button",
+                {
+                  props: {
+                    type: "info",
+                    size: "small"
+                  },
+                  style: {
+                    marginLeft: "10px"
+                  },
+                  on: {
+                    click: () => {
+                      this.downloadExcel(params.row._id);
+                    }
                   }
-                }
-              },
-              "下载表格"
-            );
+                },
+                "下载表格"
+              );
             }
           }
         },
@@ -135,9 +140,25 @@ export default {
             if (params.row._submit_status === -1) {
               return h("div", "无下属");
             } else if (params.row._submit_status === 0) {
-              return h("div", "未提交");
+              return h(
+                "div",
+                {
+                  style: {
+                    color: "#ff0000"
+                  }
+                },
+                "未提交"
+              );
             } else if (params.row._submit_status === 1) {
-              return h("div", "已提交");
+              return h(
+                "div",
+                {
+                  style: {
+                    color: "#00ff00"
+                  }
+                },
+                "已提交"
+              );
             }
           }
         },

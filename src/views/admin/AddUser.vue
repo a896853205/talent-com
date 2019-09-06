@@ -50,17 +50,21 @@ export default {
     };
   },
   created() {
-    console.log('really',this.adminUserId);
+    console.log("really", this.adminUserId);
   },
   computed: {
-    adminUserId () {
+    adminUserId() {
       return this.$store.getters.getAdminUserId;
     }
   },
   methods: {
     addUserHandle() {
-      console.log('单位名称', this.companyName, '用户权限', this.authority);
-      if (this.companyName === "" || this.companyName === null || this.authority.length === 0) {
+      console.log("单位名称", this.companyName, "用户权限", this.authority);
+      if (
+        this.companyName === "" ||
+        this.companyName === null ||
+        this.authority.length === 0
+      ) {
         this.$Message.error("单位名称和权限不得为空！");
         return;
       }
@@ -87,8 +91,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
-
+    }
   }
 };
 </script>

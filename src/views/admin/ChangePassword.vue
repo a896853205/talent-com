@@ -42,6 +42,9 @@
 </style>
 
 <script>
+import url from "@/service.config.js";
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -50,8 +53,45 @@ export default {
       reNewPassword: ""
     };
   },
+  computed: {
+    adminUserId() {
+      return this.$store.getters.getAdminUserId;
+    }
+  },
   methods: {
-    changeHandle() {}
+    changeHandle() {
+      let _this = this;
+      if (this.newPassword.length < 6) {
+        this.$Message.error("新密码最短为6位！");
+        return;
+      }
+      if (this.newPassword !== this.reNewPassword) {
+        this.$Message.error("新密码要与确认密码一致！");
+        return;
+      }
+      axios({
+        url: url.alterPassword,
+        method: "post",
+        data: {
+          userId: _this.adminUserId,
+          oldPassword: _this.currentPassword,
+          newPassword: _this.newPassword
+        }
+      })
+        .then(res => {
+          switch (res.data.status) {
+            case 0:
+              this.$Message.error(res.data.msg);
+              break;
+            case 1:
+              this.$Message.success(res.data.msg);
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>

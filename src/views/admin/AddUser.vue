@@ -39,6 +39,9 @@
 </style>
 
 <script>
+import url from "@/service.config.js";
+import axios from "axios";
+
 export default {
   data() {
     return {

@@ -17,9 +17,9 @@
       <div class="button">
         <Button type="primary" shape="circle" @click="login" long>登录</Button>
       </div>
-      <div class="forget">
+      <!-- <div class="forget">
         <router-link to="/changePassword">忘记密码？</router-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

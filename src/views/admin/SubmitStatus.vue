@@ -150,12 +150,19 @@ export default {
       console.log(ExcelName);
     }
   },
+  computed: {
+    adminUserId () {
+      return this.$store.getters.getAdminUserId;
+    }
+  },
   mounted() {
+    let _this = this
+    console.log('fuck', _this.adminUserId)
     axios({
       url: url.manageInfo,
       method: "post",
       data: {
-        userId: this.adminUserId
+        userId: _this.adminUserId
       }
     })
       .then(res => {

@@ -55,7 +55,7 @@
           <Button class="button" type="primary" @click="saveHandle">暂存</Button>
         </div>
         <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
+          <Button type="success" @click="submitHandle" :loading="loading">提交问卷</Button>
         </div>
         <div class="submit">
           <Button

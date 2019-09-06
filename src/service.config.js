@@ -29,7 +29,8 @@ const URL = {
   adminRegister: `${SERVERURL}${PORT.admin}/register`,
   manageInfo: `${SERVERURL}${PORT.admin}/manageInfo`,
   submitManage: `${SERVERURL}${PORT.admin}/submitManage`,
-  alterPassword: `${SERVERURL}${PORT.admin}/alterPassword`
+  alterPassword: `${SERVERURL}${PORT.admin}/alterPassword`,
+  deleteUser: `${SERVERURL}${PORT.admin}/deleteUser`
 };
 
 

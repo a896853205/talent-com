@@ -1,11 +1,11 @@
 <template>
   <div class="box">
     <Row type="flex" align="center" class-name="row">
-      <i-col span="4" class-name="hintMsg">已分配用户：60个</i-col>
-      <i-col span="4" class-name="hintMsg">以提交的有：58个</i-col>
-      <i-col span="4" class-name="hintMsg">未提交的有：2个</i-col>
+      <i-col span="4" class-name="hintMsg">已分配用户：{{userData.length}}个</i-col>
+      <i-col span="4" class-name="hintMsg">以提交的有：{{doSubmit}}个</i-col>
+      <i-col span="4" class-name="hintMsg">未提交的有：{{unSubmit}}个</i-col>
       <i-col span="4" class-name="hintMsg">
-        <Button type="warning">向上级部门提交</Button>
+        <Button type="warning" @click="submit()">向上级部门提交</Button>
       </i-col>
     </Row>
     <Row>
@@ -34,50 +34,112 @@ import axios from "axios";
 export default {
   data() {
     return {
+      unSubmit: 0,
+      doSubmit: 0,
       columns: [
         {
           title: "单位名称",
-          key: "companyName"
+          key: "_company_name"
         },
         {
           title: "用户名",
-          key: "userName"
+          key: "_user_code",
+          render: (h, params) => {
+            let name = params.row._user_code;
+            let tempName = "";
+            for (let index = 1; index <= name.length; index ++) {
+              tempName += name[index - 1];
+              if (index % 4 === 0 && index !== name.length) {
+                tempName += '-';
+              }
+            }
+            return h(
+              "div",
+              tempName
+            )
+          }
         },
         {
           title: "密码",
-          key: "password"
+          key: "_user_password"
         },
         {
           title: "问卷提交状态",
-          key: "submitStatus"
+          key: "_confirmed",
+          render: (h, params) => {
+            if (params.row._confirmed === 0) {
+              return h(
+                "div",
+                {
+                  style: {
+                    color: "#ff0000"
+                  }
+                },
+                "未提交"
+              );
+            } else if (params.row._confirmed === 1) {
+              return h("div", "已提交");
+            }
+          }
         },
         {
           title: "下载表格",
           key: "downloadExcel",
           render: (h, params) => {
-            return h(
+            if (params.row._confirmed === 0) {
+              return h(
+                "Button",
+                {
+                  props: {
+                    type: "info",
+                    size: "small",
+                    disabled: true
+                  },
+                  style: {
+                    marginLeft: "10px"
+                  },
+                  on: {
+                    click: () => {
+                      this.downloadExcel(params.row._id);
+                    }
+                  }
+                },
+                "下载表格"
+              );
+            } else if (params.row._confirmed === 1) {
+              return h(
               "Button",
               {
                 props: {
                   type: "info",
-                  size: "small"
+                  size: "small",
                 },
                 style: {
                   marginLeft: "10px"
                 },
                 on: {
                   click: () => {
-                    this.downloadExcel(params.row.userName);
+                    this.downloadExcel(params.row._id);
                   }
                 }
               },
               "下载表格"
             );
+            }
           }
         },
         {
           title: "下属部门提交状态",
-          key: "childrenSubmitStatus"
+          key: "_submit_status",
+          render: (h, params) => {
+            if (params.row._submit_status === -1) {
+              return h("div", "无下属");
+            } else if (params.row._submit_status === 0) {
+              return h("div", "未提交");
+            } else if (params.row._submit_status === 1) {
+              return h("div", "已提交");
+            }
+          }
         },
         {
           title: "删除账号",
@@ -95,7 +157,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.remove(params.index);
+                    this.remove(params.index, params.row._id);
                   }
                 }
               },
@@ -104,60 +166,91 @@ export default {
           }
         }
       ],
-      userData: [
-        {
-          companyName: "哈尔滨理工大学",
-          userName: "0001-0000-0000-0000",
-          password: "123456",
-          submitStatus: "未提交",
-          downloadExcel: "",
-          childrenSubmitStatus: ""
-        },
-        {
-          companyName: "哈尔滨理工大学",
-          userName: "0001-0000-0000-0000",
-          password: "123456",
-          submitStatus: "已提交，2019-09-01",
-          downloadExcel: "下载",
-          childrenSubmitStatus: "24/50,2019-09-01"
-        },
-        {
-          companyName: "哈尔滨理工大学",
-          userName: "0001-0000-0000-0000",
-          password: "123456",
-          submitStatus: "已提交，2019-09-01",
-          downloadExcel: "下载",
-          childrenSubmitStatus: "24/50,2019-09-01"
-        },
-        {
-          companyName: "哈尔滨理工大学",
-          userName: "0001-0000-0000-0000",
-          password: "123456",
-          submitStatus: "已提交，2019-09-01",
-          downloadExcel: "下载",
-          childrenSubmitStatus: "未提交"
-        }
-      ]
+      userData: []
     };
   },
   components: {},
   methods: {
-    remove(index) {
+    remove(index, _id) {
       this.userData.splice(index, 1);
+      console.log("remove id", _id);
+      axios({
+        url: url.deleteUser,
+        method: "post",
+        data: {
+          userId: _id
+        }
+      })
+        .then(res => {
+          switch (res.data.status) {
+            case 0:
+              this.$Message.error(res.data.msg);
+              break;
+            case 1:
+              this.$Message.success(res.data.msg);
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
 
     downloadExcel(ExcelName) {
       console.log(ExcelName);
+      /*
+      axios({
+        url: url.generateExcel,
+        method: "post",
+        data: {
+          form: _this.$store.state.form,
+          userId: _this.$store.state.form._from_user
+        }
+      })
+        .then(res => {
+          window.open(
+            url.download + "/" + _this.$store.state.form._from_user,
+            "_self"
+          );
+          _this.$data.btnLoading = false;
+        })
+        .catch(err => {
+          _this.$data.btnLoading = false;
+        });
+        */
+    },
+    submit() {
+      let _this = this;
+      axios({
+        url: url.submitManage,
+        method: "post",
+        data: {
+          userId: _this.adminUserId
+        }
+      })
+        .then(res => {
+          switch (res.data.status) {
+            case 0:
+              this.$Message.error(res.data.msg);
+              break;
+            case 1:
+              this.$Message.success(res.data.msg);
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   computed: {
-    adminUserId () {
+    adminUserId() {
       return this.$store.getters.getAdminUserId;
     }
   },
   mounted() {
-    let _this = this
-    console.log('fuck', _this.adminUserId)
+    let _this = this;
+    console.log("fuck", _this.adminUserId);
     axios({
       url: url.manageInfo,
       method: "post",
@@ -172,6 +265,14 @@ export default {
             break;
           case 1:
             console.log(res.data);
+            this.userData = res.data.data;
+            for (let item of this.userData) {
+              if (item._confirmed === 0) {
+                this.unSubmit++;
+              } else if (item._confirmed === 1) {
+                this.doSubmit++;
+              }
+            }
             break;
         }
       })

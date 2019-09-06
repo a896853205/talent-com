@@ -38,8 +38,7 @@
 export default {
   data() {
     return {
-      theme1: "light",
-      companyName: "哈尔滨理工大学"
+      theme1: "light"
     };
   },
   methods: {
@@ -47,11 +46,16 @@ export default {
       this.$router.push(name);
     },
     logout() {
-      this.$router.push("/");
+      this.$router.push("/adminLogin");
     }
   },
   created() {
     this.$router.push("/admin/addUser");
+  },
+  computed: {
+    companyName(){
+      return this.$store.getters.getCompanyName;
+    }
   }
 };
 </script>

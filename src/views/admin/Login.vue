@@ -89,6 +89,7 @@ export default {
             case 1:
               this.$store.commit("adminUserId", res.data.data._id);
               this.$store.commit("setUserCode", res.data.data._user_code);
+              this.$store.commit("setCompanyName", res.data.data._company_name);
               this.$router.push("/admin/addUser");
           }
         })

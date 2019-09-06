@@ -87,9 +87,6 @@ export default {
         .catch(err => {
           console.log(err);
         });
-      this.$Modal.success({
-        title: "生成成功"
-      });
     },
 
   }

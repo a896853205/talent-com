@@ -58,7 +58,12 @@
           <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
         </div>
         <div class="submit">
-          <Button type="warning" icon="md-arrow-down" @click="exportExcel" :loading="btnLoading">导出表格</Button>
+          <Button
+            type="warning"
+            icon="md-arrow-down"
+            @click="exportExcel"
+            :loading="btnLoading"
+          >导出表格</Button>
         </div>
         <div class="user-name">欢迎，{{companyName}}</div>
         <div class="logout">
@@ -96,10 +101,15 @@
           <Button class="button" type="primary" @click="saveHandle">暂存</Button>
         </div>
         <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="btnLoading">提交问卷</Button>
+          <Button type="success" @click="submitHandle" :loading="loading">提交问卷</Button>
         </div>
         <div class="submit">
-          <Button type="warning" icon="md-arrow-down" @click="exportExcel" :loading="btnLoading">导出表格</Button>
+          <Button
+            type="warning"
+            icon="md-arrow-down"
+            @click="exportExcel"
+            :loading="btnLoading"
+          >导出表格</Button>
         </div>
         <div class="user-name">欢迎，{{companyName}}</div>
         <div class="logout">
@@ -168,28 +178,11 @@ export default {
     }
   },
   methods: {
-    // exportExcel2() {
-    //   console.log("提交问卷");
-    //   let that = this;
-    //   axios({
-    //     url: url.generateExcel,
-    //     method: "post",
-    //     data: {
-    //       form: that.$store.state.form,
-    //       userId: that.$store.state.form._from_user
-    //     }
-    //   })
-    //     .then(res => {
-    //       console.log(res.data);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // },:loading="btnLoading"
     exportExcel() {
       let _this = this;
 
       _this.$data.btnLoading = true;
+      console.log("conmfirmed", _this.$store.state.form._confirmed);
 
       if (_this.$store.state.form._confirmed) {
         axios({
@@ -214,15 +207,6 @@ export default {
         _this.$data.btnLoading = false;
         _this.$message.error("请先提交问卷");
       }
-
-      // let flag = this.$store.state.form._confirmed;
-      // if (flag === true) {
-      //   console.log("下载表格");
-      //   let excelName = this.$store.state.form._from_user;
-      //   window.open(url.download + "/" + excelName, "_self");
-      // } else {
-      //   this.$message.error("请先提交问卷");
-      // }
     },
     logout() {
       // this.$cookies.remove("user_data");
@@ -252,14 +236,12 @@ export default {
         params: {
           userId
         }
-      })
-        .then(res => {
-          let { form } = res.data;
+      }).then(res => {
+        let { form } = res.data;
 
-          if (form && form._confirmed) {
-            _this.$Message.error("您已经提交过了，不需要暂存了！");
-          }
-
+        if (form && form._confirmed) {
+          _this.$Message.error("您已经提交过了，不需要暂存了！");
+        } else {
           _this.$store.state.form._from_user;
 
           debugger;
@@ -270,18 +252,19 @@ export default {
               form: _this.$store.state.form,
               userId: _this.$store.state.form._from_user
             }
-          });
-        })
-        .then(res => {
-          this.$message({
-            message: "已暂存到服务器，请放心退出",
-            type: "success",
-            duration: 1000
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+          })
+            .then(res => {
+              this.$message({
+                message: "已暂存到服务器，请放心退出",
+                type: "success",
+                duration: 1000
+              });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      });
     },
     // 提交问卷
     submitHandle() {
@@ -326,7 +309,8 @@ export default {
             type: "warning"
           })
           .then(() => {
-            _this.btnLoading = true;
+            _this.$store.state.form._confirmed = true;
+            _this.loading = true;
             // 上传服务器！！！！！！！！
             axios({
               url: url.submit,
@@ -337,7 +321,7 @@ export default {
                 type: "success",
                 message: "提交成功!"
               });
-              _this.btnLoading = false;
+              _this.loading = false;
             });
           });
       });

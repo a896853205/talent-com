@@ -24,11 +24,13 @@
   font-size: 16px;
 }
 .row {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 </style>
 
 <script>
+import url from "@/service.config.js";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -72,7 +74,6 @@ export default {
               "下载表格"
             );
           }
-
         },
         {
           title: "下属部门提交状态",
@@ -145,30 +146,31 @@ export default {
       this.userData.splice(index, 1);
     },
 
-    downloadExcel(ExcelName){
-        console.log(ExcelName)
+    downloadExcel(ExcelName) {
+      console.log(ExcelName);
     }
   },
   mounted() {
     axios({
-        url: url.manageInfo,
-        method: "post",
-        data: {
-          userId: this.adminUserId
+      url: url.manageInfo,
+      method: "post",
+      data: {
+        userId: this.adminUserId
+      }
+    })
+      .then(res => {
+        switch (res.data.status) {
+          case 0:
+            this.$Message.error(res.data.msg);
+            break;
+          case 1:
+            console.log(res.data);
+            break;
         }
       })
-        .then(res => {
-          switch (res.data.status) {
-            case 0:
-              this.$Message.error(res.data.msg);
-              break;
-            case 1:
-              break;
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 </script>

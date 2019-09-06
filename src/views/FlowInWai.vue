@@ -8,8 +8,8 @@
         </Alert>
       </i-col>
     </Row>
-    <el-tabs tab-position="left">
-      <el-tab-pane v-for="(value, key) in FlowInOutter" :key="key" :label="value.year">
+    <el-tabs tab-position="left" :value='2018'>
+      <el-tab-pane v-for="(value, key) in FlowInOutter" :key="key" :label="value.year" :name="value.year">
         <p class="title">单位人才流动汇总表-流入人才-事业单位-编制外-{{value.year}}年</p>
         <FlowIn
           :getSumInObjCombin="getSumInObjCombin(value.year)"

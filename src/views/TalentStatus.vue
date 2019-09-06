@@ -8,8 +8,8 @@
         </Alert>
       </i-col>
     </Row>
-		<el-tabs tab-position="left">
-			<el-tab-pane v-for="(value, key) in summary" :key="key" :label="value.year">
+		<el-tabs tab-position="left" :value='2018'>
+			<el-tab-pane v-for="(value, key) in summary" :key="key" :label="value.year" :name="value.year">
 				<p class="title">单位人才情况汇总表-存量信息-{{value.year}}年</p>
 				<TalentStatus
 					:key="`正常${key}`"

@@ -16,13 +16,20 @@ export const flowOutVerify = _sum_out => {
     }
   });
 
-  // 判断如果每一年都没有填写
-  if (haveDataYearIndexArr.length === 0) {
+  if (_sum_out[_sum_out.length - 1].info[0].value === 0) {
     verifyMsg.verify = false;
-    verifyMsg.msg = '至少需要添加一年的信息';
+    verifyMsg.msg = '必须填写2018年信息';
 
     return verifyMsg;
   }
+
+  // 判断如果每一年都没有填写
+  // if (haveDataYearIndexArr.length === 0) {
+  //   verifyMsg.verify = false;
+  //   verifyMsg.msg = '至少需要添加一年的信息';
+
+  //   return verifyMsg;
+  // }
 
   for (let index of haveDataYearIndexArr) {
 
@@ -48,8 +55,8 @@ export const flowOutVerify = _sum_out => {
       });
 
       for (let eachStructureObj of eachClassStructure.children) {
-        // 判断子人员类别的特殊情况
-        if (eachStructureObj.label === '子人员类别') {
+        // 判断岗位级别的特殊情况
+        if (eachStructureObj.label === '岗位级别') {
 
           let structureNum = 0;
 

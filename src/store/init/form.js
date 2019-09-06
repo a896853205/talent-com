@@ -147,7 +147,7 @@ export const personInfo = [
     type: 'number'
   },
   {
-    label: "职业资格证书",
+    label: "职业资格证书名称",
     value: undefined,
     type: 'input'
   },

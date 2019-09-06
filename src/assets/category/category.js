@@ -4861,10 +4861,7 @@ export const qunxian = [
   },
 ];
 
-export const renCaiCengCi = [{
-  "label": "问卷填写权限",
-  "value": "问卷填写权限"
-}, 
+export const renCaiCengCi = [
 {
   "label": "领军人才",
   "value": "领军人才"

@@ -24,7 +24,7 @@ export const SUM_OUT_ITEM = {
     label: '薪酬（元/月）',
     children: info_salary,
   }, {
-    label: '子人员类别',
+    label: '岗位级别',
     value: info_people,
     special: true,
     type: 'cate'

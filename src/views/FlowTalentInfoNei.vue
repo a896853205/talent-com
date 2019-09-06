@@ -2,7 +2,7 @@
   <div class="box">
     <div class="need">
       <FlowTalentInfo
-        title='单位流失人才信息表-事业单位-体制内'
+        title='单位流失人才信息表-事业单位-编制内'
         commitFunction='setOutStatusIn'
         :outStatus='outStatus' />
     </div>

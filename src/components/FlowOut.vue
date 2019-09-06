@@ -26,6 +26,15 @@
           @input-number="changeEvent"
           :initValue="SumOutInput.value" />
       </i-col>
+      <i-col span="8">
+        <Alert type="error">
+          An error prompt
+          <span slot="desc">
+            Custom error description copywriting.
+            <Icon type="help-circled" size="14"></Icon>
+          </span>
+        </Alert>
+      </i-col>
     </Row>
 
     <Divider />
@@ -76,6 +85,17 @@
           />
         </i-col>
       </div>
+    </Row>
+    <Row>
+      <i-col span="8">
+        <Alert type="error">
+          An error prompt
+          <span slot="desc">
+            Custom error description copywriting.
+            <Icon type="help-circled" size="14"></Icon>
+          </span>
+        </Alert>
+      </i-col>
     </Row>
   </div>
 

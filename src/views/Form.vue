@@ -198,7 +198,6 @@ export default {
             url: url.generateExcel,
             method: "post",
             data: {
-              form: _this.$store.state.form,
               userId: _this.$store.state.form._from_user
             }
           })

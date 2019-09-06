@@ -73,7 +73,28 @@ export default {
   },
   methods: {
     login() {
-      this.$router.push("/admin/addUser");
+      axios({
+        url: url.adminLogin,
+        method: "post",
+        data: {
+          userName: this.$data.account,
+          userPassword: this.$data.password
+        }
+      })
+        .then(res => {
+          switch (res.data.status) {
+            case 0:
+              this.$Message.error(res.data.msg);
+              break;
+            case 1:
+              this.$store.commit("adminUserId", res.data.data._id);
+              this.$store.commit("setUserCode", res.data.data._user_code);
+              this.$router.push("/admin/addUser");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

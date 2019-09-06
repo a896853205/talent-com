@@ -16,5 +16,9 @@ export default {
     }
   },
   // 获取vuex中的数据放在这里
-  getters: {}
+  getters: {
+    getAdminUserId: state => {
+      return state.adminUserId;
+    }
+  }
 }

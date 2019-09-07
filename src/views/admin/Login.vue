@@ -5,10 +5,38 @@
       <div class="account">
         <div class="account-label">用户名：</div>
         <div class="account-input">
-          <Input v-model="accounts.a" type="text" @input="changea" maxlength="4" style="width: 49px" ref="inputa" />-
-          <Input v-model="accounts.b" type="text" @input="changeb" maxlength="4" style="width: 49px" ref="inputb" />-
-          <Input v-model="accounts.c" type="text" @input="changec" maxlength="4" style="width: 49px" ref="inputc" />-
-          <Input v-model="accounts.d" type="text" @input="changed" maxlength="4" style="width: 49px" ref="inputd" />
+          <Input
+            v-model="accounts.a"
+            type="text"
+            @input="changea"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputa"
+          />-
+          <Input
+            v-model="accounts.b"
+            type="text"
+            @input="changeb"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputb"
+          />-
+          <Input
+            v-model="accounts.c"
+            type="text"
+            @input="changec"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputc"
+          />-
+          <Input
+            v-model="accounts.d"
+            type="text"
+            @input="changed"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputd"
+          />
         </div>
       </div>
       <div class="account">
@@ -82,9 +110,7 @@ export default {
         this.$refs.inputd.focus();
       }
     },
-    changed() {
-
-    }
+    changed() {}
   },
   watch: {
     accounts: {

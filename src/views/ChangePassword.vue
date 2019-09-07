@@ -84,15 +84,51 @@ export default {
       rePassword: ""
     };
   },
+  computed: {
+    userId() {
+      return this.$store.getters.getUserId;
+    }
+  },
   methods: {
     buttonHandle() {
-      this.$Modal.success({
-        title: '密码修改成功',
-        okText: "去登录",
-        onOk: () => {
-          this.$router.push("/login");
+      console.log(this.userId);
+      let _this = this;
+      if (this.newPassword.length < 6) {
+        this.$Message.error("新密码最短为6位！");
+        return;
+      }
+      if (this.newPassword !== this.rePassword) {
+        this.$Message.error("新密码要与确认密码一致！");
+        return;
+      }
+      axios({
+        url: url.alterPassword,
+        method: "post",
+        data: {
+          userId: _this.userId,
+          oldPassword: _this.oldPassword,
+          newPassword: _this.newPassword
         }
-      });
+      })
+        .then(res => {
+          switch (res.data.status) {
+            case 0:
+              this.$Message.error(res.data.msg);
+              break;
+            case 1:
+              this.$Modal.success({
+                title: "密码修改成功",
+                okText: "去登录",
+                onOk: () => {
+                  this.$router.push("/login");
+                }
+              });
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
       // this.modal1 = true;
       // if (this.$data.password1.length < 6) {
       // 	this.$message.error('新密码长度最小为6位！');

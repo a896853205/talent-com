@@ -116,10 +116,10 @@
         </div>
         <div class="user-name">欢迎，{{companyName}}</div>
         <div class="logout">
-          <span @click="logout">退出登录</span>
+          <span @click="changePwd">修改密码</span>
         </div>
         <div class="logout">
-          <span @click="changePwd">修改密码</span>
+          <span @click="logout">退出登录</span>
         </div>
       </div>
     </Menu>
@@ -285,7 +285,6 @@ export default {
         } else {
           _this.$store.state.form._from_user;
 
-          debugger;
           return axios({
             url: url.save,
             method: "post",

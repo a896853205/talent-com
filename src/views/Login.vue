@@ -5,7 +5,38 @@
       <div class="account">
         <div class="account-label">用户名：</div>
         <div class="account-input">
-          <Input v-model="account" type="text" placeholder="请输入用户名" style="width: 230px" />
+          <Input
+            v-model="accounts.a"
+            type="text"
+            @input="changea"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputa"
+          />-
+          <Input
+            v-model="accounts.b"
+            type="text"
+            @input="changeb"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputb"
+          />-
+          <Input
+            v-model="accounts.c"
+            type="text"
+            @input="changec"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputc"
+          />-
+          <Input
+            v-model="accounts.d"
+            type="text"
+            @input="changed"
+            maxlength="4"
+            style="width: 49px"
+            ref="inputd"
+          />
         </div>
       </div>
       <div class="account">
@@ -19,7 +50,7 @@
       </div>
       <!-- <div class="forget">
         <router-link to="/changePassword">忘记密码？</router-link>
-      </div> -->
+      </div>-->
     </div>
   </div>
 </template>
@@ -77,10 +108,32 @@ export default {
   data() {
     return {
       account: "",
+      accounts: {
+        a: "",
+        b: "",
+        c: "",
+        d: ""
+      },
       password: ""
     };
   },
   methods: {
+    changea() {
+      if (this.accounts.a.length === 4) {
+        this.$refs.inputb.focus();
+      }
+    },
+    changeb() {
+      if (this.accounts.b.length === 4) {
+        this.$refs.inputc.focus();
+      }
+    },
+    changec() {
+      if (this.accounts.c.length === 4) {
+        this.$refs.inputd.focus();
+      }
+    },
+    changed() {},
     login() {
       if (this.$data.account.length < 6) {
         this.$message.error("用户名长度最小为6位！");
@@ -92,7 +145,7 @@ export default {
       }
       axios({
         url: url.login,
-        method: 'post',
+        method: "post",
         data: {
           user_name: this.$data.account,
           user_password: this.$data.password
@@ -102,23 +155,35 @@ export default {
           if (!res.data.userId) {
             this.$message.error("用户名或密码输入错误！或者您没有此权限");
           } else {
-            this.$store.commit('setUserId', res.data.userId);
+            this.$store.commit("setUserId", res.data.userId);
             // this.$store.commit('setForm', res.data.returnForm);
-            
-            localStorage.setItem('userId', res.data.userId);
-            
+
+            localStorage.setItem("userId", res.data.userId);
+
             this.$message({
               message: "登录成功！",
               type: "success",
               duration: 1000
             });
-            
+
             this.$router.push("/form/companyInfo");
           }
         })
         .catch(err => {
           console.log(err);
         });
+    }
+  },
+  watch: {
+    accounts: {
+      handler: function() {
+        this.account = "";
+        for (let item in this.accounts) {
+          this.account += this.accounts[item];
+        }
+        console.log(this.account);
+      },
+      deep: true
     }
   }
 };

@@ -51,8 +51,6 @@ export default {
     };
   },
   created() {
-    console.log('really',this.adminUserId);
-    console.log('usercode', this.userCode);
     let third = this.userCode.substr(8, 4);
     let forth = this.userCode.substr(12, 4);
     if (third !== '0000' && forth === '0000') {
@@ -60,7 +58,7 @@ export default {
     }
   },
   computed: {
-    adminUserId () {
+    adminUserId() {
       return this.$store.getters.getAdminUserId;
     },
     userCode () {
@@ -69,8 +67,12 @@ export default {
   },
   methods: {
     addUserHandle() {
-      console.log('单位名称', this.companyName, '用户权限', this.authority);
-      if (this.companyName === "" || this.companyName === null || this.authority.length === 0) {
+      console.log("单位名称", this.companyName, "用户权限", this.authority);
+      if (
+        this.companyName === "" ||
+        this.companyName === null ||
+        this.authority.length === 0
+      ) {
         this.$Message.error("单位名称和权限不得为空！");
         return;
       }
@@ -97,8 +99,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
-
+    }
   }
 };
 </script>

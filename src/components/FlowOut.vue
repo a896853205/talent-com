@@ -85,6 +85,16 @@
           />
         </i-col>
       </div>
+      <div v-else-if="item.type === 'input'">
+        <i-col span=4>
+          <InputWithLabel 
+            :label='item.label'
+            :initValue="item.value"
+            @input='changeEvent'
+            :index="index"
+          />
+        </i-col>
+      </div>
     </Row>
     <Row>
       <i-col span="8">
@@ -120,6 +130,7 @@ import InputNumberWithLabel from "../components/InputNumberWithLabel.vue";
 import GangWeiLeiBie from "../components/GangWeiLeiBie.vue";
 import MultiSelectWithLabel from '../components/until/MultiSelectWithLabel';
 import SelectWithLabel from "../components/SelectWithLabel";
+import InputWithLabel from '../components/InputWithLabel';
 
 export default {
   props: [
@@ -128,12 +139,14 @@ export default {
     'sumOut',
     'getSumOutObjCombin',
     'SumOutInput',
-    'twoLevelSumOutStationCategory'],
+    'twoLevelSumOutStationCategory'
+    ],
   components: {
     InputNumberWithLabel,
     GangWeiLeiBie,
     MultiSelectWithLabel,
-    SelectWithLabel
+    SelectWithLabel,
+    InputWithLabel
   },
   computed: {
     oneLevelStationCategory() {

@@ -99,8 +99,8 @@ export default {
         }
       })
         .then(res => {
-          if (res.data.userId === -1 || res.data.userId === -2) {
-            this.$message.error("用户名或密码输入错误！");
+          if (!res.data.userId) {
+            this.$message.error("用户名或密码输入错误！或者您没有此权限");
           } else {
             this.$store.commit('setUserId', res.data.userId);
             // this.$store.commit('setForm', res.data.returnForm);

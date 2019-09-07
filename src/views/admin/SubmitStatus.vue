@@ -219,6 +219,7 @@ export default {
 
     downloadExcel(ExcelName) {
       console.log(ExcelName);
+      let _this = this;
       axios({
         url: url.generateExcel,
         method: "post",

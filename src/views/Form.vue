@@ -69,6 +69,9 @@
         <div class="logout">
           <span @click="logout">退出登录</span>
         </div>
+        <div class="logout">
+          <span @click="changePwd">修改密码</span>
+        </div>
       </div>
     </Menu>
     <Menu
@@ -115,6 +118,9 @@
         <div class="logout">
           <span @click="logout">退出登录</span>
         </div>
+        <div class="logout">
+          <span @click="changePwd">修改密码</span>
+        </div>
       </div>
     </Menu>
     <keep-alive>
@@ -134,6 +140,7 @@
 .logout {
   color: #8cd1ff;
   cursor: pointer;
+  padding: 0 10px;
 }
 
 .menu {
@@ -178,6 +185,10 @@ export default {
     }
   },
   methods: {
+    changePwd(){
+      this.$router.push('/changePassword');
+    },
+
     // 下载表格
     exportExcel() {
       let _this = this;

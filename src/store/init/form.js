@@ -228,6 +228,14 @@ export const form_inserting = {
     value: undefined,
     type: 'input',
     regExp: '/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/'
+  }, {
+    label: '2018年销售收入总额（万元）',
+    value: undefined,
+    type: 'input'
+  }, {
+    label: '2018年研发经费支出额（万元）',
+    value: undefined,
+    type: 'input'
   }],
   _summary: initEveryYear(2009, 2018, summaryInfo),
   _summary_nei: initEveryYear(2009, 2018, summaryInfo),

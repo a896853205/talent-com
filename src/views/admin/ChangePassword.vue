@@ -3,19 +3,19 @@
     <Row type="flex" align="center" class-name="row">
       <i-col span="2" class-name="label">旧密码：</i-col>
       <i-col span="6" class-name="labelInput">
-        <Input v-model="currentPassword" placeholder="请输入当前密码" />
+        <Input v-model="currentPassword" placeholder="请输入当前密码" type="password" />
       </i-col>
     </Row>
     <Row type="flex" align="center" class-name="row">
       <i-col span="2" class-name="label">新密码：</i-col>
       <i-col span="6" class-name="labelInput">
-        <Input v-model="newPassword" placeholder="请输入新密码" />
+        <Input v-model="newPassword" placeholder="请输入新密码" type="password" />
       </i-col>
     </Row>
     <Row type="flex" align="center" class-name="row">
       <i-col span="2" class-name="label">重复新密码：</i-col>
       <i-col span="6" class-name="labelInput">
-        <Input v-model="reNewPassword" placeholder="请再次输入新密码" />
+        <Input v-model="reNewPassword" placeholder="请再次输入新密码" type="password" />
       </i-col>
     </Row>
     <Row type="flex" align="center" class-name="row">

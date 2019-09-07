@@ -33,6 +33,10 @@ export const SUM_OUT_ITEM = {
     value: [],
     type: 'checkBox',
     list: liZhiYuanYin
+  }, { 
+    label: '其他离职原因',
+    value: undefined,
+    type: 'input',
   }]
 }
 

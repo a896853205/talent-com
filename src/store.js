@@ -495,6 +495,9 @@ export default new Vuex.Store({
     getUserId: state => {
       return state.form._from_user;
     },
+    getCompanyName: state => {
+      return state.form._basic[2].value;
+    },
     stationCategory: state => {
       let arr = [];
 

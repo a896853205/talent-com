@@ -44,6 +44,9 @@ export default {
   computed: {
     showCompanyName(){
       return this.$store.getters.getCompanyName1;
+    },
+    adminUserId() {
+      return this.$store.getters.getAdminUserId;
     }
   },
   methods: {
@@ -56,6 +59,9 @@ export default {
   },
   created() {
     this.$router.push("/admin/addUser");
+    if (this.adminUserId === "") {
+      this.$router.push("/adminLogin")
+    }
   }
 };
 </script>

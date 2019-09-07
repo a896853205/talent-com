@@ -69,6 +69,9 @@
         <div class="logout">
           <span @click="logout">退出登录</span>
         </div>
+        <div class="logout">
+          <span @click="changePwd">修改密码</span>
+        </div>
       </div>
     </Menu>
     <Menu
@@ -115,6 +118,9 @@
         <div class="logout">
           <span @click="logout">退出登录</span>
         </div>
+        <div class="logout">
+          <span @click="changePwd">修改密码</span>
+        </div>
       </div>
     </Menu>
     <keep-alive>
@@ -134,6 +140,7 @@
 .logout {
   color: #8cd1ff;
   cursor: pointer;
+  padding: 0 10px;
 }
 
 .menu {
@@ -178,12 +185,17 @@ export default {
     }
   },
   methods: {
+    changePwd(){
+      this.$router.push('/changePassword');
+    },
+
     // 下载表格
     exportExcel() {
       let _this = this;
 
       _this.$data.btnLoading = true;
 
+      //测试开始   记得删除哦
       axios({
         url: url.getForm,
         method: "get",
@@ -193,28 +205,47 @@ export default {
       }).then(res => {
         let { form } = res.data;
 
-        if (form._confirmed) {
-          axios({
-            url: url.generateExcel,
-            method: "post",
-            data: {
-              userId: _this.$store.state.form._from_user
-            }
+        axios({
+          url: url.generateExcel,
+          method: "post",
+          data: {
+            userId: _this.$store.state.form._from_user
+          }
+        })
+          .then(res => {
+            window.open(
+              url.download + "/" + _this.$store.state.form._from_user,
+              "_self"
+            );
+            _this.$data.btnLoading = false;
           })
-            .then(res => {
-              window.open(
-                url.download + "/" + _this.$store.state.form._from_user,
-                "_self"
-              );
-              _this.$data.btnLoading = false;
-            })
-            .catch(err => {
-              _this.$data.btnLoading = false;
-            });
-        } else {
-          _this.$data.btnLoading = false;
-          _this.$message.error("请先提交问卷");
-        }
+          .catch(err => {
+            _this.$data.btnLoading = false;
+          });
+        //测试结束 记得删除  把下面的注释打开
+
+        // if (form._confirmed) {
+        //   axios({
+        //     url: url.generateExcel,
+        //     method: "post",
+        //     data: {
+        //       userId: _this.$store.state.form._from_user
+        //     }
+        //   })
+        //     .then(res => {
+        //       window.open(
+        //         url.download + "/" + _this.$store.state.form._from_user,
+        //         "_self"
+        //       );
+        //       _this.$data.btnLoading = false;
+        //     })
+        //     .catch(err => {
+        //       _this.$data.btnLoading = false;
+        //     });
+        // } else {
+        //   _this.$data.btnLoading = false;
+        //   _this.$message.error("请先提交问卷");
+        // }
       });
     },
     logout() {

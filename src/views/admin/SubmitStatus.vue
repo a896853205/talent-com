@@ -157,7 +157,7 @@ export default {
                     color: "#00ff00"
                   }
                 },
-                "已提交"
+                `已提交${params.row._sub_submit_status}`
               );
             }
           }

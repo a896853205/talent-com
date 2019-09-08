@@ -13,7 +13,7 @@ import {
 } from '../../assets/category/category';
 function initEveryYear(begin, end, data) {
   let dataArr = [];
-  for (let i = begin; i <= end; i++) {
+  for (let i = begin; i >= end; i--) {
     dataArr.push({
       "year": i,
       "info": objectHelper.deepCopy(data)
@@ -112,7 +112,7 @@ export const outStatusInfo = [
   list: liZhiYuanYin
 }, {
   label: "其他离职原因",
-  value: undefined,
+  value: '无',
   type: 'input'
 }, {
   label: '人才层次',
@@ -239,15 +239,15 @@ export const form_inserting = {
     type: 'input',
     special: true
   }],
-  _summary: initEveryYear(2009, 2018, summaryInfo),
-  _summary_nei: initEveryYear(2009, 2018, summaryInfo),
-  _summary_wai: initEveryYear(2009, 2018, summaryInfo),
-  _sum_in: initEveryYear(2009, 2018, sumInInfo),
-  _sum_in_nei: initEveryYear(2009, 2018, sumInInfo),
-  _sum_in_wai: initEveryYear(2009, 2018, sumInInfo),
-  _sum_out: initEveryYear(2009, 2018, sumOutInfo),
-  _sum_out_nei: initEveryYear(2009, 2018, sumOutInfo),
-  _sum_out_wai: initEveryYear(2009, 2018, sumOutInfo),
+  _summary: initEveryYear(2018, 2009, summaryInfo),
+  _summary_nei: initEveryYear(2018, 2009, summaryInfo),
+  _summary_wai: initEveryYear(2018, 2009, summaryInfo),
+  _sum_in: initEveryYear(2018, 2009, sumInInfo),
+  _sum_in_nei: initEveryYear(2018, 2009, sumInInfo),
+  _sum_in_wai: initEveryYear(2018, 2009, sumInInfo),
+  _sum_out: initEveryYear(2018, 2009, sumOutInfo),
+  _sum_out_nei: initEveryYear(2018, 2009, sumOutInfo),
+  _sum_out_wai: initEveryYear(2018, 2009, sumOutInfo),
   _out_status: [{
     "id": 0,
     "info": objectHelper.deepCopy(outStatusInfo)

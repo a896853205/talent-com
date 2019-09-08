@@ -35,7 +35,7 @@ export const SUM_OUT_ITEM = {
     list: liZhiYuanYin
   }, { 
     label: '其他离职原因',
-    value: undefined,
+    value: '无',
     type: 'input',
   }]
 }

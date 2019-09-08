@@ -23,7 +23,8 @@ import { Button,
   Card,
   Checkbox,
   CheckboxGroup,
-  Table
+  Table,
+  Message
  } from 'iview';
 import 'iview/dist/styles/iview.css';
 
@@ -53,6 +54,8 @@ Vue.component('Card', Card);
 Vue.component('Checkbox', Checkbox);
 Vue.component('CheckboxGroup', CheckboxGroup);
 Vue.component('Table', Table);
+
+Vue.prototype.$Message = Message;
 
 router.beforeEach((to, from, next) => {
     /* 路由发生变化修改页面title */

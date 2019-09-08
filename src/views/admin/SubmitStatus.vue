@@ -84,6 +84,16 @@ export default {
                 },
                 "已提交"
               );
+            } else if (params.row._confirmed === -1) {
+              return h(
+                "div",
+                {
+                  style: {
+                    color: "#dddddd"
+                  }
+                },
+                "无需填报"
+              );
             }
           }
         },
@@ -91,7 +101,7 @@ export default {
           title: "下载表格",
           key: "downloadExcel",
           render: (h, params) => {
-            if (params.row._confirmed === 0) {
+            if (params.row._confirmed === 0 || params.row._confirmed === -1) {
               return h(
                 "Button",
                 {
@@ -218,7 +228,7 @@ export default {
     },
 
     downloadExcel(ExcelName) {
-      console.log(ExcelName);    
+      console.log(ExcelName);
       let _this = this;
       axios({
         url: url.generateExcel,
@@ -228,10 +238,7 @@ export default {
         }
       })
         .then(res => {
-          window.open(
-            url.download + "/" + ExcelName,
-            "_self"
-          );
+          window.open(url.download + "/" + ExcelName, "_self");
           _this.$data.btnLoading = false;
         })
         .catch(err => {

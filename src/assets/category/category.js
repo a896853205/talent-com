@@ -4844,11 +4844,7 @@ export const liZhiYuanYin = [
   {
     "label": "个人晋升空间窄",
     "value": "个人晋升空间窄"
-  },
-  {
-    "label": "其他",
-    "value": "其他"
-  },
+  }
 ];
 export const qunxian = [
   {

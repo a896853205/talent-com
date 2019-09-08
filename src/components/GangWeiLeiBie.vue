@@ -116,12 +116,12 @@
 		},
 		created() {
 			// // 这里判断四类类别
-			// // 机关,社会团体,事业单位,剩下全部
+			// // 机关,社会团体及民办非企业单位,事业单位,剩下全部
 			// switch (this.$store.state.form._basic['单位性质'].value) {
 			// 	case '机关':
 			// 		this.gangWeiLeiBie = jobCategoryJiGuan;
 			// 		break; 
-			// 	case '社会团体':
+			// 	case '社会团体及民办非企业单位':
 			// 		this.gangWeiLeiBie = jobCategorySocial;
 			// 		break;
 			// 	case '事业单位':

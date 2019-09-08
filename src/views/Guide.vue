@@ -31,7 +31,7 @@
       <p class="margin-bottom left suojin font-size line-height">2.所属地域：13个地市、农垦、森工。</p>
       <p
         class="margin-bottom left suojin font-size line-height"
-      >3.人员类别：按照单位性质“机关”“事业单位”“社会团体”及“企业”划分为4种问卷，主要差别在管理人员项目中。</p>
+      >3.人员类别：按照单位性质“机关”“事业单位”“社会团体及民办非企业单位”及“企业”划分为4种问卷，主要差别在管理人员项目中。</p>
       <p class="margin-bottom left suojin font-size line-height">4.单位流失人才信息表中的“离职时间”写清年份和月份即可。</p>
       <p class="margin-bottom left suojin font-size line-height">5.单位流失人才信息表中的“从业年限”为在本单位工作年限。</p>
       <p

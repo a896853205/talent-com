@@ -152,7 +152,7 @@ export default new Vuex.Store({
             });
 
             break;
-          case '社会团体':
+          case '社会团体及民办非企业单位':
 
             // 一级菜单进行赋值
             state.form._summary.forEach((item, i) => {
@@ -508,7 +508,7 @@ export default new Vuex.Store({
               case '机关':
                 arr = jobCategoryJiGuan;
                 break;
-              case '社会团体':
+              case '社会团体及民办非企业单位':
                 arr = jobCategorySocial;
                 break;
               case '事业单位':
@@ -536,7 +536,7 @@ export default new Vuex.Store({
               case '机关':
                 arr = OFFICE_ONE_LEVEL;
                 break;
-              case '社会团体':
+              case '社会团体及民办非企业单位':
                 arr = SOCIETY_ONE_LEVEL;
                 break;
               case '事业单位':

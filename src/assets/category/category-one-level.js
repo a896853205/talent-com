@@ -46,7 +46,7 @@ export const ENTERPRISE_ONE_LEVEL = [
   }
 ];
 
-// 社会团体一级菜单
+// 社会团体及民办非企业单位一级菜单
 export const SOCIETY_ONE_LEVEL = [
   {
     "label": "管理人员",

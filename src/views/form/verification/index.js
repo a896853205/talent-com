@@ -49,7 +49,7 @@ export const verify = form => {
       }
 
       break;
-    case '社会团体':
+    case '社会团体及民办非企业单位':
       // 判断单位人才情况汇总
       summaryResult = summaryVerify(form._summary);
 

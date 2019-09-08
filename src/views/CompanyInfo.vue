@@ -1,5 +1,6 @@
 <template>
   <div class="company-box">
+    <Alert banner type="warning">请先填写单位性质,更换单位性质时其他数据将会被清除</Alert>
     <Row type="flex" justify="start" align="middle" :gutter="30">
       <i-col span="4" v-for="(item, index) in basic" :key="index">
         <SelectWithLabel
@@ -26,7 +27,7 @@
           :index='index'
         />
         <InputWithLabel
-          v-if="item.type === 'input' && item.special && (unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体') && ((typeof unitType) === 'string') "
+          v-if="item.type === 'input' && item.special && (unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体及民办非企业单位') && ((typeof unitType) === 'string') "
           :label="item.label"
           :initValue="item.value"
           @input="changeEvent"

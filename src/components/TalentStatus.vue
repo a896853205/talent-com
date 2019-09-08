@@ -8,7 +8,7 @@
           :initValue="summary[0].value"
         />
       </i-col>
-      <i-col v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体')" span="4">
+      <i-col v-if="(unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体及民办非企业单位')" span="4">
         <InputNumberWithLabel
           :label="summary[1].label"
           :initValue="summary[1].value"

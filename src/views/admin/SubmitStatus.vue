@@ -2,7 +2,7 @@
   <div class="box">
     <Row type="flex" align="center" class-name="row">
       <i-col span="4" class-name="hintMsg">已分配用户：{{userData.length}}个</i-col>
-      <i-col span="4" class-name="hintMsg">以提交的有：{{doSubmit}}个</i-col>
+      <i-col span="4" class-name="hintMsg">已提交的有：{{doSubmit}}个</i-col>
       <i-col span="4" class-name="hintMsg">未提交的有：{{unSubmit}}个</i-col>
       <i-col span="4" class-name="hintMsg">
         <Button type="warning" @click="submit">向上级部门提交</Button>

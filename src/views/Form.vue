@@ -2,127 +2,131 @@
   <div>
     <el-container
       class="mask"
-      v-show="loading"
-      v-loading="loading"
-      element-loading-text="数据加载中"
+      v-show="maskLoading"
+      v-loading="maskLoading"
+      element-loading-text="加载中"
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(228, 231, 237, 0.8)"
     ></el-container>
-    <Menu
-      v-if="unit === '事业单位'"
-      mode="horizontal"
-      :theme="theme1"
-      active-name="companyInfo"
-      class="menu"
-      @on-select="select"
-    >
-      <MenuItem name="companyInfo">
-        <Icon type="ios-paper" />单位基本信息
-      </MenuItem>
-      <Submenu name="talentStatusNei">
-        <template slot="title">
+    <div class="menu1" v-if="unit === '事业单位'">
+      <Menu
+        mode="horizontal"
+        :theme="theme1"
+        active-name="companyInfo"
+        class="menu"
+        @on-select="select"
+      >
+        <MenuItem name="companyInfo">
+          <Icon type="ios-paper" />单位基本信息
+        </MenuItem>
+        <Submenu name="talentStatusNei">
+          <template slot="title">
+            <Icon type="ios-people" />单位人才情况汇总
+          </template>
+          <MenuItem name="talentStatusNei">单位人才情况汇总-事业单位-编制内</MenuItem>
+          <MenuItem name="talentStatusWai">单位人才情况汇总-事业单位-编制外</MenuItem>
+        </Submenu>
+        <Submenu name="flowInNei">
+          <template slot="title">
+            <Icon type="ios-stats" />单位人才流动汇总
+          </template>
+          <MenuGroup title="流入情况">
+            <MenuItem name="flowInNei">流入情况统计-事业单位-编制内</MenuItem>
+            <MenuItem name="flowInWai">流入情况统计-事业单位-编制外</MenuItem>
+          </MenuGroup>
+          <MenuGroup title="流出情况">
+            <MenuItem name="flowOutNei">流出情况统计-事业单位-编制内</MenuItem>
+            <MenuItem name="flowOutWai">流出情况统计-事业单位-编制外</MenuItem>
+          </MenuGroup>
+          <MenuGroup title="流出人才信息统计">
+            <MenuItem name="flowTalentInfoNei">流出人才信息统计-事业单位-编制内</MenuItem>
+            <MenuItem name="flowTalentInfoWai">流出人才信息统计-事业单位-编制外</MenuItem>
+          </MenuGroup>
+        </Submenu>
+        <Submenu name="needNei">
+          <template slot="title">
+            <Icon type="ios-paper" />单位人才需求调查
+          </template>
+          <MenuItem name="needNei">单位人才需求调查-事业单位-编制内</MenuItem>
+          <MenuItem name="needWai">单位人才需求调查-事业单位-编制外</MenuItem>
+        </Submenu>
+        <div class="user">
+          <div class="submit">
+            <Button class="button" :loading="saveLoading" type="primary" @click="saveHandle">暂存</Button>
+          </div>
+          <div class="submit">
+            <Button type="success" @click="submitHandle" :loading="submitLoading">提交问卷</Button>
+          </div>
+          <div class="submit">
+            <Button
+              type="warning"
+              icon="md-arrow-down"
+              @click="exportExcel"
+              :loading="btnLoading"
+            >导出表格</Button>
+          </div>
+          <div class="user-name">欢迎，{{companyName}}</div>
+          <div class="logout">
+            <span @click="logout">退出登录</span>
+          </div>
+          <div class="logout">
+            <span @click="changePwd">修改密码</span>
+          </div>
+        </div>
+      </Menu>
+    </div>
+
+    <div class="menu1" v-else>
+      <Menu
+        mode="horizontal"
+        :theme="theme1"
+        active-name="companyInfo"
+        class="menu"
+        @on-select="select"
+      >
+        <MenuItem name="companyInfo">
+          <Icon type="ios-paper" />单位基本信息
+        </MenuItem>
+        <MenuItem name="talentStatus">
           <Icon type="ios-people" />单位人才情况汇总
-        </template>
-        <MenuItem name="talentStatusNei">单位人才情况汇总-事业单位-编制内</MenuItem>
-        <MenuItem name="talentStatusWai">单位人才情况汇总-事业单位-编制外</MenuItem>
-      </Submenu>
-      <Submenu name="flowInNei">
-        <template slot="title">
-          <Icon type="ios-stats" />单位人才流动汇总
-        </template>
-        <MenuGroup title="流入情况">
-          <MenuItem name="flowInNei">流入情况统计-事业单位-编制内</MenuItem>
-          <MenuItem name="flowInWai">流入情况统计-事业单位-编制外</MenuItem>
-        </MenuGroup>
-        <MenuGroup title="流出情况">
-          <MenuItem name="flowOutNei">流出情况统计-事业单位-编制内</MenuItem>
-          <MenuItem name="flowOutWai">流出情况统计-事业单位-编制外</MenuItem>
-        </MenuGroup>
-        <MenuGroup title="流出人才信息统计">
-          <MenuItem name="flowTalentInfoNei">流出人才信息统计-事业单位-编制内</MenuItem>
-          <MenuItem name="flowTalentInfoWai">流出人才信息统计-事业单位-编制外</MenuItem>
-        </MenuGroup>
-      </Submenu>
-      <Submenu name="needNei">
-        <template slot="title">
+        </MenuItem>
+        <Submenu name="flowIn">
+          <template slot="title">
+            <Icon type="ios-stats" />单位人才流动汇总
+          </template>
+          <MenuItem name="flowIn">流入情况统计</MenuItem>
+          <MenuItem name="flowOut">流出情况统计</MenuItem>
+          <MenuItem name="flowTalentInfo">流出人才信息统计</MenuItem>
+        </Submenu>
+        <MenuItem name="need">
           <Icon type="ios-paper" />单位人才需求调查
-        </template>
-        <MenuItem name="needNei">单位人才需求调查-事业单位-编制内</MenuItem>
-        <MenuItem name="needWai">单位人才需求调查-事业单位-编制外</MenuItem>
-      </Submenu>
-      <div class="user">
-        <div class="submit">
-          <Button class="button" type="primary" @click="saveHandle">暂存</Button>
+        </MenuItem>
+        <div class="user">
+          <div class="submit">
+            <Button class="button" type="primary" :loading="saveLoading" @click="saveHandle">暂存</Button>
+          </div>
+          <div class="submit">
+            <Button type="success" @click="submitHandle" :loading="submitLoading">提交问卷</Button>
+          </div>
+          <div class="submit">
+            <Button
+              type="warning"
+              icon="md-arrow-down"
+              @click="exportExcel"
+              :loading="btnLoading"
+            >导出表格</Button>
+          </div>
+          <div class="user-name">欢迎，{{companyNameShow}}</div>
+          <div class="logout">
+            <span @click="changePwd">修改密码</span>
+          </div>
+          <div class="logout">
+            <span @click="logout">退出登录</span>
+          </div>
         </div>
-        <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="loading">提交问卷</Button>
-        </div>
-        <div class="submit">
-          <Button
-            type="warning"
-            icon="md-arrow-down"
-            @click="exportExcel"
-            :loading="btnLoading"
-          >导出表格</Button>
-        </div>
-        <div class="user-name">欢迎，{{companyName}}</div>
-        <div class="logout">
-          <span @click="logout">退出登录</span>
-        </div>
-        <div class="logout">
-          <span @click="changePwd">修改密码</span>
-        </div>
-      </div>
-    </Menu>
-    <Menu
-      v-else
-      mode="horizontal"
-      :theme="theme1"
-      active-name="companyInfo"
-      class="menu"
-      @on-select="select"
-    >
-      <MenuItem name="companyInfo">
-        <Icon type="ios-paper" />单位基本信息
-      </MenuItem>
-      <MenuItem name="talentStatus">
-        <Icon type="ios-people" />单位人才情况汇总
-      </MenuItem>
-      <Submenu name="flowIn">
-        <template slot="title">
-          <Icon type="ios-stats" />单位人才流动汇总
-        </template>
-        <MenuItem name="flowIn">流入情况统计</MenuItem>
-        <MenuItem name="flowOut">流出情况统计</MenuItem>
-        <MenuItem name="flowTalentInfo">流出人才信息统计</MenuItem>
-      </Submenu>
-      <MenuItem name="need">
-        <Icon type="ios-paper" />单位人才需求调查
-      </MenuItem>
-      <div class="user">
-        <div class="submit">
-          <Button class="button" type="primary" @click="saveHandle">暂存</Button>
-        </div>
-        <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="loading">提交问卷</Button>
-        </div>
-        <div class="submit">
-          <Button
-            type="warning"
-            icon="md-arrow-down"
-            @click="exportExcel"
-            :loading="btnLoading"
-          >导出表格</Button>
-        </div>
-        <div class="user-name">欢迎，{{companyNameShow}}</div>
-        <div class="logout">
-          <span @click="changePwd">修改密码</span>
-        </div>
-        <div class="logout">
-          <span @click="logout">退出登录</span>
-        </div>
-      </div>
-    </Menu>
+      </Menu>
+    </div>
+
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
@@ -130,6 +134,9 @@
   </div>
 </template>
 <style scoped>
+.menu1 {
+  min-width: 1200px;
+}
 .mask {
   width: 100%;
   height: 100%;
@@ -174,9 +181,11 @@ export default {
   data() {
     return {
       theme1: "light",
-      loading: false,
+      submitLoading: false,
       btnLoading: false,
-      companyNameShow: ""
+      saveLoading: false,
+      companyNameShow: "",
+      maskLoading: false
     };
   },
   computed: {
@@ -278,8 +287,7 @@ export default {
       // }
       let _this = this,
         userId = this.$store.state.form._from_user;
-      console.log(userId);
-
+      this.saveLoading = true;
       axios({
         url: url.getForm,
         method: "get",
@@ -291,6 +299,7 @@ export default {
 
         if (form && form._confirmed) {
           _this.$Message.error("您已经提交过了，不需要暂存了！");
+          this.saveLoading = false;
         } else {
           _this.$store.state.form._from_user;
 
@@ -303,6 +312,7 @@ export default {
             }
           })
             .then(res => {
+              this.saveLoading = false;
               this.$message({
                 message: "已暂存到服务器，请放心退出",
                 type: "success",
@@ -311,6 +321,7 @@ export default {
             })
             .catch(err => {
               console.log(err);
+              this.saveLoading = false;
             });
         }
       });
@@ -320,7 +331,7 @@ export default {
       let verifyMsg = null,
         _this = this,
         userId = this.$store.state.form._from_user;
-
+      this.submitLoading = true;
       axios({
         url: url.getForm,
         method: "get",
@@ -331,11 +342,13 @@ export default {
         let { form } = res.data;
 
         if (form._confirmed) {
+          _this.submitLoading = false;
           _this.$Message.error("请不要重复提交！");
           return;
         }
 
         if (!_this.$store.state.form._basic[4]) {
+          _this.submitLoading = false;
           _this.$message.error("请选择 单位基本信息 中的 单位性质 ");
           return;
         }
@@ -348,6 +361,7 @@ export default {
             duration: 10,
             closable: true
           });
+          _this.submitLoading = false;
           return;
         }
 
@@ -358,7 +372,6 @@ export default {
             type: "warning"
           })
           .then(() => {
-            _this.loading = true;
             // 上传服务器！！！！！！！！
             axios({
               url: url.submit,
@@ -369,8 +382,11 @@ export default {
                 type: "success",
                 message: "提交成功!"
               });
-              _this.loading = false;
+              _this.submitLoading = false;
             });
+          })
+          .catch(() => {
+            _this.submitLoading = false;
           });
       });
     }

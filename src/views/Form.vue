@@ -204,71 +204,69 @@ export default {
       this.$router.push("/changePassword");
     },
 
-    // 下载表格
+    //测试导出表格方法 一会删除掉
     exportExcel() {
       let _this = this;
 
       _this.$data.btnLoading = true;
-
-      //测试开始   记得删除哦
       axios({
-        url: url.getForm,
-        method: "get",
-        params: {
+        url: url.generateExcel,
+        method: "post",
+        data: {
           userId: _this.$store.state.form._from_user
         }
-      }).then(res => {
-        let { form } = res.data;
-
-        if (form && form._confirmed) {
-          axios({
-            url: url.generateExcel,
-            method: "post",
-            data: {
-              userId: _this.$store.state.form._from_user
-            }
-          })
-            .then(res => {
-              window.open(
-                url.download + "/" + _this.$store.state.form._from_user,
-                "_self"
-              );
-              _this.$data.btnLoading = false;
-            })
-            .catch(err => {
-              _this.$data.btnLoading = false;
-            });
-        } else {
+      })
+        .then(res => {
+          window.open(
+            url.download + "/" + _this.$store.state.form._from_user,
+            "_self"
+          );
           _this.$data.btnLoading = false;
-          _this.$Message.error("请先提交问卷");
-        }
-
-        //测试结束 记得删除  把下面的注释打开
-
-        // if (form._confirmed) {
-        //   axios({
-        //     url: url.generateExcel,
-        //     method: "post",
-        //     data: {
-        //       userId: _this.$store.state.form._from_user
-        //     }
-        //   })
-        //     .then(res => {
-        //       window.open(
-        //         url.download + "/" + _this.$store.state.form._from_user,
-        //         "_self"
-        //       );
-        //       _this.$data.btnLoading = false;
-        //     })
-        //     .catch(err => {
-        //       _this.$data.btnLoading = false;
-        //     });
-        // } else {
-        //   _this.$data.btnLoading = false;
-        //   _this.$message.error("请先提交问卷");
-        // }
-      });
+        })
+        .catch(err => {
+          _this.$data.btnLoading = false;
+        });
     },
+    // 下载表格
+    // exportExcel() {
+    //   let _this = this;
+
+    //   _this.$data.btnLoading = true;
+
+    //   //测试开始   记得删除哦
+    //   axios({
+    //     url: url.getForm,
+    //     method: "get",
+    //     params: {
+    //       userId: _this.$store.state.form._from_user
+    //     }
+    //   }).then(res => {
+    //     let { form } = res.data;
+
+    //     if (form && form._confirmed) {
+    //       axios({
+    //         url: url.generateExcel,
+    //         method: "post",
+    //         data: {
+    //           userId: _this.$store.state.form._from_user
+    //         }
+    //       })
+    //         .then(res => {
+    //           window.open(
+    //             url.download + "/" + _this.$store.state.form._from_user,
+    //             "_self"
+    //           );
+    //           _this.$data.btnLoading = false;
+    //         })
+    //         .catch(err => {
+    //           _this.$data.btnLoading = false;
+    //         });
+    //     } else {
+    //       _this.$data.btnLoading = false;
+    //       _this.$Message.error("请先提交问卷");
+    //     }
+    //   });
+    // },
     logout() {
       // this.$cookies.remove("user_data");
       localStorage.clear();

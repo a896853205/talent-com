@@ -231,11 +231,13 @@ export const form_inserting = {
   }, {
     label: '2018年销售收入总额（万元）',
     value: undefined,
-    type: 'input'
+    type: 'input',
+    special: true
   }, {
     label: '2018年研发经费支出额（万元）',
     value: undefined,
-    type: 'input'
+    type: 'input',
+    special: true
   }],
   _summary: initEveryYear(2009, 2018, summaryInfo),
   _summary_nei: initEveryYear(2009, 2018, summaryInfo),

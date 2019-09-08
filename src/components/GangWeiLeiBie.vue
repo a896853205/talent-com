@@ -4,7 +4,7 @@
 			<div class="add-box">
 				<p slot="title" class="add-box-title">{{label}}</p>
 				<div class="add">
-					<i-button type="info" @click="addHandle">添加</i-button>
+					<Button type="info" @click="addHandle">添加</Button>
 				</div>
 			</div>
 			<div class="input-box">
@@ -18,7 +18,7 @@
 						@cascader='getCascaderData'
 						:index='index' />
 					<div class="del-btn">
-						<i-button type="error" style="margin-right: 10px" v-if="item.id>0" shape="circle" @click="delHandle(item.id)">删除</i-button>
+						<Button type="error" style="margin-right: 10px" v-if="item.id>0" shape="circle" @click="delHandle(item.id)">删除</Button>
 						<div style="width: 56px;margin-right: 10px" v-else></div>
 					</div>
 				</div>

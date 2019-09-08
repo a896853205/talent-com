@@ -11,7 +11,7 @@
         <Icon type="ios-paper" />修改我的密码
       </MenuItem>
       <div class="user">
-        <div class>欢迎登录，{{companyName}}</div>
+        <div class>欢迎登录，{{showCompanyName}}</div>
         <div class="logout">
           <span @click="logout">退出登录</span>
         </div>
@@ -41,6 +41,14 @@ export default {
       theme1: "light"
     };
   },
+  computed: {
+    showCompanyName(){
+      return this.$store.getters.getCompanyName1;
+    },
+    adminUserId() {
+      return this.$store.getters.getAdminUserId;
+    }
+  },
   methods: {
     select(name) {
       this.$router.push(name);
@@ -51,10 +59,8 @@ export default {
   },
   created() {
     this.$router.push("/admin/addUser");
-  },
-  computed: {
-    companyName(){
-      return this.$store.getters.getCompanyName;
+    if (this.adminUserId === "") {
+      this.$router.push("/adminLogin")
     }
   }
 };

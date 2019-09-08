@@ -218,19 +218,18 @@ export default {
     },
 
     downloadExcel(ExcelName) {
-      console.log(ExcelName);
-      /*
+      console.log(ExcelName);    
+      let _this = this;
       axios({
         url: url.generateExcel,
         method: "post",
         data: {
-          form: _this.$store.state.form,
-          userId: _this.$store.state.form._from_user
+          userId: ExcelName
         }
       })
         .then(res => {
           window.open(
-            url.download + "/" + _this.$store.state.form._from_user,
+            url.download + "/" + ExcelName,
             "_self"
           );
           _this.$data.btnLoading = false;
@@ -238,7 +237,6 @@ export default {
         .catch(err => {
           _this.$data.btnLoading = false;
         });
-        */
     },
     submit() {
       let _this = this;

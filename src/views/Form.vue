@@ -114,7 +114,7 @@
             :loading="btnLoading"
           >导出表格</Button>
         </div>
-        <div class="user-name">欢迎，{{companyName}}</div>
+        <div class="user-name">欢迎，{{companyNameShow}}</div>
         <div class="logout">
           <span @click="changePwd">修改密码</span>
         </div>
@@ -174,14 +174,17 @@ export default {
   data() {
     return {
       theme1: "light",
-      companyName: "哈尔滨理工大学",
       loading: false,
-      btnLoading: false
+      btnLoading: false,
+      companyNameShow: ""
     };
   },
   computed: {
     unit() {
       return this.$store.getters.unit;
+    },
+    companyName() {
+      return this.$store.getters.getCompanyName;
     }
   },
   methods: {
@@ -677,6 +680,7 @@ export default {
       let { form } = res.data;
 
       _this.$store.commit("setForm", { form, userId });
+      this.companyNameShow = this.companyName;
     });
   }
 };

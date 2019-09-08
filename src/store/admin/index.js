@@ -27,7 +27,7 @@ export default {
     getUserCode: state => {
       return state.userCode;
     },
-    getCompanyName: state => {
+    getCompanyName1: state => {
       return state.companyName;
     }
   }

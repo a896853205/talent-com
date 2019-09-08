@@ -128,7 +128,7 @@ export default {
                   props: {
                     type: "info",
                     size: "small",
-                    loading: this.downloadLoading,
+                    loading: this.downloadLoading
                   },
                   style: {
                     marginLeft: "10px"
@@ -195,7 +195,7 @@ export default {
                       type: "warning"
                     }).then(() => {
                       this.remove(params.index, params.row._id);
-                    })
+                    });
                   }
                 }
               },
@@ -256,26 +256,32 @@ export default {
     },
     submit() {
       let _this = this;
-      axios({
-        url: url.submitManage,
-        method: "post",
-        data: {
-          userId: _this.adminUserId
-        }
-      })
-        .then(res => {
-          switch (res.data.status) {
-            case 0:
-              this.$Message.error(res.data.msg);
-              break;
-            case 1:
-              this.$Message.success(res.data.msg);
-              break;
+      this.$confirm("确定向上级汇报当前下属提交状态?", "确定", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        axios({
+          url: url.submitManage,
+          method: "post",
+          data: {
+            userId: _this.adminUserId
           }
         })
-        .catch(err => {
-          console.log(err);
-        });
+          .then(res => {
+            switch (res.data.status) {
+              case 0:
+                this.$Message.error(res.data.msg);
+                break;
+              case 1:
+                this.$Message.success(res.data.msg);
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
     }
   },
   computed: {

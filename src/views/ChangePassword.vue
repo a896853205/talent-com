@@ -2,7 +2,7 @@
   <div class="container">
     <div class="box">
       <div class="account">
-        <div class="account-label">旧密码：</div>
+        <div class="account-label">原密码：</div>
         <div class="account-input">
           <Input v-model="oldPassword" type="password" placeholder="请输入旧密码" style="width: 230px" />
         </div>

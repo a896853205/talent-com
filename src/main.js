@@ -24,7 +24,8 @@ import { Button,
   Checkbox,
   CheckboxGroup,
   Table,
-  Message
+  Message,
+  Modal
  } from 'iview';
 import 'iview/dist/styles/iview.css';
 
@@ -56,6 +57,7 @@ Vue.component('CheckboxGroup', CheckboxGroup);
 Vue.component('Table', Table);
 
 Vue.prototype.$Message = Message;
+Vue.prototype.$Modal = Modal;
 
 router.beforeEach((to, from, next) => {
     /* 路由发生变化修改页面title */

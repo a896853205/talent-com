@@ -540,7 +540,11 @@ export const jobCategoryJiGuan = [
   },
   {
     "label": "社会工作人员",
-    "value": "社会工作人员"
+    "value": "社会工作人员",
+    "children": [{
+      "label": "社会工作人员",
+      "value": "社会工作人员",
+    }]
   },
   {
     "label": "其他",
@@ -592,7 +596,11 @@ export const jobCategoryQiYe = [
   },
   {
     "label": "社会工作人员",
-    "value": "社会工作人员"
+    "value": "社会工作人员",
+    "children": [{
+      "label": "社会工作人员",
+      "value": "社会工作人员",
+    }]
   },
   {
     "label": "其他",
@@ -672,7 +680,11 @@ export const jobCategorySocial = [
   },
   {
     "label": "社会工作人员",
-    "value": "社会工作人员"
+    "value": "社会工作人员",
+    "children": [{
+      "label": "社会工作人员",
+      "value": "社会工作人员",
+    }]
   },
   {
     "label": "其他",
@@ -752,7 +764,11 @@ export const jobCategoryCareer = [
   },
   {
     "label": "社会工作人员",
-    "value": "社会工作人员"
+    "value": "社会工作人员",
+    "children": [{
+      "label": "社会工作人员",
+      "value": "社会工作人员",
+    }]
   },
   {
     "label": "其他",

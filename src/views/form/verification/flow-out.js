@@ -16,7 +16,7 @@ export const flowOutVerify = _sum_out => {
     }
   });
 
-  if (_sum_out[_sum_out.length - 1].info[0].value === 0) {
+  if (_sum_out[0].info[0].value === 0) {
     verifyMsg.verify = false;
     verifyMsg.msg = '必须填写2018年信息';
 

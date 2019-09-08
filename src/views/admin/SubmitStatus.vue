@@ -127,7 +127,8 @@ export default {
                 {
                   props: {
                     type: "info",
-                    size: "small"
+                    size: "small",
+                    loading: this.downloadLoading,
                   },
                   style: {
                     marginLeft: "10px"
@@ -203,7 +204,8 @@ export default {
           }
         }
       ],
-      userData: []
+      userData: [],
+      downloadLoading: false
     };
   },
   components: {},
@@ -235,6 +237,7 @@ export default {
 
     downloadExcel(ExcelName) {
       console.log(ExcelName);
+      this.downloadLoading = true;
       let _this = this;
       axios({
         url: url.generateExcel,
@@ -245,10 +248,10 @@ export default {
       })
         .then(res => {
           window.open(url.download + "/" + ExcelName, "_self");
-          _this.$data.btnLoading = false;
+          _this.downloadLoading = false;
         })
         .catch(err => {
-          _this.$data.btnLoading = false;
+          _this.downloadLoading = false;
         });
     },
     submit() {
@@ -298,7 +301,7 @@ export default {
           case 1:
             console.log(res.data);
             this.userData = res.data.data;
-            
+
             for (let item of this.userData) {
               if (item._confirmed === 0) {
                 this.unSubmit++;

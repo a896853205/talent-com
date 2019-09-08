@@ -17,7 +17,7 @@ export const summaryVerify = _summary => {
   })
 
 
-  if (_summary[_summary.length - 1].info[0].value === 0) {
+  if (_summary[0].info[0].value === 0) {
     verifyMsg.verify = false;
     verifyMsg.msg = '必须填写2018年信息';
 

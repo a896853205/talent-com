@@ -5,7 +5,7 @@
       <i-col span="4" class-name="hintMsg">已提交的有：{{doSubmit}}个</i-col>
       <i-col span="4" class-name="hintMsg">未提交的有：{{unSubmit}}个</i-col>
       <i-col span="4" class-name="hintMsg">
-        <Button type="warning" @click="submit">向上级部门提交</Button>
+        <Button type="warning" @click="submit">向上级部门报告</Button>
       </i-col>
     </Row>
     <Row>
@@ -69,7 +69,7 @@ export default {
                 "div",
                 {
                   style: {
-                    color: "#ff0000"
+                    color: "#ed4014"
                   }
                 },
                 "未提交"
@@ -79,7 +79,7 @@ export default {
                 "div",
                 {
                   style: {
-                    color: "#00ff00"
+                    color: "#19be6b"
                   }
                 },
                 "已提交"
@@ -154,20 +154,20 @@ export default {
                 "div",
                 {
                   style: {
-                    color: "#ff0000"
+                    color: "#ed4014"
                   }
                 },
-                "未提交"
+                "未报告"
               );
             } else if (params.row._submit_status === 1) {
               return h(
                 "div",
                 {
                   style: {
-                    color: "#00ff00"
+                    color: "#19be6b"
                   }
                 },
-                `已提交${params.row._sub_submit_status}`
+                `已报告`
               );
             }
           }
@@ -188,7 +188,13 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.remove(params.index, params.row._id);
+                    this.$confirm("确定删除此账号?", "确定", {
+                      confirmButtonText: "确定",
+                      cancelButtonText: "取消",
+                      type: "warning"
+                    }).then(() => {
+                      this.remove(params.index, params.row._id);
+                    })
                   }
                 }
               },
@@ -292,6 +298,7 @@ export default {
           case 1:
             console.log(res.data);
             this.userData = res.data.data;
+            
             for (let item of this.userData) {
               if (item._confirmed === 0) {
                 this.unSubmit++;

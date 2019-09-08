@@ -17,6 +17,10 @@ export const OFFICE_ONE_LEVEL = [
     "value": "农村实用人员"
   },
   {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
+  },
+  {
     "label": "其他",
     "value": "其他"
   }
@@ -39,6 +43,10 @@ export const ENTERPRISE_ONE_LEVEL = [
   {
     "label": "农村实用人员",
     "value": "农村实用人员"
+  },
+  {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
   },
   {
     "label": "其他",
@@ -65,6 +73,10 @@ export const SOCIETY_ONE_LEVEL = [
     "value": "农村实用人员"
   },
   {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
+  },
+  {
     "label": "其他",
     "value": "其他"
   }
@@ -87,6 +99,10 @@ export const JOB_ONE_LEVEL = [
   {
     "label": "农村实用人员",
     "value": "农村实用人员"
+  },
+  {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
   },
   {
     "label": "其他",

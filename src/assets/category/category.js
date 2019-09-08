@@ -489,10 +489,6 @@ const village = [
     "label": "社会服务型人员",
     "value": "社会服务型人员"
   },
-  {
-    "label": "社会工作人员",
-    "value": "社会工作人员"
-  },
 ];
 
 //人员类别-机关
@@ -543,6 +539,10 @@ export const jobCategoryJiGuan = [
     "children": village
   },
   {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
+  },
+  {
     "label": "其他",
     "value": "其他",
     "children": [{
@@ -591,6 +591,10 @@ export const jobCategoryQiYe = [
     "value": "农村实用人员"
   },
   {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
+  },
+  {
     "label": "其他",
     "value": "其他",
     "children": [{
@@ -599,7 +603,7 @@ export const jobCategoryQiYe = [
     }]
   }
 ];
-// 社会团体
+// 社会团体及民办非企业单位
 export const jobCategorySocial = [
   {
     "label": "管理人员",
@@ -665,6 +669,10 @@ export const jobCategorySocial = [
     "label": "农村实用人员",
     "value": "农村实用人员",
     "children": village,
+  },
+  {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
   },
   {
     "label": "其他",
@@ -741,6 +749,10 @@ export const jobCategoryCareer = [
     "label": "农村实用人员",
     "value": "农村实用人员",
     "children": village,
+  },
+  {
+    "label": "社会工作人员",
+    "value": "社会工作人员"
   },
   {
     "label": "其他",
@@ -4668,8 +4680,8 @@ export const danWeiXingZhi = [
     "label": "事业单位"
   },
   {
-    "value": "社会团体",
-    "label": "社会团体"
+    "value": "社会团体及民办非企业单位",
+    "label": "社会团体及民办非企业单位"
   },
   {
     "value": "国有企业",

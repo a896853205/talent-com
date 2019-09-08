@@ -50,6 +50,9 @@
           <MenuItem name="needNei">单位人才需求调查-事业单位-编制内</MenuItem>
           <MenuItem name="needWai">单位人才需求调查-事业单位-编制外</MenuItem>
         </Submenu>
+        <template slot="title">
+          <Icon type="ios-stats" />单位人才流动汇总
+        </template>
         <div class="user">
           <div class="submit">
             <Button class="button" :loading="saveLoading" type="primary" @click="saveHandle">暂存</Button>
@@ -65,7 +68,7 @@
               :loading="btnLoading"
             >导出表格</Button>
           </div>
-          <div class="user-name">欢迎，{{companyName}}</div>
+          <!-- <div class="user-name">欢迎，{{companyName}}</div> -->
           <div class="logout">
             <span @click="logout">退出登录</span>
           </div>
@@ -116,7 +119,7 @@
               :loading="btnLoading"
             >导出表格</Button>
           </div>
-          <div class="user-name">欢迎，{{companyNameShow}}</div>
+          <!-- <div class="user-name">欢迎，{{companyNameShow}}</div> -->
           <div class="logout">
             <span @click="changePwd">修改密码</span>
           </div>
@@ -341,7 +344,7 @@ export default {
       }).then(res => {
         let { form } = res.data;
 
-        if (form._confirmed) {
+        if (form && form._confirmed) {
           _this.submitLoading = false;
           _this.$Message.error("请不要重复提交！");
           return;

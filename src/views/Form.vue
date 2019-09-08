@@ -52,10 +52,10 @@
       </Submenu>
       <div class="user">
         <div class="submit">
-          <Button class="button" type="primary" @click="saveHandle">暂存</Button>
+          <Button class="button" :loading="saveLoading" type="primary" @click="saveHandle">暂存</Button>
         </div>
         <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="loading">提交问卷</Button>
+          <Button type="success" @click="submitHandle" :loading="submitLoading">提交问卷</Button>
         </div>
         <div class="submit">
           <Button
@@ -101,10 +101,10 @@
       </MenuItem>
       <div class="user">
         <div class="submit">
-          <Button class="button" type="primary" @click="saveHandle">暂存</Button>
+          <Button class="button" type="primary" :loading="saveLoading" @click="saveHandle">暂存</Button>
         </div>
         <div class="submit">
-          <Button type="success" @click="submitHandle" :loading="loading">提交问卷</Button>
+          <Button type="success" @click="submitHandle" :loading="submitLoading">提交问卷</Button>
         </div>
         <div class="submit">
           <Button
@@ -174,8 +174,9 @@ export default {
   data() {
     return {
       theme1: "light",
-      loading: false,
+      submitLoading: false,
       btnLoading: false,
+      saveLoading: false,
       companyNameShow: ""
     };
   },
@@ -188,8 +189,8 @@ export default {
     }
   },
   methods: {
-    changePwd(){
-      this.$router.push('/changePassword');
+    changePwd() {
+      this.$router.push("/changePassword");
     },
 
     // 下载表格
@@ -272,8 +273,7 @@ export default {
       // }
       let _this = this,
         userId = this.$store.state.form._from_user;
-      console.log(userId);
-
+      this.saveLoading = true;
       axios({
         url: url.getForm,
         method: "get",
@@ -285,6 +285,7 @@ export default {
 
         if (form && form._confirmed) {
           _this.$Message.error("您已经提交过了，不需要暂存了！");
+          this.saveLoading = false;
         } else {
           _this.$store.state.form._from_user;
 
@@ -297,6 +298,7 @@ export default {
             }
           })
             .then(res => {
+              this.saveLoading = false;
               this.$message({
                 message: "已暂存到服务器，请放心退出",
                 type: "success",
@@ -305,6 +307,7 @@ export default {
             })
             .catch(err => {
               console.log(err);
+              this.saveLoading = false;
             });
         }
       });
@@ -314,7 +317,7 @@ export default {
       let verifyMsg = null,
         _this = this,
         userId = this.$store.state.form._from_user;
-
+      this.submitLoading = true;
       axios({
         url: url.getForm,
         method: "get",
@@ -325,11 +328,13 @@ export default {
         let { form } = res.data;
 
         if (form._confirmed) {
+          _this.submitLoading = false;
           _this.$Message.error("请不要重复提交！");
           return;
         }
 
         if (!_this.$store.state.form._basic[4]) {
+          _this.submitLoading = false;
           _this.$message.error("请选择 单位基本信息 中的 单位性质 ");
           return;
         }
@@ -342,6 +347,7 @@ export default {
             duration: 10,
             closable: true
           });
+          _this.submitLoading = false;
           return;
         }
 
@@ -352,7 +358,6 @@ export default {
             type: "warning"
           })
           .then(() => {
-            _this.loading = true;
             // 上传服务器！！！！！！！！
             axios({
               url: url.submit,
@@ -363,8 +368,11 @@ export default {
                 type: "success",
                 message: "提交成功!"
               });
-              _this.loading = false;
+              _this.submitLoading = false;
             });
+          })
+          .catch(() => {
+            _this.submitLoading = false;
           });
       });
     }

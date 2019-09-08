@@ -10,7 +10,7 @@
     </Row>
     <el-tabs tab-position="left" :value='2018'>
       <el-tab-pane v-for="(value, key) in FlowInInner" :key="key" :label="value.year" :name="value.year">
-        <p class="title">单位人才流动汇总表-流入人才-事业单位-编制内-{{value.year}}年</p>
+        <p class="title">单位人才流动汇总表-<span class="special">流入人才</span>-事业单位-<span class="special">编制内</span>-{{value.year}}年</p>
         <FlowIn
           :getSumInObjCombin="getSumInObjCombin(value.year)"
           :sumInInput="SumInInput(value.year)"
@@ -24,6 +24,11 @@
   </div>
 </template>
 <style scoped>
+.special {
+  color: #ed4014;
+  font-weight: bold;
+  font-size: 24px;
+}
 .box {
   margin-top: 20px;
 }

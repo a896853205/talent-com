@@ -10,7 +10,7 @@
     </Row>
     <el-tabs tab-position="left" :value='2018'>
       <el-tab-pane v-for="(value, key) in sumOut" :key="key" :label="value.year" :name="value.year">
-        <p class="title">单位人才流动汇总表-流出人才-{{value.year}}年</p>
+        <p class="title">单位人才流动汇总表-<span class="special">流出人才</span>-{{value.year}}年</p>
         <FlowOut
           :getSumOutObjCombin="getSumOutObjCombin(value.year)"
           :SumOutInput="SumOutInput(value.year)"
@@ -24,6 +24,11 @@
   </div>
 </template>
 <style scoped>
+.special {
+  color: #ed4014;
+  font-weight: bold;
+  font-size: 24px;
+}
 .box {
   margin-top: 20px;
 }

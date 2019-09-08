@@ -19,7 +19,14 @@
           :index='index'
         />
         <InputWithLabel
-          v-if="item.type === 'input'"
+          v-if="item.type === 'input' && !item.special"
+          :label="item.label"
+          :initValue="item.value"
+          @input="changeEvent"
+          :index='index'
+        />
+        <InputWithLabel
+          v-if="item.type === 'input' && item.special && (unitType !== '事业单位') && (unitType !== '机关') && (unitType !== '社会团体') && ((typeof unitType) === 'string') "
           :label="item.label"
           :initValue="item.value"
           @input="changeEvent"
@@ -70,6 +77,11 @@ export default {
   computed: {
     basic() {
       return this.$store.state.form._basic;
+    },
+
+    unitType() {
+      console.log(typeof this.$store.getters.unit);
+      return this.$store.getters.unit;
     }
   }
 };

@@ -5,13 +5,13 @@
         <div class="del-box">
           <p class="del-box-title" slot="title">{{ title }} {{propIndex+1}}</p>
           <div class="del-btn">
-            <i-button
+            <Button
               type="error"
               v-if="item.id > 0"
               style="margin-right: 10px"
               shape="circle"
               @click="delHandle(item.id)"
-            >删除</i-button>
+            >删除</Button>
           </div>
         </div>
         <Row :gutter="16">
@@ -81,7 +81,7 @@
       </Card>
     </div>
     <div class="add">
-      <i-button class="add-btn" type="info" @click="addHandle">添加</i-button>
+      <Button class="add-btn" type="info" @click="addHandle">添加</Button>
     </div>
   </div>
 </template>

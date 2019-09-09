@@ -8,22 +8,22 @@
       <p class="margin-bottom left suojin font-size line-height">特此说明。</p>
       <p class="margin-bottom font-size right padding-rignt line-height">黑龙江省人力资源和社会保障厅</p>
       <p class="margin-bottom font-size right line-height">2019年8月26日</p>
-      <h2 class="title">《黑龙江省人才调查和流失情况专项工作》单位人才统计平台操作说明</h2>
+      <h2 class="title margin-bottom2">《黑龙江省人才调查和流失情况专项工作》单位人才统计平台操作说明</h2>
       <p
         class="margin-bottom left suojin font-size line-height"
       >为做好全省人才情况调研工作，全面掌握我省人才规模结构、流失和需求情况，特开发单位人才统计平台。具体操作说明如下：</p>
-      <p class="margin-bottom left suojin font-size line-height">一、单位账号注册</p>
+      <p class="margin-bottom left suojin font-size line-height">一、单位数据填报</p>
       <p
         class="margin-bottom left suojin font-size line-height"
-      >请登录网址https://talent.hrbust.edu.cn，通过下发的唯一账号登录。</p>
-      <p class="margin-bottom left suojin font-size line-height">二、账号登录及统计模块</p>
+      >请登录网址https://talent.hrbust.edu.cn，通过下发的唯一用户名登录，并填报人才相关数据信息。</p>
+      <p class="margin-bottom left suojin font-size line-height">二、统计模块</p>
       <p
         class="margin-bottom left suojin font-size line-height"
       >1.平台调查表包括“单位基本信息”、“单位人才情况汇总”、“单位人才流动汇总”和“单位人才需求调查”4个模块。其中“单位人才流动汇总”包括“流入情况统计”、“流出情况统计”、“流出人才信息统计”。</p>
       <p class="margin-bottom left suojin font-size line-height">2.“单位基本信息”和“单位人才需求调查”2个模块，仅需填写当前状态。</p>
       <p
         class="margin-bottom left suojin font-size line-height"
-      >3.“单位人才情况汇总”和“单位人才流动汇总”2个模块，需要对2009-2018年十年期间的各年度数据进行填写。</p>
+      >3.“单位人才情况汇总”和“单位人才流动汇总”2个模块，需要对2009-2018年十年期间的各年度数据进行填写。v</p>
       <p class="margin-bottom left suojin font-size line-height">三、主要指标说明</p>
       <p
         class="margin-bottom left suojin font-size line-height"
@@ -31,22 +31,19 @@
       <p class="margin-bottom left suojin font-size line-height">2.所属地域：13个地市、农垦、森工。</p>
       <p
         class="margin-bottom left suojin font-size line-height"
-      >3.人员类别：按照单位性质“机关”“事业单位”“社会团体及民办非企业单位”及“企业”划分为4种问卷，主要差别在管理人员项目中。</p>
-      <p class="margin-bottom left suojin font-size line-height">4.单位流失人才信息表中的“离职时间”写清年份和月份即可。</p>
-      <p class="margin-bottom left suojin font-size line-height">5.单位流失人才信息表中的“从业年限”为在本单位工作年限。</p>
+      >3.单位流失人才信息表中的“离职时间”写清年份和月份即可。</p>
+      <p class="margin-bottom left suojin font-size line-height">4.单位流失人才信息表中的“从业年限”为在本单位工作年限。</p>
+      <p class="margin-bottom left suojin font-size line-height">5.单位流失人才信息表中的“流入地”为流失人员的去向，即到哪座城市参加工作或流向哪座城市，填写到省份即可。</p>
       <p
         class="margin-bottom left suojin font-size line-height"
-      >6.单位流失人才信息表中的“流入地”为流失人员的去向，即到哪座城市参加工作或流向哪座城市，填写到省份即可。</p>
+      >6.薪酬在取值区间点，按照左闭右开选择。例如：薪酬为4000元，选择薪酬区间为4000-5000。</p>
       <p
         class="margin-bottom left suojin font-size line-height"
-      >7.薪酬在取值区间点，按照左闭右开选择。例如：薪酬为4000元，选择薪酬区间为4000-5000。</p>
-      <p
-        class="margin-bottom left suojin font-size line-height"
-      >8.单位流失人才信息表中关于人才层次的界定请看常见问题回答，且为单选，就高不就低。</p>
+      >7.单位流失人才信息表中关于人才层次的界定请看常见问题回答，且为单选，就高不就低。</p>
       <p class="margin-bottom left suojin font-size line-height">四、系统运行说明</p>
-      <p class="margin-bottom left suojin font-size line-height">1.请使用最新版本浏览器登陆。</p>
+      <p class="margin-bottom left suojin font-size line-height">1.请使用最新版本浏览器登陆，推荐使用谷歌浏览器。</p>
       <p class="margin-bottom left suojin font-size line-height">2.调查平台对相关信息自动校验，请准确填写。</p>
-      <p class="margin-bottom left suojin font-size line-height">3.请用规格为A3的纸张打印。</p>
+      <p class="margin-bottom left suojin font-size line-height"><span class="span-bolde">3.请用规格为A3的纸张打印。</span></p>
       <p
         class="margin-bottom left suojin font-size line-height"
       >谢谢您在百忙之中抽出时间填写问卷，调查内容将严格保密，且不涉及税务、社保等问题，请您放心作答！</p>
@@ -95,6 +92,9 @@ export default {
 };
 </script>
 <style scoped>
+.span-bolde {
+  font-weight: bold;
+}
 .title {
   text-align: center;
 }

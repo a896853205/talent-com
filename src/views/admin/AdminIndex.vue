@@ -11,7 +11,10 @@
         <Icon type="ios-paper" />修改我的密码
       </MenuItem>
       <div class="user">
-        <div class>欢迎登录，{{showCompanyName}}</div>
+        <div class="submit">
+          <Button class="button" type="info" @click="faqDownload">账号分配系统使用说明</Button>
+        </div>
+        <div>欢迎登录，{{showCompanyName}}</div>
         <div class="logout">
           <span @click="logout">退出登录</span>
         </div>
@@ -21,6 +24,9 @@
   </div>
 </template>
 <style scoped>
+.submit {
+  margin-right: 20px;
+}
 .user {
   display: flex;
   position: absolute;
@@ -35,6 +41,7 @@
 </style>
 
 <script>
+import url from "@/service.config.js";
 export default {
   data() {
     return {
@@ -42,7 +49,7 @@ export default {
     };
   },
   computed: {
-    showCompanyName(){
+    showCompanyName() {
       return this.$store.getters.getCompanyName1;
     },
     adminUserId() {
@@ -50,6 +57,9 @@ export default {
     }
   },
   methods: {
+    faqDownload() {
+      window.open(url.download + "/" + "账号分配系统使用说明", "_self");
+    },
     select(name) {
       this.$router.push(name);
     },
@@ -60,7 +70,7 @@ export default {
   created() {
     this.$router.push("/admin/addUser");
     if (this.adminUserId === "") {
-      this.$router.push("/adminLogin")
+      this.$router.push("/adminLogin");
     }
   }
 };

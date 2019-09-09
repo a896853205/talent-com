@@ -55,6 +55,9 @@
         </template>
         <div class="user">
           <div class="submit">
+            <Button class="button" type="info" @click="faqDownload">常见问题回答</Button>
+          </div>
+          <div class="submit">
             <Button class="button" :loading="saveLoading" type="primary" @click="saveHandle">暂存</Button>
           </div>
           <div class="submit">
@@ -105,6 +108,9 @@
           <Icon type="ios-paper" />单位人才需求调查
         </MenuItem>
         <div class="user">
+          <div class="submit">
+            <Button class="button" type="info" @click="faqDownload">常见问题回答</Button>
+          </div>
           <div class="submit">
             <Button class="button" type="primary" :loading="saveLoading" @click="saveHandle">暂存</Button>
           </div>
@@ -200,6 +206,12 @@ export default {
     }
   },
   methods: {
+    faqDownload() {
+      window.open(
+        url.download + "/" + '下载faq',
+        "_self"
+      );
+    },
     changePwd() {
       this.$router.push("/changePassword");
     },

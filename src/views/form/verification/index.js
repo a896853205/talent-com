@@ -102,7 +102,7 @@ export const verify = form => {
         return verifyMsg;
       }
       // 判断流入情况统计编制内
-      flowInResult = flowInVerify(form._sum_in_wai);
+      flowInResult = flowInVerify(form._sum_in_wai, false);
 
       if (!flowInResult.verify) {
         verifyMsg.msg = `流入情况统计中-编制外${flowInResult.msg}`;
@@ -120,7 +120,7 @@ export const verify = form => {
       }
 
       // 判断流出情况统计
-      flowOutResult = flowOutVerify(form._sum_out_wai);
+      flowOutResult = flowOutVerify(form._sum_out_wai, false);
 
       if (!flowOutResult.verify) {
         verifyMsg.msg = `流出情况统计中-编制外${flowOutResult.msg}`;

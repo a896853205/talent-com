@@ -1,104 +1,105 @@
-export const flowOutVerify = _sum_out => {
-  // 进行Array的处理 
-  _sum_out = Array.from(_sum_out);
-  // 返回的对象
-  let verifyMsg = {
-    verify: true,
-    msg: '',
-    label: '',
-  },
-  haveDataYearIndexArr = [];
+export const flowOutVerify = (_sum_out, isMust = true) => {
+	// 进行Array的处理
+	_sum_out = Array.from(_sum_out);
+	// 返回的对象
+	let verifyMsg = {
+			verify: true,
+			msg: '',
+			label: ''
+		},
+		haveDataYearIndexArr = [];
 
-  // 查一下哪一年有数据把index输入到
-  _sum_out.forEach((item, index) => {
-    if (item.info[0].value > 0) {
-      haveDataYearIndexArr.push(index);
-    }
-  });
+	// 查一下哪一年有数据把index输入到
+	_sum_out.forEach((item, index) => {
+		if (item.info[0].value > 0) {
+			haveDataYearIndexArr.push(index);
+		}
+	});
 
-  if (_sum_out[0].info[0].value === 0) {
-    verifyMsg.verify = false;
-    verifyMsg.msg = '必须填写2018年信息';
+	if (isMust) {
+		if (_sum_out[0].info[0].value === 0) {
+			verifyMsg.verify = false;
+			verifyMsg.msg = '必须填写2018年信息';
 
-    return verifyMsg;
-  }
+			return verifyMsg;
+		}
+	}
 
-  // 判断如果每一年都没有填写
-  // if (haveDataYearIndexArr.length === 0) {
-  //   verifyMsg.verify = false;
-  //   verifyMsg.msg = '至少需要添加一年的信息';
+	// 判断如果每一年都没有填写
+	// if (haveDataYearIndexArr.length === 0) {
+	//   verifyMsg.verify = false;
+	//   verifyMsg.msg = '至少需要添加一年的信息';
 
-  //   return verifyMsg;
-  // }
+	//   return verifyMsg;
+	// }
 
-  for (let index of haveDataYearIndexArr) {
+	for (let index of haveDataYearIndexArr) {
+		// 先求每个年份的所有类别的人数和
+		let yearSum = 0;
+		for (let eachClass of _sum_out[index].info[0].children.inputChildren) {
+			yearSum += eachClass.value;
+		}
 
-    // 先求每个年份的所有类别的人数和
-    let yearSum = 0;
-    for (let eachClass of _sum_out[index].info[0].children.inputChildren) {
-      yearSum += eachClass.value;
-    }
+		// 看二级加和等不等于一级
+		if (_sum_out[index].info[0].value !== yearSum) {
+			verifyMsg.verify = false;
+			verifyMsg.msg = `${_sum_out[index].year}年的流出人数填写错误`;
 
-    // 看二级加和等不等于一级
-    if (_sum_out[index].info[0].value !== yearSum) {
-      verifyMsg.verify = false;
-      verifyMsg.msg = `${_sum_out[index].year}年的流出人数填写错误`;
-      
-      return verifyMsg;
-    }
+			return verifyMsg;
+		}
 
-    // 看三级加和等不等于二级
-    for (let eachClassStructure of _sum_out[index].info[0].children.children) {
-      let classObj = _sum_out[index].info[0].children.inputChildren.find(value => {
-        
-        return (value.prop === eachClassStructure.prop);
-      });
+		// 看三级加和等不等于二级
+		for (let eachClassStructure of _sum_out[index].info[0].children.children) {
+			let classObj = _sum_out[index].info[0].children.inputChildren.find((value) => {
+				return value.prop === eachClassStructure.prop;
+			});
 
-      for (let eachStructureObj of eachClassStructure.children) {
-        // 判断岗位级别的特殊情况
-        if (eachStructureObj.label === '岗位级别') {
+			for (let eachStructureObj of eachClassStructure.children) {
+				// 判断岗位级别的特殊情况
+				if (eachStructureObj.label === '岗位级别') {
+					let structureNum = 0;
 
-          let structureNum = 0;
+					for (let selectSpecial of eachStructureObj.value) {
+						if (selectSpecial.num && selectSpecial.cas.length === 0) {
+							verifyMsg.verify = false;
+							verifyMsg.msg = `${_sum_out[index]
+								.year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
 
-          for (let selectSpecial of eachStructureObj.value) {
-            if (selectSpecial.num && selectSpecial.cas.length === 0) {
-              verifyMsg.verify = false;
-              verifyMsg.msg = `${_sum_out[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
+							return verifyMsg;
+						}
+						if (selectSpecial.num) {
+							structureNum += selectSpecial.num;
+						}
+					}
 
-              return verifyMsg;
-            }
-            if (selectSpecial.num) {
-              structureNum += selectSpecial.num;
-            }
-          }
+					if (classObj.value !== structureNum) {
+						verifyMsg.verify = false;
+						verifyMsg.msg = `${_sum_out[index]
+							.year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
 
-          if (classObj.value !== structureNum) {
-            verifyMsg.verify = false;
-            verifyMsg.msg = `${_sum_out[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
+						return verifyMsg;
+					}
+				} else {
+					let eachStructureArr = eachStructureObj.children,
+						structureNum = 0;
 
-            return verifyMsg;
-          }
+					if (eachStructureArr) {
+						eachStructureArr.forEach((structure) => {
+							structureNum += structure.value;
+						});
 
-        } else {
-          let eachStructureArr = eachStructureObj.children,
-            structureNum = 0;
+						if (classObj.value !== structureNum) {
+							verifyMsg.verify = false;
+							verifyMsg.msg = `${_sum_out[index]
+								.year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
 
-          if (eachStructureArr){
-            eachStructureArr.forEach(structure => {
-              structureNum += structure.value;
-            })
-  
-            if (classObj.value !== structureNum) {
-              verifyMsg.verify = false;
-              verifyMsg.msg = `${_sum_out[index].year}年的 ${classObj.label} 类别中的 ${eachStructureObj.label} 填写错误`;
-              
-              return verifyMsg;
-            }
-          }
-        }
-      }
-    }
-  }
+							return verifyMsg;
+						}
+					}
+				}
+			}
+		}
+	}
 
-  return verifyMsg;
-}
+	return verifyMsg;
+};

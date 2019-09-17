@@ -86,7 +86,7 @@ export const verify = form => {
         return verifyMsg;
       }
       // 判断单位人才情况汇总编制外
-      summaryResult = summaryVerify(form._summary_wai);
+      summaryResult = summaryVerify(form._summary_wai, false);
 
       if (!summaryResult.verify) {
         verifyMsg.msg = `单位人才情况汇总-编制外中${summaryResult.msg}`;

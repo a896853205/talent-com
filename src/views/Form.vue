@@ -356,7 +356,7 @@ export default {
         }
 
         _this
-          .$confirm("提交后不可修改, 是否提交?", "提交", {
+          .$confirm("提交前请仔细核对填报信息，特别是“单位人才流动汇总”和“单位人才需求调查”模块，是否填写完毕，如确认无误，即可提交。  提交后不可修改, 是否提交?", "提交", {
             confirmButtonText: "提交",
             cancelButtonText: "取消",
             type: "warning"

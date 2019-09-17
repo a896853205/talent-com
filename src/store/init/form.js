@@ -213,7 +213,7 @@ export const form_inserting = {
     label: '联系电话',
     value: undefined,
     type: 'input',
-    regExp: '/^[1][0-9][0-9]{9}$/',
+    regExp: '/^[1][0-9][0-9]{9}||[0-9]{4}(-)[0-9]{6,8}$/',
     must: true,
   }, {
     label: 'QQ号',

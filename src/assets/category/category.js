@@ -4596,6 +4596,10 @@ export const suoShuDiYu = [
     "value": "黑河"
   },
   {
+    "label": "伊春",
+    "value": "伊春"
+  },
+  {
     "label": "大兴安岭",
     "value": "大兴安岭"
   },

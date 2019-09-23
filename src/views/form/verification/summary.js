@@ -16,23 +16,23 @@ export const summaryVerify = (_summary, isMust = true) => {
 		}
 	});
 
-	// if (isMust) {
-	// 	if (_summary[0].info[0].value === 0) {
-	// 		verifyMsg.verify = false;
-	// 		verifyMsg.msg = '必须填写2018年信息';
+	if (isMust) {
+		if (_summary[0].info[0].value === 0) {
+			verifyMsg.verify = false;
+			verifyMsg.msg = '必须填写2018年信息';
 
-	// 		return verifyMsg;
-	// 	}
-	// }
+			return verifyMsg;
+		}
 
-	// 判断如果每一年都没有填写
-	// if (haveDataYearIndexArr.length === 0) {
-	//   verifyMsg.verify = false;
-	//   verifyMsg.msg = '至少需要添加一年的信息';
+		// 判断如果每一年都没有填写
+		if (haveDataYearIndexArr.length === 0) {
+			verifyMsg.verify = false;
+			verifyMsg.msg = '至少需要添加一年的信息';
 
-	//   return verifyMsg;
-	// }
-
+			return verifyMsg;
+		}
+	}
+	
 	for (let index of haveDataYearIndexArr) {
 		// 先求每个年份的所有类别的人数和
 		let yearSum = 0;

@@ -39,7 +39,7 @@ import adminModul from './store/admin/'
 
 Vue.use(Vuex)
 
-let form = objectHelper.deepCopy(form_inserting);
+let InitForm = objectHelper.deepCopy(form_inserting);
 export default new Vuex.Store({
   state: {
     userId: '',
@@ -54,7 +54,7 @@ export default new Vuex.Store({
       'flowTalentInfo': false,
       'need': false
     },
-    form,
+    form: InitForm,
     vueElementLoading: false,
   },
   mutations: {

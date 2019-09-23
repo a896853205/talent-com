@@ -135,9 +135,6 @@ export default {
     SelectWithLabel
   },
 
-  data() {
-    return {};
-  },
   methods: {
     changeEvent({ value, index, propIndex, label }) {
       this.$store.commit(this.commitFunction, {

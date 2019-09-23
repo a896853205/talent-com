@@ -47,9 +47,6 @@ export default {
   components: {
     TalentStatus
   },
-  data() {
-    return {};
-  },
   computed: {
     summaryOutter() {
       return this.$store.state.form._summary_wai;

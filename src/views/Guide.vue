@@ -70,9 +70,6 @@ import axios from "axios";
 import util from "@/utils.js";
 
 export default {
-  data() {
-    return {};
-  },
   created() {
     // if (util.getCookies(this) != null) {
     //   this.$router.push("/loading");

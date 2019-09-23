@@ -45,9 +45,6 @@ export default {
   components: {
     FlowIn
   },
-  data() {
-    return {};
-  },
   computed: {
     FlowInOutter() {
       return this.$store.state.form._sum_in_wai;

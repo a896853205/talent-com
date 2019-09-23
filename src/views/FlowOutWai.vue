@@ -46,7 +46,6 @@ export default {
   components: {
     FlowOut
   },
-  data() {},
   computed: {
     sumOutOutter() {
       return this.$store.state.form._sum_out_wai;

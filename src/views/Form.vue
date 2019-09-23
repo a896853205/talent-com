@@ -135,11 +135,7 @@
         </div>
       </Menu>
     </div>
-
-    <keep-alive>
-      <router-view v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <router-view />
   </div>
 </template>
 <style scoped>
@@ -203,7 +199,7 @@ export default {
     },
     companyName() {
       return this.$store.getters.getCompanyName;
-    }
+    },
   },
   methods: {
     faqDownload() {

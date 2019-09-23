@@ -3,37 +3,38 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-
-import { Button,
-  Input,
-  Divider,
-  Row,
-  Col,
-  DatePicker,
-  Menu,
-  MenuItem,
-  Select,
-  Form,
-  FormItem,
-  Cascader,
-  Alert,
-  InputNumber,
-  Option,
-  Submenu,
-  Card,
-  Checkbox,
-  CheckboxGroup,
-  Table,
-  Message,
-  Modal
- } from 'iview';
+import {
+	Button,
+	Input,
+	Divider,
+	Row,
+	Col,
+	DatePicker,
+	Menu,
+	MenuItem,
+	Select,
+	Form,
+	FormItem,
+	Cascader,
+	Alert,
+	InputNumber,
+	Option,
+	Submenu,
+	Card,
+	Checkbox,
+	CheckboxGroup,
+	Table,
+	Message,
+	Modal,
+	Page
+} from 'iview';
 import 'iview/dist/styles/iview.css';
 
-import "babel-polyfill"
+import 'babel-polyfill';
 import ElementUI from 'element-ui';
-import cookies from 'vue-cookies'
-
- // menu card
+import cookies from 'vue-cookies';
+import { Loading } from 'element-ui';
+// menu card
 
 Vue.component('Button', Button);
 Vue.component('Input', Input);
@@ -55,25 +56,38 @@ Vue.component('Card', Card);
 Vue.component('Checkbox', Checkbox);
 Vue.component('CheckboxGroup', CheckboxGroup);
 Vue.component('Table', Table);
+Vue.component('Page', Page);
 
 Vue.prototype.$Message = Message;
 Vue.prototype.$Modal = Modal;
 
+let loadingInstance;
 router.beforeEach((to, from, next) => {
-    /* 路由发生变化修改页面title */
-    if (to.meta.title) {
-        document.title = to.meta.title
+	/* 路由发生变化修改页面title */
+  // 加上loading
+  loadingInstance = Loading.service({ fullscreen: true });
+	setTimeout(() => {
+		if (to.meta.title) {
+			document.title = to.meta.title;
     }
-    next()
+    next();
+  }, 1000);
+  
+});
+
+router.afterEach((to, from) => {
+	setTimeout(() => {
+		loadingInstance.close();
+	}, 1000);
 });
 
 Vue.use(ElementUI);
 Vue.use(cookies);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+	router,
+	store,
+	render: (h) => h(App)
+}).$mount('#app');

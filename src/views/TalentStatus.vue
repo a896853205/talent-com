@@ -8,13 +8,14 @@
         </Alert>
       </i-col>
     </Row>
-    <el-tabs tab-position="left" :value="2018">
+    <el-tabs tab-position="left" :value="activeYear" @tab-click="handleClick">
       <el-tab-pane
         v-for="(value, key) in summary"
         :key="key"
         :label="value.year"
         :name="value.year"
       >
+      <div v-if="activeYear === value.year">
         <p class="title">
           单位人才情况汇总表-
           <span class="special">存量信息</span>
@@ -29,6 +30,7 @@
           :summary="value.info"
           commitFunction="setSummery"
         />
+      </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -56,7 +58,19 @@ export default {
   components: {
     TalentStatus
   },
+  data() {
+    return {
+      activeYear: 2018
+    }
+  },
+  methods: {
+    handleClick(tab, e) {
+      console.log(tab.name);
+      this.$data.activeYear = tab.name;
+    },
+  },
   computed: {
+
     summary() {
       return this.$store.state.form._summary;
     },

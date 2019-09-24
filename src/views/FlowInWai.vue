@@ -8,17 +8,19 @@
         </Alert>
       </i-col>
     </Row>
-    <el-tabs tab-position="left" :value='2018'>
+    <el-tabs tab-position="left" :value="activeYear" @tab-click="handleClick">
       <el-tab-pane v-for="(value, key) in FlowInOutter" :key="key" :label="value.year" :name="value.year">
-        <p class="title">单位人才流动汇总表-<span class="special">流入人才</span>-事业单位-<span class="special">编制外</span>-{{value.year}}年</p>
-        <FlowIn
-          :getSumInObjCombin="getSumInObjCombin(value.year)"
-          :sumInInput="SumInInput(value.year)"
-          :twoLevelStationCategory="twoLevelSumInStationCategory(value.year)"
-          :year="value.year"
-          :sumIn="value.info"
-          commitFunction="setFlowInOutter"
-        />
+        <div v-if="activeYear === value.year">
+          <p class="title">单位人才流动汇总表-<span class="special">流入人才</span>-事业单位-<span class="special">编制外</span>-{{value.year}}年</p>
+          <FlowIn
+            :getSumInObjCombin="getSumInObjCombin(value.year)"
+            :sumInInput="SumInInput(value.year)"
+            :twoLevelStationCategory="twoLevelSumInStationCategory(value.year)"
+            :year="value.year"
+            :sumIn="value.info"
+            commitFunction="setFlowInOutter"
+          />
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -44,6 +46,16 @@ import FlowIn from "../components/FlowIn.vue";
 export default {
   components: {
     FlowIn
+  },
+  data() {
+    return {
+      activeYear: 2018
+    }
+  },
+  methods: {
+    handleClick(tab, e) {
+      this.$data.activeYear = tab.name;
+    },
   },
   computed: {
     FlowInOutter() {

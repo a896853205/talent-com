@@ -8,17 +8,19 @@
         </Alert>
       </i-col>
     </Row>
-    <el-tabs tab-position="left" :value='2018'>
+    <el-tabs tab-position="left" :value="activeYear" @tab-click="handleClick">
       <el-tab-pane v-for="(value, key) in sumOutInner" :key="key" :label="value.year" :name="value.year">
-        <p class="title">单位人才流动汇总表-<span class="special">流出人才</span>-事业单位-<span class="special">编制内</span>-{{value.year}}年</p>
-        <FlowOut
-          :getSumOutObjCombin="getSumOutObjCombin(value.year)"
-          :SumOutInput="SumOutInput(value.year)"
-          :twoLevelSumOutStationCategory="twoLevelSumOutStationCategory(value.year)"
-          :year="value.year"
-          :sumOut="value.info"
-          commitFunction="setFlowOutInner"
-        />
+        <div v-if="activeYear === value.year">
+          <p class="title">单位人才流动汇总表-<span class="special">流出人才</span>-事业单位-<span class="special">编制内</span>-{{value.year}}年</p>
+          <FlowOut
+            :getSumOutObjCombin="getSumOutObjCombin(value.year)"
+            :SumOutInput="SumOutInput(value.year)"
+            :twoLevelSumOutStationCategory="twoLevelSumOutStationCategory(value.year)"
+            :year="value.year"
+            :sumOut="value.info"
+            commitFunction="setFlowOutInner"
+          />
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -45,6 +47,16 @@ import FlowOut from "../components/FlowOut.vue";
 export default {
   components: {
     FlowOut
+  },
+  data() {
+    return {
+      activeYear: 2018
+    }
+  },
+  methods: {
+    handleClick(tab, e) {
+      this.$data.activeYear = tab.name;
+    },
   },
   computed: {
     sumOutInner() {

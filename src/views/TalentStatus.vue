@@ -65,7 +65,6 @@ export default {
   },
   methods: {
     handleClick(tab, e) {
-      console.log(tab.name);
       this.$data.activeYear = tab.name;
     },
   },

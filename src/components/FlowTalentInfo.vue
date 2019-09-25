@@ -1,21 +1,20 @@
 <template>
   <div class="container">
-    <div v-for="(item, propIndex) in outStatus" :key="propIndex">
       <Card :bordered="false">
         <div class="del-box">
-          <p class="del-box-title" slot="title">{{ title }} {{propIndex+1}}</p>
+          <p class="del-box-title" slot="title">{{ title }} {{(page - 1)+1}}</p>
           <div class="del-btn">
             <Button
               type="error"
-              v-if="item.id > 0"
+              v-if="outStatus[(page - 1)].id > 0"
               style="margin-right: 10px"
               shape="circle"
-              @click="delHandle(item.id)"
+              @click="delHandle(outStatus[(page - 1)].id)"
             >删除</Button>
           </div>
         </div>
         <Row :gutter="16">
-          <i-col span="4" v-for="(item, index) in item.info" :key="'' + propIndex + index">
+          <i-col span="4" v-for="(item, index) in outStatus[(page - 1)].info" :key="'' + (page - 1) + index">
             <SelectWithLabel
               v-if='item.type === "select"'
               :label="item.label"
@@ -23,7 +22,7 @@
               @select="changeEvent"
               :list="item.list"
               :index="index"
-              :propIndex="propIndex"
+              :propIndex="(page - 1)"
             />
             <CascaderWithLabel
               v-if='item.type === "cascader"'
@@ -32,7 +31,7 @@
               @cascader="changeEvent"
               :data="item.data"
               :index="index"
-              :propIndex="propIndex"
+              :propIndex="(page - 1)"
             />
             <InputWithLabel
               v-if='item.type === "input"'
@@ -40,7 +39,7 @@
               :initValue="item.value"
               @input="changeEvent"
               :index="index"
-              :propIndex="propIndex"
+              :propIndex="(page - 1)"
             />
             <InputNumberWithLabel
               v-if='item.type === "number"'
@@ -48,7 +47,7 @@
               :initValue="item.value"
               @input-number="changeEvent"
               :index="index"
-              :propIndex="propIndex"
+              :propIndex="(page - 1)"
             />
             <InputDateWithLabel
               v-if='item.type === "date"'
@@ -56,7 +55,7 @@
               :initValue="item.value"
               @date="changeEvent"
               :index="index"
-              :propIndex="propIndex"
+              :propIndex="(page - 1)"
             />
             <MultiSelectWithLabel
               v-if='item.type === "checkBox"'
@@ -65,7 +64,7 @@
               @checkBox="changeEvent"
               :index="index"
               :list="item.list"
-              :propIndex="propIndex"
+              :propIndex="(page - 1)"
             />
             <CascaderWithLabel
               v-if='item.type === "cascaderSpecial"'
@@ -74,12 +73,12 @@
               :data="stationCategory"
               @cascader="changeEvent"
               :index="index"
-              :propIndex="propIndex"
+              :propIndex="(page - 1)"
             />
           </i-col>
         </Row>
       </Card>
-    </div>
+    <Page :total="outStatus.length" show-total :page-size='1' @on-change='this.pageChange' :current='page'/> 
     <div class="add">
       <Button class="add-btn" type="info" @click="addHandle">添加</Button>
     </div>
@@ -155,16 +154,17 @@ export default {
   methods: {
     addHandle() {
       let num = this.$data.num++;
-
       this.$data.outStatusArr.push({
         id: num,
         info: objectHelper.deepCopy(outStatusInfo)
       });
 
       this.$options.methods.outStatusArrCommit(this);
+      this.page = this.outStatus.length;
     },
 
     delHandle(index) {
+      this.page = this.page - 1;
       let cur_index = this.$data.outStatusArr.findIndex(item => {
         return item.id === index;
       });
@@ -181,13 +181,18 @@ export default {
 
     outStatusArrCommit(_this) {
       _this.$store.commit(_this.commitFunction, _this.$data.outStatusArr);
+    },
+
+    pageChange (page) {
+      this.page = page;
     }
   },
 
   data() {
     return {
       num: 1,
-      outStatusArr: []
+      outStatusArr: [],
+      page: 1,
     };
   },
 

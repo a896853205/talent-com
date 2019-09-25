@@ -1,26 +1,23 @@
 <template>
   <div class="container">
-    <div 
-      v-for="(item, propIndex) in need"
-      :key="propIndex">
-      <Card :bordered="false">
+<Card :bordered="false">
         <div class="del-box">
-          <p class="del-box-title" slot="title">{{ title }} {{ propIndex + 1 }}</p>
+          <p class="del-box-title" slot="title">{{ title }} {{ (page - 1) + 1 }}</p>
           <div class="del-btn">
             <Button
               type="error"
-              v-if="item.id > 0"
+              v-if="need[(page - 1)].id > 0"
               style="margin-right: 10px"
               shape="circle"
-              @click="delHandle(item.id)"
+              @click="delHandle(need[(page - 1)].id)"
             >删除</Button>
           </div>
         </div>
         <Row :gutter='16'>
           <i-col
             span='4'
-            v-for="(item, index) in item.info"
-            :key='"" + propIndex + index'>
+            v-for="(item, index) in need[(page - 1)].info"
+            :key='"" + (page - 1) + index'>
             <SelectWithLabel
               v-if="item.type === 'select'"
               :label="item.label"
@@ -28,7 +25,7 @@
               @select="changeEvent"
               :list="item.list"
               :index="index"
-              :propIndex='propIndex'
+              :propIndex='(page - 1)'
             />
             <CascaderWithLabel
               v-if="item.type === 'cascader'"
@@ -37,7 +34,7 @@
 							@cascader='changeEvent'
 							:data="item.data"
 							:index='index'
-							:propIndex='propIndex'
+							:propIndex='(page - 1)'
             />
             <InputWithLabel
               v-if="item.type === 'input'"
@@ -45,7 +42,7 @@
 							:initValue='item.value'
 							@input='changeEvent'
 							:index='index'
-							:propIndex='propIndex'
+							:propIndex='(page - 1)'
             />
             <InputNumberWithLabel
               v-if="item.type === 'number'"
@@ -53,7 +50,7 @@
 							:initValue='item.value'
 							@input-number='changeEvent'
 							:index='index'
-							:propIndex='propIndex'
+							:propIndex='(page - 1)'
             />
             <CascaderWithLabel
               v-if="item.type === 'cascaderSpecial'"
@@ -62,12 +59,12 @@
               :data="stationCategory"
               @cascader="changeEvent"
               :index="index"
-              :propIndex='propIndex'
+              :propIndex='(page - 1)'
             />
           </i-col>
         </Row>
       </Card>
-    </div>
+    <Page :total="need.length" show-total :page-size='1' @on-change='this.pageChange' :current='page'/> 
     <div class="add">
       <Button class="add-btn" type="info" @click="addHandle">添加</Button>
     </div>
@@ -138,15 +135,18 @@ export default {
   methods: {
     addHandle() {
       var num = this.$data.num++;
-
       this.$data.needArr.push({
         id: num,
         info: objectHelper.deepCopy(personInfo)
       });
 
       this.$options.methods.needArrCommit(this);
+
+      
+      this.page = this.need.length;
     },
     delHandle(index) {
+      this.page = this.page - 1;
       var cur_index = this.$data.needArr.findIndex(item => {
         return item.id === index;
       });
@@ -163,13 +163,18 @@ export default {
 
     needArrCommit(_this) {
       _this.$store.commit(_this.commitFunction, _this.$data.needArr);
+    },
+
+    pageChange (page) {
+      this.page = page;
     }
   },
 
   data() {
     return {
       num: 1,
-      needArr: []
+      needArr: [],
+      page: 1,
     };
   },
 

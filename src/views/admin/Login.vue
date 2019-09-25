@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="button">
-        <Button type="primary" shape="circle" @click="login" long>登录</Button>
+        <Button type="primary" shape="circle" @click="login" long :loading='btnLoading'>登录</Button>
       </div>
     </div>
   </div>
@@ -66,11 +66,15 @@ export default {
         c: "",
         d: ""
       },
-      password: ""
+      password: "",
+      btnLoading: false,
     };
   },
   methods: {
     login() {
+      let _this = this;
+      this.$data.btnLoading = true;
+
       axios({
         url: url.adminLogin,
         method: "post",
@@ -80,6 +84,7 @@ export default {
         }
       })
         .then(res => {
+          _this.$data.btnLoading = false;
           switch (res.data.status) {
             case 0:
               this.$Message.error(res.data.msg);
@@ -92,6 +97,7 @@ export default {
           }
         })
         .catch(err => {
+          _this.$data.btnLoading = false;
           console.log(err);
         });
     },

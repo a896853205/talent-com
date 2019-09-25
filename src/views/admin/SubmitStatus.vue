@@ -9,7 +9,7 @@
       </i-col>
     </Row>
     <Row>
-      <Table :columns="columns" :data="userData"></Table>
+      <Table :columns="columns" :data="userData" :loading="tableLoading"></Table>
     </Row>
   </div>
 </template>
@@ -23,6 +23,7 @@
   line-height: 30px;
   font-size: 16px;
 }
+
 .row {
   margin-bottom: 15px;
 }
@@ -205,7 +206,8 @@ export default {
         }
       ],
       userData: [],
-      downloadLoading: false
+      downloadLoading: false,
+      tableLoading: false,
     };
   },
   components: {},
@@ -291,7 +293,7 @@ export default {
   },
   mounted() {
     let _this = this;
-    console.log("fuck", _this.adminUserId);
+    this.$data.tableLoading = true;
     axios({
       url: url.manageInfo,
       method: "post",
@@ -300,6 +302,7 @@ export default {
       }
     })
       .then(res => {
+        _this.$data.tableLoading = false;
         switch (res.data.status) {
           case 0:
             this.$Message.error(res.data.msg);

@@ -17,7 +17,7 @@
     </Row>
     <Row type="flex" align="center" class-name="row">
       <i-col span="8" class-name="label">
-        <Button type="primary" long @click="addUserHandle">生成用户名和密码</Button>
+        <Button type="primary" long @click="addUserHandle" :loading='btnLoading'>生成用户名和密码</Button>
       </i-col>
     </Row>
   </div>
@@ -48,6 +48,7 @@ export default {
       companyName: "",
       authority: [],
       isThird: false,
+      btnLoading: false,
     };
   },
   created() {
@@ -67,13 +68,16 @@ export default {
   },
   methods: {
     addUserHandle() {
-      console.log("单位名称", this.companyName, "用户权限", this.authority);
+      let _this = this;
+      this.$data.btnLoading = true;
+
       if (
         this.companyName === "" ||
         this.companyName === null ||
         this.authority.length === 0
       ) {
         this.$Message.error("单位名称和权限不得为空！");
+        this.$data.btnLoading = false;
         return;
       }
       axios({
@@ -86,6 +90,7 @@ export default {
         }
       })
         .then(res => {
+          _this.$data.btnLoading = false;
           switch (res.data.status) {
             case 0:
               this.$Message.error(res.data.msg);
@@ -97,6 +102,7 @@ export default {
           }
         })
         .catch(err => {
+          _this.$data.btnLoading = false;
           console.log(err);
         });
     }

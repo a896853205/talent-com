@@ -1,5 +1,5 @@
-// const SERVERURL = "https://api.im-here.cn/";
-const SERVERURL = "http://localhost:3000/";
+const SERVERURL = "https://api.im-here.cn/";
+// const SERVERURL = "http://localhost:3000/";
 
 
 const PORT = {

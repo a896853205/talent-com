@@ -30,7 +30,7 @@ import {
 } from 'iview';
 import 'iview/dist/styles/iview.css';
 
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import ElementUI from 'element-ui';
 import cookies from 'vue-cookies';
 import { Loading } from 'element-ui';

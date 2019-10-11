@@ -181,6 +181,10 @@ import util from "@/utils.js";
 import { debuglog } from "util";
 // 表单验证
 import { verify } from "./form/verification";
+// 注入FORM
+import injectForm from '../util/inject-form-helper';
+// 清除FORM
+import clearForm from '../util/clear-form-helper';
 
 export default {
   data() {
@@ -287,13 +291,13 @@ export default {
           _this.$Message.error("您已经提交过了，不需要暂存了！");
           this.saveLoading = false;
         } else {
-          _this.$store.state.form._from_user;
-
+          let clearedForm = clearForm(_this.$store.state.form);
+          // 上传之前需要做数据清除处理--**--
           return axios({
             url: url.save,
             method: "post",
             data: {
-              form: _this.$store.state.form,
+              form: clearedForm,
               userId: _this.$store.state.form._from_user
             }
           })
@@ -358,11 +362,14 @@ export default {
             type: "warning"
           })
           .then(() => {
+
+            let clearedForm = clearForm(_this.$store.state.form);
             // 上传服务器！！！！！！！！
+            // 上传之前需要做数据清除处理--**--
             axios({
               url: url.submit,
               method: "post",
-              data: { form: _this.$store.state.form }
+              data: { form: clearedForm }
             }).then(res => {
               _this.$message({
                 type: "success",
@@ -553,7 +560,6 @@ export default {
     }
 
     let userId = this.$store.state.form._from_user;
-    debugger;
     let _this = this;
 
     axios({
@@ -564,7 +570,8 @@ export default {
       }
     }).then(res => {
       let { form } = res.data;
-
+      // 下载数据之后需要做数据添加处理--**--
+      form = injectForm(form);
       _this.$store.commit("setForm", { form, userId });
       this.companyNameShow = this.companyName;
     });

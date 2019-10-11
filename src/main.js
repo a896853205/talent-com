@@ -71,14 +71,14 @@ router.beforeEach((to, from, next) => {
 			document.title = to.meta.title;
     }
     next();
-  }, 1000);
+  }, 400);
   
 });
 
 router.afterEach((to, from) => {
 	setTimeout(() => {
 		loadingInstance.close();
-	}, 1000);
+	}, 400);
 });
 
 Vue.use(ElementUI);

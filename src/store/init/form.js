@@ -102,7 +102,7 @@ export const outStatusInfo = [
   value: 0,
   type: 'number'
 }, {
-  label: "流入地",
+  label: "流入地（省/市)",
   value: undefined,
   type: 'input'
 }, {

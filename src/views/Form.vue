@@ -302,6 +302,8 @@ export default {
             }
           })
             .then(res => {
+              clearedForm = injectForm(clearedForm);
+              _this.$store.commit("setForm", { form: clearedForm });
               this.saveLoading = false;
               this.$message({
                 message: "已暂存到服务器，请放心退出",
@@ -371,6 +373,8 @@ export default {
               method: "post",
               data: { form: clearedForm }
             }).then(res => {
+              clearedForm = injectForm(clearedForm);
+              _this.$store.commit("setForm", { form: clearedForm });
               _this.$message({
                 type: "success",
                 message: "提交成功!"
